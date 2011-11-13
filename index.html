@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>HTML5 Sprite Generator</title>
+<link type="text/css" rel="stylesheet" href="css/reset.css" />
+<link type="text/css" rel="stylesheet" href="css/html5sprite.css" />
+<link type="text/css" rel="stylesheet" href="css/sprite.css" />
+</head>
+<body>
+	
+	<div id="dropboxwrap">
+		<h1>HTML5 Sprite Generator</h1>
+		<p>Drag and drop image files into the space below and click "Generate" to create a sprite and 
+			stylesheet. This demo uses a couple of HTML5 APIs, and <strong>it is only currently compatible with 
+			the latest versions of Chrome and Firefox.</strong></p>
+	    <div id="dropbox">
+	    	<span id="droplabel">Drop images here...</span>
+	    	<ul id="filelist"><!-- files go here --></ul>
+    	</div>
+    	<div id="buttons">
+    		<a href="javascript:void(0)" class="generate disabled">Generate</a>
+    		<a href="javascript:void(0)" class="sprite disabled" target="_blank">Sprite &raquo;</a>
+    		<a href="javascript:void(0)" class="stylesheet disabled" target="_blank">Stylesheet &raquo;</a>
+    		<a href="javascript:void(0)" class="clear disabled">Clear Images</a>
+    	</div>
+    </div>
+
+<script type="text/javascript" src="js/jquery-1.7.js"></script>
+<script type="text/javascript" src="js/tmpl.js"></script>
+<script type="text/javascript" src="js/sprite.js"></script>
+<script type="text/javascript" src="js/sprite.page.js"></script>
+<script type="text/javascript" src="js/sprite.icon.js"></script>
+<script type="text/javascript" src="js/sprite.icons.js"></script>
+<script type="text/javascript">jQuery(Sprite.init);</script>
+
+<!-- templates -->
+<script type="text/html" id="icon_tmpl">
+    <li>
+    	<span class="icon"><img src="<%=image.src%>" alt="<%=name%>" /></span>
+    	<span class="name"><%=name%></span>
+    	<a href="javascript:void(0)" class="remove">remove</a>
+	</li>
+</script>
+
+</body>
+</html>
