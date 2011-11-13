@@ -2,7 +2,7 @@
 
 ##Notes
 
-TODO
+TODO. [Demo here](http://draeton.github.com/Stitches/).
 
 ##Stylesheet
 
