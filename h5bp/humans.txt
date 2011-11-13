@@ -1,0 +1,9 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Developer: Matthew Cobbs
+  Site: www.matthewcobbs.com
+  Twitter: draeton
+  Location: Detroit
