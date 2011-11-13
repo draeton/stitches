@@ -23,7 +23,18 @@
                 	$stylesheet: $("a.stylesheet")
                 };
 
+                Stitches.Page.getTemplates();
                 Stitches.Page.bindHandlers();
+            },
+
+            getTemplates: function (callback) {
+                $.get("templates.html", function (data) {
+                    $("body").append(data);
+                    Stitches.Page.hasTemplates = true;
+                    if (callback) {
+                        callback();
+                    }
+                });
             },
 
             bindHandlers: function () {
@@ -109,14 +120,22 @@
             handleFileLoad: function (evt) {
             	Stitches.filesQueue--;
 
-            	var icon = new Stitches.Icon(this.name, evt.target.result);
-            	var $li = $( $.tmpl("icon_tmpl", icon) ).data("icon", icon);
-            	Stitches.Page.$filelist.append($li);
-                $li.fadeIn("fast")
+                var callback = function () {
+                    var icon = new Stitches.Icon(this.name, evt.target.result);
+                    var $li = $( $.tmpl("icon_tmpl", icon) ).data("icon", icon);
+                    Stitches.Page.$filelist.append($li);
+                    $li.fadeIn("fast");
 
-            	if (Stitches.filesQueue === 0) {
-                    Stitches.Page.toggleButtons("remove", ["generate", "clear"]);
-            	}
+                    if (Stitches.filesQueue === 0) {
+                        Stitches.Page.toggleButtons("remove", ["generate", "clear"]);
+                    }
+                }
+
+                if (!Stitches.Page.hasTemplates) {
+                    Stitches.Page.getTemplates(callback.bind(this));
+                } else {
+                    callback.call(this);
+                }
             },
 
             removeFile: function (evt) {
