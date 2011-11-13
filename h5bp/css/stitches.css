@@ -68,6 +68,8 @@ pre {
 	color: #777;
     height: 200px;
     overflow: auto;
+    margin: 0;
+    padding: 0;
 }
 #filelist li {
 	position: relative;
