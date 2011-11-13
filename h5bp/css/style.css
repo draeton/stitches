@@ -1,4 +1,4 @@
-/* 
+/*!
  * HTML5 ✰ Boilerplate
  *
  * What follows is the result of much research on cross-browser styling. 
@@ -290,3 +290,10 @@ td { vertical-align: top; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
+/* ==|== my styles =======================================================
+   Stitches styles
+   ========================================================================== */
+
+@import url("stitches.css");
+@import url("sprite.css");

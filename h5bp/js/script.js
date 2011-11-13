@@ -1,3 +1,6 @@
+/*!
+ * Snippets
+ */
 /*global jQuery, Stitches */
 (function ($, Stitches) {
     $(Stitches.init);
