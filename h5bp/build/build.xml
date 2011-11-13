@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <!DOCTYPE project>
 <project name="Boilerplate Build" default="build" basedir="../"> <!-- one back since we're in build/ -->
 
@@ -497,10 +497,11 @@
         <echo message="Concatenating JS libraries"/>
         <!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
         <concat destfile="./${dir.intermediate}/${dir.js}/mylibs-concat.js" overwrite="no">
+            <filelist dir="./${dir.intermediate}/${dir.js.mylibs}/stitches/"
+                files="main.js, page.js, icon.js, icons.js"/>
             <fileset dir="./${dir.intermediate}/${dir.js.mylibs}/"
                 includes="**/*.js" 
-                excludes="${file.js.bypass}"/>                
-                  
+                excludes="${file.js.bypass}, **/main.js, **/page.js, **/icon.js, **/icons.js"/>
         </concat>
     </target>
     
