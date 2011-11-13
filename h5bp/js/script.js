@@ -1,1 +1,4 @@
-jQuery(Stitches.init);
+/*global jQuery, Stitches */
+(function ($, Stitches) {
+    $(Stitches.init);
+}(jQuery, Stitches));

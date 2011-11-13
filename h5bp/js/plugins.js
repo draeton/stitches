@@ -1,4 +1,4 @@
-
+/*global jQuery, log */
 // usage: log('inside coolFunc', this, arguments);
 // paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
 window.log = function(){
@@ -46,11 +46,10 @@ window.log = function(){
           .replace(/\t=(.*?)%>/g, "',$1,'")
           .split("\t").join("');")
           .split("%>").join("p.push('")
-          .split("\r").join("\\'")
-      + "');}return p.join('');");
+          .split("\r").join("\\'") + "');}return p.join('');");
 
     // Provide some basic currying to the user
     return data ? fn( data ) : fn;
   };
-})(jQuery);
+}(jQuery));
 

@@ -5,6 +5,7 @@
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.
  */
+/*global jQuery, Stitches */
 (function (window, Stitches, $) {
 
     "use strict";
