@@ -5,7 +5,7 @@
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.
  */
-#stitches {
+.stitches {
 	width: 500px;
     margin: 72px auto;
 	font-family: Arial, sans-serif;
@@ -15,14 +15,14 @@
 }
 
 /* dropbox */
-#stitches .dropbox {
+.stitches .dropbox {
     background: white;
     height: 200px;
     border-radius: 10px 10px 0 0;
     padding: 20px 0 0;
     position: relative;
 }
-#stitches .droplabel {
+.stitches .droplabel {
 	display: block;
     width: 200px;
     position: absolute;
@@ -35,7 +35,7 @@
 }
 
 /* filelist */
-#stitches .filelist {
+.stitches .filelist {
 	font-size: 14px;
 	line-height: 14px;
 	color: #777;
@@ -44,7 +44,7 @@
     margin: 0;
     padding: 0;
 }
-#stitches .filelist li {
+.stitches .filelist li {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -53,38 +53,38 @@
     height: 40px;
     display: none;
 }
-#stitches .filelist li:hover {
+.stitches .filelist li:hover {
 	background: #f2f2f2;
 }
-#stitches .filelist li span.icon {
+.stitches .filelist li span.icon {
 	display: block;
 	float: left;
 	width: 60px;
 	margin-right: 10px;
 	text-align: center;
 }
-#stitches .filelist li span.icon img {
+.stitches .filelist li span.icon img {
 	max-width: 40px;
     max-height: 40px;
 }
-#stitches .filelist li span.name {
+.stitches .filelist li span.name {
 	display: block;
 	float: left;
 	margin-right: 10px;
 	padding-top: 14px;
 }
-#stitches .filelist li a.remove {
+.stitches .filelist li a.remove {
 	padding-top: 14px;
 	display: block;
 	float: left;
 }
 
 /* buttons */
-#stitches .buttons {
+.stitches .buttons {
 	overflow: hidden;
     margin-bottom: 40px;
 }
-#stitches .buttons a {
+.stitches .buttons a {
 	display: block;
 	width: 124px;
     border-right: 1px solid #f2f2f2;
@@ -97,29 +97,29 @@
 	font-weight: bold;
 	text-decoration: none;
 }
-#stitches .buttons a:hover {
+.stitches .buttons a:hover {
 	background: #0486CC;
 }
-#stitches .buttons a:active {
+.stitches .buttons a:active {
 	background: #05A8FF;
 }
-#stitches .buttons a.disabled {
+.stitches .buttons a.disabled {
 	background: #aaa !important;
     color: #ccc !important;
 	cursor: default;
 }
-#stitches .buttons a.clear {
+.stitches .buttons a.clear {
 	border-radius: 0 0 10px 0;
     border-right: none;
 	width: 125px;
 }
-#stitches .buttons a.generate {
+.stitches .buttons a.generate {
 	border-radius: 0 0 0 10px;
     background: #039a27; /* green 04CC33 05FF3F */
 }
-#stitches .buttons a.generate:hover {
+.stitches .buttons a.generate:hover {
 	background: #04CC33;
 }
-#stitches .buttons a.generate:active {
+.stitches .buttons a.generate:active {
 	background: #05FF3F;
 }

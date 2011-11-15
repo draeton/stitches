@@ -12,9 +12,9 @@
 
     window.Stitches = (function () {
         return {
-            init: function () {
+            init: function ($elem) {
                 Stitches.filesCount = 0;
-                Stitches.Page.init();
+                Stitches.Page.init($elem);
             },
 
             generateStitches: function () {
