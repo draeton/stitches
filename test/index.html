@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>QUnit Tests</title>
+	<link rel="stylesheet" href="qunit/qunit.css" media="screen">
+
+<!-- reference your own javascript files here -->
+
+  <script src="../js/libs/modernizr-2.0.6.min.js"></script>
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+  <script src="../js/plugins.js"></script> 
+  <script src="../js/script.js"></script> 
+
+
+<!-- test runner files -->
+	<script src="qunit/qunit.js"></script>
+	<script src="tests.js"></script>
+
+
+
+</head>
+<body class="flora">
+	<h1 id="qunit-header">QUnit Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">test markup</div>
+	
+    <div id="stitches">
+	    <div class="dropbox">
+	        <span class="droplabel">Drop images here...</span>
+	        <ul class="filelist"></ul>
+	    </div>
+	    <div class="buttons">
+	        <a href="javascript:void(0)" class="generate disabled">Generate</a>
+	        <a href="javascript:void(0)" class="dlsprite disabled" target=_blank>Sprite &raquo;</a>
+	        <a href="javascript:void(0)" class="dlstylesheet disabled" target=_blank>Stylesheet &raquo;</a>
+	        <a href="javascript:void(0)" class="clear disabled">Clear Images</a>
+	    </div>
+    </div>
+    
+</body>
+</html>
