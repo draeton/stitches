@@ -144,7 +144,8 @@
 
                 Stitches.Page.$dropbox.removeClass("dropping");
 
-                var files = evt.dataTransfer.files;
+                var e = evt || window.event;
+                var files = (e.files || e.dataTransfer.files);
 
                 if (files.length > 0) {
                     Stitches.Page.handleFiles(files);

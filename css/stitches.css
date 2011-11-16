@@ -33,8 +33,7 @@
 	font-weight: bold;
     color: #aaa;
 }
-.stitches .dropping,
-.stitches .dropping .filelist {
+.stitches .dropping {
     background-color: #eee;
 }
 
