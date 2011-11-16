@@ -90,6 +90,9 @@
                     this.addEventListener("dragenter", function () {
                             Stitches.Page.$dropbox.addClass("dropping")
                         }, false);
+                    this.addEventListener("dragleave", function () {
+                            Stitches.Page.$dropbox.removeClass("dropping")
+                        }, false);
                     this.addEventListener("dragexit", function () {
                             Stitches.Page.$dropbox.removeClass("dropping")
                         }, false);
@@ -138,6 +141,8 @@
             drop: function (evt) {
                 evt.stopPropagation();
                 evt.preventDefault();
+
+                Stitches.Page.$dropbox.removeClass("dropping");
 
                 var files = evt.dataTransfer.files;
 

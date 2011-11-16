@@ -33,6 +33,9 @@
 	font-weight: bold;
     color: #aaa;
 }
+.stitches .dropping {
+    outline: 1px dotted #888;
+}
 
 /* filelist */
 .stitches .filelist {
