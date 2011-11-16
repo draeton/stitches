@@ -48,7 +48,7 @@
             },
             
             getTemplates: function () {
-            	$.get("js/mylibs/templates.html", function (html) {
+            	$.get("js/mylibs/stitches/templates.html", function (html) {
             		$("body").append(html);
             		Stitches.Page.templates.stitches = Stitches.tmpl("stitches_tmpl");
             		Stitches.Page.templates.icon = Stitches.tmpl("stitches_icon_tmpl");
