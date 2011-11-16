@@ -72,7 +72,7 @@
                 Stitches.Page.buttons = {
                     $generate: $("a.generate", Stitches.Page.$buttons),
                     $clear: $("a.clear", Stitches.Page.$buttons),
-                    $sprite: $("a.dlsprite".Stitches.Page.$buttons),
+                    $sprite: $("a.dlsprite", Stitches.Page.$buttons),
                     $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
                 };
 
