@@ -3,5 +3,8 @@
  */
 /*global jQuery, Stitches */
 (function ($, Stitches) {
-    $(Stitches.init);
+
+	var $stitches = $("#stitches");
+	Stitches.init($stitches);
+    
 }(jQuery, Stitches));

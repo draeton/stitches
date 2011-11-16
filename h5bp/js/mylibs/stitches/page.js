@@ -9,33 +9,72 @@
 (function (window, Stitches, $) {
 
     "use strict";
+    
+    // Simple JavaScript Templating
+    // John Resig - http://ejohn.org/ - MIT Licensed
+    (function () {
+	    var cache = {};
+	
+	    Stitches.tmpl = function tmpl(str, data) {
+	        // Figure out if we're getting a template, or if we need to
+	        // load the template - and be sure to cache the result.
+	        var fn = !/\W/.test(str) ? cache[str] = cache[str] || tmpl(document.getElementById(str).innerHTML) :
+	
+	        // Generate a reusable function that will serve as a template
+	        // generator (and which will be cached).
+	        new Function("obj", "var p=[],print=function(){p.push.apply(p,arguments);};" +
+	
+	        // Introduce the data as local variables using with(){}
+	        "with(obj){p.push('" +
+	
+	        // Convert the template into pure JavaScript
+	        str.replace(/[\r\t\n]/g, " ").split("<%").join("\t").replace(/((^|%>)[^\t]*)'/g, "$1\r").replace(/\t=(.*?)%>/g, "',$1,'").split("\t").join("');").split("%>").join("p.push('").split("\r").join("\\'") + "');}return p.join('');");
+	
+	        // Provide some basic currying to the user
+	        return data ? fn(data) : fn;
+        };
+	})();
 
     Stitches.Page = (function () {
         return {
-            init: function () {
-                Stitches.Page.dropbox = $("#dropbox").get(0);
-                Stitches.Page.$droplabel = $("#droplabel");
-                Stitches.Page.$filelist = $("#filelist");
-                Stitches.Page.$buttons = $("#buttons");
-                Stitches.Page.buttons =  {
-                	$generate: $("a.generate"),
-                	$clear: $("a.clear"),
-                	$sprite: $("a.sprite"),
-                	$stylesheet: $("a.stylesheet")
-                };
-
-                Stitches.Page.getTemplates();
-                Stitches.Page.bindHandlers();
+            init: function ($elem) {
+            	if (!$elem) {
+            		$elem = $('<div>').appendTo('body');
+            	}
+                
+                // load templates
+				Stitches.Page.getTemplates();
             },
-
-            getTemplates: function (callback) {
-                $.get("templates.html", function (data) {
-                    $("body").append(data);
-                    Stitches.Page.hasTemplates = true;
-                    if (callback) {
-                        callback();
-                    }
-                });
+            
+            getTemplates: function () {
+            	$.get("templates.html", function (html) {
+            		$("body").append(html);
+            		Stitches.Page.templates.stitches = Stitches.tmpl("stitches_tmpl");
+            		Stitches.Page.templates.icon = Stitches.tmpl("stitches_icon_tmpl");
+            		
+            		var $div = $(Stitches.tmpl(Stitches.Page.templates.stitches, {}));
+            		$div.appendTo(Stitches.Page.$elem);
+            		
+            		// set dom element references
+            		Stitches.Page.setReferences();
+            	});
+            },
+            
+            setReferences: function () {
+            	Stitches.Page.$elem = $elem;
+                Stitches.Page.dropbox = $(".dropbox", Stitches.Page.$elem).get(0);
+                Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
+                Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
+                Stitches.Page.$buttons = $(".buttons", Stitches.Page.$elem);
+                Stitches.Page.buttons =  {
+                	$generate: $("a.generate", Stitches.Page.$buttons),
+                	$clear: $("a.clear", Stitches.Page.$buttons),
+                	$sprite: $("a.dlsprite". Stitches.Page.$buttons),
+                	$stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
+                };
+				
+				// bind handlers to generated element
+                Stitches.Page.bindHandlers();
             },
 
             bindHandlers: function () {
@@ -55,9 +94,9 @@
                 }
 
                 if (/generate/.test(this.className)) {
-                    Stitches.Page.toggleButtons("add", ["generate", "clear"]);
+                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);
                     Stitches.generateStitches();
-                    Stitches.Page.toggleButtons("remove", ["generate", "clear"]);
+                    Stitches.Page.setButtonDisabled(false, ["generate", "clear"]);
                     return false;
                 }
 
@@ -69,7 +108,9 @@
                 return true;
             },
 
-            toggleButtons: function (action, buttons) {
+            setButtonDisabled: function (disabled, buttons) {
+            	var action = disabled ? "add" : "remove";
+            	
                 buttons.forEach(function (val, idx) {
                     Stitches.Page.buttons["$" + val][action + "Class"]("disabled");
                 });
@@ -107,7 +148,7 @@
             	Stitches.filesCount++;
             	Stitches.filesQueue++;
 
-                Stitches.Page.toggleButtons("add", ["generate", "clear", "sprite", "stylesheet"]);
+                Stitches.Page.setButtonDisabled(true, ["generate", "clear", "sprite", "stylesheet"]);
 
             	if (Stitches.filesCount === 1) {
                     Stitches.Page.$droplabel.fadeOut("fast");
@@ -121,26 +162,18 @@
             handleFileLoad: function (evt) {
             	Stitches.filesQueue--;
 
-                var callback = function () {
-                    var icon = new Stitches.Icon(this.name, evt.target.result);
-                    var $li = $( $.tmpl("icon_tmpl", icon) ).data("icon", icon);
-                    Stitches.Page.$filelist.append($li);
-                    $li.fadeIn("fast");
+                var icon = new Stitches.Icon(this.name, evt.target.result);
+                var $li = $( Stitches.tmpl(Stitches.Page.templates.icon, icon) ).data("icon", icon);
+                Stitches.Page.$filelist.append($li);
+                $li.fadeIn("fast");
 
-                    if (Stitches.filesQueue === 0) {
-                        Stitches.Page.toggleButtons("remove", ["generate", "clear"]);
-                    }
-                }
-
-                if (!Stitches.Page.hasTemplates) {
-                    Stitches.Page.getTemplates(callback.bind(this));
-                } else {
-                    callback.call(this);
+                if (Stitches.filesQueue === 0) {
+                    Stitches.Page.setButtonDisabled(false, ["generate", "clear"]);
                 }
             },
 
             removeFile: function (evt) {
-                Stitches.Page.toggleButtons("add", ["sprite", "stylesheet"]);
+                Stitches.Page.setButtonDisabled(true, ["sprite", "stylesheet"]);
 
                 $(this).parent().fadeOut("fast", function () {
                     $(this).remove();
@@ -148,7 +181,7 @@
 
                 Stitches.filesCount--;
                 if (Stitches.filesCount === 0) {
-                    Stitches.Page.toggleButtons("add", ["generate", "clear"]);
+                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);
                     Stitches.Page.$droplabel.fadeIn("fast");
                 }
 

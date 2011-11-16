@@ -5,51 +5,24 @@
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.
  */
- body {
-	background: #f2f2f2;
+.stitches {
+	width: 500px;
+    margin: 72px auto;
 	font-family: Arial, sans-serif;
 	font-size: 16px;
 	line-height: 20px;
 	color: #222;
 }
-#container {
-	width: 500px;
-    margin: 72px auto;
-}
-h1 {
-	margin-bottom: 12px;
-	font-size: 36px;
-	font-weight: bold;
-}
-h1 .small {
-    font-size: 12px;
-}
-h2 {
-	margin-bottom: 6px;
-	font-size: 20px;
-	font-weight: bold;
-}
-p {
-	margin-bottom: 12px;
-}
-strong {
-	font-weight: bold;
-}
-pre {
-    background: #000;
-    color: #fff;
-    padding: 15px;
-}
 
 /* dropbox */
-#dropbox {
+.stitches .dropbox {
     background: white;
     height: 200px;
     border-radius: 10px 10px 0 0;
     padding: 20px 0 0;
     position: relative;
 }
-#droplabel {
+.stitches .droplabel {
 	display: block;
     width: 200px;
     position: absolute;
@@ -62,7 +35,7 @@ pre {
 }
 
 /* filelist */
-#filelist {
+.stitches .filelist {
 	font-size: 14px;
 	line-height: 14px;
 	color: #777;
@@ -71,7 +44,7 @@ pre {
     margin: 0;
     padding: 0;
 }
-#filelist li {
+.stitches .filelist li {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -80,38 +53,38 @@ pre {
     height: 40px;
     display: none;
 }
-#filelist li:hover {
+.stitches .filelist li:hover {
 	background: #f2f2f2;
 }
-#filelist li span.icon {
+.stitches .filelist li span.icon {
 	display: block;
 	float: left;
 	width: 60px;
 	margin-right: 10px;
 	text-align: center;
 }
-#filelist li span.icon img {
+.stitches .filelist li span.icon img {
 	max-width: 40px;
     max-height: 40px;
 }
-#filelist li span.name {
+.stitches .filelist li span.name {
 	display: block;
 	float: left;
 	margin-right: 10px;
 	padding-top: 14px;
 }
-#filelist li a.remove {
+.stitches .filelist li a.remove {
 	padding-top: 14px;
 	display: block;
 	float: left;
 }
 
 /* buttons */
-#buttons {
+.stitches .buttons {
 	overflow: hidden;
     margin-bottom: 40px;
 }
-#buttons a {
+.stitches .buttons a {
 	display: block;
 	width: 124px;
     border-right: 1px solid #f2f2f2;
@@ -124,29 +97,29 @@ pre {
 	font-weight: bold;
 	text-decoration: none;
 }
-#buttons a:hover {
+.stitches .buttons a:hover {
 	background: #0486CC;
 }
-#buttons a:active {
+.stitches .buttons a:active {
 	background: #05A8FF;
 }
-#buttons a.disabled {
+.stitches .buttons a.disabled {
 	background: #aaa !important;
     color: #ccc !important;
 	cursor: default;
 }
-#buttons a.clear {
+.stitches .buttons a.clear {
 	border-radius: 0 0 10px 0;
     border-right: none;
 	width: 125px;
 }
-#buttons a.generate {
+.stitches .buttons a.generate {
 	border-radius: 0 0 0 10px;
     background: #039a27; /* green 04CC33 05FF3F */
 }
-#buttons a.generate:hover {
+.stitches .buttons a.generate:hover {
 	background: #04CC33;
 }
-#buttons a.generate:active {
+.stitches .buttons a.generate:active {
 	background: #05FF3F;
 }

@@ -291,9 +291,47 @@ td { vertical-align: top; }
   h2, h3 { page-break-after: avoid; }
 }
 
-/* ==|== my styles =======================================================
-   Stitches styles
-   ========================================================================== */
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.com/Stitches
+ *
+ * Copyright 2011, Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+ body {
+	background: #f2f2f2;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	color: #222;
+}
+#container {
+	width: 500px;
+    margin: 72px auto;
+}
+h1 {
+	margin-bottom: 12px;
+	font-size: 36px;
+	font-weight: bold;
+}
+h1 .small {
+    font-size: 12px;
+}
+h2 {
+	margin-bottom: 6px;
+	font-size: 20px;
+	font-weight: bold;
+}
+p {
+	margin-bottom: 12px;
+}
+strong {
+	font-weight: bold;
+}
+pre {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+}
 
 @import url("stitches.css");
-@import url("sprite.css");
