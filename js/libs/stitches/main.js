@@ -15,7 +15,7 @@
             init: function ($elem) {
                 Modernizr.load([
                     {
-                        test: !!FileReader && Modernizr.draganddrop,
+                        test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
                         nope: "js/libs/dropfile/dropfile.js"
                     },
                     {

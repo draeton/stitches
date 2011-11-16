@@ -44,11 +44,12 @@
                 Stitches.Page.$elem = $elem;
 
                 // test
-                console.log("drag", $elem.get(0).ondragover);
-                console.log("file", FileReader);
-
-                // load templates
-                Stitches.Page.getTemplates();
+                if (typeof FileReader !== "undefined" && Modernizr.draganddrop) {
+                    // load templates
+                    Stitches.Page.getTemplates();
+                } else {
+                    // browser is not compatible
+                }
             },
 
             getTemplates: function () {
