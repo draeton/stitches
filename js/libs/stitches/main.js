@@ -5,16 +5,28 @@
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.
  */
-/*global jQuery, Stitches */
-(function (window) {
+/*global jQuery, Stitches, Modernizr */
+(function (window, Modernizr) {
 
     "use strict";
 
     window.Stitches = (function () {
         return {
             init: function ($elem) {
-                Stitches.filesCount = 0;
-                Stitches.Page.init($elem);
+                Modernizr.load([
+                    {
+                        test: !!FileReader && Modernizr.draganddrop,
+                        nope: "js/libs/dropfile/dropfile.js"
+                    },
+                    {
+                        test: Modernizr.canvas,
+                        nope: "js/libs/flashcanvas/flashcanvas.js"
+                    },
+                    function () {
+                        Stitches.filesCount = 0;
+                        Stitches.Page.init($elem);
+                    }
+                ]);
             },
 
             generateStitches: function () {
@@ -94,4 +106,4 @@
         };
     })();
 
-})(window);
+})(window, Modernizr);

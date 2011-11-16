@@ -43,6 +43,10 @@
                 }
                 Stitches.Page.$elem = $elem;
 
+                // test
+                console.log("drag", $elem.get(0).ondragover);
+                console.log("file", FileReader);
+
                 // load templates
                 Stitches.Page.getTemplates();
             },
@@ -65,7 +69,7 @@
             },
 
             setReferences: function () {
-                Stitches.Page.dropbox = $(".dropbox", Stitches.Page.$elem).get(0);
+                Stitches.Page.$dropbox = $(".dropbox", Stitches.Page.$elem);
                 Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
                 Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
                 Stitches.Page.$buttons = $(".buttons", Stitches.Page.$elem);
@@ -81,10 +85,16 @@
             },
 
             bindHandlers: function () {
-                Stitches.Page.dropbox.addEventListener("dragenter", Stitches.Page.noopHandler, false);
-                Stitches.Page.dropbox.addEventListener("dragexit", Stitches.Page.noopHandler, false);
-                Stitches.Page.dropbox.addEventListener("dragover", Stitches.Page.noopHandler, false);
-                Stitches.Page.dropbox.addEventListener("drop", Stitches.Page.drop, false);
+                Stitches.Page.$dropbox.each(function () {
+                    this.addEventListener("dragenter", function () {
+                            Stitches.Page.$dropbox.addClass("dropping")
+                        }, false);
+                    this.addEventListener("dragexit", function () {
+                            Stitches.Page.$dropbox.removeClass("dropping")
+                        }, false);
+                    this.addEventListener("dragover", Stitches.Page.noopHandler, false);
+                    this.addEventListener("drop", Stitches.Page.drop, false);
+                });
 
                 Stitches.Page.$buttons.delegate("a", "click", Stitches.Page.handleButtons);
 
