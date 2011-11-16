@@ -32,7 +32,7 @@
 
                 Stitches.Page.buttons.$sprite.attr("href", sprite);
                 Stitches.Page.buttons.$stylesheet.attr("href", stylesheet);
-                Stitches.Page.toggleButtons("remove", ["sprite", "stylesheet"]);
+                Stitches.Page.setButtonDisabled(false, ["sprite", "stylesheet"]);
             },
 
             positionImages: function () {
