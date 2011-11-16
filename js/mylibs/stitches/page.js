@@ -56,7 +56,7 @@
                         icon: Stitches.tmpl("stitches_icon_tmpl")
                     };
 
-                    var $div = $(Stitches.tmpl(Stitches.Page.templates.stitches, {}));
+                    var $div = $(Stitches.Page.templates.stitches({}));
                     $div.appendTo(Stitches.Page.$elem);
 
                     // set dom element references
@@ -166,7 +166,7 @@
                 Stitches.filesQueue--;
 
                 var icon = new Stitches.Icon(this.name, evt.target.result);
-                var $li = $(Stitches.tmpl(Stitches.Page.templates.icon, icon)).data("icon", icon);
+                var $li = $(Stitches.Page.templates.icon(icon)).data("icon", icon);
                 Stitches.Page.$filelist.append($li);
                 $li.fadeIn("fast");
 
