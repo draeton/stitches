@@ -33,7 +33,8 @@
 
 ##TODO
 
+* add ability to configure file locations and other props
 * minify and concat
-* add ability to configure file locations
-* more comments
 * fix dropfile and flashcanvas support
+* write unit tests
+* more comments
