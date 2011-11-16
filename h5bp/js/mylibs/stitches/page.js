@@ -1,5 +1,5 @@
 /*!
- * Stitches - HTML5 Sprite Generator
+ * Stitches.Page
  * http://draeton.github.com/Stitches
  *
  * Copyright 2011, Matthew Cobbs
@@ -41,13 +41,14 @@
             	if (!$elem) {
             		$elem = $('<div>').appendTo('body');
             	}
+                Stitches.Page.$elem = $elem;
                 
                 // load templates
 				Stitches.Page.getTemplates();
             },
             
             getTemplates: function () {
-            	$.get("templates.html", function (html) {
+            	$.get("js/mylibs/templates.html", function (html) {
             		$("body").append(html);
             		Stitches.Page.templates.stitches = Stitches.tmpl("stitches_tmpl");
             		Stitches.Page.templates.icon = Stitches.tmpl("stitches_icon_tmpl");
@@ -61,7 +62,6 @@
             },
             
             setReferences: function () {
-            	Stitches.Page.$elem = $elem;
                 Stitches.Page.dropbox = $(".dropbox", Stitches.Page.$elem).get(0);
                 Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
                 Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);

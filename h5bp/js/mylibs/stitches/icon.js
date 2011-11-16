@@ -1,5 +1,5 @@
 /*!
- * Stitches - HTML5 Sprite Generator
+ * Stitches.Icon
  * http://draeton.github.com/Stitches
  *
  * Copyright 2011, Matthew Cobbs
