@@ -20,11 +20,11 @@
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: "js/libs/flashcanvas/flashcanvas.js"
-                    },
-                    function () {
-                        Stitches.filesCount = 0;
-                        Stitches.Page.init($elem);
+                        nope: "js/libs/flashcanvas/flashcanvas.js",
+                        complete: function () {
+                            Stitches.filesCount = 0;
+                            Stitches.Page.init($elem);
+                        }
                     }
                 ]);
             },
