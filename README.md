@@ -1,14 +1,14 @@
-#Stitches - An HTML5 sprite generator
+## Stitches - An HTML5 sprite generator
 
-##Demo
+### Demo
 
 [Here.](http://github.matthewcobbs.com/stitches/).
 
-## Dependencies
+### Dependencies
 
     jQuery 1.6.2+, Modernizr (Dropfile, Flashcanvas for older browser support)
 
-##Setup
+### Setup
 
     <!-- Stitches -->
     <link rel="stylesheet" href="src/stitches/stitches.css">
@@ -18,11 +18,11 @@
     <script defer src="src/stitches/icon.js"></script>
     <script defer src="src/stitches/icons.js"></script>
 
-##Markup
+### Markup
 
     <div id="stitches"></div>
 
-##Implementation
+### Implementation
 
     (function ($, Stitches) {
 
@@ -31,7 +31,7 @@
 
     }(jQuery, Stitches));
 
-##TODO
+### TODO
 
 * add ability to configure file locations and other props
 * minify and concat
