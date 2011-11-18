@@ -1,6 +1,6 @@
 /*!
  * Stitches - HTML5 Sprite Generator
- * http://draeton.github.com/Stitches
+ * http://draeton.github.com/stitches
  *
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.

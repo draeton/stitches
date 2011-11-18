@@ -1,6 +1,6 @@
 /*!
  * Stitches.Icons
- * http://draeton.github.com/Stitches
+ * http://draeton.github.com/stitches
  *
  * Copyright 2011, Matthew Cobbs
  * Licensed under the MIT license.
