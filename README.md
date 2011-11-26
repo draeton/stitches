@@ -1,6 +1,6 @@
 ## Stitches
 
-[Stitches](http://github.matthewcobbs.com/stitches/) is an HTML5 sprite generator.
+[Stitches](http://draeton.github.com/stitches/) is an HTML5 sprite generator.
 
 ## Version
 
@@ -36,7 +36,7 @@ Once that's in place, the sprite generator is created by the `init` method:
 
 ## Documentation
 
-[See here](http://github.matthewcobbs.com/stitches/docs/main.html).
+[See here](http://draeton.github.com/stitches/docs/main.html).
 
 ## TODO
 
