@@ -1,6 +1,6 @@
 ## Stitches
 
-[Stitches](/draeton/stitches) is an HTML5 sprite generator.
+[Stitches](http://github.matthewcobbs.com/stitches/) is an HTML5 sprite generator.
 
 ### Version
 
@@ -33,10 +33,6 @@ Once that's in place, the sprite generator is created by the `init` method:
 
     }(jQuery, Stitches));
     </script>
-
-### Demo
-
-[Here.](http://github.matthewcobbs.com/stitches/).
 
 ### TODO
 
