@@ -59,7 +59,7 @@ Matthew Cobbs (matthew.cobbs@gmail.com)
 
 ## Download
 
-*The latest release, 0.1.9, is [available here](dist/stitches-0.1.9.zip)*.
+**The latest release, 0.1.9, is [available here](dist/stitches-0.1.9.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
