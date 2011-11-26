@@ -6,21 +6,29 @@
  * Licensed under the MIT license.
  */
 /*global jQuery, Stitches, Modernizr */
-(function (window, Modernizr) {
+(function (window, $, Modernizr) {
 
     "use strict";
 
     window.Stitches = (function () {
+        var defaults = {
+            "jsdir": "js"
+        };
+        
         return {
-            init: function ($elem) {
+            init: function ($elem, config) {
+                Stitches.settings = $.extend({}, defaults, config);
+                
+                var jsdir = Stitches.settings.jsdir;
+                
                 Modernizr.load([
                     {
                         test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
-                        nope: "js/libs/dropfile/dropfile.js"
+                        nope: jsdir + "/dropfile/dropfile.js"
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: "js/libs/flashcanvas/flashcanvas.js",
+                        nope: jsdir + "/flashcanvas/flashcanvas.js",
                         complete: function () {
                             Stitches.filesCount = 0;
                             Stitches.Page.init($elem);
@@ -106,4 +114,4 @@
         };
     })();
 
-})(window, Modernizr);
+})(window, jQuery, Modernizr);

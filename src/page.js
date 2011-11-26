@@ -53,7 +53,9 @@
             },
 
             getTemplates: function () {
-                $.get("js/libs/stitches/templates.html", function (html) {
+                var jsdir = Stitches.settings.jsdir;
+                
+                $.get(jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
                     
                     Stitches.Page.templates = {
