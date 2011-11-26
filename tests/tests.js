@@ -6,7 +6,7 @@
     module("setup");
     test("init", function () {
         expect(0);
-        Stitches.init($stitches, {jsdir: "../build/js"});
+        Stitches.init($stitches, {jsdir: "../src"});
     });
 
 })(window, jQuery, Stitches);
