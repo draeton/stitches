@@ -4,7 +4,7 @@
 
 ### Version
 
-    0.1.9
+    0.1.10
 
 ### Dependencies
 
@@ -14,33 +14,30 @@ jQuery 1.6.2+, Modernizr; *Dropfile, Flashcanvas for older browser support*
 
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
-    <link rel="stylesheet" href="css/stitches-0.1.9.min.css">
+    <link rel="stylesheet" href="css/stitches-0.1.10-min.css">
 
     <script src="js/jquery-1.6.2.min.js"></script>
     <script src="js/modernizr-2.0.6.min.js"></script>
 
-    <script src="js/stitches-0.1.9.min.js"></script>
+    <script src="js/stitches-0.1.10-min.js"></script>
 
 Once that's in place, the sprite generator is created by the `init` method:
 
     <div id="stitches"></div>
 
     <script>
-    (function ($, Stitches) {
+    jQuery(document).ready(function ($) {
 
         var $stitches = $("#stitches");
-        Stitches.init($stitches);
+        Stitches.init($stitches, {jsdir: "js"});
 
-    }(jQuery, Stitches));
+    });
     </script>
 
 ### TODO
 
 * fix dropfile and flashcanvas support
-* add ability to configure file locations and other props
-* minify and concat
 * write unit tests
-* more comments
 
 ### License
 
