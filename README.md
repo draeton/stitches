@@ -2,15 +2,15 @@
 
 [Stitches](http://github.matthewcobbs.com/stitches/) is an HTML5 sprite generator.
 
-### Version
+## Version
 
     0.1.11
 
-### Dependencies
+## Dependencies
 
 jQuery 1.6.2+, Modernizr; *Dropfile, Flashcanvas for older browser support*
 
-### Implementation
+## Implementation
 
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
@@ -34,16 +34,16 @@ Once that's in place, the sprite generator is created by the `init` method:
     });
     </script>
 
-### Documentation
+## Documentation
 
 [See here](http://github.matthewcobbs.com/stitches/docs/main.html).
 
-### TODO
+## TODO
 
 * fix dropfile and flashcanvas support
 * write unit tests
 
-### License
+## License
 
 (The MIT License)
 
