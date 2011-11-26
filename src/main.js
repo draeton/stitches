@@ -1,21 +1,33 @@
-/*!
- * Stitches - HTML5 Sprite Generator
- * http://draeton.github.com/stitches
- *
- * Copyright 2011, Matthew Cobbs
- * Licensed under the MIT license.
- */
+// ## Stitches - HTML5 Sprite Generator
+//
+// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+//
+// Copyright 2011, Matthew Cobbs  
+// Licensed under the MIT license.
+//
 /*global jQuery, Stitches, Modernizr */
 (function (window, $, Modernizr) {
 
     "use strict";
 
+    // ## Stitches namespace
+    //
+    // Holds all methods
     window.Stitches = (function () {
+        // **Some configuration defaults**
         var defaults = {
             "jsdir": "js"
         };
         
         return {
+            // ### init
+            //
+            // Uses Modernizr to check for drag-and-drop, FileReader, and canvas
+            // functionality. Initializes the stitches element and readies everything for
+            // user interaction.
+            //
+            //     @param {jQuery} $elem A wrapped DOM node
+            //     @param {Object} config An optional settings object
             init: function ($elem, config) {
                 Stitches.settings = $.extend({}, defaults, config);
                 
@@ -37,6 +49,11 @@
                 ]);
             },
 
+            // ### generateStitches
+            //
+            // Positions all of the icons from the $filelist on the canvas;
+            // crate the sprite link and the stylesheet link;
+            // updates button state
             generateStitches: function () {
             	Stitches.looseIcons = [];
             	Stitches.placedIcons = [];
@@ -55,42 +72,49 @@
                 Stitches.Page.setButtonDisabled(false, ["sprite", "stylesheet"]);
             },
 
+            // ### positionImages
+            //
+            // Position all of the images in the `looseIcons` array within the canvas
             positionImages: function () {
-            	// reset position of icons
+            	/* reset position of icons */
             	Stitches.looseIcons.forEach(function (icon, idx) {
             		icon.x = icon.y = 0;
             		icon.isPlaced = false;
             	});
 
-                // reverse sort by area
+                /* reverse sort by area */
                 Stitches.looseIcons = Stitches.looseIcons.sort(function (a, b) {
                     return b.area - a.area;
                 });
 
-                // find the ideal sprite for this set of icons
+                /* find the ideal sprite for this set of icons */
                 Stitches.canvas = Stitches.Icons.idealCanvas(Stitches.looseIcons);
 
-                // try to place all of the icons on the ideal canvas
+                /* try to place all of the icons on the ideal canvas */
                 Stitches.Icons.placeIcons(Stitches.looseIcons, Stitches.placedIcons, Stitches.canvas);
 
-                // trim empty edges
+                /* trim empty edges */
                 Stitches.Icons.cropCanvas(Stitches.placedIcons, Stitches.canvas);
             },
 
-            // draw images on canvas
+            // ### makeStitches
+            // 
+            // Draw images on canvas
             makeStitches: function () {
                 var context = Stitches.canvas.getContext('2d');
                 Stitches.placedIcons.forEach(function (icon, idx) {
                     context.drawImage(icon.image, icon.x, icon.y);
                 });
 
-                // add save link
+                /* add save link */
                 return Stitches.canvas.toDataURL();
             },
 
-            // create stylesheet text
+            // ### makeStylesheet
+            // 
+            // Create stylesheet text
             makeStylesheet: function () {
-                // sort by name for css output
+                /* sort by name for css output */
                 Stitches.placedIcons = Stitches.placedIcons.sort(function (a, b) {
                     return a.name < b.name ? -1 : 1;
                 });
@@ -108,7 +132,7 @@
                     text += "}\n\n";
                 });
 
-                // add save link
+                /* add save link */
                 return "data:," + encodeURIComponent(text);
             }
         };
