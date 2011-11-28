@@ -4,7 +4,7 @@
 
 ## Version
 
-    0.1.11
+    0.0.15
 
 ## Dependencies
 
@@ -14,12 +14,12 @@ jQuery 1.6.2+, Modernizr; *Dropfile, Flashcanvas for older browser support*
 
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
-    <link rel="stylesheet" href="css/stitches-0.1.11-min.css">
+    <link rel="stylesheet" href="css/stitches-0.0.15-min.css">
 
     <script src="js/jquery-1.6.2.min.js"></script>
     <script src="js/modernizr-2.0.6.min.js"></script>
 
-    <script src="js/stitches-0.1.11-min.js"></script>
+    <script src="js/stitches-0.0.15-min.js"></script>
 
 Once that's in place, the sprite generator is created by the `init` method:
 
