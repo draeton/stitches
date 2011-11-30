@@ -12,6 +12,13 @@
         <property file="build.properties"/>
         
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
+        
+        <input message="Please enter a commit message:" addproperty="commit.message"/>
+        <condition property="commit.message.yes">
+            <not>
+                <equals arg1="${commit.message}" arg2=""/>
+            </not>
+        </condition>
     </target>
     
         
@@ -30,7 +37,7 @@
     </macrodef>
     
     
-    <target name="-init" description="Make project directory structure">
+    <target name="-init" depends="-load.properties" description="Make project directory structure" if="commit.message.yes">
         <echo message="Starting build ${version}..."/>
         <echo message="Make project directory structure"/>
         
@@ -142,7 +149,7 @@
             <args><arg line="."/></args>
         </git>
         <git command="commit">
-            <args><arg value="-am Build ${version} ${msg}"/></args>
+            <args><arg value="-am Build ${version} - ${commit.message}"/></args>
         </git>
         <git command="push">
             <args>
@@ -191,7 +198,7 @@
             <args><arg line="."/></args>
         </git>
         <git command="commit" dir="${gh-pages}">
-            <args><arg value="-am Build ${version}"/></args>
+            <args><arg value="-am Build ${version} - ${commit.message}"/></args>
         </git>
         <git command="push" dir="${gh-pages}">
             <args>
