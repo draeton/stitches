@@ -34,7 +34,12 @@
             <filelist refid="src.js"/>
         </apply-->
         <exec executable="${docco.bat}">
-            <arg value="${docco.js}"/>
+            <arg line="${docco.js}"/>
+            
+            <!-- arg value="${src}/main.js"/>
+            <arg value="${src}/icons.js"/>
+            <arg value="${src}/icon.js"/>
+            <arg value="${src}/page.js"/-->
         </exec>
         <!-- clean up after docco -->
         <delete dir="-p"/>
