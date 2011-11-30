@@ -14,13 +14,13 @@
     <target name="-init" depends="-load.properties" description="Starting new build">
         <echo>Starting new build</echo>
         
-        <filelist id="src.js" dir="${doc.src}">
+        <filelist id="src.js" dir="${src.dir}">
             <file name="main.js"/>
             <file name="icons.js"/>
             <file name="icon.js"/>
             <file name="page.js"/>
         </filelist>
-        <filelist id="src.css" dir="${doc.src}">
+        <filelist id="src.css" dir="${src.dir}">
             <file name="${repo}.css"/>
         </filelist>
     </target>
