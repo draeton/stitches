@@ -190,7 +190,7 @@
         <git command="push" dir="${gh-pages}">
             <args>
                 <arg value="origin"/>
-                <arg value="gh-page"/>
+                <arg value="gh-pages"/>
             </args>
         </git>
     </target>
