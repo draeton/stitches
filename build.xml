@@ -4,46 +4,33 @@
 
     <description>ANT build file for git://github.com/draeton/stitches</description>
     
+        
+    <property environment="env"/>
+    <import file="../common-targets.xml"/>
+    
     
     <target name="-load.properties" description="Set properties for this build">
         <echo>Set properties for this build</echo>
         
-        <property environment="env"/>
-        <property file="../ant.properties"/>
         <property file="build.properties"/>
         
         <property name="repo" value="stitches"/>
-        <property name="gh-pages" value="../gh-pages/${repo}"/>
+        <property name="gh-pages.dir" value="../gh-pages/${repo}"/>
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
         
         <input message="Please enter a commit message:" addproperty="commit.message"/>
     </target>
-    
-        
-    <macrodef name="git">
-        <attribute name="command"/>
-        <attribute name="failonerror" default="true"/>
-        <attribute name="dir" default=""/>
-        <element name="args" optional="true"/>
-        <sequential>
-            <echo message="git @{command}"/>
-            <exec executable="git" dir="@{dir}">
-                <arg line="@{command}"/>
-                <args/>
-            </exec>
-        </sequential>
-    </macrodef>
     
     
     <target name="-init" depends="-load.properties" description="Make project directory structure">
         <echo>Starting new build</echo>
         <echo>Make project directory structure</echo>
         
-        <delete dir="${build}"/>
-        <delete dir="${docs}"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${docs.dir}"/>
         
-        <mkdir dir="${build}"/>
-        <mkdir dir="${docs}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${docs.dir}"/>
     </target>
 
     
@@ -51,12 +38,12 @@
     <target name="jslint" depends="-load.properties" description="JSHint check">
         <echo>JSLint check</echo>
         
-        <taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="${jslint4java}" />
+        <taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="${jslint4java.jar}" />
         
         <jslint options="undef,white">
             <formatter type="plain" />
-            <formatter type="plain" destfile="${build}/jslint.out" />
-            <fileset dir="${src}">
+            <formatter type="plain" destfile="${build.dir}/jslint.out" />
+            <fileset dir="${src.dir}">
                 <include name="*.js"/>
                 <exclude name="lib"/>
             </fileset>
@@ -69,7 +56,7 @@
         <echo>Updating version number in README.md</echo>
         
         <delete file="README.md"/>
-        <copy file="${templates}/README.md" tofile="README.md"/>
+        <copy file="${templates.dir}/README.md" tofile="README.md"/>
         <replace file="README.md" token="@VERSION@" value="${version}"/>
     </target>
     
@@ -77,11 +64,11 @@
     <target name="-docco" depends="-init" description="Create docs using Docco">
         <echo>Create docs using Docco</echo>
         
-        <exec executable="${docco}">
-            <arg value="${src}/main.js"/>
-            <arg value="${src}/icons.js"/>
-            <arg value="${src}/icon.js"/>
-            <arg value="${src}/page.js"/>
+        <exec executable="${docco.bat}">
+            <arg value="${src.dir}/main.js"/>
+            <arg value="${src.dir}/icons.js"/>
+            <arg value="${src.dir}/icon.js"/>
+            <arg value="${src.dir}/page.js"/>
         </exec>
         <!-- clean up after docco -->
         <delete dir="-p"/>
@@ -91,14 +78,14 @@
     <target name="-concat" depends="-init" description="Concatenation of JS and CSS">
         <echo>Concatenation of JS and CSS</echo>
 
-        <concat destfile="${build}/js/${repo}-${version}.js" force="no">
-           <fileset dir="${src}" includes="main.js" />
-           <fileset dir="${src}" includes="icons.js" />
-           <fileset dir="${src}" includes="icon.js" />
-           <fileset dir="${src}" includes="page.js" />
+        <concat destfile="${build.dir}/js/${repo}-${version}.js" force="no">
+           <fileset dir="${src.dir}" includes="main.js" />
+           <fileset dir="${src.dir}" includes="icons.js" />
+           <fileset dir="${src.dir}" includes="icon.js" />
+           <fileset dir="${src.dir}" includes="page.js" />
         </concat>
-        <concat destfile="${build}/css/${repo}-${version}.css" force="no">
-           <fileset dir="${src}" includes="${repo}.css" />
+        <concat destfile="${build.dir}/css/${repo}-${version}.css" force="no">
+           <fileset dir="${src.dir}" includes="${repo}.css" />
         </concat>
     </target>
     
@@ -114,7 +101,7 @@
             <classpath refid="task.classpath"/>
         </taskdef>
         
-        <yui-compressor warn="false" charset="UTF-8" fromdir="${build}" todir="${build}">
+        <yui-compressor warn="false" charset="UTF-8" fromdir="${build.dir}" todir="${build.dir}">
            <include name="js/${repo}-${version}.js" />
            <include name="css/${repo}-${version}.css" />
         </yui-compressor>
@@ -124,11 +111,11 @@
     <target name="-copylib" depends="-init" description="Copying dependencies">
         <echo>Copying dependencies</echo>
         
-       <copy todir="${build}/js">
-           <fileset dir="${src}" includes="*.html"/>
+       <copy todir="${build.dir}/js">
+           <fileset dir="${src.dir}" includes="*.html"/>
        </copy>
-        <copy todir="${build}/js">
-            <fileset dir="${src}/lib"/>
+        <copy todir="${build.dir}/js">
+            <fileset dir="${src.dir}/lib"/>
         </copy>
     </target>
     
@@ -136,7 +123,7 @@
     <target name="-zip" depends="-init" description="Create a zip file for distribution">       
         <echo message="Create a zip file for distribution" />
         
-        <zip destfile="${dist}/${repo}-${version}.zip" basedir="${build}" />
+        <zip destfile="${dist.dir}/${repo}-${version}.zip" basedir="${build.dir}" />
     </target>
     
     
@@ -162,29 +149,29 @@
         <echo>Push new changes to gh-pages</echo>
         
         <echo>copy new index.md to gh-pages and update version number</echo>
-        <delete file="${gh-pages}/index.md"/>
-        <copy file="${templates}/index.md" tofile="${gh-pages}/index.md"/>
-        <replace file="${gh-pages}/index.md" token="@VERSION@" value="${version}"/>
+        <delete file="${gh-pages.dir}/index.md"/>
+        <copy file="${templates.dir}/index.md" tofile="${gh-pages.dir}/index.md"/>
+        <replace file="${gh-pages.dir}/index.md" token="@VERSION@" value="${version}"/>
         
         <echo>copy new dist to gh-pages dist</echo>
-        <copy file="${dist}/${repo}-${version}.zip" tofile="${gh-pages}/dist/${repo}-${version}.zip"/>
+        <copy file="${dist.dir}/${repo}-${version}.zip" tofile="${gh-pages.dir}/dist/${repo}-${version}.zip"/>
         
         <echo>delete css and js, and copy new from build dir</echo>
-        <delete dir="${gh-pages}/css"/>
-        <delete dir="${gh-pages}/js"/>
-        <mkdir dir="${gh-pages}/css"/>
-        <mkdir dir="${gh-pages}/js"/>        
-        <copy todir="${gh-pages}/css">
-            <fileset dir="${build}/css" includes="*.css"/>
+        <delete dir="${gh-pages.dir}/css"/>
+        <delete dir="${gh-pages.dir}/js"/>
+        <mkdir dir="${gh-pages.dir}/css"/>
+        <mkdir dir="${gh-pages.dir}/js"/>        
+        <copy todir="${gh-pages.dir}/css">
+            <fileset dir="${build.dir}/css" includes="*.css"/>
         </copy>
-        <copy todir="${gh-pages}/js">
-            <fileset dir="${build}/js" includes="*.js"/>
+        <copy todir="${gh-pages.dir}/js">
+            <fileset dir="${build.dir}/js" includes="*.js"/>
         </copy>
         
         <echo>delete docs, and copy new docs</echo>
-        <delete dir="${gh-pages}/docs"/>        
-        <copy todir="${gh-pages}/docs">
-            <fileset dir="${docs}" includes="**"/>
+        <delete dir="${gh-pages.dir}/docs"/>        
+        <copy todir="${gh-pages.dir}/docs">
+            <fileset dir="${docs.dir}" includes="**"/>
         </copy>
     </target>
     
@@ -192,13 +179,13 @@
     <target name="-gh-pages-commit" depends="-gh-pages" description="Commit new build to gh-pages git repo">
         <echo>Commit new build to gh-pages git repo</echo>
         
-        <git command="add" dir="${gh-pages}">
+        <git command="add" dir="${gh-pages.dir}">
             <args><arg line="."/></args>
         </git>
-        <git command="commit" dir="${gh-pages}">
+        <git command="commit" dir="${gh-pages.dir}">
             <args><arg value="-am Build ${version} - ${commit.message}"/></args>
         </git>
-        <git command="push" dir="${gh-pages}">
+        <git command="push" dir="${gh-pages.dir}">
             <args>
                 <arg value="origin"/>
                 <arg value="gh-pages"/>
