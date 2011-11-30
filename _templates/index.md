@@ -15,6 +15,7 @@ currently compatible with the latest versions of Chrome and Firefox.**
 
 <div id="stitches"></div>
     
+
 ## Implementation
 
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
@@ -43,21 +44,25 @@ jQuery(document).ready(function ($) {
 </script>
 {% endhighlight %}
 
-Documentation is available [here.](docs/main.html)
+Documentation is available [here.](docs/stitches.html)
     
+
 ## Dependencies
 
 [jQuery 1.6.2+](http://jquery.com/), [Modernizr](http://www.modernizr.com/), 
 *[Dropfile](https://github.com/MrSwitch/dropfile), [Flashcanvas](http://flashcanvas.net/) 
 for older browser support*
 
+
 ## Contributors
 
 Matthew Cobbs (matthew.cobbs@gmail.com)
 
+
 ## License
 
 [MIT](https://raw.github.com/draeton/stitches/master/LICENSE)
+
 
 ## Download
 
