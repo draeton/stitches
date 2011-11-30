@@ -20,63 +20,14 @@
             <file name="icon.js"/>
             <file name="page.js"/>
         </filelist>
+        
         <filelist id="src.css" dir="${src.dir}">
             <file name="${repo}.css"/>
         </filelist>
     </target>
     
     
-    <target name="-docco" depends="-init" description="Create docs using Docco">
-        <echo>Create docs using Docco</echo>
-        
-        <pathconvert pathsep=" " property="docco.js" refid="src.js"/>
-        <!--apply executable="${docco.bat}">
-            <filelist refid="src.js"/>
-        </apply-->
-        <exec executable="${docco.bat}">
-            <arg line="${docco.js}"/>
-            
-            <!-- arg value="${src}/main.js"/>
-            <arg value="${src}/icons.js"/>
-            <arg value="${src}/icon.js"/>
-            <arg value="${src}/page.js"/-->
-        </exec>
-        <!-- clean up after docco -->
-        <delete dir="-p"/>
-    </target>
-    
-    
-    <target name="-concat" depends="-init" description="Concatenation of JS and CSS">
-        <echo>Concatenation of JS and CSS</echo>
-
-        <concat destfile="${build.dir}/js/${repo}-${version}.js" force="no">
-            <filelist refid="src.js"/>
-        </concat>
-        <concat destfile="${build.dir}/css/${repo}-${version}.css" force="no">
-            <filelist refid="src.css"/>
-        </concat>
-    </target>
-    
-    
-    <target name="-minify" depends="-concat" description="Invoke YUI compressor">
-        <echo>Invoke YUI compressor</echo>
-        
-        <path id="task.classpath">
-            <pathelement location="${yui-compressor.jar}"/>
-            <pathelement location="${yui-compressor-ant-task.jar}"/>
-        </path>
-        <taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
-            <classpath refid="task.classpath"/>
-        </taskdef>
-        
-        <yui-compressor warn="false" charset="UTF-8" fromdir="${build.dir}" todir="${build.dir}">
-           <include name="js/${repo}-${version}.js" />
-           <include name="css/${repo}-${version}.css" />
-        </yui-compressor>
-    </target>
-    
-    
-    <target name="-copylib" depends="-init" description="Copying dependencies">
+    <target name="-copy-depends" depends="-init" description="Copying dependencies">
         <echo>Copying dependencies</echo>
         
        <copy todir="${build.dir}/js">
@@ -85,89 +36,6 @@
         <copy todir="${build.dir}/js">
             <fileset dir="${src.dir}/lib"/>
         </copy>
-    </target>
-    
-    
-    <target name="-zip" depends="-init" description="Create a zip file for distribution">       
-        <echo message="Create a zip file for distribution" />
-        
-        <zip destfile="${dist.dir}/${repo}-${version}.zip" basedir="${build.dir}" />
-    </target>
-    
-    
-    <target name="-commit" depends="-init" description="Commit new build to master git repo">
-        <echo>Commit new build to master git repo</echo>
-        
-        <git command="add">
-            <args><arg line="."/></args>
-        </git>
-        <git command="commit">
-            <args><arg value="-am Build ${version} - ${commit.message}"/></args>
-        </git>
-        <git command="push">
-            <args>
-                <arg value="origin"/>
-                <arg value="master"/>
-            </args>
-        </git>
-    </target>
-    
-    
-    <target name="-gh-pages" depends="-load.properties" description="Push new changes to gh-pages">
-        <echo>Push new changes to gh-pages</echo>
-        
-        <echo>copy new index.md to gh-pages and update version number</echo>
-        <delete file="${gh-pages.dir}/index.md"/>
-        <copy file="${templates.dir}/index.md" tofile="${gh-pages.dir}/index.md"/>
-        <replace file="${gh-pages.dir}/index.md" token="@VERSION@" value="${version}"/>
-        
-        <echo>copy new dist to gh-pages dist</echo>
-        <copy file="${dist.dir}/${repo}-${version}.zip" tofile="${gh-pages.dir}/dist/${repo}-${version}.zip"/>
-        
-        <echo>delete css and js, and copy new from build dir</echo>
-        <delete dir="${gh-pages.dir}/css"/>
-        <delete dir="${gh-pages.dir}/js"/>
-        <mkdir dir="${gh-pages.dir}/css"/>
-        <mkdir dir="${gh-pages.dir}/js"/>        
-        <copy todir="${gh-pages.dir}/css">
-            <fileset dir="${build.dir}/css" includes="*.css"/>
-        </copy>
-        <copy todir="${gh-pages.dir}/js">
-            <fileset dir="${build.dir}/js" includes="*.js"/>
-        </copy>
-        
-        <echo>delete docs, and copy new docs</echo>
-        <delete dir="${gh-pages.dir}/docs"/>        
-        <copy todir="${gh-pages.dir}/docs">
-            <fileset dir="${docs.dir}" includes="**"/>
-        </copy>
-    </target>
-    
-    
-    <target name="-gh-pages-commit" depends="-gh-pages" description="Commit new build to gh-pages git repo">
-        <echo>Commit new build to gh-pages git repo</echo>
-        
-        <git command="add" dir="${gh-pages.dir}">
-            <args><arg line="."/></args>
-        </git>
-        <git command="commit" dir="${gh-pages.dir}">
-            <args><arg value="-am Build ${version} - ${commit.message}"/></args>
-        </git>
-        <git command="push" dir="${gh-pages.dir}">
-            <args>
-                <arg value="origin"/>
-                <arg value="gh-pages"/>
-            </args>
-        </git>
-    </target>
-
-    
-    <target name="-increment" depends="-load.properties" description="Increment build number">
-        <echo>Increment build number</echo>
-        
-        <propertyfile file="build.properties">
-            <entry key="build.number" type="int" operation="+" default="0"/>
-        </propertyfile>
     </target>
     
     
@@ -182,7 +50,7 @@
             -docco,
             -concat,
             -minify,
-            -copylib,
+            -copy-depends,
             -zip,
             -commit,
             -gh-pages-commit,
