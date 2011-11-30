@@ -15,7 +15,7 @@
         
         <input message="Please enter a commit message:" addproperty="commit.message"/>
         <condition property="commit.message.yes">
-            <length string="${commit.message}" trim="true" when="greater" length="0"/>
+            <length string="${commit.message}" trim="true" when="greater" length="12"/>
         </condition>
     </target>
     
