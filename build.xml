@@ -6,20 +6,8 @@
     
         
     <property environment="env"/>
+    <property name="repo" value="stitches"/>
     <import file="../common-targets.xml"/>
-    
-    
-    <target name="-load.properties" description="Set properties for this build">
-        <echo>Set properties for this build</echo>
-        
-        <property file="build.properties"/>
-        
-        <property name="repo" value="stitches"/>
-        <property name="gh-pages.dir" value="../gh-pages/${repo}"/>
-        <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
-        
-        <input message="Please enter a commit message:" addproperty="commit.message"/>
-    </target>
     
     
     <target name="-init" depends="-load.properties" description="Make project directory structure">
