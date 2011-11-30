@@ -14,9 +14,11 @@
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
         
         <input message="Please enter a commit message:" addproperty="commit.message"/>
-        <condition property="commit.message.yes">
-            <length string="${commit.message}" trim="true" when="greater" length="12"/>
-        </condition>
+        <fail message="Commit message must be longer than 12 chars.">
+            <condition>
+                <length string="${commit.message}" trim="true" when="greater" length="12"/>
+            </condition>
+        </fail>
     </target>
     
         
@@ -35,7 +37,7 @@
     </macrodef>
     
     
-    <target name="-init" depends="-load.properties" description="Make project directory structure" if="commit.message.yes">
+    <target name="-init" depends="-load.properties" description="Make project directory structure">
         <echo message="Starting build ${version}..."/>
         <echo message="Make project directory structure"/>
         
