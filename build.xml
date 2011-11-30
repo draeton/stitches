@@ -7,45 +7,22 @@
         
     <property environment="env"/>
     <property name="repo" value="stitches"/>
+    
     <import file="../common-targets.xml"/>
     
     
-    <target name="-init" depends="-load.properties" description="Make project directory structure">
+    <target name="-init" depends="-load.properties" description="Starting new build">
         <echo>Starting new build</echo>
-        <echo>Make project directory structure</echo>
         
-        <delete dir="${build.dir}"/>
-        <delete dir="${docs.dir}"/>
-        
-        <mkdir dir="${build.dir}"/>
-        <mkdir dir="${docs.dir}"/>
-    </target>
-
-    
-    <!-- skipping for now... I need jshint4java!!! -->
-    <target name="jslint" depends="-load.properties" description="JSHint check">
-        <echo>JSLint check</echo>
-        
-        <taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="${jslint4java.jar}" />
-        
-        <jslint options="undef,white">
-            <formatter type="plain" />
-            <formatter type="plain" destfile="${build.dir}/jslint.out" />
-            <fileset dir="${src.dir}">
-                <include name="*.js"/>
-                <exclude name="lib"/>
-            </fileset>
-        </jslint>
-	    <echo>Finished linting</echo>
-    </target>
-    
-    
-    <target name="-readme" depends="-load.properties" description="Updating version number in README">        
-        <echo>Updating version number in README.md</echo>
-        
-        <delete file="README.md"/>
-        <copy file="${templates.dir}/README.md" tofile="README.md"/>
-        <replace file="README.md" token="@VERSION@" value="${version}"/>
+        <filelist id="src.js" dir="${doc.src}">
+            <file name="main.js"/>
+            <file name="icons.js"/>
+            <file name="icon.js"/>
+            <file name="page.js"/>
+        </filelist>
+        <filelist id="src.css" dir="${doc.src}">
+            <file name="${repo}.css"/>
+        </filelist>
     </target>
     
     
@@ -53,10 +30,7 @@
         <echo>Create docs using Docco</echo>
         
         <exec executable="${docco.bat}">
-            <arg value="${src.dir}/main.js"/>
-            <arg value="${src.dir}/icons.js"/>
-            <arg value="${src.dir}/icon.js"/>
-            <arg value="${src.dir}/page.js"/>
+            <arg value="${src.files}"/>
         </exec>
         <!-- clean up after docco -->
         <delete dir="-p"/>
@@ -67,13 +41,10 @@
         <echo>Concatenation of JS and CSS</echo>
 
         <concat destfile="${build.dir}/js/${repo}-${version}.js" force="no">
-           <fileset dir="${src.dir}" includes="main.js" />
-           <fileset dir="${src.dir}" includes="icons.js" />
-           <fileset dir="${src.dir}" includes="icon.js" />
-           <fileset dir="${src.dir}" includes="page.js" />
+            <filelist refid="src.js"/>
         </concat>
         <concat destfile="${build.dir}/css/${repo}-${version}.css" force="no">
-           <fileset dir="${src.dir}" includes="${repo}.css" />
+            <filelist refid="src.css"/>
         </concat>
     </target>
     
@@ -196,6 +167,7 @@
         description="Builds project files for production use"
         depends="
             -load.properties,
+            -clean,
             -init,
             -readme,
             -docco,
