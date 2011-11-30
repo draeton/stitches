@@ -15,7 +15,7 @@
         <echo>Starting new build</echo>
         
         <filelist id="src.js" dir="${src.dir}">
-            <file name="main.js"/>
+            <file name="${repo}.js"/>
             <file name="icons.js"/>
             <file name="icon.js"/>
             <file name="page.js"/>

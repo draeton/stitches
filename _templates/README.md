@@ -1,8 +1,8 @@
 ## Stitches
 
 [Stitches](http://draeton.github.com/stitches/) is an HTML5 sprite generator.
-The current version is `@VERSION@`. Documentatin is available
-[here](http://draeton.github.com/stitches/docs/main.html).
+The current version is `@VERSION@`. Documentation is available
+[here](http://draeton.github.com/stitches/docs/stitches.html).
 
 ## Implementation
 
