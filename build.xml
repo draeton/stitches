@@ -188,7 +188,10 @@
             <args><arg value="-am Build ${version}"/></args>
         </git>
         <git command="push" dir="${gh-pages}">
-            <args><arg value="origin gh-pages"/></args>
+            <args>
+                <arg value="origin"/>
+                <arg value="gh-page"/>
+            </args>
         </git>
     </target>
 
