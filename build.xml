@@ -175,6 +175,12 @@
         <copy todir="${gh-pages}/js">
             <fileset dir="${build}/js" includes="*.js"/>
         </copy>
+        
+        <echo message="delete docs, and copy new docs"/>
+        <delete dir="${gh-pages}/docs"/>        
+        <copy todir="${gh-pages}/docs">
+            <fileset dir="${docs}" includes="**"/>
+        </copy>
     </target>
     
     
