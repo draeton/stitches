@@ -142,7 +142,7 @@
             <args><arg line="."/></args>
         </git>
         <git command="commit">
-            <args><arg value="-am Build ${version}"/></args>
+            <args><arg value="-am Build ${version} ${msg}"/></args>
         </git>
         <git command="push">
             <args>
