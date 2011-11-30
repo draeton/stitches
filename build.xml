@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Stitches" basedir="." default="prod">
+    
 
     <description>ANT build file for git://github.com/draeton/stitches</description>
+    
     
     <target name="-load.properties" description="Set properties for this build">
         <echo message="Set properties for this build"/>
@@ -11,6 +13,21 @@
         
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
     </target>
+    
+        
+    <macrodef name="git">
+        <attribute name="command"/>
+        <attribute name="failonerror" default="true"/>
+        <attribute name="dir" default=""/>
+        <element name="args" optional="true"/>
+        <sequential>
+            <echo message="git @{command}"/>
+            <exec executable="git" dir="@{dir}">
+                <arg line="@{command}"/>
+                <args/>
+            </exec>
+        </sequential>
+    </macrodef>
     
     
     <target name="-init" description="Make project directory structure">
@@ -25,35 +42,29 @@
     </target>
 
     
-    <target name="jshint" depends="-load.properties" description="JSHint check">
-        <echo message="JSHint check"/>
+    <!-- skipping for now... I need jshint4java!!! -->
+    <target name="jslint" depends="-load.properties" description="JSHint check">
+        <echo message="JSLint check"/>
         
-	    <pathconvert pathsep=" " property="jsfiles">
-	        <fileset dir="${src}">
-	            <include name="**/*.js"/>
-	        </fileset>
-	    </pathconvert>
-	    <exec dir="${src}" executable="java" failonerror="true">
-	        <arg line="-jar ${rhino} ${jshint} ${jsfiles}"/>
-	    </exec>
-	    <echo>Finished</echo>
-    </target>
-
-    
-    <target name="-increment" depends="-load.properties" description="Increment build number">
-        <echo message="Increment build number"/>
+        <taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="${jslint4java}" />
         
-        <propertyfile file="build.properties">
-            <entry key="build.number" type="int" operation="+" default="0"/>
-        </propertyfile>
+        <jslint options="undef,white">
+            <formatter type="plain" />
+            <formatter type="plain" destfile="${build}/jslint.out" />
+            <fileset dir="${src}">
+                <include name="*.js"/>
+                <exclude name="lib"/>
+            </fileset>
+        </jslint>
+	    <echo message="Finished linting"/>
     </target>
     
     
-    <target name="-readme" depends="-increment" description="Updating version number in README">        
+    <target name="-readme" depends="-load.properties" description="Updating version number in README">        
         <echo message="Updating version number in README"/>
         
         <delete file="README.md"/>
-        <copy file="README" tofile="README.md"/>
+        <copy file="${templates}/README.md" tofile="README.md"/>
         <replace file="README.md" token="@VERSION@" value="${version}"/>
     </target>
     
@@ -124,34 +135,69 @@
     </target>
     
     
-    <target name="-commit" depends="-init" description="Commit new build to git repo">
-        <echo message="Commit new build to git repo"/>
-        
-        <macrodef name="git">
-            <attribute name="command"/>
-            <attribute name="failonerror" default="true"/>
-            <attribute name="dir" default=""/>
-            <element name="args" optional="true"/>
-            <sequential>
-                <echo message="git @{command}"/>
-                <exec executable="git" dir="@{dir}">
-                    <arg line="@{command}"/>
-                    <args/>
-                </exec>
-            </sequential>
-        </macrodef>
+    <target name="-commit" depends="-init" description="Commit new build to master git repo">
+        <echo message="Commit new build to master git repo"/>
         
         <git command="add">
-            <args>
-                <arg line="."/>
-            </args>
+            <args><arg line="."/></args>
         </git>
-        
         <git command="commit">
-            <args>
-                <arg value="-am Build ${version} completed"/>
-            </args>
+            <args><arg value="-am Build ${version}"/></args>
         </git>
+        <git command="push">
+            <args><arg value="origin master"/></args>
+        </git>
+    </target>
+    
+    
+    <target name="-gh-pages" depends="-load.properties" description="Push new changes to gh-pages">
+        <echo message="Push new changes to gh-pages"/>
+        
+        <echo message="copy new index.md to gh-pages and update version number"/>
+        <delete file="${gh-pages}/index.md"/>
+        <copy file="${templates}/index.md" tofile="${gh-pages}/index.md"/>
+        <replace file="${gh-pages}/index.md" token="@VERSION@" value="${version}"/>
+        
+        <echo message="copy new dist to gh-pages dist"/>
+        <copy file="${dist}/stitches-${version}.zip" tofile="${gh-pages}/dist/stitches-${version}.zip"/>
+        
+        <echo message="delete css and js, and copy new from build dir"/>
+        <delete dir="${gh-pages}/css"/>
+        <delete dir="${gh-pages}/js"/>
+        <mkdir dir="${gh-pages}/css"/>
+        <mkdir dir="${gh-pages}/js"/>        
+        <copy todir="${gh-pages}/css">
+            <fileset dir="${build}/css" includes="*.css"/>
+        </copy>
+        <copy todir="${gh-pages}/js">
+            <fileset dir="${build}/js" includes="*.js"/>
+        </copy>
+    </target>
+    
+    
+    <target name="-gh-pages-commit" depends="-gh-pages" description="Commit new build to gh-pages git repo">
+        <echo message="Commit new build to gh-pages git repo"/>
+        
+        <java fork="true" dir="${gh-pages}">
+            <git command="add">
+                <args><arg line="."/></args>
+            </git>
+            <git command="commit">
+                <args><arg value="-am Build ${version}"/></args>
+            </git>
+            <git command="push">
+                <args><arg value="origin gh-pages"/></args>
+            </git>
+        </java>
+    </target>
+
+    
+    <target name="-increment" depends="-load.properties" description="Increment build number">
+        <echo message="Increment build number"/>
+        
+        <propertyfile file="build.properties">
+            <entry key="build.number" type="int" operation="+" default="0"/>
+        </propertyfile>
     </target>
     
     
@@ -161,14 +207,16 @@
         depends="
             -load.properties,
             -init,
-            jshint,
-            -increment,
             -readme,
             -docco,
             -concat,
             -minify,
             -copylib,
             -zip,
-            -commit">
+            -commit,
+            -gh-pages-commit,
+            -increment">
     </target>
+    
+    
 </project>
