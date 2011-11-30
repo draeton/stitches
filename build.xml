@@ -14,11 +14,6 @@
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
         
         <input message="Please enter a commit message:" addproperty="commit.message"/>
-        <fail message="Commit message must be longer than 12 chars.">
-            <condition>
-                <length string="" trim="true" when="greater" length="12"/>
-            </condition>
-        </fail>
     </target>
     
         
