@@ -29,9 +29,9 @@
     <target name="-docco" depends="-init" description="Create docs using Docco">
         <echo>Create docs using Docco</echo>
         
-        <exec executable="${docco.bat}">
-            <arg value="${src.js}"/>
-        </exec>
+        <apply executable="${docco.bat}">
+            <filelist refid="src.js"/>
+        </apply>
         <!-- clean up after docco -->
         <delete dir="-p"/>
     </target>
