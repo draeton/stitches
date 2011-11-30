@@ -6,11 +6,14 @@
     
     
     <target name="-load.properties" description="Set properties for this build">
-        <echo message="Set properties for this build"/>
+        <echo>Set properties for this build</echo>
         
         <property environment="env"/>
+        <property file="../ant.properties"/>
         <property file="build.properties"/>
         
+        <property name="repo" value="stitches"/>
+        <property name="gh-pages" value="../gh-pages/${repo}"/>
         <property name="version" value="${build.major}.${build.minor}.${build.number}"/>
         
         <input message="Please enter a commit message:" addproperty="commit.message"/>
@@ -33,8 +36,8 @@
     
     
     <target name="-init" depends="-load.properties" description="Make project directory structure">
-        <echo message="Starting build ${version}..."/>
-        <echo message="Make project directory structure"/>
+        <echo>Starting new build</echo>
+        <echo>Make project directory structure</echo>
         
         <delete dir="${build}"/>
         <delete dir="${docs}"/>
@@ -46,7 +49,7 @@
     
     <!-- skipping for now... I need jshint4java!!! -->
     <target name="jslint" depends="-load.properties" description="JSHint check">
-        <echo message="JSLint check"/>
+        <echo>JSLint check</echo>
         
         <taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="${jslint4java}" />
         
@@ -58,12 +61,12 @@
                 <exclude name="lib"/>
             </fileset>
         </jslint>
-	    <echo message="Finished linting"/>
+	    <echo>Finished linting</echo>
     </target>
     
     
     <target name="-readme" depends="-load.properties" description="Updating version number in README">        
-        <echo message="Updating version number in README"/>
+        <echo>Updating version number in README.md</echo>
         
         <delete file="README.md"/>
         <copy file="${templates}/README.md" tofile="README.md"/>
@@ -72,7 +75,7 @@
     
     
     <target name="-docco" depends="-init" description="Create docs using Docco">
-        <echo message="Create docs using Docco"/>
+        <echo>Create docs using Docco</echo>
         
         <exec executable="${docco}">
             <arg value="${src}/main.js"/>
@@ -86,22 +89,22 @@
     
     
     <target name="-concat" depends="-init" description="Concatenation of JS and CSS">
-        <echo message="Concatenation of JS and CSS"/>
+        <echo>Concatenation of JS and CSS</echo>
 
-        <concat destfile="${build}/js/stitches-${version}.js" force="no">
+        <concat destfile="${build}/js/${repo}-${version}.js" force="no">
            <fileset dir="${src}" includes="main.js" />
            <fileset dir="${src}" includes="icons.js" />
            <fileset dir="${src}" includes="icon.js" />
            <fileset dir="${src}" includes="page.js" />
         </concat>
-        <concat destfile="${build}/css/stitches-${version}.css" force="no">
-           <fileset dir="${src}" includes="stitches.css" />
+        <concat destfile="${build}/css/${repo}-${version}.css" force="no">
+           <fileset dir="${src}" includes="${repo}.css" />
         </concat>
     </target>
     
     
     <target name="-minify" depends="-concat" description="Invoke YUI compressor">
-        <echo message="Invoke YUI compressor"/>
+        <echo>Invoke YUI compressor</echo>
         
         <path id="task.classpath">
             <pathelement location="${yui-compressor.jar}"/>
@@ -112,14 +115,14 @@
         </taskdef>
         
         <yui-compressor warn="false" charset="UTF-8" fromdir="${build}" todir="${build}">
-           <include name="js/stitches-${version}.js" />
-           <include name="css/stitches-${version}.css" />
+           <include name="js/${repo}-${version}.js" />
+           <include name="css/${repo}-${version}.css" />
         </yui-compressor>
     </target>
     
     
     <target name="-copylib" depends="-init" description="Copying dependencies">
-        <echo message="Copying dependencies"/>
+        <echo>Copying dependencies</echo>
         
        <copy todir="${build}/js">
            <fileset dir="${src}" includes="*.html"/>
@@ -133,12 +136,12 @@
     <target name="-zip" depends="-init" description="Create a zip file for distribution">       
         <echo message="Create a zip file for distribution" />
         
-        <zip destfile="${dist}/stitches-${version}.zip" basedir="${build}" />
+        <zip destfile="${dist}/${repo}-${version}.zip" basedir="${build}" />
     </target>
     
     
     <target name="-commit" depends="-init" description="Commit new build to master git repo">
-        <echo message="Commit new build to master git repo"/>
+        <echo>Commit new build to master git repo</echo>
         
         <git command="add">
             <args><arg line="."/></args>
@@ -156,17 +159,17 @@
     
     
     <target name="-gh-pages" depends="-load.properties" description="Push new changes to gh-pages">
-        <echo message="Push new changes to gh-pages"/>
+        <echo>Push new changes to gh-pages</echo>
         
-        <echo message="copy new index.md to gh-pages and update version number"/>
+        <echo>copy new index.md to gh-pages and update version number</echo>
         <delete file="${gh-pages}/index.md"/>
         <copy file="${templates}/index.md" tofile="${gh-pages}/index.md"/>
         <replace file="${gh-pages}/index.md" token="@VERSION@" value="${version}"/>
         
-        <echo message="copy new dist to gh-pages dist"/>
-        <copy file="${dist}/stitches-${version}.zip" tofile="${gh-pages}/dist/stitches-${version}.zip"/>
+        <echo>copy new dist to gh-pages dist</echo>
+        <copy file="${dist}/${repo}-${version}.zip" tofile="${gh-pages}/dist/${repo}-${version}.zip"/>
         
-        <echo message="delete css and js, and copy new from build dir"/>
+        <echo>delete css and js, and copy new from build dir</echo>
         <delete dir="${gh-pages}/css"/>
         <delete dir="${gh-pages}/js"/>
         <mkdir dir="${gh-pages}/css"/>
@@ -178,7 +181,7 @@
             <fileset dir="${build}/js" includes="*.js"/>
         </copy>
         
-        <echo message="delete docs, and copy new docs"/>
+        <echo>delete docs, and copy new docs</echo>
         <delete dir="${gh-pages}/docs"/>        
         <copy todir="${gh-pages}/docs">
             <fileset dir="${docs}" includes="**"/>
@@ -187,7 +190,7 @@
     
     
     <target name="-gh-pages-commit" depends="-gh-pages" description="Commit new build to gh-pages git repo">
-        <echo message="Commit new build to gh-pages git repo"/>
+        <echo>Commit new build to gh-pages git repo</echo>
         
         <git command="add" dir="${gh-pages}">
             <args><arg line="."/></args>
@@ -205,7 +208,7 @@
 
     
     <target name="-increment" depends="-load.properties" description="Increment build number">
-        <echo message="Increment build number"/>
+        <echo>Increment build number</echo>
         
         <propertyfile file="build.properties">
             <entry key="build.number" type="int" operation="+" default="0"/>
