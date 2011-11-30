@@ -30,7 +30,7 @@
         <echo>Create docs using Docco</echo>
         
         <exec executable="${docco.bat}">
-            <arg value="${src.files}"/>
+            <arg value="${src.js}"/>
         </exec>
         <!-- clean up after docco -->
         <delete dir="-p"/>
