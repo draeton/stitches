@@ -145,7 +145,10 @@
             <args><arg value="-am Build ${version}"/></args>
         </git>
         <git command="push">
-            <args><arg value="origin master"/></args>
+            <args>
+                <arg value="origin"/>
+                <arg value="master"/>
+            </args>
         </git>
     </target>
     
@@ -214,7 +217,6 @@
             -copylib,
             -zip,
             -commit,
-            -gh-pages-commit,
             -increment">
     </target>
     
