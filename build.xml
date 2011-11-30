@@ -29,9 +29,13 @@
     <target name="-docco" depends="-init" description="Create docs using Docco">
         <echo>Create docs using Docco</echo>
         
-        <apply executable="${docco.bat}">
+        <pathconvert pathsep=" " property="docco.js" refid="src.js"/>
+        <!--apply executable="${docco.bat}">
             <filelist refid="src.js"/>
-        </apply>
+        </apply-->
+        <exec executable="${docco.bat}">
+            <arg value="${docco.js}"/>
+        </exec>
         <!-- clean up after docco -->
         <delete dir="-p"/>
     </target>
