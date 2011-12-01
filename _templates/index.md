@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite generator
 ---
 
-<link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
+<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-@VERSION@-min.css">
 
 <section id="main" role="main">
 
@@ -44,7 +44,7 @@ jQuery(document).ready(function ($) {
 </script>
 {% endhighlight %}
 
-Documentation is available [here.](docs/stitches.html)
+Documentation is available [here.](http://draeton.github.com/stitches/stitches/docs/stitches.html)
     
 
 ## Dependencies
@@ -66,7 +66,7 @@ Matthew Cobbs (matthew.cobbs@gmail.com)
 
 ## Download
 
-**The latest release, @VERSION@, is [available here](dist/stitches-@VERSION@.zip).**
+**The latest release, @VERSION@, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-@VERSION@.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -77,7 +77,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script src="js/stitches-@VERSION@-min.js"></script>
+<script src="http://draeton.github.com/stitches/stitches/build/js/stitches-@VERSION@-min.js"></script>
 <script>
 jQuery(document).ready(function ($) {
     

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Stitches" basedir="." default="prod">
+    
+
+    <description>ANT build file for git://github.com/draeton/stitches</description>
+    
+        
+    <property environment="env"/>
+    <property name="repo" value="stitches"/>
+    
+    <import file="../_tools/github/common-targets.xml"/>
+    
+    
+    <target name="-init" depends="-load.properties" description="Starting new build">
+        <echo>Starting new build</echo>
+        
+        <filelist id="src.js" dir="${src.dir}">
+            <file name="${repo}.js"/>
+            <file name="icons.js"/>
+            <file name="icon.js"/>
+            <file name="page.js"/>
+        </filelist>
+        
+        <filelist id="src.css" dir="${src.dir}">
+            <file name="${repo}.css"/>
+        </filelist>
+    </target>
+    
+    
+    <target name="-copy-depends" depends="-init" description="Copying dependencies">
+        <echo>Copying dependencies</echo>
+        
+       <copy todir="${build.dir}/js">
+           <fileset dir="${src.dir}" includes="*.html"/>
+       </copy>
+        <copy todir="${build.dir}/js">
+            <fileset dir="${src.dir}/lib"/>
+        </copy>
+    </target>
+    
+    
+    <!-- * build * -->
+    <target name="prod"
+        description="Builds project files for production use"
+        depends="
+            increment,
+            -load.properties,
+            -clean,
+            -init,
+            -readme,
+            -docco,
+            -concat,
+            -minify,
+            -copy-depends,
+            -zip,
+            -commit">
+    </target>
+                
+    <target name="pages"
+        description="Builds project pages (and prod)"
+        depends="
+            prod,
+            -gh-pages-update,
+            -gh-pages-commit">
+    </target>
+    
+    
+</project>
