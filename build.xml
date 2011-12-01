@@ -8,7 +8,7 @@
     <property environment="env"/>
     <property name="repo" value="stitches"/>
     
-    <import file="../tools/common-targets.xml"/>
+    <import file="../_tools/common-targets.xml"/>
     
     
     <target name="-init" depends="-load.properties" description="Starting new build">
