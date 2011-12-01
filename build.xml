@@ -53,8 +53,7 @@
             -copy-depends,
             -zip,
             -commit,
-            -gh-pages-commit,
-            -increment">
+            -gh-pages-commit">
     </target>
     
     

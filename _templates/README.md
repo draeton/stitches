@@ -32,11 +32,6 @@ Once that's in place, the sprite generator is created by the `init` method:
 
 jQuery 1.6.2+, Modernizr; *Dropfile, Flashcanvas for older browser support*
 
-## To-do
-
-* fix dropfile and flashcanvas support
-* write unit tests
-
 ## License
 
 (The MIT License)
