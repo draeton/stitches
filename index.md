@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite generator
 ---
 
-<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.0.46-min.css">
+<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.0.47-min.css">
 
 <section id="main" role="main">
 
@@ -21,12 +21,12 @@ currently compatible with the latest versions of Chrome and Firefox.**
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-0.0.46-min.css">
+<link rel="stylesheet" href="css/stitches-0.0.47-min.css">
 
 <script src="js/jquery-1.6.2.min.js"></script>
 <script src="js/modernizr-2.0.6.min.js"></script>
 
-<script src="js/stitches-0.0.46-min.js"></script>
+<script src="js/stitches-0.0.47-min.js"></script>
 {% endhighlight %}
 
 Once that's in place, the sprite generator is created by the `init` method:
@@ -66,7 +66,7 @@ Matthew Cobbs (matthew.cobbs@gmail.com)
 
 ## Download
 
-**The latest release, 0.0.46, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.0.46.zip).**
+**The latest release, 0.0.47, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.0.47.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -77,12 +77,12 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script src="http://draeton.github.com/stitches/stitches/build/js/stitches-0.0.46-min.js"></script>
+<script src="http://draeton.github.com/stitches/stitches/build/js/stitches-0.0.47-min.js"></script>
 <script>
 jQuery(document).ready(function ($) {
     
     var $stitches = $("#stitches");
-    Stitches.init($stitches, {jsdir: "js"});
+    Stitches.init($stitches, {jsdir: "stitches/build/js"});
     
 });
 </script>

@@ -82,7 +82,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 jQuery(document).ready(function ($) {
     
     var $stitches = $("#stitches");
-    Stitches.init($stitches, {jsdir: "js"});
+    Stitches.init($stitches, {jsdir: "stitches/build/js"});
     
 });
 </script>
