@@ -1,16 +1,19 @@
 /*--------------------- Layout and Typography ----------------------------*/
 body {
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+  font-family: sans-serif;
   font-size: 15px;
   line-height: 22px;
   color: #252519;
   margin: 0; padding: 0;
 }
 a {
-  color: #261a3b;
+  color: #00E;
 }
+  a:hover {
+    color: #06E;  
+  }
   a:visited {
-    color: #261a3b;
+    color: #551A8B;
   }
 p {
   margin: 0 0 15px 0;
@@ -20,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 }
   h1 {
     margin-top: 40px;
+    color: #A00;
   }
 #container {
   position: relative;
@@ -27,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
 #background {
   position: fixed;
   top: 0; left: 525px; right: 0; bottom: 0;
-  background: #f5f5ff;
+  background: #FAFAFA;
   border-left: 1px solid #e5e5ee;
   z-index: -1;
 }
@@ -110,7 +114,7 @@ table td {
     padding: 14px 15px 16px 25px;
     width: 100%;
     vertical-align: top;
-    background: #f5f5ff;
+    background: #FAFAFA;
     border-left: 1px solid #e5e5ee;
   }
     pre, tt, code {
