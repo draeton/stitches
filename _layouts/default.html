@@ -16,85 +16,134 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS: implied media=all -->
+  <link rel="stylesheet" href="/bootstrap/bootstrap.css">
   <link rel="stylesheet" href="/css/syntax.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/draeton.css">
+  <!-- link rel="stylesheet" href="/css/style.css" -->
   <!-- end CSS-->
 
+  <!-- Loading everything with Modernizr -->
   <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+  
+  <!-- Le fav and touch icons -->
+  <link rel="shortcut icon" href="favicon.ico">
 </head>
 
 <body>
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=289961234369425";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 
-<div class="site">
-
-    <header>
-        <a href="/">Matthew Cobbs</a>
-        <a class="extra" href="/">home</a>
-
-        <h1>{{ page.title }}</h1>
-    </header>
-
-    <section id="main" role="main">
-
-        {{ content }}
-    
-        <section id="comments">
-            <div class="fb-comments" data-href="" data-num-posts="2" data-width="572"></div>
-        </section>
-
-    </section>
-
-    <footer>
-        <div class="contact">
-            <p>
-                Matthew Cobbs<br />
-                Detroit Web Developer<br />
-                matthew.cobbs@gmail.com
-            </p>
+    <!-- top navigation -->
+    <nav>
+        <div class="topbar" data-dropdown="dropdown">
+            <div class="fill">
+                <div class="container span10">
+                    <a class="brand" href="/">Matthew Cobbs</a>
+                    <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Projects</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/stitches">Stitches</a></li>
+                                <li><a href="/lockdown">Lockdown</a></li>
+                                <li><a href="/tanchor">Tanchor</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form action="/search.html" class="search pull-right">
+                        <input name="gsc" type="text" placeholder="Search"/>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="contact">
-            <p>
-                <a href="http://github.com/draeton/">github.com/draeton</a><br />
-                <a href="http://twitter.com/draeton/">twitter.com/draeton</a>
-            </p>
+    </nav>
+    
+    <!-- main content container -->
+    <div class="container span10">
+        <div class="content">
+            <div class="page-header">
+                <h1>Stitches <small>An HTML5 sprite generator</small></h1>
+            </div>
+            <div class="alert-message info" data-alert="alert">
+                <a class="close" href="#">&times;</a>
+                <p><strong>Fork me on Github!</strong> <a href="http://github.com/draeton/stitches">http://github.com/draeton/stitches</a></p>
+            </div>
+                    
+            {{ content }}
+
+            <!-- start section -->
+            <section id="comments">
+                <div class="fb-comments" data-href="" data-num-posts="2" data-width="580"></div>
+            </section>
+            <!-- end section -->
+            
+        </div>
+    </div>
+    
+    <!-- footer -->
+    <footer>
+        <div class="container span10">
+            <div class="content">
+                <div class="pull-left">
+                    <p>
+                        Matthew Cobbs<br />
+                        Detroit Web Developer<br />
+                        draeton@gmail.com
+                    </p>
+                </div>
+                <div class="pull-right text-right">
+                    <p>
+                        <a href="http://github.com/draeton/">github.com/draeton</a><br />
+                        <a href="http://twitter.com/draeton/">twitter.com/draeton</a><br />
+                        &copy; 2011, Matthew Cobbs
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 
-</div> <!--! end of .site -->
+    <!-- github banner -->
+    <!-- a href="https://github.com/draeton/">
+        <img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67%22%20alt=%22Fork%20me%20on%20GitHub" alt="Fork me on GitHub" /></a -->
+    
+    <!-- loading scripts and analytics -->
+    <script>
+    window._gaq = [
+        ['_setAccount','UA-16683389-1'],
+        ['_setDomainName', 'draeton.github.com'],
+        ['_trackPageview'],
+        ['_trackPageLoadTime']
+    ];
+    Modernizr.load({
+        load: [
+            '/bootstrap/js/bootstrap-dropdown.js',
+            '/bootstrap/js/bootstrap-buttons.js',
+            '/bootstrap/js/bootstrap-alerts.js',
+            '/bootstrap/js/bootstrap-modal.js',
+            '/js/draeton.js',
+            ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+        ]
+    });
+    </script>
+    
+    <!-- facebook api start -->
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=289961234369425";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 
-<a href="https://github.com/draeton/stitches/">
-    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67%22%20alt=%22Fork%20me%20on%20GitHub" alt="Fork me on GitHub" /></a>
-
-<script>
-window._gaq = [
-    ['_setAccount','UA-16683389-1'],
-    ['_setDomainName', 'draeton.github.com'],
-    ['_trackPageview'],
-    ['_trackPageLoadTime']
-];
-Modernizr.load({
-    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-});
-</script>
-
-<!--[if lt IE 7 ]>
-<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-<![endif]-->
+    <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <![endif]-->
 
 </body>
 </html>

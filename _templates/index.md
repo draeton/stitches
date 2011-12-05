@@ -54,9 +54,12 @@ Documentation is available [here.](http://draeton.github.com/stitches/stitches/d
 for older browser support*
 
 
-## Contributors
+## Contributing
 
-Matthew Cobbs (matthew.cobbs@gmail.com)
+* [Fork the project.](https://github.com/draeton/lockdown)
+* Read through the [outstanding issues or report new ones.](https://github.com/draeton/lockdown/issues)
+* Write some tests to make sure we don't accidentally break each other's code.
+* Send a pull request.
 
 
 ## License
@@ -77,12 +80,16 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script src="http://draeton.github.com/stitches/stitches/build/js/stitches-@VERSION@-min.js"></script>
 <script>
-jQuery(document).ready(function ($) {
+Modernizr.load({
+    load: "/stitches/stitches/build/js/stitches-@VERSION@-min.js",
+    complete: function () {
+        $(function () {
     
-    var $stitches = $("#stitches");
-    Stitches.init($stitches, {jsdir: "stitches/build/js"});
-    
+            var $stitches = $("#stitches");
+            Stitches.init($stitches, {jsdir: "stitches/build/js"});
+
+        });
+    }
 });
 </script>
