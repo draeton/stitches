@@ -56,6 +56,7 @@
                     Stitches.Page.getTemplates();
                 } else {
                     /* browser is not compatible */
+                    // TODO show an error message
                 }
             },
 
@@ -67,6 +68,8 @@
                 
                 $.get(jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
+                    
+                    // TODO consider converting template to bootstrap
                     
                     Stitches.Page.templates = {
                         stitches: Stitches.tmpl("stitches_tmpl"),
