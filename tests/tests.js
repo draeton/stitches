@@ -1,12 +1,15 @@
 (function (window, $, Stitches) {
-        
-    var $stitches = $("<div>");
-    $("body").append($stitches);
-	
-    module("setup");
-    test("init", function () {
-        expect(0);
+    
+    $(function ($) {
+
+        var $stitches = $("#stitches");
         Stitches.init($stitches, {jsdir: "../src"});
+	
+        module("setup");
+        test("init", function () {
+            expect(0);
+        });
+
     });
 
 })(window, jQuery, Stitches);
