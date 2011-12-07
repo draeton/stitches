@@ -14,12 +14,17 @@
     //
     // Holds all DOM interaction methods
     Stitches.Page = (function () {
+        
+        var rendered = false;
+        
         return {
-            // ### getTemplates
+            // ### fetchTemplates
             //
             // Fetch the jQuery templates used to construct the widget
-            getTemplates: function () {                
-                $.get(Stitches.settings.jsdir + "/stitches.html", function (html) {
+            //
+            //     @return {jqXHR}
+            fetchTemplates: function () {                
+                return $.get(Stitches.settings.jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
                     
                     // TODO consider converting template to bootstrap
@@ -30,7 +35,8 @@
                         style: Stitches.tmpl("stitches_style_tmpl")
                     };
                     
-                    Stitches.pub("page.render");
+                    /* notify */
+                    Stitches.pub("page.templates.done");
                 });
             },
             
@@ -42,13 +48,6 @@
                 $div.appendTo(Stitches.Page.$elem);
 
                 // set dom element references
-                Stitches.Page.setReferences();
-            },
-
-            // ### setReferences
-            //
-            // Cache jQuery selectors, then bind handlers to them
-            setReferences: function () {
                 Stitches.Page.$dropbox = $(".dropbox", Stitches.Page.$elem);
                 Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
                 Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
@@ -59,32 +58,51 @@
                     $sprite: $("a.dlsprite", Stitches.Page.$buttons),
                     $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
                 };
-
-                /* bind handlers to generated element */
-                Stitches.Page.bindHandlers();
+                
+                /* notify */
+                rendered = true;
+                Stitches.pub("page.render.done");
+            },
+            
+            // ## errorHandler
+            //
+            // Handles all error messages
+            errorHandler: function (e) {             
+                if (rendered) {
+                    Stitches.Page.$droplabel.html("&times; " + e.message).addClass("error");
+                }                
+                throw e;
             },
 
             // ### bindHandlers
             //
             // Bind all of the event listeners for the page
             bindHandlers: function () {
-                Stitches.Page.$dropbox.each(function () {
-                    this.addEventListener("dragenter", function () {
-                            Stitches.Page.$dropbox.addClass("dropping")
-                        }, false);
-                    this.addEventListener("dragleave", function () {
-                            Stitches.Page.$dropbox.removeClass("dropping")
-                        }, false);
-                    this.addEventListener("dragexit", function () {
-                            Stitches.Page.$dropbox.removeClass("dropping")
-                        }, false);
-                    this.addEventListener("dragover", Stitches.Page.noopHandler, false);
-                    this.addEventListener("drop", Stitches.Page.drop, false);
-                });
-
-                Stitches.Page.$buttons.delegate("a", "click", Stitches.Page.handleButtons);
+                /* drag and drop */
+                var dragStart = function (e) {
+                    Stitches.Page.$dropbox.addClass("dropping");
+                };
+                var dragStop = function (e) {
+                    if ($(e.target).parents(".dropbox").length === 0) {
+                        Stitches.Page.$dropbox.removeClass("dropping");
+                    }
+                };
+                var dragNoop = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();                        
+                };
+                    
+                var dropbox = Stitches.Page.$dropbox.get(0);                    
+                dropbox.addEventListener("dragenter", dragStart, false);                        
+                dropbox.addEventListener("dragleave", dragStop, false);                        
+                dropbox.addEventListener("dragexit", dragStop, false);                        
+                dropbox.addEventListener("dragover", dragNoop, false);
+                dropbox.addEventListener("drop", Stitches.Page.drop, false);
 
                 Stitches.Page.$filelist.delegate("a.remove", "click", Stitches.Page.removeFile);
+
+                /* buttons */
+                Stitches.Page.$buttons.delegate("a", "click", Stitches.Page.handleButtons);
             },
 
             // ### handleButtons
@@ -93,16 +111,21 @@
             //
             //     @param {Event} evt Click event
             //     @return {Boolean}
-            handleButtons: function (evt) {
-                evt.preventDefault();
-                
+            handleButtons: function (evt) {                
                 if (/disabled/.test(this.className)) {
                     return false;
                 }
 
                 if (/generate/.test(this.className)) {
-                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);
-                    Stitches.generateStitches();
+                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);                    
+                    
+                    var icons = [];
+                    Stitches.Page.$filelist.find("li").each(function () {
+                        var icon = $(this).data("icon");
+                        icons.push(icon);
+                    });
+                    Stitches.generateStitches(icons);                    
+                    
                     Stitches.Page.setButtonDisabled(false, ["generate", "clear"]);
                     return false;
                 }
@@ -128,16 +151,6 @@
                 $(buttons).each(function (idx, val) {
                     Stitches.Page.buttons["$" + val][action + "Class"]("disabled");
                 });
-            },
-
-            // ### noopHandler
-            //
-            // Event handler dead-end
-            //
-            //     @param {Event} evt DOM event
-            noopHandler: function (evt) {
-                evt.stopPropagation();
-                evt.preventDefault();
             },
 
             // ### drop
