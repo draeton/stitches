@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */
@@ -12,7 +12,7 @@
 
     // **Maintain a unique id for each icon**
     var guid = 0;
-    
+
     // ## Stitches.Icon class
     //
     // Wraps a single icon. Creates a new image from the source

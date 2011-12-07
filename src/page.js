@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */
@@ -14,32 +14,32 @@
     //
     // Holds all DOM interaction methods
     Stitches.Page = (function () {
-        
+
         var rendered = false;
-        
+
         return {
             // ### fetchTemplates
             //
             // Fetch the jQuery templates used to construct the widget
             //
             //     @return {jqXHR}
-            fetchTemplates: function () {                
+            fetchTemplates: function () {
                 return $.get(Stitches.settings.jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
-                    
+
                     // TODO consider converting template to bootstrap
-                    
+
                     Stitches.Page.templates = {
                         stitches: Stitches.tmpl("stitches_tmpl"),
                         icon: Stitches.tmpl("stitches_icon_tmpl"),
                         style: Stitches.tmpl("stitches_style_tmpl")
                     };
-                    
+
                     /* notify */
                     Stitches.pub("page.templates.done");
                 });
             },
-            
+
             // ### render
             //
             // Creates the stitches widget and content
@@ -58,84 +58,81 @@
                     $sprite: $("a.dlsprite", Stitches.Page.$buttons),
                     $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
                 };
-                
+
                 /* notify */
                 rendered = true;
                 Stitches.pub("page.render.done");
             },
-            
+
             // ## errorHandler
             //
             // Handles all error messages
-            errorHandler: function (e) {             
+            errorHandler: function (e) {
                 if (rendered) {
                     Stitches.Page.$droplabel.html("&times; " + e.message).addClass("error");
-                }                
+                }
                 throw e;
             },
 
-            // ### bindHandlers
+            // ### bindDragAndDrop
             //
-            // Bind all of the event listeners for the page
-            bindHandlers: function () {
-                /* drag and drop */
-                var dragStart = function (e) {
-                    Stitches.Page.$dropbox.addClass("dropping");
-                };
-                var dragStop = function (e) {
-                    if ($(e.target).parents(".dropbox").length === 0) {
-                        Stitches.Page.$dropbox.removeClass("dropping");
-                    }
-                };
-                var dragNoop = function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();                        
-                };
-                    
-                var dropbox = Stitches.Page.$dropbox.get(0);                    
-                dropbox.addEventListener("dragenter", dragStart, false);                        
-                dropbox.addEventListener("dragleave", dragStop, false);                        
-                dropbox.addEventListener("dragexit", dragStop, false);                        
-                dropbox.addEventListener("dragover", dragNoop, false);
-                dropbox.addEventListener("drop", Stitches.Page.drop, false);
-
-                Stitches.Page.$filelist.delegate("a.remove", "click", Stitches.Page.removeFile);
-
-                /* buttons */
-                Stitches.Page.$buttons.delegate("a", "click", Stitches.Page.handleButtons);
+            // Bind all of the event listeners for drag and drop
+            bindDragAndDrop: function () {
+                var dropbox = Stitches.Page.$dropbox.get(0);
+                dropbox.addEventListener("dragenter", Stitches.Page._dragStart, false);
+                dropbox.addEventListener("dragleave", Stitches.Page._dragStop, false);
+                dropbox.addEventListener("dragexit", Stitches.Page._dragStop, false);
+                dropbox.addEventListener("dragover", Stitches.Page._dragNoop, false);
+                dropbox.addEventListener("drop", Stitches.Page._drop, false);
             },
 
-            // ### handleButtons
-            //
-            // One handler for all of the buttons; chooses action based on className
-            //
-            //     @param {Event} evt Click event
-            //     @return {Boolean}
-            handleButtons: function (evt) {                
-                if (/disabled/.test(this.className)) {
-                    return false;
+            // #### *Private drag and drop methods*
+            _dragStart: function (e) {
+                Stitches.Page.$dropbox.addClass("dropping");
+            },
+            
+            _dragStop: function (e) {
+                if ($(e.target).parents(".dropbox").length === 0) {
+                    Stitches.Page.$dropbox.removeClass("dropping");
                 }
+            },
+            
+            _dragNoop: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            },
+            
+            _drop: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                Stitches.Page.$dropbox.removeClass("dropping");
 
-                if (/generate/.test(this.className)) {
-                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);                    
-                    
+                var evt = e || window.event;
+                var files = (evt.files || evt.dataTransfer.files);
+                if (files.length > 0) {
+                    Stitches.pub("page.drop.done", files);
+                }
+            },
+
+            // ### bindButtons
+            //
+            // Bind all of the event listeners for buttons
+            bindButtons: function () {
+                Stitches.Page.$elem.delegate("a", "click", function (e) {
+                    return !($(this).hasClass("disabled"));
+                });
+                
+                Stitches.Page.$elem.delegate("a.generate", "click", function (e) {
                     var icons = [];
                     Stitches.Page.$filelist.find("li").each(function () {
                         var icon = $(this).data("icon");
                         icons.push(icon);
                     });
-                    Stitches.generateStitches(icons);                    
-                    
-                    Stitches.Page.setButtonDisabled(false, ["generate", "clear"]);
-                    return false;
-                }
-
-                if (/clear/.test(this.className)) {
-                    Stitches.Page.clearFiles();
-                    return false;
-                }
-
-                return true;
+                    Stitches.pub("sprite.generate", icons);
+                });
+                
+                Stitches.Page.$elem.delegate("a.remove", "click", Stitches.Page.removeFile);
+                Stitches.Page.$elem.delegate("a.clear", "click", Stitches.Page.removeAllFiles);
             },
 
             // ### setButtonDisabled
@@ -151,27 +148,6 @@
                 $(buttons).each(function (idx, val) {
                     Stitches.Page.buttons["$" + val][action + "Class"]("disabled");
                 });
-            },
-
-            // ### drop
-            //
-            // Handles drop events; starts to process the files after
-            // a drop
-            //
-            //     @param {Event} evt A DOM drop event
-            //     @return {Type}
-            drop: function (evt) {
-                evt.stopPropagation();
-                evt.preventDefault();
-
-                Stitches.Page.$dropbox.removeClass("dropping");
-
-                var e = evt || window.event;
-                var files = (e.files || e.dataTransfer.files);
-
-                if (files.length > 0) {
-                    Stitches.Page.handleFiles(files);
-                }
             },
 
             // ### handleFiles
@@ -252,12 +228,12 @@
                 return false;
             },
 
-            // ### clearFiles
+            // ### removeAllFiles
             //
             // Clear all files from the file list
-            clearFiles: function () {
+            removeAllFiles: function () {
                 Stitches.Page.$filelist.find("a.remove").each(function () {
-                    Stitches.Page.removeFile.bind(this)();
+                    Stitches.Page.removeFile.call(this);
                 });
             }
         };

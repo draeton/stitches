@@ -20,7 +20,7 @@
     border-radius: 10px 10px 0 0;
     padding: 20px 0 0;
     position: relative;
-    
+
     background-color: #ffffff;
 }
 .stitches .droplabel {
@@ -75,16 +75,16 @@
 }
 .stitches .filelist li:hover {
 	background-color: #f0f0f0;
-    background-image: linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
-    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
-    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
-    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
-    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
 
     background-image: -webkit-gradient(
         linear,
-        left bottom,
         left top,
+        left bottom,
         color-stop(0, rgb(255,255,255)),
         color-stop(1, rgb(240,240,240))
     );

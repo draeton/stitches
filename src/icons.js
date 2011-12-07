@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */
@@ -11,14 +11,14 @@
     "use strict";
 
     var document = window.document;
-    
+
     // ## Stitches.Icons namespace
     //
     // Holds all methods for working with icons
     Stitches.Icons = (function () {
         return {
             // ### idealCanvas
-            // 
+            //
             // Find the ideal sprite canvas
             //
             //     @param {Array} icons A list of icons
@@ -55,7 +55,7 @@
             },
 
             // ### placeIcons
-            // 
+            //
             // Place icons within the sprite (the ideal square)
             //
             //     @param {Array} loose All loose icons
@@ -88,7 +88,7 @@
             },
 
             // ### placeIcon
-            // 
+            //
             // Place one icon on the sprite, checking for intersects with the sprite
             // dimensions and other placed icons
             //
@@ -128,7 +128,7 @@
             },
 
             // ### isOverlapped
-            // 
+            //
             // Check if this icon overlaps any of the placed icons. If not,
             // add to the `placed` array
             //
@@ -163,7 +163,7 @@
             },
 
             // ### cropCanvas
-            // 
+            //
             // Crop to content, after placing icons
             //
             //     @param {Array} placed All placed icons

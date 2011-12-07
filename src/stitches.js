@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches, Modernizr */
@@ -18,10 +18,10 @@
         var defaults = {
             "jsdir": "js"
         };
-        
+
         // **Pub/sub subscription manager**
         var topics = {};
-        
+
         return {
             // ### init
             //
@@ -33,19 +33,21 @@
                 Stitches.settings = $.extend({}, defaults, config);
                 Stitches.filesCount = 0;
                 Stitches.Page.$elem = $elem;
-                
+
                 /* setup subscriptions */
-                Stitches.sub("sprite.generate", Stitches.generateStitches);
                 Stitches.sub("page.error", Stitches.Page.errorHandler);
                 Stitches.sub("page.init.done", Stitches.Page.fetchTemplates);
                 Stitches.sub("page.templates.done", Stitches.Page.render);
                 Stitches.sub("page.render.done", Stitches.checkAPIs);
-                Stitches.sub("page.apis.done", Stitches.Page.bindHandlers);
-                
+                Stitches.sub("page.apis.done", Stitches.Page.bindDragAndDrop);
+                Stitches.sub("page.apis.done", Stitches.Page.bindButtons);
+                Stitches.sub("page.drop.done", Stitches.Page.handleFiles);
+                Stitches.sub("sprite.generate", Stitches.generateStitches);
+
                 /* notify */
                 Stitches.pub("page.init.done");
             },
-            
+
             // ### sub
             //
             // Subscribe to a topic
@@ -59,7 +61,7 @@
                 }
                 topics[topic] = callbacks;
             },
-            
+
             // ### pub
             //
             // Publish a topic
@@ -73,10 +75,10 @@
                     callbacks.fire.apply(callbacks, args);
                 }
             },
-            
+
             // ### checkAPIs
             //
-            // Load supporting libraries for browsers with no native support. Uses 
+            // Load supporting libraries for browsers with no native support. Uses
             // Modernizr to check for drag-and-drop, FileReader, and canvas
             // functionality.
             checkAPIs: function () {
@@ -113,7 +115,7 @@
 
                 Stitches.Page.buttons.$sprite.attr("href", sprite);
                 Stitches.Page.buttons.$stylesheet.attr("href", stylesheet);
-                
+
                 /* notify */
                 Stitches.pub("sprite.generate.done");
             },
@@ -126,7 +128,7 @@
             //     @return {[Icon]} The placed images array
             positionImages: function (looseIcons) {
                 var placedIcons = [];
-                
+
             	/* reset position of icons */
             	$(looseIcons).each(function (idx, icon) {
             		icon.x = icon.y = 0;
@@ -146,36 +148,45 @@
 
                 /* trim empty edges */
                 Stitches.Icons.cropCanvas(placedIcons, Stitches.canvas);
-                
+
                 /* notify  and return */
-                Stitches.pub("sprite.position.done", placedIcons);                
+                Stitches.pub("sprite.position.done", placedIcons);
                 return placedIcons;
             },
 
             // ### makeStitches
-            // 
+            //
             // Draw images on canvas
-            // 
+            //
             //     @param {[Icon]} The placed images array
             //     @return {String} The sprite image data URL
             makeStitches: function (placedIcons) {
-                var context = Stitches.canvas.getContext('2d');
-                $(placedIcons).each(function (idx, icon) {
-                    context.drawImage(icon.image, icon.x, icon.y);
-                });
+                var context, data;
                 
-                /* create image link */
-                var data = Stitches.canvas.toDataURL();
-                
+                /* this block often fails as a result of the cross-
+                   domain blocking in browses for access to write
+                   image data to the canvas */
+                try {
+                    context = Stitches.canvas.getContext('2d');
+                    $(placedIcons).each(function (idx, icon) {
+                        context.drawImage(icon.image, icon.x, icon.y);
+                    });
+
+                    /* create image link */
+                    data = Stitches.canvas.toDataURL();
+                } catch (e) {
+                    Stitches.pub("page.error", e);
+                }
+
                 /* notify  and return */
                 Stitches.pub("sprite.image.done", data);
                 return data;
             },
 
             // ### makeStylesheet
-            // 
+            //
             // Create stylesheet text
-            // 
+            //
             //     @param {[Icon]} The placed images array
             //     @return {String} The sprite stylesheet
             makeStylesheet: function (placedIcons) {
@@ -196,7 +207,7 @@
 
                 /* create stylesheet link */
                 var data = "data:," + encodeURIComponent(css.join(""));
-                
+
                 /* notify  and return */
                 Stitches.pub("sprite.stylesheet.done", data);
                 return data;
