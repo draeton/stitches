@@ -31,7 +31,7 @@
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
                 Stitches.settings = $.extend({}, defaults, config);
-                Stitches.imageQueue = [];
+                Stitches.iconQueue = [];
                 Stitches.Page.$elem = $elem;
 
                 /* setup subscriptions */
@@ -41,7 +41,8 @@
                 Stitches.sub("page.render.done",    Stitches.checkAPIs);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
-                Stitches.sub("page.drop.done",      Stitches.File.handleFiles);
+                Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
+                Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
                 Stitches.sub("sprite.generate",     Stitches.generateStitches);
 
                 /* notify */

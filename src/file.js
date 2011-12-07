@@ -15,92 +15,71 @@
     // Holds all Fle procesing methods
     Stitches.File = (function () {
         
-        /* keep count to fire done message */
-        var filesQueue;
+        /* track files to read */
+        var readQueue = [];
         
         return {
             // ### queueFiles
             //
-            // Loops through `files`; sends images to `addFile`
+            // Loops through `files`; adds an image to the `readQueue`
             //
             //     @param {FileList} files From a drop event
             queueFiles: function (files) {
-                filesQueue = 0;
-                
                 $.each(files, function (i, file) {
                     if (/jpeg|png|gif/.test(file.type)) {
-                        Stitches.Page.addFile(file);
+                        readQueue.push(file);
+                        Stitches.pub("file.queue.done", file);
                     }
                 });
             },
 
-            // ### addFile
+            // ### queueIcons
             //
-            // Increments the `filesQueue` to track when all images have been processed.
-            // Starts up a new `FileReader` to read in the image as data
-            //
-            //     @param {File} file
-            addFile: function (file) {
-                Stitches.filesCount++;
-                Stitches.filesQueue++;
-
-                Stitches.Page.setButtonDisabled(true, ["generate", "clear", "sprite", "stylesheet"]);
-
-                if (Stitches.filesCount === 1) {
-                    Stitches.Page.$droplabel.fadeOut("fast");
-                }
-
-                var reader = new FileReader();
-                reader.onloadend = Stitches.Page.handleFileLoad.bind(file);
-                reader.readAsDataURL(file);
+            // Read in a file from the `readQueue`. Starts up a new `FileReader` 
+            // to read in the image as data and create a new `Icon`
+            queueIcons: function () {
+                var file, reader;
+                
+                file = readQueue.shift();
+                if (file) {
+                    try {
+                        reader = new FileReader();
+                        reader.onloadend = function (e) {
+                            /* create an icon and add to the icon queue */
+                            var icon = new Stitches.Icon(file.name, e.target.result);
+                            Stitches.iconQueue.push(icon);
+                            
+                            /* notify */
+                            Stitches.pub("file.icon.done", icon);
+                        };
+                        reader.readAsDataURL(file);
+                    } catch (e) {
+                        Stitches.pub("page.error", e);                        
+                    }
+                }                
             },
 
-            // ### handleFileLoad
+            // ### unqueueIcon
             //
-            // When the `FileReader` has loaded the file, this creates a new icon
-            // and adds it to the file list in the widget
+            // Removes an icon from the queue
             //
-            //     @param {Event} evt
-            handleFileLoad: function (evt) {
-                Stitches.filesQueue--;
-
-                var icon = new Stitches.Icon(this.name, evt.target.result);
-                var $li = $(Stitches.Page.templates.icon(icon)).data("icon", icon);
-                Stitches.Page.$filelist.append($li);
-                $li.fadeIn("fast");
-
-                if (Stitches.filesQueue === 0) {
-                    Stitches.Page.setButtonDisabled(false, ["generate", "clear"]);
-                }
-            },
-
-            // ### removeFile
-            //
-            // Removes a file from the file list
-            //
-            //     @param {Event} evt
-            removeFile: function (evt) {
-                Stitches.Page.setButtonDisabled(true, ["sprite", "stylesheet"]);
-
-                $(this).parent().fadeOut("fast", function () {
-                    $(this).remove();
+            //     @param {Icon} removeIcon
+            unqueueIcon: function (removeIcon) {
+                /* remove the icon from the queue */
+                Stitches.iconQueue = $.grep(Stitches.iconQueue, function (icon) {
+                    return icon !== removeIcon;
                 });
-
-                Stitches.filesCount--;
-                if (Stitches.filesCount === 0) {
-                    Stitches.Page.setButtonDisabled(true, ["generate", "clear"]);
-                    Stitches.Page.$droplabel.fadeIn("fast");
-                }
-
-                return false;
+                
+                /* notify */
+                Stitches.pub("file.remove.done", removeIcon);
             },
 
-            // ### removeAllFiles
+            // ### unqueueAllIcons
             //
-            // Clear all files from the file list
-            removeAllFiles: function () {
-                Stitches.Page.$filelist.find("a.remove").each(function () {
-                    Stitches.Page.removeFile.call(this);
+            // Clear all icons from the queue
+            unqueueAllIcons: function () {
+                $.each(Stitches.iconQueue, function (i, icon) {
+                    Stitches.File.unqueueIcon(icon);
                 });
             }
         };
