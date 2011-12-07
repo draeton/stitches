@@ -27,12 +27,9 @@
                 return $.get(Stitches.settings.jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
 
-                    // TODO consider converting template to bootstrap
-
                     Stitches.Page.templates = {
                         stitches: Stitches.tmpl("stitches_tmpl"),
-                        icon: Stitches.tmpl("stitches_icon_tmpl"),
-                        style: Stitches.tmpl("stitches_style_tmpl")
+                        icon:     Stitches.tmpl("stitches_icon_tmpl")
                     };
 
                     /* notify */
@@ -48,14 +45,14 @@
                 $div.appendTo(Stitches.Page.$elem);
 
                 // set dom element references
-                Stitches.Page.$dropbox = $(".dropbox", Stitches.Page.$elem);
+                Stitches.Page.$dropbox =   $(".dropbox", Stitches.Page.$elem);
                 Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
-                Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
-                Stitches.Page.$buttons = $(".buttons", Stitches.Page.$elem);
+                Stitches.Page.$filelist =  $(".filelist", Stitches.Page.$elem);
+                Stitches.Page.$buttons =   $(".buttons", Stitches.Page.$elem);
                 Stitches.Page.buttons = {
-                    $generate: $("a.generate", Stitches.Page.$buttons),
-                    $clear: $("a.clear", Stitches.Page.$buttons),
-                    $sprite: $("a.dlsprite", Stitches.Page.$buttons),
+                    $generate:   $("a.generate", Stitches.Page.$buttons),
+                    $clear:      $("a.clear", Stitches.Page.$buttons),
+                    $sprite:     $("a.dlsprite", Stitches.Page.$buttons),
                     $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
                 };
 
@@ -73,6 +70,12 @@
                 }
                 throw e;
             },
+            
+            // #### *Private no operation method*
+            _noop: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            },
 
             // ### bindDragAndDrop
             //
@@ -81,9 +84,9 @@
                 var dropbox = Stitches.Page.$dropbox.get(0);
                 dropbox.addEventListener("dragenter", Stitches.Page._dragStart, false);
                 dropbox.addEventListener("dragleave", Stitches.Page._dragStop, false);
-                dropbox.addEventListener("dragexit", Stitches.Page._dragStop, false);
-                dropbox.addEventListener("dragover", Stitches.Page._dragNoop, false);
-                dropbox.addEventListener("drop", Stitches.Page._drop, false);
+                dropbox.addEventListener("dragexit",  Stitches.Page._dragStop, false);
+                dropbox.addEventListener("dragover",  Stitches.Page._noop, false);
+                dropbox.addEventListener("drop",      Stitches.Page._drop, false);
             },
 
             // #### *Private drag and drop methods*
@@ -95,11 +98,6 @@
                 if ($(e.target).parents(".dropbox").length === 0) {
                     Stitches.Page.$dropbox.removeClass("dropping");
                 }
-            },
-            
-            _dragNoop: function (e) {
-                e.preventDefault();
-                e.stopPropagation();
             },
             
             _drop: function (e) {
@@ -118,36 +116,29 @@
             //
             // Bind all of the event listeners for buttons
             bindButtons: function () {
-                Stitches.Page.$elem.delegate("a", "click", function (e) {
-                    return !($(this).hasClass("disabled"));
-                });
-                
-                Stitches.Page.$elem.delegate("a.generate", "click", function (e) {
-                    var icons = [];
-                    Stitches.Page.$filelist.find("li").each(function () {
-                        var icon = $(this).data("icon");
-                        icons.push(icon);
-                    });
-                    Stitches.pub("sprite.generate", icons);
-                });
-                
-                Stitches.Page.$elem.delegate("a.remove", "click", Stitches.Page.removeFile);
-                Stitches.Page.$elem.delegate("a.clear", "click", Stitches.Page.removeAllFiles);
+                var $elem = Stitches.Page.$elem;
+                $elem.delegate("a.disabled", "click", Stitches.Page._noop);
+                $elem.delegate("a.generate", "click", Stitches.Page._generate);                
+                $elem.delegate("a.remove", "click",   Stitches.Page._removeFile);
+                $elem.delegate("a.clear", "click",    Stitches.Page._removeAllFiles);
             },
-
-            // ### setButtonDisabled
-            //
-            // Shortcut to disable or enable buttons. There's certainly a nicer way
-            // of writing this
-            //
-            //     @param {Boolean} param Disabled (true) or enabled (false)
-            //     @param {Array} buttons Which buttons to target
-            setButtonDisabled: function (disabled, buttons) {
-                var action = disabled ? "add" : "remove";
-
-                $(buttons).each(function (idx, val) {
-                    Stitches.Page.buttons["$" + val][action + "Class"]("disabled");
+            
+            // #### *Private button methods*
+            _generate: function (e) {
+                var icons = [];
+                Stitches.Page.$filelist.find("li").each(function () {
+                    var icon = $(this).data("icon");
+                    icons.push(icon);
                 });
+                Stitches.pub("sprite.generate", icons);
+            },
+            
+            _removeFile: function (e) {
+                // find the corresponding file and remove from queue
+            },
+            
+            _removeAllFiles: function (e) {
+                // a lot happens here
             }
         };
     })();

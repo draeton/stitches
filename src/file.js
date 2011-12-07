@@ -14,22 +14,24 @@
     //
     // Holds all Fle procesing methods
     Stitches.File = (function () {
+        
+        /* keep count to fire done message */
+        var filesQueue;
+        
         return {
-            // ### handleFiles
+            // ### queueFiles
             //
             // Loops through `files`; sends images to `addFile`
             //
             //     @param {FileList} files From a drop event
-            handleFiles: function (files) {
-                Stitches.filesQueue = 0;
-
-                for (var i = 0, l = files.length; i < l; i++) {
-                    var file = files[i];
-
+            queueFiles: function (files) {
+                filesQueue = 0;
+                
+                $.each(files, function (i, file) {
                     if (/jpeg|png|gif/.test(file.type)) {
                         Stitches.Page.addFile(file);
                     }
-                }
+                });
             },
 
             // ### addFile

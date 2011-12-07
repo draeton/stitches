@@ -31,18 +31,18 @@
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
                 Stitches.settings = $.extend({}, defaults, config);
-                Stitches.filesCount = 0;
+                Stitches.imageQueue = [];
                 Stitches.Page.$elem = $elem;
 
                 /* setup subscriptions */
-                Stitches.sub("page.error", Stitches.Page.errorHandler);
-                Stitches.sub("page.init.done", Stitches.Page.fetchTemplates);
+                Stitches.sub("page.error",          Stitches.Page.errorHandler);
+                Stitches.sub("page.init.done",      Stitches.Page.fetchTemplates);
                 Stitches.sub("page.templates.done", Stitches.Page.render);
-                Stitches.sub("page.render.done", Stitches.checkAPIs);
-                Stitches.sub("page.apis.done", Stitches.Page.bindDragAndDrop);
-                Stitches.sub("page.apis.done", Stitches.Page.bindButtons);
-                Stitches.sub("page.drop.done", Stitches.Page.handleFiles);
-                Stitches.sub("sprite.generate", Stitches.generateStitches);
+                Stitches.sub("page.render.done",    Stitches.checkAPIs);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
+                Stitches.sub("page.drop.done",      Stitches.File.handleFiles);
+                Stitches.sub("sprite.generate",     Stitches.generateStitches);
 
                 /* notify */
                 Stitches.pub("page.init.done");
@@ -202,7 +202,13 @@
                 ];
 
                 $(placedIcons).each(function (idx, icon) {
-                    css.push( Stitches.Page.templates.style(icon) );
+                    css.concat([
+                        ".sprite-" + icon.name + " {\n",
+                        "    width: " + icon.width + "px;\n",
+                        "    height: " + icon.height + "px;\n",
+                        "    background-position: -" + icon.x + "px -" + icon.y + "px;\n",
+                        "}\n\n"
+                    ]);
                 });
 
                 /* create stylesheet link */
