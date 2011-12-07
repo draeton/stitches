@@ -43,21 +43,8 @@
             // ### init
             //
             // Creates the stitches widget using the `$elem` as a container
-            //
-            //     @param {jQuery} $elem The container node
-            init: function ($elem) {
-                if (!$elem) {
-                    $elem = $('<div>').appendTo('body');
-                }
-                Stitches.Page.$elem = $elem;
-
-                if (typeof FileReader !== "undefined" && Modernizr.draganddrop) {
-                    /* load templates */
-                    Stitches.Page.getTemplates();
-                } else {
-                    /* browser is not compatible */
-                    // TODO show an error message
-                }
+            init: function () {
+                Stitches.Page.getTemplates();
             },
 
             // ### getTemplates
@@ -133,6 +120,8 @@
             //     @param {Event} evt Click event
             //     @return {Boolean}
             handleButtons: function (evt) {
+                evt.preventDefault();
+                
                 if (/disabled/.test(this.className)) {
                     return false;
                 }
@@ -162,7 +151,7 @@
             setButtonDisabled: function (disabled, buttons) {
                 var action = disabled ? "add" : "remove";
 
-                buttons.forEach(function (val, idx) {
+                buttons.forEach(function (val) {
                     Stitches.Page.buttons["$" + val][action + "Class"]("disabled");
                 });
             },

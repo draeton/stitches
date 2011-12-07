@@ -19,6 +19,9 @@
             "jsdir": "js"
         };
         
+        // **Pub/sub subscription manager**
+        var topics = {};
+        
         return {
             // ### init
             //
@@ -30,20 +33,58 @@
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
                 Stitches.settings = $.extend({}, defaults, config);
+                Stitches.filesCount = 0;
+                Stitches.Page.$elem = $elem;
                 
-                var jsdir = Stitches.settings.jsdir;
+                Stitches.sub("page.init", Stitches.Page.init);
+                Stitches.sub("page.error", Stitches.Page.error);
                 
+                if (typeof FileReader === "undefined" || Modernizr.draganddrop) {
+                    Stitches.loadSupport();
+                } else {
+                    Stitches.pub("page.init");
+                }
+            },
+            
+            // ### sub
+            //
+            // Subscribe to a topic
+            //
+            //     @param {String} topic The subscription topic name
+            //     @param {Function} fn A callback to fire
+            sub: function (topic, fn) {
+                topics[topic] = topics[topic] ||  $.Callbacks("stopOnFalse");
+                topics[topic].add(fn);
+            },
+            
+            // ### pub
+            //
+            // Publish a topic
+            //
+            //     @param {String} topic The subscription topic name
+            pub: function (topic) {
+                var callbacks, args;
+                if (topics[topic]) {
+                    callbacks = topics[topic];
+                    args = Array.prototype.slice.call(arguments, 1);
+                    callbacks.fire.apply(callbacks, args);
+                }
+            },
+            
+            // ### loadSupport
+            //
+            // Load supporting libraries for browsers with no native support
+            loadSupport: function () {
                 Modernizr.load([
                     {
                         test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
-                        nope: jsdir + "/dropfile/dropfile.js"
+                        nope: Stitches.settings.jsdir + "/dropfile/dropfile.js"
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: jsdir + "/flashcanvas/flashcanvas.js",
+                        nope: Stitches.settings.jsdir + "/flashcanvas/flashcanvas.js",
                         complete: function () {
-                            Stitches.filesCount = 0;
-                            Stitches.Page.init($elem);
+                            Stitches.pub("page.init");
                         }
                     }
                 ]);
@@ -124,7 +165,7 @@
                 text += "    background: url(sprite.png) no-repeat;\n";
                 text += "}\n\n";
 
-                Stitches.placedIcons.forEach(function (icon, idx) {
+                Stitches.placedIcons.forEach(function (icon) {
                     text += ".sprite-" + icon.name + " {\n";
                     text += "    width: " + icon.width + "px;\n";
                     text += "    height: " + icon.height + "px;\n";
