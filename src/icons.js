@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */
-(function (window, Stitches) {
+(function (window, Stitches, $) {
 
     "use strict";
 
@@ -30,7 +30,7 @@
 
                 /* find the max height & width; the area is the sum of the areas
                    of the rectangles */
-                icons.forEach(function (icon, idx) {
+                $(icons).each(function (idx, icon) {
                     maxW = icon.width > maxW ? icon.width : maxW;
                     maxH = icon.height > maxH ? icon.height : maxH;
                     area += icon.area;
@@ -68,7 +68,7 @@
                 /* loop through all of the icons, attempting to place them within the sprite
                    without intersections */
                 while (loose.length && i < 10) {
-                    loose.forEach(function (icon, idx) {
+                    $(loose).each(function (idx, icon) {
                         if (!icon.isPlaced) {
                             icon.isPlaced = Stitches.Icons.placeIcon(icon, placed, canvas);
                         }
@@ -141,7 +141,7 @@
                 var overlap = null;
 
                 /* filter the checkPoints arrays based on currentIcon position */
-                placed.forEach(function (p, idx) {
+                $(placed).each(function (idx, p) {
                     x1 = (p.x < icon.x + icon.width);
                     x2 = (p.x + p.width > icon.x);
                     y1 = (p.y < icon.y + icon.height);
@@ -171,7 +171,7 @@
             cropCanvas: function (placed, canvas) {
                 var w = 0, h = 0;
 
-                placed.forEach(function (icon, idx) {
+                $(placed).each(function (idx, icon) {
                     w = w > icon.x + icon.width ? w : icon.x + icon.width;
                     h = h > icon.y + icon.height ? h : icon.y + icon.height;
                 });
@@ -182,4 +182,4 @@
         };
     })();
 
-})(window, Stitches);
+})(window, Stitches, jQuery);

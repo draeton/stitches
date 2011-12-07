@@ -36,9 +36,12 @@
                 Stitches.filesCount = 0;
                 Stitches.Page.$elem = $elem;
                 
-                Stitches.sub("page.init", Stitches.Page.init);
+                /* setup subscriptions */
+                Stitches.sub("page.init", Stitches.Page.getTemplates);
+                Stitches.sub("page.render", Stitches.Page.render);
                 Stitches.sub("page.error", Stitches.Page.error);
                 
+                /* if html5 api support is missing, try to load it */
                 if (typeof FileReader === "undefined" || Modernizr.draganddrop) {
                     Stitches.loadSupport();
                 } else {
@@ -118,7 +121,7 @@
             // Position all of the images in the `looseIcons` array within the canvas
             positionImages: function () {
             	/* reset position of icons */
-            	Stitches.looseIcons.forEach(function (icon, idx) {
+            	$(Stitches.looseIcons).each(function (idx, icon) {
             		icon.x = icon.y = 0;
             		icon.isPlaced = false;
             	});
@@ -143,7 +146,7 @@
             // Draw images on canvas
             makeStitches: function () {
                 var context = Stitches.canvas.getContext('2d');
-                Stitches.placedIcons.forEach(function (icon, idx) {
+                $(Stitches.placedIcons).each(function (idx, icon) {
                     context.drawImage(icon.image, icon.x, icon.y);
                 });
 
@@ -160,21 +163,18 @@
                     return a.name < b.name ? -1 : 1;
                 });
 
-                var text = "";
-                text += ".sprite {\n";
-                text += "    background: url(sprite.png) no-repeat;\n";
-                text += "}\n\n";
+                var css = [
+                    ".sprite {\n",
+                    "    background: url(sprite.png) no-repeat;\n",
+                    "}\n\n"
+                ];
 
-                Stitches.placedIcons.forEach(function (icon) {
-                    text += ".sprite-" + icon.name + " {\n";
-                    text += "    width: " + icon.width + "px;\n";
-                    text += "    height: " + icon.height + "px;\n";
-                    text += "    background-position: -" + icon.x + "px -" + icon.y + "px;\n";
-                    text += "}\n\n";
+                $(Stitches.placedIcons).each(function (idx, icon) {
+                    css.push( Stitches.Page.templates.style(icon) );
                 });
 
                 /* add save link */
-                return "data:," + encodeURIComponent(text);
+                return "data:," + encodeURIComponent(css.join(""));
             }
         };
     })();

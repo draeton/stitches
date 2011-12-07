@@ -18,6 +18,7 @@
             <file name="${repo}.js"/>
             <file name="icons.js"/>
             <file name="icon.js"/>
+            <file name="tmpl.js"/>
             <file name="page.js"/>
         </filelist>
         

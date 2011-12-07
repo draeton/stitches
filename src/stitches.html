@@ -17,7 +17,16 @@
 <script type="text/html" id="stitches_icon_tmpl">
     <li>
         <span class="icon"><img src="<%=image.src%>" alt="<%=name%>" /></span>
-        <span class="name"><%=name%></span>
+        <span class="name"><%= name %></span>
         <a href="javascript:void(0)" class="remove">remove</a>
     </li>
+</script>
+
+<script type="text/html" id="stitches_style_tmpl">
+.sprite-<%= name %> {
+    width: <%= width %>px;
+    height: <%= height %>px;
+    background-position: -<%= x %>px -<%= y %>px;
+}
+
 </script>
