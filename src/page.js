@@ -70,6 +70,42 @@
                 }
                 throw e;
             },
+
+            // ## subscribe
+            //
+            // Handles all subscriptions
+            subscribe: function () {
+                var buttons = Stitches.Page.buttons,
+                    $droplabel = Stitches.Page.$droplabel;
+                    
+                /* handle drop label and buttons on queue length changes */
+                Stitches.sub("file.icon.done", function (icon) {
+                    if (Stitches.iconQueue.length === 1) {
+                        $droplabel.fadeOut("fast");
+                        buttons.$generate.removeClass("disabled");
+                        buttons.$clear.removeClass("disabled");
+                    }
+                    buttons.$sprite.addClass("disabled");
+                    buttons.$stylesheet.addClass("disabled");
+                });
+                Stitches.sub("file.remove.done", function (icon) {
+                    if (Stitches.iconQueue.length < 1) {
+                        $droplabel.fadeIn("fast");
+                        buttons.$generate.addClass("disabled");
+                        buttons.$clear.addClass("disabled");
+                    }
+                    buttons.$sprite.addClass("disabled");
+                    buttons.$stylesheet.addClass("disabled");
+                });
+                
+                /* handle sprite and stylesheet generation */
+                Stitches.sub("sprite.image.done", function (data) {
+                    buttons.$sprite.attr("href", data).removeClass("disabled");
+                });
+                Stitches.sub("sprite.stylesheet.done", function (data) {
+                    buttons.$stylesheet.attr("href", data).removeClass("disabled");
+                });
+            },
             
             // #### *Private no operation method*
             _noop: function (e) {
@@ -125,20 +161,41 @@
             
             // #### *Private button methods*
             _generate: function (e) {
-                var icons = [];
-                Stitches.Page.$filelist.find("li").each(function () {
-                    var icon = $(this).data("icon");
-                    icons.push(icon);
-                });
-                Stitches.pub("sprite.generate", icons);
+                /* [].concat to copy array */
+                Stitches.pub("sprite.generate", [].concat(Stitches.iconQueue));
             },
             
             _removeFile: function (e) {
-                // find the corresponding file and remove from queue
+                var icon = $(this).parent("li").data("icon");
+                Stitches.pub("file.unqueue", icon);
             },
             
             _removeAllFiles: function (e) {
-                // a lot happens here
+                Stitches.pub("file.unqueue.all");
+            },
+            
+            // ### addIcon
+            //
+            // Add an icon to the file list
+            //     @param {Icon} icon
+            addIcon: function (icon) {                
+                $(Stitches.Page.templates.icon(icon))
+                    .data("icon", icon)
+                    .appendTo(Stitches.Page.$filelist)
+                    .fadeIn("fast");
+            },
+            
+            // ### removeIcon
+            //
+            // Remove an icon from the file list
+            //     @param {Icon} icon
+            removeIcon: function (icon) {                
+                Stitches.Page.$filelist.find("li")
+                    .filter(function () {
+                        return $(this).data("icon") === icon;
+                    })
+                    .fadeOut("fast")
+                    .remove();
             }
         };
     })();

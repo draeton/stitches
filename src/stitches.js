@@ -19,10 +19,10 @@
             "jsdir": "js"
         };
 
-        // **Pub/sub subscription manager**
-        var topics = {};
-
         return {
+            // **Pub/sub subscription manager**
+            _topics: {},
+        
             // ### init
             //
             // Readies everything for user interaction.
@@ -41,8 +41,13 @@
                 Stitches.sub("page.render.done",    Stitches.checkAPIs);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
+                Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
                 Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
                 Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
+                Stitches.sub("file.icon.done",      Stitches.Page.addIcon);
+                Stitches.sub("file.remove.done",    Stitches.Page.removeIcon);
+                Stitches.sub("file.unqueue",        Stitches.File.unqueueIcon);
+                Stitches.sub("file.unqueue.all",    Stitches.File.unqueueAllIcons);
                 Stitches.sub("sprite.generate",     Stitches.generateStitches);
 
                 /* notify */
@@ -56,11 +61,24 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to fire
             sub: function (topic, fn) {
-                var callbacks = topics[topic] ||  $.Callbacks("stopOnFalse");
+                var callbacks = Stitches._topics[topic] ||  $.Callbacks("stopOnFalse");
                 if (fn) {
                     callbacks.add(fn);
                 }
-                topics[topic] = callbacks;
+                Stitches._topics[topic] = callbacks;
+            },
+
+            // ### unsub
+            //
+            // Unsubscribe from a topic
+            //
+            //     @param {String} topic The subscription topic name
+            //     @param {Function} fn A callback to remove
+            unsub: function (topic, fn) {
+                var callbacks = Stitches._topics[topic];
+                if (callbacks) {
+                    callbacks.remove(fn);
+                }
             },
 
             // ### pub
@@ -69,9 +87,8 @@
             //
             //     @param {String} topic The subscription topic name
             pub: function (topic) {
-                var callbacks = topics[topic],
+                var callbacks = Stitches._topics[topic],
                     args = Array.prototype.slice.call(arguments, 1);
-                console.log('publishing: ', topic, callbacks, args)
                 if (callbacks) {
                     callbacks.fire.apply(callbacks, args);
                 }
@@ -113,9 +130,6 @@
                 var placedIcons = Stitches.positionImages(looseIcons);
                 var sprite = Stitches.makeStitches(placedIcons);
                 var stylesheet = Stitches.makeStylesheet(placedIcons);
-
-                Stitches.Page.buttons.$sprite.attr("href", sprite);
-                Stitches.Page.buttons.$stylesheet.attr("href", stylesheet);
 
                 /* notify */
                 Stitches.pub("sprite.generate.done");
@@ -197,23 +211,23 @@
                 });
 
                 var css = [
-                    ".sprite {\n",
-                    "    background: url(sprite.png) no-repeat;\n",
-                    "}\n\n"
+                    ".sprite {",
+                    "    background: url(sprite.png) no-repeat;",
+                    "}\n"
                 ];
 
                 $(placedIcons).each(function (idx, icon) {
-                    css.concat([
-                        ".sprite-" + icon.name + " {\n",
-                        "    width: " + icon.width + "px;\n",
-                        "    height: " + icon.height + "px;\n",
-                        "    background-position: -" + icon.x + "px -" + icon.y + "px;\n",
-                        "}\n\n"
+                    css = css.concat([
+                        ".sprite-" + icon.name + " {",
+                        "    width: " + icon.width + "px;",
+                        "    height: " + icon.height + "px;",
+                        "    background-position: -" + icon.x + "px -" + icon.y + "px;",
+                        "}\n"
                     ]);
                 });
 
                 /* create stylesheet link */
-                var data = "data:," + encodeURIComponent(css.join(""));
+                var data = "data:," + encodeURIComponent(css.join("\n"));
 
                 /* notify  and return */
                 Stitches.pub("sprite.stylesheet.done", data);

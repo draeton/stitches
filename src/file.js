@@ -63,15 +63,15 @@
             //
             // Removes an icon from the queue
             //
-            //     @param {Icon} removeIcon
-            unqueueIcon: function (removeIcon) {
+            //     @param {Icon} icon
+            unqueueIcon: function (icon) {
                 /* remove the icon from the queue */
-                Stitches.iconQueue = $.grep(Stitches.iconQueue, function (icon) {
-                    return icon !== removeIcon;
+                Stitches.iconQueue = $.grep(Stitches.iconQueue, function (item) {
+                    return item !== icon;
                 });
                 
                 /* notify */
-                Stitches.pub("file.remove.done", removeIcon);
+                Stitches.pub("file.remove.done", icon);
             },
 
             // ### unqueueAllIcons
