@@ -18,7 +18,9 @@
             <file name="${repo}.js"/>
             <file name="icons.js"/>
             <file name="icon.js"/>
+            <file name="tmpl.js"/>
             <file name="page.js"/>
+            <file name="file.js"/>
         </filelist>
         
         <filelist id="src.css" dir="${src.dir}">

@@ -23,7 +23,7 @@ Stitches requires a stylesheet, a script, and an HTML element to get the job don
 {% highlight html %}
 <link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
 
-<script src="js/jquery-1.6.2.min.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
 <script src="js/modernizr-2.0.6.min.js"></script>
 
 <script src="js/stitches-@VERSION@-min.js"></script>
@@ -49,7 +49,7 @@ Documentation is available [here.](http://draeton.github.com/stitches/stitches/d
 
 ## Dependencies
 
-[jQuery 1.6.2+](http://jquery.com/), [Modernizr](http://www.modernizr.com/), 
+[jQuery 1.7.1+](http://jquery.com/) <span class="label success">New</span>, [Modernizr](http://www.modernizr.com/), 
 *[Dropfile](https://github.com/MrSwitch/dropfile), [Flashcanvas](http://flashcanvas.net/) 
 for older browser support*
 

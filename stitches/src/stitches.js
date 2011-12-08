@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches, Modernizr */
@@ -18,32 +18,102 @@
         var defaults = {
             "jsdir": "js"
         };
-        
+
         return {
+            // **Pub/sub subscription manager**
+            _topics: {},
+        
             // ### init
             //
-            // Uses Modernizr to check for drag-and-drop, FileReader, and canvas
-            // functionality. Initializes the stitches element and readies everything for
-            // user interaction.
+            // Readies everything for user interaction.
             //
             //     @param {jQuery} $elem A wrapped DOM node
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
                 Stitches.settings = $.extend({}, defaults, config);
-                
-                var jsdir = Stitches.settings.jsdir;
-                
+                Stitches.iconQueue = [];
+                Stitches.Page.$elem = $elem;
+
+                /* setup subscriptions */
+                Stitches.sub("page.error",          Stitches.Page.errorHandler);
+                Stitches.sub("page.init.done",      Stitches.Page.fetchTemplates);
+                Stitches.sub("page.templates.done", Stitches.Page.render);
+                Stitches.sub("page.render.done",    Stitches.checkAPIs);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
+                Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
+                Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
+                Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
+                Stitches.sub("file.icon.done",      Stitches.Page.addIcon);
+                Stitches.sub("file.remove.done",    Stitches.Page.removeIcon);
+                Stitches.sub("file.unqueue",        Stitches.File.unqueueIcon);
+                Stitches.sub("file.unqueue.all",    Stitches.File.unqueueAllIcons);
+                Stitches.sub("sprite.generate",     Stitches.generateStitches);
+
+                /* notify */
+                Stitches.pub("page.init.done");
+            },
+
+            // ### sub
+            //
+            // Subscribe to a topic
+            //
+            //     @param {String} topic The subscription topic name
+            //     @param {Function} fn A callback to fire
+            sub: function (topic, fn) {
+                var callbacks = Stitches._topics[topic] ||  $.Callbacks("stopOnFalse");
+                if (fn) {
+                    callbacks.add(fn);
+                }
+                Stitches._topics[topic] = callbacks;
+            },
+
+            // ### unsub
+            //
+            // Unsubscribe from a topic
+            //
+            //     @param {String} topic The subscription topic name
+            //     @param {Function} fn A callback to remove
+            unsub: function (topic, fn) {
+                var callbacks = Stitches._topics[topic];
+                if (callbacks) {
+                    callbacks.remove(fn);
+                }
+            },
+
+            // ### pub
+            //
+            // Publish a topic
+            //
+            //     @param {String} topic The subscription topic name
+            pub: function (topic) {
+                var callbacks = Stitches._topics[topic],
+                    args = Array.prototype.slice.call(arguments, 1);
+                if (callbacks) {
+                    callbacks.fire.apply(callbacks, args);
+                }
+            },
+
+            // ### checkAPIs
+            //
+            // Load supporting libraries for browsers with no native support. Uses
+            // Modernizr to check for drag-and-drop, FileReader, and canvas
+            // functionality.
+            checkAPIs: function () {
                 Modernizr.load([
                     {
                         test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
-                        nope: jsdir + "/dropfile/dropfile.js"
+                        nope: Stitches.settings.jsdir + "/dropfile/dropfile.js"
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: jsdir + "/flashcanvas/flashcanvas.js",
+                        nope: Stitches.settings.jsdir + "/flashcanvas/flashcanvas.js",
                         complete: function () {
-                            Stitches.filesCount = 0;
-                            Stitches.Page.init($elem);
+                            if (typeof FileReader !== "undefined" && Modernizr.draganddrop && Modernizr.canvas) {
+                                Stitches.pub("page.apis.done");
+                            } else {
+                                Stitches.pub("page.error", new Error("Required APIs are not present."));
+                            }
                         }
                     }
                 ]);
@@ -54,86 +124,114 @@
             // Positions all of the icons from the $filelist on the canvas;
             // crate the sprite link and the stylesheet link;
             // updates button state
-            generateStitches: function () {
-            	Stitches.looseIcons = [];
-            	Stitches.placedIcons = [];
+            //
+            //     @param {[Icon]} looseIcons An Icon array of images to place
+            generateStitches: function (looseIcons) {
+                var placedIcons = Stitches.positionImages(looseIcons);
+                var sprite = Stitches.makeStitches(placedIcons);
+                var stylesheet = Stitches.makeStylesheet(placedIcons);
 
-            	Stitches.Page.$filelist.find("li").each(function () {
-            		var icon = $(this).data("icon");
-            		Stitches.looseIcons.push(icon);
-            	});
-
-                Stitches.positionImages();
-                var sprite = Stitches.makeStitches();
-                var stylesheet = Stitches.makeStylesheet();
-
-                Stitches.Page.buttons.$sprite.attr("href", sprite);
-                Stitches.Page.buttons.$stylesheet.attr("href", stylesheet);
-                Stitches.Page.setButtonDisabled(false, ["sprite", "stylesheet"]);
+                /* notify */
+                Stitches.pub("sprite.generate.done");
             },
 
             // ### positionImages
             //
             // Position all of the images in the `looseIcons` array within the canvas
-            positionImages: function () {
+            //
+            //     @param {[Icon]} looseIcons An Icon array of images to place
+            //     @return {[Icon]} The placed images array
+            positionImages: function (looseIcons) {
+                var placedIcons = [];
+
             	/* reset position of icons */
-            	Stitches.looseIcons.forEach(function (icon, idx) {
+            	$(looseIcons).each(function (idx, icon) {
             		icon.x = icon.y = 0;
             		icon.isPlaced = false;
             	});
 
                 /* reverse sort by area */
-                Stitches.looseIcons = Stitches.looseIcons.sort(function (a, b) {
+                looseIcons = looseIcons.sort(function (a, b) {
                     return b.area - a.area;
                 });
 
                 /* find the ideal sprite for this set of icons */
-                Stitches.canvas = Stitches.Icons.idealCanvas(Stitches.looseIcons);
+                Stitches.canvas = Stitches.Icons.idealCanvas(looseIcons);
 
                 /* try to place all of the icons on the ideal canvas */
-                Stitches.Icons.placeIcons(Stitches.looseIcons, Stitches.placedIcons, Stitches.canvas);
+                Stitches.Icons.placeIcons(looseIcons, placedIcons, Stitches.canvas);
 
                 /* trim empty edges */
-                Stitches.Icons.cropCanvas(Stitches.placedIcons, Stitches.canvas);
+                Stitches.Icons.cropCanvas(placedIcons, Stitches.canvas);
+
+                /* notify  and return */
+                Stitches.pub("sprite.position.done", placedIcons);
+                return placedIcons;
             },
 
             // ### makeStitches
-            // 
+            //
             // Draw images on canvas
-            makeStitches: function () {
-                var context = Stitches.canvas.getContext('2d');
-                Stitches.placedIcons.forEach(function (icon, idx) {
-                    context.drawImage(icon.image, icon.x, icon.y);
-                });
+            //
+            //     @param {[Icon]} The placed images array
+            //     @return {String} The sprite image data URL
+            makeStitches: function (placedIcons) {
+                var context, data;
+                
+                /* this block often fails as a result of the cross-
+                   domain blocking in browses for access to write
+                   image data to the canvas */
+                try {
+                    context = Stitches.canvas.getContext('2d');
+                    $(placedIcons).each(function (idx, icon) {
+                        context.drawImage(icon.image, icon.x, icon.y);
+                    });
 
-                /* add save link */
-                return Stitches.canvas.toDataURL();
+                    /* create image link */
+                    data = Stitches.canvas.toDataURL();
+                } catch (e) {
+                    Stitches.pub("page.error", e);
+                }
+
+                /* notify  and return */
+                Stitches.pub("sprite.image.done", data);
+                return data;
             },
 
             // ### makeStylesheet
-            // 
+            //
             // Create stylesheet text
-            makeStylesheet: function () {
+            //
+            //     @param {[Icon]} The placed images array
+            //     @return {String} The sprite stylesheet
+            makeStylesheet: function (placedIcons) {
                 /* sort by name for css output */
-                Stitches.placedIcons = Stitches.placedIcons.sort(function (a, b) {
+                placedIcons = placedIcons.sort(function (a, b) {
                     return a.name < b.name ? -1 : 1;
                 });
 
-                var text = "";
-                text += ".sprite {\n";
-                text += "    background: url(sprite.png) no-repeat;\n";
-                text += "}\n\n";
+                var css = [
+                    ".sprite {",
+                    "    background: url(sprite.png) no-repeat;",
+                    "}\n"
+                ];
 
-                Stitches.placedIcons.forEach(function (icon, idx) {
-                    text += ".sprite-" + icon.name + " {\n";
-                    text += "    width: " + icon.width + "px;\n";
-                    text += "    height: " + icon.height + "px;\n";
-                    text += "    background-position: -" + icon.x + "px -" + icon.y + "px;\n";
-                    text += "}\n\n";
+                $(placedIcons).each(function (idx, icon) {
+                    css = css.concat([
+                        ".sprite-" + icon.name + " {",
+                        "    width: " + icon.width + "px;",
+                        "    height: " + icon.height + "px;",
+                        "    background-position: -" + icon.x + "px -" + icon.y + "px;",
+                        "}\n"
+                    ]);
                 });
 
-                /* add save link */
-                return "data:," + encodeURIComponent(text);
+                /* create stylesheet link */
+                var data = "data:," + encodeURIComponent(css.join("\n"));
+
+                /* notify  and return */
+                Stitches.pub("sprite.stylesheet.done", data);
+                return data;
             }
         };
     })();

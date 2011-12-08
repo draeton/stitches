@@ -2,23 +2,23 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs  
+// Copyright 2011, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */
-(function (window, Stitches) {
+(function (window, Stitches, $) {
 
     "use strict";
 
     var document = window.document;
-    
+
     // ## Stitches.Icons namespace
     //
     // Holds all methods for working with icons
     Stitches.Icons = (function () {
         return {
             // ### idealCanvas
-            // 
+            //
             // Find the ideal sprite canvas
             //
             //     @param {Array} icons A list of icons
@@ -30,7 +30,7 @@
 
                 /* find the max height & width; the area is the sum of the areas
                    of the rectangles */
-                icons.forEach(function (icon, idx) {
+                $(icons).each(function (idx, icon) {
                     maxW = icon.width > maxW ? icon.width : maxW;
                     maxH = icon.height > maxH ? icon.height : maxH;
                     area += icon.area;
@@ -55,7 +55,7 @@
             },
 
             // ### placeIcons
-            // 
+            //
             // Place icons within the sprite (the ideal square)
             //
             //     @param {Array} loose All loose icons
@@ -68,7 +68,7 @@
                 /* loop through all of the icons, attempting to place them within the sprite
                    without intersections */
                 while (loose.length && i < 10) {
-                    loose.forEach(function (icon, idx) {
+                    $(loose).each(function (idx, icon) {
                         if (!icon.isPlaced) {
                             icon.isPlaced = Stitches.Icons.placeIcon(icon, placed, canvas);
                         }
@@ -88,7 +88,7 @@
             },
 
             // ### placeIcon
-            // 
+            //
             // Place one icon on the sprite, checking for intersects with the sprite
             // dimensions and other placed icons
             //
@@ -128,7 +128,7 @@
             },
 
             // ### isOverlapped
-            // 
+            //
             // Check if this icon overlaps any of the placed icons. If not,
             // add to the `placed` array
             //
@@ -141,7 +141,7 @@
                 var overlap = null;
 
                 /* filter the checkPoints arrays based on currentIcon position */
-                placed.forEach(function (p, idx) {
+                $(placed).each(function (idx, p) {
                     x1 = (p.x < icon.x + icon.width);
                     x2 = (p.x + p.width > icon.x);
                     y1 = (p.y < icon.y + icon.height);
@@ -163,7 +163,7 @@
             },
 
             // ### cropCanvas
-            // 
+            //
             // Crop to content, after placing icons
             //
             //     @param {Array} placed All placed icons
@@ -171,7 +171,7 @@
             cropCanvas: function (placed, canvas) {
                 var w = 0, h = 0;
 
-                placed.forEach(function (icon, idx) {
+                $(placed).each(function (idx, icon) {
                     w = w > icon.x + icon.width ? w : icon.x + icon.width;
                     h = h > icon.y + icon.height ? h : icon.y + icon.height;
                 });
@@ -182,4 +182,4 @@
         };
     })();
 
-})(window, Stitches);
+})(window, Stitches, jQuery);

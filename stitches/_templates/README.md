@@ -10,7 +10,7 @@ Stitches requires a stylesheet, a script, and an HTML element to get the job don
 
     <link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
 
-    <script src="js/jquery-1.6.2.min.js"></script>
+    <script src="js/jquery-1.7.1.min.js"></script>
     <script src="js/modernizr-2.0.6.min.js"></script>
 
     <script src="js/stitches-@VERSION@-min.js"></script>
@@ -30,7 +30,7 @@ Once that's in place, the sprite generator is created by the `init` method:
 
 ## Dependencies
 
-jQuery 1.6.2+, Modernizr; *Dropfile, Flashcanvas for older browser support*
+jQuery 1.7.1+, Modernizr; *Dropfile, Flashcanvas for older browser support*
 
 ## License
 
