@@ -1,19 +1,19 @@
 ## Stitches
 
 [Stitches](http://draeton.github.com/stitches/) is an HTML5 sprite generator.
-The current version is `0.1.1`. Documentation is available
+The current version is `0.1.2`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/docs/stitches.html).
 
 ## Implementation
 
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
-    <link rel="stylesheet" href="css/stitches-0.1.1-min.css">
+    <link rel="stylesheet" href="css/stitches-0.1.2-min.css">
 
     <script src="js/jquery-1.7.1.min.js"></script>
     <script src="js/modernizr-2.0.6.min.js"></script>
 
-    <script src="js/stitches-0.1.1-min.js"></script>
+    <script src="js/stitches-0.1.2-min.js"></script>
 
 Once that's in place, the sprite generator is created by the `init` method:
 
