@@ -26,7 +26,7 @@
         var self = this;
 
         this.guid = guid++;
-        this.name = name.replace(/\.|\s+/gi, "-");
+        this.name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
 
         this.image = new Image();
         this.image.onload = function () {
