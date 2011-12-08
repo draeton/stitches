@@ -132,7 +132,7 @@
                 var stylesheet = Stitches.makeStylesheet(placedIcons);
 
                 /* notify */
-                Stitches.pub("sprite.generate.done");
+                Stitches.pub("sprite.generate.done", sprite, stylesheet);
             },
 
             // ### positionImages
