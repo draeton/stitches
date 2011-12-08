@@ -16,25 +16,42 @@
 
 /* dropbox */
 .stitches .dropbox {
-    background: white;
     height: 200px;
     border-radius: 10px 10px 0 0;
     padding: 20px 0 0;
     position: relative;
+
+    background-color: #ffffff;
 }
 .stitches .droplabel {
 	display: block;
-    width: 200px;
+    width: 400px;
     position: absolute;
     top: 100px;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -200px;
 	text-align: center;
 	font-weight: bold;
     color: #aaa;
 }
+.stitches .droplabel.error {
+    color: red;
+}
 .stitches .dropping {
-    background-color: #eee;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(255,255,255)),
+        color-stop(1, rgb(240,240,240))
+    );
 }
 
 /* filelist */
@@ -52,12 +69,25 @@
 	display: block;
 	overflow: hidden;
 	padding: 9px 20px;
-	border-top: 1px solid #f2f2f2;
+	border-top: 1px solid #f0f0f0;
     height: 40px;
     display: none;
 }
 .stitches .filelist li:hover {
-	background: #f2f2f2;
+	background-color: #f0f0f0;
+    background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+    background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(240,240,240) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgb(255,255,255)),
+        color-stop(1, rgb(240,240,240))
+    );
 }
 .stitches .filelist li span.icon {
 	display: block;
