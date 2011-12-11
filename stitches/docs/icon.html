@@ -25,7 +25,7 @@ The callback is generally used to handle queueuing</p>
         <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">guid</span> <span class="o">=</span> <span class="nx">guid</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\.|\s+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>

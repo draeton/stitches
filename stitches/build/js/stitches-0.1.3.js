@@ -1,4 +1,4 @@
-// ## Stitches - HTML5 Sprite Generator
+// ## Stitches - HTML5 Sprite Sheet Generator
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
@@ -132,7 +132,7 @@
                 var stylesheet = Stitches.makeStylesheet(placedIcons);
 
                 /* notify */
-                Stitches.pub("sprite.generate.done");
+                Stitches.pub("sprite.generate.done", sprite, stylesheet);
             },
 
             // ### positionImages
@@ -448,7 +448,7 @@
         var self = this;
 
         this.guid = guid++;
-        this.name = name.replace(/\.|\s+/gi, "-");
+        this.name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
 
         this.image = new Image();
         this.image.onload = function () {
@@ -589,11 +589,9 @@
                 });
                 
                 /* handle sprite and stylesheet generation */
-                Stitches.sub("sprite.image.done", function (data) {
-                    buttons.$sprite.attr("href", data).removeClass("disabled");
-                });
-                Stitches.sub("sprite.stylesheet.done", function (data) {
-                    buttons.$stylesheet.attr("href", data).removeClass("disabled");
+                Stitches.sub("sprite.generate.done", function (sprite, stylesheet) {
+                    buttons.$sprite.attr("href", sprite).removeClass("disabled");
+                    buttons.$stylesheet.attr("href", stylesheet).removeClass("disabled");
                 });
             },
             
@@ -704,7 +702,7 @@
 
     // ## Stitches.Fle namespace
     //
-    // Holds all Fle procesing methods
+    // Holds all File procesing methods
     Stitches.File = (function () {
         
         /* track files to read */

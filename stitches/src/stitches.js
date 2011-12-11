@@ -1,4 +1,4 @@
-// ## Stitches - HTML5 Sprite Generator
+// ## Stitches - HTML5 Sprite Sheet Generator
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
@@ -132,7 +132,7 @@
                 var stylesheet = Stitches.makeStylesheet(placedIcons);
 
                 /* notify */
-                Stitches.pub("sprite.generate.done");
+                Stitches.pub("sprite.generate.done", sprite, stylesheet);
             },
 
             // ### positionImages

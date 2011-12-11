@@ -99,11 +99,9 @@
                 });
                 
                 /* handle sprite and stylesheet generation */
-                Stitches.sub("sprite.image.done", function (data) {
-                    buttons.$sprite.attr("href", data).removeClass("disabled");
-                });
-                Stitches.sub("sprite.stylesheet.done", function (data) {
-                    buttons.$stylesheet.attr("href", data).removeClass("disabled");
+                Stitches.sub("sprite.generate.done", function (sprite, stylesheet) {
+                    buttons.$sprite.attr("href", sprite).removeClass("disabled");
+                    buttons.$stylesheet.attr("href", stylesheet).removeClass("disabled");
                 });
             },
             

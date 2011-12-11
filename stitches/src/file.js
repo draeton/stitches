@@ -12,7 +12,7 @@
 
     // ## Stitches.Fle namespace
     //
-    // Holds all Fle procesing methods
+    // Holds all File procesing methods
     Stitches.File = (function () {
         
         /* track files to read */

@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Stitches - An HTML5 sprite generator
+title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.1.2-min.css">
+<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.1.3-min.css">
 
 <section id="main" role="main">
 
 Drag and drop image files into the space below and click "Generate" to create a 
-sprite and stylesheet. This demo uses a couple of HTML5 APIs, and **it is only 
+sprite sheet and stylesheet. This demo uses a couple of HTML5 APIs, and **it is only 
 currently compatible with the latest versions of Chrome and Firefox.**
 
 <a href="http://www.w3.org/html/logo/"><img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-semantics-storage.png" height="50" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage"></a>
@@ -21,15 +21,15 @@ currently compatible with the latest versions of Chrome and Firefox.**
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-0.1.2-min.css">
+<link rel="stylesheet" href="css/stitches-0.1.3-min.css">
 
 <script src="js/jquery-1.7.1.min.js"></script>
 <script src="js/modernizr-2.0.6.min.js"></script>
 
-<script src="js/stitches-0.1.2-min.js"></script>
+<script src="js/stitches-0.1.3-min.js"></script>
 {% endhighlight %}
 
-Once that's in place, the sprite generator is created by the `init` method:
+Once that's in place, the sprite sheet generator is created by the `init` method:
 
 {% highlight html %}
 <div id="stitches"></div>
@@ -56,8 +56,8 @@ for older browser support*
 
 ## Contributing
 
-* [Fork the project.](https://github.com/draeton/lockdown)
-* Read through the [outstanding issues or report new ones.](https://github.com/draeton/lockdown/issues)
+* [Fork the project.](https://github.com/draeton/stitches)
+* Read through the [outstanding issues or report new ones.](https://github.com/draeton/stitches/issues)
 * Write some tests to make sure we don't accidentally break each other's code.
 * Send a pull request.
 
@@ -69,7 +69,7 @@ for older browser support*
 
 ## Download
 
-**The latest release, 0.1.2, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.1.2.zip).**
+**The latest release, 0.1.3, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.1.3.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -82,7 +82,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 <script>
 Modernizr.load({
-    load: "/stitches/stitches/build/js/stitches-0.1.2-min.js",
+    load: "/stitches/stitches/build/js/stitches-0.1.3-min.js",
     complete: function () {
         $(function () {
     
