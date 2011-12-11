@@ -1,4 +1,4 @@
-// ## Stitches - HTML5 Sprite Generator
+// ## Stitches - HTML5 Sprite Sheet Generator
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
