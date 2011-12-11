@@ -700,7 +700,7 @@
 
     "use strict";
 
-    // ## Stitches.Fle namespace
+    // ## Stitches.File namespace
     //
     // Holds all File procesing methods
     Stitches.File = (function () {
