@@ -80,7 +80,7 @@
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
 }
 
-.stitches .drawer .open {
+.stitches .drawer .open-options {
     display: block;
     width: 125px;
     height: 30px;
@@ -293,7 +293,7 @@
     );
 }
 
-.stitches .options a.close {
+.stitches .options a.close-options {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -314,6 +314,7 @@
     padding: 0;
     font-size: 14px;
     line-height: 18px;
+    clear: both;
 }
 
 .stitches .options label {
@@ -322,8 +323,14 @@
     font-weight: bold;
     display: inline-block;
     margin-top: 6px;
+    padding: 0;
+    width: auto;
+    float: none;
+    text-align: left;
 }
 
 .stitches .options input {
     vertical-align: middle;
+    width: auto;
+    color: black;
 }
