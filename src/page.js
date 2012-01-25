@@ -197,7 +197,7 @@
                 });
 
                 // open options
-                $drawer.delegate("a.open", "click", function () {
+                $drawer.delegate("a.open-options", "click", function () {
                     $options.fadeIn();
                 });
             },
@@ -209,7 +209,7 @@
                 var $options = Stitches.Page.$options;
                 var buttons = Stitches.Page.buttons;
 
-                $options.delegate("a.close", "click", function () {
+                $options.delegate("a.close-options", "click", function () {
                     $options.fadeOut();
                 });
 
