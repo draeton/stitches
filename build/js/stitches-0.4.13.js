@@ -774,6 +774,7 @@
                 $options.delegate("input[name=padding]", "change", function () {
                     var padding = Stitches.Page.inputs.$padding.val();
                     Stitches.settings.padding = +padding;
+                    Stitches.Page.updateIconDimensions();
                 });
 
                 $options.delegate("input[name=dataURI]", "change", function () {
@@ -819,6 +820,18 @@
                     })
                     .fadeOut("fast")
                     .remove();
+            },
+
+            // ### updateIconDimensions
+            //
+            // Update icon dimensions after changing padding setting
+            updateIconDimensions: function () {
+                var padding = Stitches.setting.padding;
+
+                $.each(Stitches.iconQueue, function (i, icon) {
+                    icon.width = icon.image.width + padding;
+                    icon.height = icon.image.height + padding;
+                });
             }
         };
     })();
