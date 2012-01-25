@@ -1,13 +1,30 @@
 <!-- templates -->
 <script type="text/html" id="stitches_tmpl">
     <div class="stitches">
-        <form class="cabinet">
-            <span>Choose File</span>
-            <input type="file" class="files" multiple>
-        </form>
+        <div class="drawer">
+            <form class="cabinet">
+                <span>Choose File</span>
+                <input type="file" class="files" multiple>
+            </form>
+            <a href="javascript:;" class="open">Options</a>
+        </div>
         <div class="dropbox">
             <span class="droplabel">Drop images here...</span>
             <ul class="filelist"></ul>
+        </div>
+        <div class="options">
+            <a href="javascript:;" class="close">&times</a>
+            <h2>options</h2>
+            <p>Prefix before CSS classes in stylesheet<br>
+                <label><input name="prefix" type="text" required></label>
+            </p>
+            <p>Padding between images in pixels<br>
+                <label>0&nbsp;<input name="padding" type="range" min="0" max="20">&nbsp;20</label>
+            </p>
+            <p>Include sprite in stylesheet as Data URI<br>
+                <label>Yes&nbsp;<input name="dataURI" type="radio" value="true"></label>
+                <label>No&nbsp;<input name="dataURI" type="radio" value="false"></label>
+            </p>
         </div>
         <div class="buttons">
             <a href="javascript:void(0)" class="disabled generate">Generate</a>

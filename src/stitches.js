@@ -44,7 +44,8 @@
                 Stitches.sub("page.render.done",    Stitches.checkAPIs);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindFileInput);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindCabinet);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindOptions);
                 Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
                 Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
                 Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
