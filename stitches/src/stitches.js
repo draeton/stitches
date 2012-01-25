@@ -17,9 +17,9 @@
         // **Some configuration defaults**
         var defaults = {
             "jsdir": "js",
-            "prefix": "stitches",
-            "padding": 50,
-            "dataURI": true
+            "prefix": "sprite",
+            "padding": 10,
+            "dataURI": false
         };
 
         return {
@@ -221,7 +221,7 @@
                 if (Stitches.settings.dataURI) {
                     backgroundImage = sprite;
                 } else {
-                    backgroundImage = "sprite.png";
+                    backgroundImage = "download.png";
                 }
 
                 var css = [

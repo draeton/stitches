@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.4.7-min.css">
+<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-0.4.8-min.css">
 
 <section id="main" role="main">
 
@@ -21,12 +21,12 @@ currently compatible with the latest versions of Chrome and Firefox.**
 Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-0.4.7-min.css">
+<link rel="stylesheet" href="css/stitches-0.4.8-min.css">
 
 <script src="js/jquery-1.7.1.min.js"></script>
 <script src="js/modernizr-2.0.6.min.js"></script>
 
-<script src="js/stitches-0.4.7-min.js"></script>
+<script src="js/stitches-0.4.8-min.js"></script>
 {% endhighlight %}
 
 Once that's in place, the sprite sheet generator is created by the `init` method:
@@ -69,7 +69,7 @@ for older browser support*
 
 ## Download
 
-**The latest release, 0.4.7, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.4.7.zip).**
+**The latest release, 0.4.8, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.4.8.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -82,7 +82,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 <script>
 Modernizr.load({
-    load: "/stitches/stitches/build/js/stitches-0.4.7-min.js",
+    load: "/stitches/stitches/build/js/stitches-0.4.8-min.js",
     complete: function () {
         $(function () {
     

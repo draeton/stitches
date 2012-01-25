@@ -15,9 +15,9 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 </pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><strong>Some configuration defaults</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
         <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;jsdir&quot;</span><span class="o">:</span> <span class="s2">&quot;js&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;prefix&quot;</span><span class="o">:</span> <span class="s2">&quot;stitches&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;padding&quot;</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
-            <span class="s2">&quot;dataURI&quot;</span><span class="o">:</span> <span class="kc">true</span>
+            <span class="s2">&quot;prefix&quot;</span><span class="o">:</span> <span class="s2">&quot;sprite&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;padding&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s2">&quot;dataURI&quot;</span><span class="o">:</span> <span class="kc">false</span>
         <span class="p">};</span>
 
         <span class="k">return</span> <span class="p">{</span>
@@ -227,7 +227,7 @@ updates button state</p>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dataURI</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
                 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="s2">&quot;sprite.png&quot;</span><span class="p">;</span>
+                    <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="s2">&quot;download.png&quot;</span><span class="p">;</span>
                 <span class="p">}</span>
 
                 <span class="kd">var</span> <span class="nx">css</span> <span class="o">=</span> <span class="p">[</span>
