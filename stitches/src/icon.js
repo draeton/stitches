@@ -32,8 +32,8 @@
         this.image.onload = function () {
             self.x = 0;
             self.y = 0;
-            self.width = self.image.width;
-            self.height = self.image.height;
+            self.width = self.image.width + Stitches.settings.padding;
+            self.height = self.image.height + Stitches.settings.padding;
             self.area = self.width * self.height;
 
             if (cb) {

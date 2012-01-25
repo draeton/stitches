@@ -16,13 +16,16 @@
     window.Stitches = (function () {
         // **Some configuration defaults**
         var defaults = {
-            "jsdir": "js"
+            "jsdir": "js",
+            "prefix": "stitches",
+            "padding": 50,
+            "dataURI": true
         };
 
         return {
             // **Pub/sub subscription manager**
             _topics: {},
-        
+
             // ### init
             //
             // Readies everything for user interaction.
@@ -41,6 +44,7 @@
                 Stitches.sub("page.render.done",    Stitches.checkAPIs);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindFileInput);
                 Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
                 Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
                 Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
@@ -129,7 +133,7 @@
             generateStitches: function (looseIcons) {
                 var placedIcons = Stitches.positionImages(looseIcons);
                 var sprite = Stitches.makeStitches(placedIcons);
-                var stylesheet = Stitches.makeStylesheet(placedIcons);
+                var stylesheet = Stitches.makeStylesheet(placedIcons, sprite);
 
                 /* notify */
                 Stitches.pub("sprite.generate.done", sprite, stylesheet);
@@ -177,7 +181,7 @@
             //     @return {String} The sprite image data URL
             makeStitches: function (placedIcons) {
                 var context, data;
-                
+
                 /* this block often fails as a result of the cross-
                    domain blocking in browses for access to write
                    image data to the canvas */
@@ -203,24 +207,34 @@
             // Create stylesheet text
             //
             //     @param {[Icon]} The placed images array
+            //     @param {String} The sprite data URI string
             //     @return {String} The sprite stylesheet
-            makeStylesheet: function (placedIcons) {
+            makeStylesheet: function (placedIcons, sprite) {
                 /* sort by name for css output */
                 placedIcons = placedIcons.sort(function (a, b) {
                     return a.name < b.name ? -1 : 1;
                 });
 
+                var prefix = Stitches.settings.prefix;
+
+                var backgroundImage
+                if (Stitches.settings.dataURI) {
+                    backgroundImage = sprite;
+                } else {
+                    backgroundImage = "sprite.png";
+                }
+
                 var css = [
-                    ".sprite {",
-                    "    background: url(sprite.png) no-repeat;",
+                    "." + prefix + " {",
+                    "    background: url(" + backgroundImage + ") no-repeat;",
                     "}\n"
                 ];
 
                 $(placedIcons).each(function (idx, icon) {
                     css = css.concat([
-                        ".sprite-" + icon.name + " {",
-                        "    width: " + icon.width + "px;",
-                        "    height: " + icon.height + "px;",
+                        "." + prefix + "-" + icon.name + " {",
+                        "    width: " + icon.image.width + "px;",
+                        "    height: " + icon.image.height + "px;",
                         "    background-position: -" + icon.x + "px -" + icon.y + "px;",
                         "}\n"
                     ]);

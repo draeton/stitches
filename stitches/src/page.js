@@ -77,7 +77,7 @@
             subscribe: function () {
                 var buttons = Stitches.Page.buttons,
                     $droplabel = Stitches.Page.$droplabel;
-                    
+
                 /* handle drop label and buttons on queue length changes */
                 Stitches.sub("file.icon.done", function (icon) {
                     if (Stitches.iconQueue.length === 1) {
@@ -97,14 +97,14 @@
                     buttons.$sprite.addClass("disabled");
                     buttons.$stylesheet.addClass("disabled");
                 });
-                
+
                 /* handle sprite and stylesheet generation */
                 Stitches.sub("sprite.generate.done", function (sprite, stylesheet) {
                     buttons.$sprite.attr("href", sprite).removeClass("disabled");
                     buttons.$stylesheet.attr("href", stylesheet).removeClass("disabled");
                 });
             },
-            
+
             // #### *Private no operation method*
             _noop: function (e) {
                 e.preventDefault();
@@ -127,13 +127,13 @@
             _dragStart: function (e) {
                 Stitches.Page.$dropbox.addClass("dropping");
             },
-            
+
             _dragStop: function (e) {
                 if ($(e.target).parents(".dropbox").length === 0) {
                     Stitches.Page.$dropbox.removeClass("dropping");
                 }
             },
-            
+
             _drop: function (e) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -152,42 +152,65 @@
             bindButtons: function () {
                 var $elem = Stitches.Page.$elem;
                 $elem.delegate("a.disabled", "click", Stitches.Page._noop);
-                $elem.delegate("a.generate", "click", Stitches.Page._generate);                
+                $elem.delegate("a.generate", "click", Stitches.Page._generate);
                 $elem.delegate("a.remove", "click",   Stitches.Page._removeFile);
                 $elem.delegate("a.clear", "click",    Stitches.Page._removeAllFiles);
             },
-            
+
+            // ### bindFileInput
+            //
+            // Bind all of the event listeners for file input
+            bindFileInput: function () {
+                var $elem = Stitches.Page.$elem;
+                var $stitches = $(".stitches", Stitches.Page.$elem);
+                var $input = $(".cabinet", $elem);
+
+                // show file input on hover
+                $stitches.hover(function () {
+                    $input.stop().animate({left: "-5px"}, 250);
+                }, function () {
+                    $input.stop().animate({left: "-125px"}, 250);
+                });
+
+                // on change event, use the drop event to handle files
+                $elem.delegate("input.files", "change", function () {
+                    if (this.files.length) {
+                        Stitches.pub("page.drop.done", this.files);
+                    }
+                });
+            },
+
             // #### *Private button methods*
             _generate: function (e) {
                 /* [].concat to copy array */
                 Stitches.pub("sprite.generate", [].concat(Stitches.iconQueue));
             },
-            
+
             _removeFile: function (e) {
                 var icon = $(this).parent("li").data("icon");
                 Stitches.pub("file.unqueue", icon);
             },
-            
+
             _removeAllFiles: function (e) {
                 Stitches.pub("file.unqueue.all");
             },
-            
+
             // ### addIcon
             //
             // Add an icon to the file list
             //     @param {Icon} icon
-            addIcon: function (icon) {                
+            addIcon: function (icon) {
                 $(Stitches.Page.templates.icon(icon))
                     .data("icon", icon)
                     .appendTo(Stitches.Page.$filelist)
                     .fadeIn("fast");
             },
-            
+
             // ### removeIcon
             //
             // Remove an icon from the file list
             //     @param {Icon} icon
-            removeIcon: function (icon) {                
+            removeIcon: function (icon) {
                 Stitches.Page.$filelist.find("li")
                     .filter(function () {
                         return $(this).data("icon") === icon;

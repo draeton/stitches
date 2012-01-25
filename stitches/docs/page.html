@@ -76,7 +76,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="nx">subscribe</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">buttons</span><span class="p">,</span>
                     <span class="nx">$droplabel</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$droplabel</span><span class="p">;</span>
-                    
+
                 <span class="cm">/* handle drop label and buttons on queue length changes */</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">sub</span><span class="p">(</span><span class="s2">&quot;file.icon.done&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
                     <span class="k">if</span> <span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -96,14 +96,14 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
                     <span class="nx">buttons</span><span class="p">.</span><span class="nx">$sprite</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">);</span>
                     <span class="nx">buttons</span><span class="p">.</span><span class="nx">$stylesheet</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">);</span>
                 <span class="p">});</span>
-                
+
                 <span class="cm">/* handle sprite and stylesheet generation */</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">sub</span><span class="p">(</span><span class="s2">&quot;sprite.generate.done&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">buttons</span><span class="p">.</span><span class="nx">$sprite</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">);</span>
                     <span class="nx">buttons</span><span class="p">.</span><span class="nx">$stylesheet</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">);</span>
                 <span class="p">});</span>
             <span class="p">},</span>
-            
+
 </pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h4><em>Private no operation method</em></h4>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">_noop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
@@ -126,13 +126,13 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="nx">_dragStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$dropbox</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;dropping&quot;</span><span class="p">);</span>
             <span class="p">},</span>
-            
+
             <span class="nx">_dragStop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">parents</span><span class="p">(</span><span class="s2">&quot;.dropbox&quot;</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$dropbox</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;dropping&quot;</span><span class="p">);</span>
                 <span class="p">}</span>
             <span class="p">},</span>
-            
+
             <span class="nx">_drop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
                 <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
@@ -151,42 +151,65 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="nx">bindButtons</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">$elem</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$elem</span><span class="p">;</span>
                 <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;a.disabled&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">_noop</span><span class="p">);</span>
-                <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;a.generate&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">_generate</span><span class="p">);</span>                
+                <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;a.generate&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">_generate</span><span class="p">);</span>
                 <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;a.remove&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span>   <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">_removeFile</span><span class="p">);</span>
                 <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;a.clear&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span>    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">_removeAllFiles</span><span class="p">);</span>
             <span class="p">},</span>
-            
-</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h4><em>Private button methods</em></h4>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h3>bindFileInput</h3>
+
+<p>Bind all of the event listeners for file input</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">bindFileInput</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">$elem</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$elem</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">$stitches</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.stitches&quot;</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$elem</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.cabinet&quot;</span><span class="p">,</span> <span class="nx">$elem</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>show file input on hover</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">$stitches</span><span class="p">.</span><span class="nx">hover</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">$input</span><span class="p">.</span><span class="nx">stop</span><span class="p">().</span><span class="nx">animate</span><span class="p">({</span><span class="nx">left</span><span class="o">:</span> <span class="s2">&quot;-5px&quot;</span><span class="p">},</span> <span class="mi">250</span><span class="p">);</span>
+                <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">$input</span><span class="p">.</span><span class="nx">stop</span><span class="p">().</span><span class="nx">animate</span><span class="p">({</span><span class="nx">left</span><span class="o">:</span> <span class="s2">&quot;-125px&quot;</span><span class="p">},</span> <span class="mi">250</span><span class="p">);</span>
+                <span class="p">});</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>on change event, use the drop event to handle files</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">$elem</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;input.files&quot;</span><span class="p">,</span> <span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">files</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;page.drop.done&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">files</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <h4><em>Private button methods</em></h4>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">_generate</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="cm">/* [].concat to copy array */</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;sprite.generate&quot;</span><span class="p">,</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">));</span>
             <span class="p">},</span>
-            
+
             <span class="nx">_removeFile</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">);</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.unqueue&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">);</span>
             <span class="p">},</span>
-            
+
             <span class="nx">_removeAllFiles</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.unqueue.all&quot;</span><span class="p">);</span>
             <span class="p">},</span>
-            
-</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h3>addIcon</h3>
+
+</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <h3>addIcon</h3>
 
 <p>Add an icon to the file list
     @param {Icon} icon</p>             </td>             <td class="code">               <div class="highlight"><pre>
-            <span class="nx">addIcon</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>                
+            <span class="nx">addIcon</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">$</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">templates</span><span class="p">.</span><span class="nx">icon</span><span class="p">(</span><span class="nx">icon</span><span class="p">))</span>
                     <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span>
                     <span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$filelist</span><span class="p">)</span>
                     <span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">);</span>
             <span class="p">},</span>
-            
-</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h3>removeIcon</h3>
+
+</pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h3>removeIcon</h3>
 
 <p>Remove an icon from the file list
     @param {Icon} icon</p>             </td>             <td class="code">               <div class="highlight"><pre>
-            <span class="nx">removeIcon</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>                
+            <span class="nx">removeIcon</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$filelist</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">)</span>
                     <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
                         <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">icon</span><span class="p">;</span>
