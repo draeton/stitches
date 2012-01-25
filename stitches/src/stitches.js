@@ -156,7 +156,11 @@
 
                 /* reverse sort by area */
                 looseIcons = looseIcons.sort(function (a, b) {
-                    return b.area - a.area;
+                    if (b.area === a.area) {
+                        return b.name > a.name ? 1 : -1;
+                    } else {
+                        return b.area - a.area;
+                    }
                 });
 
                 /* find the ideal sprite for this set of icons */

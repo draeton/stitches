@@ -156,7 +156,11 @@
 
                 /* reverse sort by area */
                 looseIcons = looseIcons.sort(function (a, b) {
-                    return b.area - a.area;
+                    if (b.area === a.area) {
+                        return b.name > a.name ? 1 : -1;
+                    } else {
+                        return b.area - a.area;
+                    }
                 });
 
                 /* find the ideal sprite for this set of icons */
@@ -449,6 +453,9 @@
     // **Maintain a unique id for each icon**
     var guid = 0;
 
+    // **Maintains a unique name for each icon**
+    var nameCache = {};
+
     // ## Stitches.Icon class
     //
     // Wraps a single icon. Creates a new image from the source
@@ -462,7 +469,7 @@
         var self = this;
 
         this.guid = guid++;
-        this.name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+        this.name = Stitches.Icon.getName(name);
 
         this.image = new Image();
         this.image.onload = function () {
@@ -477,6 +484,43 @@
             }
         }
         this.image.src = src;
+    };
+
+    // ### Stitches.Icon.getName
+    //
+    // Return a unique name. If the name is already in the nameCache,
+    // append a value until a unique name is found.
+    //
+    //     @param {String} name
+    //     @return {String}
+    Stitches.Icon.getName = function (name) {
+        var i = 1, fix;
+
+        name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+
+        if (nameCache[name]) {
+            do {
+                fix = name + "-" + i++;
+            } while (nameCache[fix]);
+            name = fix;
+        }
+
+        nameCache[name] = true;
+        return name;
+    };
+
+    // ### Stitches.Icon.clearNameCache
+    //
+    // Clear the name cache. If a name is passed in, only clear that key
+    //
+    //     @param {String} name
+    //     @return {String}
+    Stitches.Icon.clearNameCache = function (name) {
+        if (name) {
+            delete nameCache[name];
+        } else {
+            nameCache = {};
+        }
     };
 
 })(window, Stitches);/* Simple JavaScript Templating
@@ -667,20 +711,22 @@
             bindFileInput: function () {
                 var $elem = Stitches.Page.$elem;
                 var $stitches = $(".stitches", Stitches.Page.$elem);
-                var $input = $(".cabinet", $elem);
+                var $cabinet = $("form.cabinet", $elem);
+                var $input = $("input.files", $elem);
 
                 // show file input on hover
                 $stitches.hover(function () {
-                    $input.stop().animate({left: "-5px"}, 250);
+                    $cabinet.stop().animate({left: "-5px"}, 250);
                 }, function () {
-                    $input.stop().animate({left: "-125px"}, 250);
+                    $cabinet.stop().animate({left: "-125px"}, 250);
                 });
 
                 // on change event, use the drop event to handle files
-                $elem.delegate("input.files", "change", function () {
+                $input.bind("change", function () {
                     if (this.files.length) {
                         Stitches.pub("page.drop.done", this.files);
                     }
+                    $cabinet.trigger("reset");
                 });
             },
 
@@ -741,10 +787,10 @@
     //
     // Holds all File procesing methods
     Stitches.File = (function () {
-        
+
         /* track files to read */
         var readQueue = [];
-        
+
         return {
             // ### queueFiles
             //
@@ -762,11 +808,11 @@
 
             // ### queueIcons
             //
-            // Read in a file from the `readQueue`. Starts up a new `FileReader` 
+            // Read in a file from the `readQueue`. Starts up a new `FileReader`
             // to read in the image as data and create a new `Icon`
             queueIcons: function () {
                 var file, reader;
-                
+
                 file = readQueue.shift();
                 if (file) {
                     try {
@@ -775,15 +821,15 @@
                             /* create an icon and add to the icon queue */
                             var icon = new Stitches.Icon(file.name, e.target.result);
                             Stitches.iconQueue.push(icon);
-                            
+
                             /* notify */
                             Stitches.pub("file.icon.done", icon);
                         };
                         reader.readAsDataURL(file);
                     } catch (e) {
-                        Stitches.pub("page.error", e);                        
+                        Stitches.pub("page.error", e);
                     }
-                }                
+                }
             },
 
             // ### unqueueIcon
@@ -796,7 +842,8 @@
                 Stitches.iconQueue = $.grep(Stitches.iconQueue, function (item) {
                     return item !== icon;
                 });
-                
+                Stitches.Icon.clearNameCache(icon.name);
+
                 /* notify */
                 Stitches.pub("file.remove.done", icon);
             },
@@ -808,6 +855,7 @@
                 $.each(Stitches.iconQueue, function (i, icon) {
                     Stitches.File.unqueueIcon(icon);
                 });
+                Stitches.Icon.clearNameCache();
             }
         };
     })();

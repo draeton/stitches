@@ -14,10 +14,10 @@
     //
     // Holds all File procesing methods
     Stitches.File = (function () {
-        
+
         /* track files to read */
         var readQueue = [];
-        
+
         return {
             // ### queueFiles
             //
@@ -35,11 +35,11 @@
 
             // ### queueIcons
             //
-            // Read in a file from the `readQueue`. Starts up a new `FileReader` 
+            // Read in a file from the `readQueue`. Starts up a new `FileReader`
             // to read in the image as data and create a new `Icon`
             queueIcons: function () {
                 var file, reader;
-                
+
                 file = readQueue.shift();
                 if (file) {
                     try {
@@ -48,15 +48,15 @@
                             /* create an icon and add to the icon queue */
                             var icon = new Stitches.Icon(file.name, e.target.result);
                             Stitches.iconQueue.push(icon);
-                            
+
                             /* notify */
                             Stitches.pub("file.icon.done", icon);
                         };
                         reader.readAsDataURL(file);
                     } catch (e) {
-                        Stitches.pub("page.error", e);                        
+                        Stitches.pub("page.error", e);
                     }
-                }                
+                }
             },
 
             // ### unqueueIcon
@@ -69,7 +69,8 @@
                 Stitches.iconQueue = $.grep(Stitches.iconQueue, function (item) {
                     return item !== icon;
                 });
-                
+                Stitches.Icon.clearNameCache(icon.name);
+
                 /* notify */
                 Stitches.pub("file.remove.done", icon);
             },
@@ -81,6 +82,7 @@
                 $.each(Stitches.iconQueue, function (i, icon) {
                     Stitches.File.unqueueIcon(icon);
                 });
+                Stitches.Icon.clearNameCache();
             }
         };
     })();
