@@ -44,7 +44,8 @@
                 Stitches.sub("page.render.done",    Stitches.checkAPIs);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
                 Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindFileInput);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindCabinet);
+                Stitches.sub("page.apis.done",      Stitches.Page.bindOptions);
                 Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
                 Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
                 Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
@@ -593,16 +594,29 @@
                 $div.appendTo(Stitches.Page.$elem);
 
                 // set dom element references
-                Stitches.Page.$dropbox =   $(".dropbox", Stitches.Page.$elem);
+                Stitches.Page.$stitches = $(".stitches", Stitches.Page.$elem);
+                Stitches.Page.$drawer = $(".drawer", Stitches.Page.$elem);
+                Stitches.Page.$dropbox = $(".dropbox", Stitches.Page.$elem);
                 Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
-                Stitches.Page.$filelist =  $(".filelist", Stitches.Page.$elem);
-                Stitches.Page.$buttons =   $(".buttons", Stitches.Page.$elem);
+                Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
+                Stitches.Page.$buttons = $(".buttons", Stitches.Page.$elem);
                 Stitches.Page.buttons = {
                     $generate:   $("a.generate", Stitches.Page.$buttons),
                     $clear:      $("a.clear", Stitches.Page.$buttons),
                     $sprite:     $("a.dlsprite", Stitches.Page.$buttons),
                     $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
                 };
+
+                // set options
+                Stitches.Page.$options = $(".options", Stitches.Page.$elem);
+                Stitches.Page.inputs = {
+                    $prefix:     $("input[name=prefix]", Stitches.Page.$options),
+                    $padding:    $("input[name=padding]", Stitches.Page.$options),
+                    $dataURI:    $("input[name=dataURI]", Stitches.Page.$options)
+                };
+                Stitches.Page.inputs.$prefix.val(Stitches.settings.prefix);
+                Stitches.Page.inputs.$padding.val(Stitches.settings.padding);
+                Stitches.Page.inputs.$dataURI.filter("[value=" + Stitches.settings.dataURI + "]").attr("checked", true);
 
                 /* notify */
                 rendered = true;
@@ -623,8 +637,8 @@
             //
             // Handles all subscriptions
             subscribe: function () {
-                var buttons = Stitches.Page.buttons,
-                    $droplabel = Stitches.Page.$droplabel;
+                var buttons = Stitches.Page.buttons;
+                var $droplabel = Stitches.Page.$droplabel;
 
                 /* handle drop label and buttons on queue length changes */
                 Stitches.sub("file.icon.done", function (icon) {
@@ -705,20 +719,22 @@
                 $elem.delegate("a.clear", "click",    Stitches.Page._removeAllFiles);
             },
 
-            // ### bindFileInput
+            // ### bindCabinet
             //
-            // Bind all of the event listeners for file input
-            bindFileInput: function () {
+            // Bind all of the event listeners for the cabinet
+            bindCabinet: function () {
                 var $elem = Stitches.Page.$elem;
-                var $stitches = $(".stitches", Stitches.Page.$elem);
-                var $cabinet = $("form.cabinet", $elem);
-                var $input = $("input.files", $elem);
+                var $stitches = Stitches.Page.$stitches;
+                var $options = Stitches.Page.$options;
+                var $drawer = Stitches.Page.$drawer;
+                var $cabinet = $("form.cabinet", $drawer);
+                var $input = $("input.files", $drawer);
 
                 // show file input on hover
                 $stitches.hover(function () {
-                    $cabinet.stop().animate({left: "-5px"}, 250);
+                    $drawer.stop().animate({left: "-5px"}, 250);
                 }, function () {
-                    $cabinet.stop().animate({left: "-125px"}, 250);
+                    $drawer.stop().animate({left: "-125px"}, 250);
                 });
 
                 // on change event, use the drop event to handle files
@@ -727,6 +743,42 @@
                         Stitches.pub("page.drop.done", this.files);
                     }
                     $cabinet.trigger("reset");
+                });
+
+                // open options
+                $drawer.delegate("a.open", "click", function () {
+                    $options.fadeIn();
+                });
+            },
+
+            // ### bindOptions
+            //
+            // Bind all of the event listeners for the options panel
+            bindOptions: function () {
+                var $options = Stitches.Page.$options;
+                var buttons = Stitches.Page.buttons;
+
+                $options.delegate("a.close", "click", function () {
+                    $options.fadeOut();
+                });
+
+                $options.delegate("input", "change", function () {
+                    buttons.$sprite.addClass("disabled");
+                    buttons.$stylesheet.addClass("disabled");
+                });
+
+                $options.delegate("input[name=prefix]", "change", function () {
+                    Stitches.settings.prefix = Stitches.Page.inputs.$prefix.val();
+                });
+
+                $options.delegate("input[name=padding]", "change", function () {
+                    var padding = Stitches.Page.inputs.$padding.val();
+                    Stitches.settings.padding = +padding;
+                });
+
+                $options.delegate("input[name=dataURI]", "change", function () {
+                    var dataURI = Stitches.Page.inputs.$dataURI.filter(":checked").val();
+                    Stitches.settings.dataURI = dataURI === "true" ? true : false;
                 });
             },
 
