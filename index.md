@@ -7,14 +7,14 @@ title: Stitches - An HTML5 sprite sheet generator
 
 <section id="main" role="main">
 
-Drag and drop image files into the space below and click "Generate" to create a 
-sprite sheet and stylesheet. This demo uses a couple of HTML5 APIs, and **it is only 
+Drag and drop image files into the space below and click "Generate" to create a
+sprite sheet and stylesheet. This demo uses a couple of HTML5 APIs, and **it is only
 currently compatible with the latest versions of Chrome and Firefox.**
 
 <a href="http://www.w3.org/html/logo/"><img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-semantics-storage.png" height="50" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage"></a>
 
 <div id="stitches"></div>
-    
+
 
 ## Implementation
 
@@ -45,12 +45,12 @@ jQuery(document).ready(function ($) {
 {% endhighlight %}
 
 Documentation is available [here.](http://draeton.github.com/stitches/stitches/docs/stitches.html)
-    
+
 
 ## Dependencies
 
-[jQuery 1.7.1+](http://jquery.com/) <span class="label success">New</span>, [Modernizr](http://www.modernizr.com/), 
-*[Dropfile](https://github.com/MrSwitch/dropfile), [Flashcanvas](http://flashcanvas.net/) 
+[jQuery 1.7.1+](http://jquery.com/) <span class="label success">New</span>, [Modernizr](http://www.modernizr.com/),
+*[Dropfile](https://github.com/MrSwitch/dropfile), [Flashcanvas](http://flashcanvas.net/)
 for older browser support*
 
 
@@ -71,7 +71,7 @@ for older browser support*
 
 **The latest release, 0.4.6, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-0.4.6.zip).**
 
-You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
+You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
 
 You can also clone the project with [Git](http://git-scm.com) by running:
@@ -85,7 +85,7 @@ Modernizr.load({
     load: "/stitches/stitches/build/js/stitches-0.4.6-min.js",
     complete: function () {
         $(function () {
-    
+
             var $stitches = $("#stitches");
             Stitches.init($stitches, {jsdir: "stitches/build/js"});
 
