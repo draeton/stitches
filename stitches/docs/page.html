@@ -224,6 +224,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
                 <span class="nx">$options</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;input[name=padding]&quot;</span><span class="p">,</span> <span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
                     <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">inputs</span><span class="p">.</span><span class="nx">$padding</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
                     <span class="nx">Stitches</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="o">+</span><span class="nx">padding</span><span class="p">;</span>
+                    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">updateIconDimensions</span><span class="p">();</span>
                 <span class="p">});</span>
 
                 <span class="nx">$options</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="s2">&quot;input[name=dataURI]&quot;</span><span class="p">,</span> <span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -269,6 +270,18 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
                     <span class="p">})</span>
                     <span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">)</span>
                     <span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+            <span class="p">},</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <h3>updateIconDimensions</h3>
+
+<p>Update icon dimensions after changing padding setting</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">updateIconDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">setting</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+
+                <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">icon</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">icon</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">padding</span><span class="p">;</span>
+                    <span class="nx">icon</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">icon</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">padding</span><span class="p">;</span>
+                <span class="p">});</span>
             <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">})();</span>
