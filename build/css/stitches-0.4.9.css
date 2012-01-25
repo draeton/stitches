@@ -17,8 +17,8 @@
 	color: #222;
 }
 
-/* label.cabinet */
-.stitches label.cabinet {
+/* form.cabinet */
+.stitches form.cabinet {
     z-index: 100;
     display: block;
     width: 125px;
@@ -29,8 +29,10 @@
     left: -125px;
     background: #039a27; /* green 04CC33 05FF3F */
     border-radius: 0 10px 10px 0;
+    padding: 0;
+    margin: 0;
 }
-.stitches label.cabinet span {
+.stitches form.cabinet span {
     display: block;
     width: 125px;
     height: 30px;
@@ -43,7 +45,7 @@
     font-size: 14px;
     line-height: 30px;
 }
-.stitches label.cabinet input.files {
+.stitches form.cabinet input.files {
     display: block;
     width: 125px;
     height: 30px;

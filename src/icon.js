@@ -13,6 +13,9 @@
     // **Maintain a unique id for each icon**
     var guid = 0;
 
+    // **Maintains a unique name for each icon**
+    var nameCache = {};
+
     // ## Stitches.Icon class
     //
     // Wraps a single icon. Creates a new image from the source
@@ -26,7 +29,7 @@
         var self = this;
 
         this.guid = guid++;
-        this.name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+        this.name = Stitches.Icon.getName(name);
 
         this.image = new Image();
         this.image.onload = function () {
@@ -41,6 +44,43 @@
             }
         }
         this.image.src = src;
+    };
+
+    // ### Stitches.Icon.getName
+    //
+    // Return a unique name. If the name is already in the nameCache,
+    // append a value until a unique name is found.
+    //
+    //     @param {String} name
+    //     @return {String}
+    Stitches.Icon.getName = function (name) {
+        var i = 1, fix;
+
+        name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+
+        if (nameCache[name]) {
+            do {
+                fix = name + "-" + i++;
+            } while (nameCache[fix]);
+            name = fix;
+        }
+
+        nameCache[name] = true;
+        return name;
+    };
+
+    // ### Stitches.Icon.clearNameCache
+    //
+    // Clear the name cache. If a name is passed in, only clear that key
+    //
+    //     @param {String} name
+    //     @return {String}
+    Stitches.Icon.clearNameCache = function (name) {
+        if (name) {
+            delete nameCache[name];
+        } else {
+            nameCache = {};
+        }
     };
 
 })(window, Stitches);

@@ -163,20 +163,22 @@
             bindFileInput: function () {
                 var $elem = Stitches.Page.$elem;
                 var $stitches = $(".stitches", Stitches.Page.$elem);
-                var $input = $(".cabinet", $elem);
+                var $cabinet = $("form.cabinet", $elem);
+                var $input = $("input.files", $elem);
 
                 // show file input on hover
                 $stitches.hover(function () {
-                    $input.stop().animate({left: "-5px"}, 250);
+                    $cabinet.stop().animate({left: "-5px"}, 250);
                 }, function () {
-                    $input.stop().animate({left: "-125px"}, 250);
+                    $cabinet.stop().animate({left: "-125px"}, 250);
                 });
 
                 // on change event, use the drop event to handle files
-                $elem.delegate("input.files", "change", function () {
+                $input.bind("change", function () {
                     if (this.files.length) {
                         Stitches.pub("page.drop.done", this.files);
                     }
+                    $cabinet.trigger("reset");
                 });
             },
 
