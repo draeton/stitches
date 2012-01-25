@@ -277,7 +277,7 @@
             //
             // Update icon dimensions after changing padding setting
             updateIconDimensions: function () {
-                var padding = Stitches.setting.padding;
+                var padding = Stitches.settings.padding;
 
                 $.each(Stitches.iconQueue, function (i, icon) {
                     icon.width = icon.image.width + padding;
