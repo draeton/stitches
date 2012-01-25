@@ -276,7 +276,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 
 <p>Update icon dimensions after changing padding setting</p>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">updateIconDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">setting</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
 
                 <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">icon</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">icon</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">padding</span><span class="p">;</span>
