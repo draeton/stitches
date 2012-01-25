@@ -31,6 +31,14 @@
     border-radius: 0 10px 10px 0;
     padding: 0;
     margin: 0;
+    opacity: 0.4;
+    -moz-opacity: 0.4;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.4);
+}
+.stitches form.cabinet:hover {
+    opacity: 1;
+    -moz-opacity: 1;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
 }
 .stitches form.cabinet span {
     display: block;
@@ -39,7 +47,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: #fff;
+    color: white;
     text-align: center;
     font-weight: bold;
     font-size: 14px;
