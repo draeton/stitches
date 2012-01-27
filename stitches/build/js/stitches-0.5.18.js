@@ -23,9 +23,6 @@
             "dataURI": false
         };
 
-        /* Pub/sub subscription manager */
-        var _topics = {};
-
         return {
             // ### init
             //
@@ -36,6 +33,7 @@
             init: function ($elem, config) {
                 S.settings = $.extend({}, defaults, config);
                 S.iconQueue = [];
+                S.topics = {};
                 S.Page.$elem = $elem;
 
                 /* setup subscriptions */
@@ -67,11 +65,11 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to fire
             sub: function (topic, fn) {
-                var callbacks = _topics[topic] ||  $.Callbacks("stopOnFalse");
+                var callbacks = S.topics[topic] ||  $.Callbacks("stopOnFalse");
                 if (fn) {
                     callbacks.add(fn);
                 }
-                _topics[topic] = callbacks;
+                S.topics[topic] = callbacks;
             },
 
             // ### unsub
@@ -81,7 +79,7 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to remove
             unsub: function (topic, fn) {
-                var callbacks = _topics[topic];
+                var callbacks = S.topics[topic];
                 if (callbacks) {
                     callbacks.remove(fn);
                 }
@@ -93,7 +91,7 @@
             //
             //     @param {String} topic The subscription topic name
             pub: function (topic) {
-                var callbacks = _topics[topic],
+                var callbacks = S.topics[topic],
                     args = Array.prototype.slice.call(arguments, 1);
                 if (callbacks) {
                     callbacks.fire.apply(callbacks, args);
@@ -102,7 +100,7 @@
 
             // ### checkAPIs
             //
-            // Load supporting libraries for browsers with no native support. Uses
+            // Load supporting libraries  for browsers with no native support. Uses
             // Modernizr to check for drag-and-drop, FileReader, and canvas
             // functionality.
             checkAPIs: function () {

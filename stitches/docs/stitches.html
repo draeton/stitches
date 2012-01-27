@@ -21,9 +21,6 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="s2">&quot;dataURI&quot;</span><span class="o">:</span> <span class="kc">false</span>
         <span class="p">};</span>
 
-        <span class="cm">/* Pub/sub subscription manager */</span>
-        <span class="kd">var</span> <span class="nx">_topics</span> <span class="o">=</span> <span class="p">{};</span>
-
         <span class="k">return</span> <span class="p">{</span>
 </pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h3>init</h3>
 
@@ -35,6 +32,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$elem</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">S</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
                 <span class="nx">S</span><span class="p">.</span><span class="nx">iconQueue</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">topics</span> <span class="o">=</span> <span class="p">{};</span>
                 <span class="nx">S</span><span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">$elem</span> <span class="o">=</span> <span class="nx">$elem</span><span class="p">;</span>
 
                 <span class="cm">/* setup subscriptions */</span>
@@ -67,11 +65,11 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 @param {Function} fn A callback to fire
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">sub</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">_topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span> <span class="o">||</span>  <span class="nx">$</span><span class="p">.</span><span class="nx">Callbacks</span><span class="p">(</span><span class="s2">&quot;stopOnFalse&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span> <span class="o">||</span>  <span class="nx">$</span><span class="p">.</span><span class="nx">Callbacks</span><span class="p">(</span><span class="s2">&quot;stopOnFalse&quot;</span><span class="p">);</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">callbacks</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span>
                 <span class="p">}</span>
-                <span class="nx">_topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span> <span class="o">=</span> <span class="nx">callbacks</span><span class="p">;</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span> <span class="o">=</span> <span class="nx">callbacks</span><span class="p">;</span>
             <span class="p">},</span>
 
 </pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h3>unsub</h3>
@@ -82,7 +80,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 @param {Function} fn A callback to remove
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">unsub</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">_topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">];</span>
+                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">];</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">callbacks</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">callbacks</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span>
                 <span class="p">}</span>
@@ -95,7 +93,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 <pre><code>@param {String} topic The subscription topic name
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">pub</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">topic</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">_topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">],</span>
+                <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">],</span>
                     <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">callbacks</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">callbacks</span><span class="p">.</span><span class="nx">fire</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">callbacks</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
@@ -104,7 +102,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 
 </pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h3>checkAPIs</h3>
 
-<p>Load supporting libraries for browsers with no native support. Uses
+<p>Load supporting libraries  for browsers with no native support. Uses
 Modernizr to check for drag-and-drop, FileReader, and canvas
 functionality.</p>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">checkAPIs</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
