@@ -198,7 +198,7 @@
                     });
 
                     /* create image link */
-                    data = S.canvas.toDataURL();
+                    data = S.canvas.toDataURL("image/png");
                 } catch (e) {
                     S.pub("page.error", e);
                 }
@@ -247,11 +247,80 @@
                 });
 
                 /* create stylesheet link */
-                var data = "data:," + encodeURIComponent(css.join("\n"));
+                var data = "data:text/plain," + encodeURIComponent(css.join("\n"));
 
                 /* notify  and return */
                 S.pub("sprite.stylesheet.done", data);
                 return data;
+            },
+
+            // ### dataToObjectURL
+            //
+            // Convert base64 data or raw binary data to an object URL
+            // See: http://stackoverflow.com/a/5100158/230483
+            //
+            //     @param {String} dataURI
+            //     @return {String} The object URL
+            dataToObjectURL: function (dataURI) {
+                var dataParts = dataURI.split(',');
+                var byteString;
+
+                // convert base64 to raw binary data held in a string
+                if (dataParts[0].indexOf('base64') >= 0) {
+                    byteString = atob(dataParts[1]);
+                } else {
+                    byteString = unescape(dataParts[1]);
+                }
+
+                // separate out the mime component
+                var mimeString = dataParts[0].split(':')[1].split(';')[0];
+
+                // write the bytes of the string to an ArrayBuffer
+                var bl = byteString.length;
+                var ab = new ArrayBuffer(bl);
+                var ia = new Uint8Array(ab);
+                var i;
+                for (i = 0; i < bl; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+
+                // get the blob and create an object URL
+                var blob = S.createBlob(ab, mimeString);
+                var url = S.createObjectURL(blob);
+
+                return url;
+            },
+
+            // ### createBlob
+            //
+            // Polyfill
+            createBlob: function (arrayBuffer, mimeString) {
+                var BlobBuilder = BlobBuilder || WebKitBlobBuilder;
+
+                if (!BlobBuilder) {
+                    throw new Error("BlobBuilder is unsupported.")
+                }
+
+                var bb = new BlobBuilder();
+                bb.append(arrayBuffer);
+
+                return bb.getBlob(mimeString);
+            },
+
+            // ### createObjectURL
+            //
+            // Polyfill
+            createObjectURL: function (file) {
+                if (window.URL && window.URL.createObjectURL) {
+                    return window.URL.createObjectURL(file);
+                }
+
+                if (window.webkitURL && window.webkitURL.createObjectURL) {
+                    return window.webkitURL.createObjectURL(file);
+                }
+
+                /* if we reached here, it's unsupported */
+                throw new Error("createObjectURL is unsupported.")
             }
         };
     })();

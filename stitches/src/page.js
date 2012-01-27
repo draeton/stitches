@@ -117,6 +117,18 @@
 
                 /* handle sprite and stylesheet generation */
                 S.sub("sprite.generate.done", function (sprite, stylesheet) {
+                    var spriteURL;
+                    var stylesheetURL;
+
+                    try {
+                        spriteURL = S.dataToObjectURL(sprite);
+                        stylesheetURL = S.dataToObjectURL(stylesheet);
+                        sprite = spriteURL;
+                        stylesheet = stylesheetURL;
+                    } catch (e) {
+                        // do nothing; unsupported
+                    }
+
                     buttons.$sprite.attr("href", sprite).removeClass("disabled");
                     buttons.$stylesheet.attr("href", stylesheet).removeClass("disabled");
                 });
