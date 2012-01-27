@@ -10,12 +10,17 @@
 
     "use strict";
 
-    var document = window.document;
-
     // ## Stitches.Icons namespace
     //
     // Holds all methods for working with icons
     Stitches.Icons = (function () {
+
+        /* shortcut */
+        var S = window.Stitches;
+
+        /* shortcut */
+        var document = window.document;
+
         return {
             // ### idealCanvas
             //
@@ -70,7 +75,7 @@
                 while (loose.length && i < 10) {
                     $(loose).each(function (idx, icon) {
                         if (!icon.isPlaced) {
-                            icon.isPlaced = Stitches.Icons.placeIcon(icon, placed, canvas);
+                            icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
                         }
                     });
 
@@ -106,7 +111,7 @@
                             icon.x = x;
                             icon.y = y;
 
-                            var overlap = Stitches.Icons.isOverlapped(icon, placed);
+                            var overlap = S.Icons.isOverlapped(icon, placed);
                             if (!overlap) {
                                 return true;
                             }

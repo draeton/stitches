@@ -13,6 +13,9 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 <p>Holds all File procesing methods</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">Stitches</span><span class="p">.</span><span class="nx">File</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
+        <span class="cm">/* shortcut */</span>
+        <span class="kd">var</span> <span class="nx">S</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Stitches</span><span class="p">;</span>
+
         <span class="cm">/* track files to read */</span>
         <span class="kd">var</span> <span class="nx">readQueue</span> <span class="o">=</span> <span class="p">[];</span>
 
@@ -27,7 +30,7 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
                 <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">files</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
                     <span class="k">if</span> <span class="p">(</span><span class="sr">/jpeg|png|gif/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">type</span><span class="p">))</span> <span class="p">{</span>
                         <span class="nx">readQueue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
-                        <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.queue.done&quot;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+                        <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.queue.done&quot;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
                     <span class="p">}</span>
                 <span class="p">});</span>
             <span class="p">},</span>
@@ -45,15 +48,15 @@ to read in the image as data and create a new <code>Icon</code></p>             
                         <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
                         <span class="nx">reader</span><span class="p">.</span><span class="nx">onloadend</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="cm">/* create an icon and add to the icon queue */</span>
-                            <span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
-                            <span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">S</span><span class="p">.</span><span class="nx">Icon</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+                            <span class="nx">S</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
 
                             <span class="cm">/* notify */</span>
-                            <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.icon.done&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">);</span>
+                            <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.icon.done&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">);</span>
                         <span class="p">};</span>
                         <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
                     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;page.error&quot;</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
+                        <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;page.error&quot;</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">},</span>
@@ -66,23 +69,23 @@ to read in the image as data and create a new <code>Icon</code></p>             
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">unqueueIcon</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
                 <span class="cm">/* remove the icon from the queue */</span>
-                <span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">iconQueue</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">S</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
                     <span class="k">return</span> <span class="nx">item</span> <span class="o">!==</span> <span class="nx">icon</span><span class="p">;</span>
                 <span class="p">});</span>
-                <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span><span class="p">(</span><span class="nx">icon</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span><span class="p">(</span><span class="nx">icon</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 
                 <span class="cm">/* notify */</span>
-                <span class="nx">Stitches</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.remove.done&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">);</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;file.remove.done&quot;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">);</span>
             <span class="p">},</span>
 
 </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h3>unqueueAllIcons</h3>
 
 <p>Clear all icons from the queue</p>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">unqueueAllIcons</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-                <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Stitches</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">unqueueIcon</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+                <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">S</span><span class="p">.</span><span class="nx">iconQueue</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">S</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">unqueueIcon</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
                 <span class="p">});</span>
-                <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span><span class="p">();</span>
+                <span class="nx">S</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span><span class="p">();</span>
             <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">})();</span>

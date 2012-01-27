@@ -13,8 +13,9 @@
     // ## Stitches namespace
     //
     // Holds all methods
-    window.Stitches = (function () {
-        // **Some configuration defaults**
+    var S = window.Stitches = (function () {
+
+        /* Some configuration defaults */
         var defaults = {
             "jsdir": "js",
             "prefix": "sprite",
@@ -22,10 +23,10 @@
             "dataURI": false
         };
 
-        return {
-            // **Pub/sub subscription manager**
-            _topics: {},
+        /* Pub/sub subscription manager */
+        var _topics = {};
 
+        return {
             // ### init
             //
             // Readies everything for user interaction.
@@ -33,30 +34,30 @@
             //     @param {jQuery} $elem A wrapped DOM node
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
-                Stitches.settings = $.extend({}, defaults, config);
-                Stitches.iconQueue = [];
-                Stitches.Page.$elem = $elem;
+                S.settings = $.extend({}, defaults, config);
+                S.iconQueue = [];
+                S.Page.$elem = $elem;
 
                 /* setup subscriptions */
-                Stitches.sub("page.error",          Stitches.Page.errorHandler);
-                Stitches.sub("page.init.done",      Stitches.Page.fetchTemplates);
-                Stitches.sub("page.templates.done", Stitches.Page.render);
-                Stitches.sub("page.render.done",    Stitches.checkAPIs);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindCabinet);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindOptions);
-                Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
-                Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
-                Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
-                Stitches.sub("file.icon.done",      Stitches.Page.addIcon);
-                Stitches.sub("file.remove.done",    Stitches.Page.removeIcon);
-                Stitches.sub("file.unqueue",        Stitches.File.unqueueIcon);
-                Stitches.sub("file.unqueue.all",    Stitches.File.unqueueAllIcons);
-                Stitches.sub("sprite.generate",     Stitches.generateStitches);
+                S.sub("page.error",          S.Page.errorHandler);
+                S.sub("page.init.done",      S.Page.fetchTemplates);
+                S.sub("page.templates.done", S.Page.render);
+                S.sub("page.render.done",    S.checkAPIs);
+                S.sub("page.apis.done",      S.Page.bindDragAndDrop);
+                S.sub("page.apis.done",      S.Page.bindButtons);
+                S.sub("page.apis.done",      S.Page.bindCabinet);
+                S.sub("page.apis.done",      S.Page.bindOptions);
+                S.sub("page.apis.done",      S.Page.subscribe);
+                S.sub("page.drop.done",      S.File.queueFiles);
+                S.sub("file.queue.done",     S.File.queueIcons);
+                S.sub("file.icon.done",      S.Page.addIcon);
+                S.sub("file.remove.done",    S.Page.removeIcon);
+                S.sub("file.unqueue",        S.File.unqueueIcon);
+                S.sub("file.unqueue.all",    S.File.unqueueAllIcons);
+                S.sub("sprite.generate",     S.generateStitches);
 
                 /* notify */
-                Stitches.pub("page.init.done");
+                S.pub("page.init.done");
             },
 
             // ### sub
@@ -66,11 +67,11 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to fire
             sub: function (topic, fn) {
-                var callbacks = Stitches._topics[topic] ||  $.Callbacks("stopOnFalse");
+                var callbacks = _topics[topic] ||  $.Callbacks("stopOnFalse");
                 if (fn) {
                     callbacks.add(fn);
                 }
-                Stitches._topics[topic] = callbacks;
+                _topics[topic] = callbacks;
             },
 
             // ### unsub
@@ -80,7 +81,7 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to remove
             unsub: function (topic, fn) {
-                var callbacks = Stitches._topics[topic];
+                var callbacks = _topics[topic];
                 if (callbacks) {
                     callbacks.remove(fn);
                 }
@@ -92,7 +93,7 @@
             //
             //     @param {String} topic The subscription topic name
             pub: function (topic) {
-                var callbacks = Stitches._topics[topic],
+                var callbacks = _topics[topic],
                     args = Array.prototype.slice.call(arguments, 1);
                 if (callbacks) {
                     callbacks.fire.apply(callbacks, args);
@@ -108,16 +109,16 @@
                 Modernizr.load([
                     {
                         test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
-                        nope: Stitches.settings.jsdir + "/dropfile/dropfile.js"
+                        nope: S.settings.jsdir + "/dropfile/dropfile.js"
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: Stitches.settings.jsdir + "/flashcanvas/flashcanvas.js",
+                        nope: S.settings.jsdir + "/flashcanvas/flashcanvas.js",
                         complete: function () {
                             if (typeof FileReader !== "undefined" && Modernizr.draganddrop && Modernizr.canvas) {
-                                Stitches.pub("page.apis.done");
+                                S.pub("page.apis.done");
                             } else {
-                                Stitches.pub("page.error", new Error("Required APIs are not present."));
+                                S.pub("page.error", new Error("Required APIs are not present."));
                             }
                         }
                     }
@@ -132,12 +133,12 @@
             //
             //     @param {[Icon]} looseIcons An Icon array of images to place
             generateStitches: function (looseIcons) {
-                var placedIcons = Stitches.positionImages(looseIcons);
-                var sprite = Stitches.makeStitches(placedIcons);
-                var stylesheet = Stitches.makeStylesheet(placedIcons, sprite);
+                var placedIcons = S.positionImages(looseIcons);
+                var sprite = S.makeStitches(placedIcons);
+                var stylesheet = S.makeStylesheet(placedIcons, sprite);
 
                 /* notify */
-                Stitches.pub("sprite.generate.done", sprite, stylesheet);
+                S.pub("sprite.generate.done", sprite, stylesheet);
             },
 
             // ### positionImages
@@ -165,16 +166,16 @@
                 });
 
                 /* find the ideal sprite for this set of icons */
-                Stitches.canvas = Stitches.Icons.idealCanvas(looseIcons);
+                S.canvas = S.Icons.idealCanvas(looseIcons);
 
                 /* try to place all of the icons on the ideal canvas */
-                Stitches.Icons.placeIcons(looseIcons, placedIcons, Stitches.canvas);
+                S.Icons.placeIcons(looseIcons, placedIcons, S.canvas);
 
                 /* trim empty edges */
-                Stitches.Icons.cropCanvas(placedIcons, Stitches.canvas);
+                S.Icons.cropCanvas(placedIcons, S.canvas);
 
                 /* notify  and return */
-                Stitches.pub("sprite.position.done", placedIcons);
+                S.pub("sprite.position.done", placedIcons);
                 return placedIcons;
             },
 
@@ -191,19 +192,19 @@
                    domain blocking in browses for access to write
                    image data to the canvas */
                 try {
-                    context = Stitches.canvas.getContext('2d');
+                    context = S.canvas.getContext('2d');
                     $(placedIcons).each(function (idx, icon) {
                         context.drawImage(icon.image, icon.x, icon.y);
                     });
 
                     /* create image link */
-                    data = Stitches.canvas.toDataURL();
+                    data = S.canvas.toDataURL();
                 } catch (e) {
-                    Stitches.pub("page.error", e);
+                    S.pub("page.error", e);
                 }
 
                 /* notify  and return */
-                Stitches.pub("sprite.image.done", data);
+                S.pub("sprite.image.done", data);
                 return data;
             },
 
@@ -220,10 +221,10 @@
                     return a.name < b.name ? -1 : 1;
                 });
 
-                var prefix = Stitches.settings.prefix;
+                var prefix = S.settings.prefix;
 
                 var backgroundImage
-                if (Stitches.settings.dataURI) {
+                if (S.settings.dataURI) {
                     backgroundImage = sprite;
                 } else {
                     backgroundImage = "download.png";
@@ -249,7 +250,7 @@
                 var data = "data:," + encodeURIComponent(css.join("\n"));
 
                 /* notify  and return */
-                Stitches.pub("sprite.stylesheet.done", data);
+                S.pub("sprite.stylesheet.done", data);
                 return data;
             }
         };

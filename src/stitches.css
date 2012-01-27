@@ -84,7 +84,7 @@
     display: block;
     width: 125px;
     height: 30px;
-    background: #03669A; /* blue 0486CC 05A8FF */
+    background: #039a27; /* green 04CC33 05FF3F */
     border-radius: 0 0 10px 0;
     padding: 0;
     margin: 0;
@@ -96,12 +96,12 @@
     text-decoration: none;
 }
 
-.stitches .drawer .open:hover {
-    background: #0486CC;
+.stitches .drawer .open-options:hover {
+    background: #04CC33;
 }
 
-.stitches .drawer .open:active {
-    background: #05A8FF;
+.stitches .drawer .open-options:active {
+    background: #05FF3F;
 }
 
 /* dropbox */
