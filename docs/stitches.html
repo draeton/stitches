@@ -203,7 +203,7 @@ updates button state</p>
                     <span class="p">});</span>
 
                     <span class="cm">/* create image link */</span>
-                    <span class="nx">data</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">();</span>
+                    <span class="nx">data</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">(</span><span class="s2">&quot;image/png&quot;</span><span class="p">);</span>
                 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;page.error&quot;</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
                 <span class="p">}</span>
@@ -253,11 +253,81 @@ updates button state</p>
                 <span class="p">});</span>
 
                 <span class="cm">/* create stylesheet link */</span>
-                <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="s2">&quot;data:,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">css</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">));</span>
+                <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">css</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">));</span>
 
                 <span class="cm">/* notify  and return */</span>
                 <span class="nx">S</span><span class="p">.</span><span class="nx">pub</span><span class="p">(</span><span class="s2">&quot;sprite.stylesheet.done&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
                 <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+            <span class="p">},</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h3>dataToObjectURL</h3>
+
+<p>Convert base64 data or raw binary data to an object URL
+See: http://stackoverflow.com/a/5100158/230483</p>
+
+<pre><code>@param {String} dataURI
+@return {String} The object URL
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">dataToObjectURL</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">dataURI</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">dataParts</span> <span class="o">=</span> <span class="nx">dataURI</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">byteString</span><span class="p">;</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>convert base64 to raw binary data held in a string</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">byteString</span> <span class="o">=</span> <span class="nx">atob</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">byteString</span> <span class="o">=</span> <span class="nx">unescape</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="p">}</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>separate out the mime component</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="kd">var</span> <span class="nx">mimeString</span> <span class="o">=</span> <span class="nx">dataParts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>write the bytes of the string to an ArrayBuffer</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="nx">byteString</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">ab</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="nx">bl</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">ia</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">ab</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">bl</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">ia</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">byteString</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+                <span class="p">}</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>get the blob and create an object URL</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">createBlob</span><span class="p">(</span><span class="nx">ab</span><span class="p">,</span> <span class="nx">mimeString</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+
+                <span class="k">return</span> <span class="nx">url</span><span class="p">;</span>
+            <span class="p">},</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h3>createBlob</h3>
+
+<p>Polyfill</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">createBlob</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arrayBuffer</span><span class="p">,</span> <span class="nx">mimeString</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">BlobBuilder</span> <span class="o">=</span> <span class="nx">BlobBuilder</span> <span class="o">||</span> <span class="nx">WebKitBlobBuilder</span><span class="p">;</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">BlobBuilder</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;BlobBuilder is unsupported.&quot;</span><span class="p">)</span>
+                <span class="p">}</span>
+
+                <span class="kd">var</span> <span class="nx">bb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlobBuilder</span><span class="p">();</span>
+                <span class="nx">bb</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">arrayBuffer</span><span class="p">);</span>
+
+                <span class="k">return</span> <span class="nx">bb</span><span class="p">.</span><span class="nx">getBlob</span><span class="p">(</span><span class="nx">mimeString</span><span class="p">);</span>
+            <span class="p">},</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <h3>createObjectURL</h3>
+
+<p>Polyfill</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">createObjectURL</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">URL</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">webkitURL</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">webkitURL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">webkitURL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="cm">/* if we reached here, it&#39;s unsupported */</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;createObjectURL is unsupported.&quot;</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">})();</span>
