@@ -15,6 +15,9 @@
     // Holds all File procesing methods
     Stitches.File = (function () {
 
+        /* shortcut */
+        var S = window.Stitches;
+
         /* track files to read */
         var readQueue = [];
 
@@ -28,7 +31,7 @@
                 $.each(files, function (i, file) {
                     if (/jpeg|png|gif/.test(file.type)) {
                         readQueue.push(file);
-                        Stitches.pub("file.queue.done", file);
+                        S.pub("file.queue.done", file);
                     }
                 });
             },
@@ -46,15 +49,15 @@
                         reader = new FileReader();
                         reader.onloadend = function (e) {
                             /* create an icon and add to the icon queue */
-                            var icon = new Stitches.Icon(file.name, e.target.result);
-                            Stitches.iconQueue.push(icon);
+                            var icon = new S.Icon(file.name, e.target.result);
+                            S.iconQueue.push(icon);
 
                             /* notify */
-                            Stitches.pub("file.icon.done", icon);
+                            S.pub("file.icon.done", icon);
                         };
                         reader.readAsDataURL(file);
                     } catch (e) {
-                        Stitches.pub("page.error", e);
+                        S.pub("page.error", e);
                     }
                 }
             },
@@ -66,23 +69,23 @@
             //     @param {Icon} icon
             unqueueIcon: function (icon) {
                 /* remove the icon from the queue */
-                Stitches.iconQueue = $.grep(Stitches.iconQueue, function (item) {
+                S.iconQueue = $.grep(S.iconQueue, function (item) {
                     return item !== icon;
                 });
-                Stitches.Icon.clearNameCache(icon.name);
+                S.Icon.clearNameCache(icon.name);
 
                 /* notify */
-                Stitches.pub("file.remove.done", icon);
+                S.pub("file.remove.done", icon);
             },
 
             // ### unqueueAllIcons
             //
             // Clear all icons from the queue
             unqueueAllIcons: function () {
-                $.each(Stitches.iconQueue, function (i, icon) {
-                    Stitches.File.unqueueIcon(icon);
+                $.each(S.iconQueue, function (i, icon) {
+                    S.File.unqueueIcon(icon);
                 });
-                Stitches.Icon.clearNameCache();
+                S.Icon.clearNameCache();
             }
         };
     })();

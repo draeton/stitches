@@ -13,8 +13,9 @@
     // ## Stitches namespace
     //
     // Holds all methods
-    window.Stitches = (function () {
-        // **Some configuration defaults**
+    var S = window.Stitches = (function () {
+
+        /* Some configuration defaults */
         var defaults = {
             "jsdir": "js",
             "prefix": "sprite",
@@ -22,10 +23,10 @@
             "dataURI": false
         };
 
-        return {
-            // **Pub/sub subscription manager**
-            _topics: {},
+        /* Pub/sub subscription manager */
+        var _topics = {};
 
+        return {
             // ### init
             //
             // Readies everything for user interaction.
@@ -33,30 +34,30 @@
             //     @param {jQuery} $elem A wrapped DOM node
             //     @param {Object} config An optional settings object
             init: function ($elem, config) {
-                Stitches.settings = $.extend({}, defaults, config);
-                Stitches.iconQueue = [];
-                Stitches.Page.$elem = $elem;
+                S.settings = $.extend({}, defaults, config);
+                S.iconQueue = [];
+                S.Page.$elem = $elem;
 
                 /* setup subscriptions */
-                Stitches.sub("page.error",          Stitches.Page.errorHandler);
-                Stitches.sub("page.init.done",      Stitches.Page.fetchTemplates);
-                Stitches.sub("page.templates.done", Stitches.Page.render);
-                Stitches.sub("page.render.done",    Stitches.checkAPIs);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindDragAndDrop);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindButtons);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindCabinet);
-                Stitches.sub("page.apis.done",      Stitches.Page.bindOptions);
-                Stitches.sub("page.apis.done",      Stitches.Page.subscribe);
-                Stitches.sub("page.drop.done",      Stitches.File.queueFiles);
-                Stitches.sub("file.queue.done",     Stitches.File.queueIcons);
-                Stitches.sub("file.icon.done",      Stitches.Page.addIcon);
-                Stitches.sub("file.remove.done",    Stitches.Page.removeIcon);
-                Stitches.sub("file.unqueue",        Stitches.File.unqueueIcon);
-                Stitches.sub("file.unqueue.all",    Stitches.File.unqueueAllIcons);
-                Stitches.sub("sprite.generate",     Stitches.generateStitches);
+                S.sub("page.error",          S.Page.errorHandler);
+                S.sub("page.init.done",      S.Page.fetchTemplates);
+                S.sub("page.templates.done", S.Page.render);
+                S.sub("page.render.done",    S.checkAPIs);
+                S.sub("page.apis.done",      S.Page.bindDragAndDrop);
+                S.sub("page.apis.done",      S.Page.bindButtons);
+                S.sub("page.apis.done",      S.Page.bindCabinet);
+                S.sub("page.apis.done",      S.Page.bindOptions);
+                S.sub("page.apis.done",      S.Page.subscribe);
+                S.sub("page.drop.done",      S.File.queueFiles);
+                S.sub("file.queue.done",     S.File.queueIcons);
+                S.sub("file.icon.done",      S.Page.addIcon);
+                S.sub("file.remove.done",    S.Page.removeIcon);
+                S.sub("file.unqueue",        S.File.unqueueIcon);
+                S.sub("file.unqueue.all",    S.File.unqueueAllIcons);
+                S.sub("sprite.generate",     S.generateStitches);
 
                 /* notify */
-                Stitches.pub("page.init.done");
+                S.pub("page.init.done");
             },
 
             // ### sub
@@ -66,11 +67,11 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to fire
             sub: function (topic, fn) {
-                var callbacks = Stitches._topics[topic] ||  $.Callbacks("stopOnFalse");
+                var callbacks = _topics[topic] ||  $.Callbacks("stopOnFalse");
                 if (fn) {
                     callbacks.add(fn);
                 }
-                Stitches._topics[topic] = callbacks;
+                _topics[topic] = callbacks;
             },
 
             // ### unsub
@@ -80,7 +81,7 @@
             //     @param {String} topic The subscription topic name
             //     @param {Function} fn A callback to remove
             unsub: function (topic, fn) {
-                var callbacks = Stitches._topics[topic];
+                var callbacks = _topics[topic];
                 if (callbacks) {
                     callbacks.remove(fn);
                 }
@@ -92,7 +93,7 @@
             //
             //     @param {String} topic The subscription topic name
             pub: function (topic) {
-                var callbacks = Stitches._topics[topic],
+                var callbacks = _topics[topic],
                     args = Array.prototype.slice.call(arguments, 1);
                 if (callbacks) {
                     callbacks.fire.apply(callbacks, args);
@@ -108,16 +109,16 @@
                 Modernizr.load([
                     {
                         test: typeof FileReader !== "undefined" && Modernizr.draganddrop,
-                        nope: Stitches.settings.jsdir + "/dropfile/dropfile.js"
+                        nope: S.settings.jsdir + "/dropfile/dropfile.js"
                     },
                     {
                         test: Modernizr.canvas,
-                        nope: Stitches.settings.jsdir + "/flashcanvas/flashcanvas.js",
+                        nope: S.settings.jsdir + "/flashcanvas/flashcanvas.js",
                         complete: function () {
                             if (typeof FileReader !== "undefined" && Modernizr.draganddrop && Modernizr.canvas) {
-                                Stitches.pub("page.apis.done");
+                                S.pub("page.apis.done");
                             } else {
-                                Stitches.pub("page.error", new Error("Required APIs are not present."));
+                                S.pub("page.error", new Error("Required APIs are not present."));
                             }
                         }
                     }
@@ -132,12 +133,12 @@
             //
             //     @param {[Icon]} looseIcons An Icon array of images to place
             generateStitches: function (looseIcons) {
-                var placedIcons = Stitches.positionImages(looseIcons);
-                var sprite = Stitches.makeStitches(placedIcons);
-                var stylesheet = Stitches.makeStylesheet(placedIcons, sprite);
+                var placedIcons = S.positionImages(looseIcons);
+                var sprite = S.makeStitches(placedIcons);
+                var stylesheet = S.makeStylesheet(placedIcons, sprite);
 
                 /* notify */
-                Stitches.pub("sprite.generate.done", sprite, stylesheet);
+                S.pub("sprite.generate.done", sprite, stylesheet);
             },
 
             // ### positionImages
@@ -165,16 +166,16 @@
                 });
 
                 /* find the ideal sprite for this set of icons */
-                Stitches.canvas = Stitches.Icons.idealCanvas(looseIcons);
+                S.canvas = S.Icons.idealCanvas(looseIcons);
 
                 /* try to place all of the icons on the ideal canvas */
-                Stitches.Icons.placeIcons(looseIcons, placedIcons, Stitches.canvas);
+                S.Icons.placeIcons(looseIcons, placedIcons, S.canvas);
 
                 /* trim empty edges */
-                Stitches.Icons.cropCanvas(placedIcons, Stitches.canvas);
+                S.Icons.cropCanvas(placedIcons, S.canvas);
 
                 /* notify  and return */
-                Stitches.pub("sprite.position.done", placedIcons);
+                S.pub("sprite.position.done", placedIcons);
                 return placedIcons;
             },
 
@@ -191,19 +192,19 @@
                    domain blocking in browses for access to write
                    image data to the canvas */
                 try {
-                    context = Stitches.canvas.getContext('2d');
+                    context = S.canvas.getContext('2d');
                     $(placedIcons).each(function (idx, icon) {
                         context.drawImage(icon.image, icon.x, icon.y);
                     });
 
                     /* create image link */
-                    data = Stitches.canvas.toDataURL();
+                    data = S.canvas.toDataURL();
                 } catch (e) {
-                    Stitches.pub("page.error", e);
+                    S.pub("page.error", e);
                 }
 
                 /* notify  and return */
-                Stitches.pub("sprite.image.done", data);
+                S.pub("sprite.image.done", data);
                 return data;
             },
 
@@ -220,10 +221,10 @@
                     return a.name < b.name ? -1 : 1;
                 });
 
-                var prefix = Stitches.settings.prefix;
+                var prefix = S.settings.prefix;
 
                 var backgroundImage
-                if (Stitches.settings.dataURI) {
+                if (S.settings.dataURI) {
                     backgroundImage = sprite;
                 } else {
                     backgroundImage = "download.png";
@@ -249,7 +250,7 @@
                 var data = "data:," + encodeURIComponent(css.join("\n"));
 
                 /* notify  and return */
-                Stitches.pub("sprite.stylesheet.done", data);
+                S.pub("sprite.stylesheet.done", data);
                 return data;
             }
         };
@@ -267,12 +268,17 @@
 
     "use strict";
 
-    var document = window.document;
-
     // ## Stitches.Icons namespace
     //
     // Holds all methods for working with icons
     Stitches.Icons = (function () {
+
+        /* shortcut */
+        var S = window.Stitches;
+
+        /* shortcut */
+        var document = window.document;
+
         return {
             // ### idealCanvas
             //
@@ -327,7 +333,7 @@
                 while (loose.length && i < 10) {
                     $(loose).each(function (idx, icon) {
                         if (!icon.isPlaced) {
-                            icon.isPlaced = Stitches.Icons.placeIcon(icon, placed, canvas);
+                            icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
                         }
                     });
 
@@ -363,7 +369,7 @@
                             icon.x = x;
                             icon.y = y;
 
-                            var overlap = Stitches.Icons.isOverlapped(icon, placed);
+                            var overlap = S.Icons.isOverlapped(icon, placed);
                             if (!overlap) {
                                 return true;
                             }
@@ -451,78 +457,91 @@
 
     "use strict";
 
-    // **Maintain a unique id for each icon**
-    var guid = 0;
-
-    // **Maintains a unique name for each icon**
-    var nameCache = {};
-
-    // ## Stitches.Icon class
+    // ## Stitches.Icon namespace
     //
-    // Wraps a single icon. Creates a new image from the source
-    // and sets additional properties after the image loads.
-    // The callback is generally used to handle queueuing
-    //
-    //     @param {String} name
-    //     @param {String} src
-    //     @param {Function} cb Optional callback
-    Stitches.Icon = function (name, src, cb) {
-        var self = this;
+    // Constructs and manages icons
+    Stitches.Icon = (function () {
 
-        this.guid = guid++;
-        this.name = Stitches.Icon.getName(name);
+        /* shortcut */
+        var S = window.Stitches;
 
-        this.image = new Image();
-        this.image.onload = function () {
-            self.x = 0;
-            self.y = 0;
-            self.width = self.image.width + Stitches.settings.padding;
-            self.height = self.image.height + Stitches.settings.padding;
-            self.area = self.width * self.height;
+        /* Maintain a unique id for each icon */
+        var guid = 0;
 
-            if (cb) {
-                cb(self);
+        /* Maintains a unique name for each icon */
+        var nameCache = {};
+
+        // ### Icon
+        //
+        // Wraps a single icon. Creates a new image from the source
+        // and sets additional properties after the image loads.
+        // The callback is generally used to handle queueuing
+        //
+        //     @param {String} name
+        //     @param {String} src
+        //     @param {Function} cb Optional callback
+        //     @constructor
+        var Icon = function (name, src, cb) {
+            var self = this;
+
+            this.guid = guid++;
+            this.name = S.Icon.getName(name);
+
+            this.image = new Image();
+            this.image.onload = function () {
+                self.x = 0;
+                self.y = 0;
+                self.width = self.image.width + S.settings.padding;
+                self.height = self.image.height + S.settings.padding;
+                self.area = self.width * self.height;
+
+                if (cb) {
+                    cb(self);
+                }
             }
-        }
-        this.image.src = src;
-    };
+            this.image.src = src;
+        };
 
-    // ### Stitches.Icon.getName
-    //
-    // Return a unique name. If the name is already in the nameCache,
-    // append a value until a unique name is found.
-    //
-    //     @param {String} name
-    //     @return {String}
-    Stitches.Icon.getName = function (name) {
-        var i = 1, fix;
+        // ### Icon.getName
+        //
+        // Return a unique name. If the name is already in the nameCache,
+        // append a value until a unique name is found.
+        //
+        //     @param {String} name
+        //     @return {String}
+        Icon.getName = function (name) {
+            var i = 1, fix;
 
-        name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+            name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
 
-        if (nameCache[name]) {
-            do {
-                fix = name + "-" + i++;
-            } while (nameCache[fix]);
-            name = fix;
-        }
+            if (nameCache[name]) {
+                do {
+                    fix = name + "-" + i++;
+                } while (nameCache[fix]);
+                name = fix;
+            }
 
-        nameCache[name] = true;
-        return name;
-    };
+            nameCache[name] = true;
+            return name;
+        };
 
-    // ### Stitches.Icon.clearNameCache
-    //
-    // Clear the name cache. If a name is passed in, only clear that key
-    //
-    //     @param {String} name
-    //     @return {String}
-    Stitches.Icon.clearNameCache = function (name) {
-        if (name) {
-            delete nameCache[name];
-        } else {
-            nameCache = {};
-        }
-    };
+        // ### Icon.clearNameCache
+        //
+        // Clear the name cache. If a name is passed in, only clear that key
+        //
+        //     @param {String} name
+        //     @return {String}
+        Icon.clearNameCache = function (name) {
+            if (name) {
+                delete nameCache[name];
+            } else {
+                nameCache = {};
+            }
+        };
+
+        /* return constructor */
+        return Icon;
+    })();
 
 })(window, Stitches);/* Simple JavaScript Templating
    John Resig - http://ejohn.org/ - MIT Licensed */
@@ -564,6 +583,10 @@
     // Holds all DOM interaction methods
     Stitches.Page = (function () {
 
+        /* shortcut */
+        var S = window.Stitches;
+
+        /* true when the widget has rendered */
         var rendered = false;
 
         return {
@@ -573,16 +596,16 @@
             //
             //     @return {jqXHR}
             fetchTemplates: function () {
-                return $.get(Stitches.settings.jsdir + "/stitches.html", function (html) {
+                return $.get(S.settings.jsdir + "/stitches.html", function (html) {
                     $("body").append(html);
 
-                    Stitches.Page.templates = {
-                        stitches: Stitches.tmpl("stitches_tmpl"),
-                        icon:     Stitches.tmpl("stitches_icon_tmpl")
+                    S.Page.templates = {
+                        stitches: S.tmpl("stitches_tmpl"),
+                        icon:     S.tmpl("stitches_icon_tmpl")
                     };
 
                     /* notify */
-                    Stitches.pub("page.templates.done");
+                    S.pub("page.templates.done");
                 });
             },
 
@@ -590,37 +613,37 @@
             //
             // Creates the stitches widget and content
             render: function () {
-                var $div = $(Stitches.Page.templates.stitches({}));
-                $div.appendTo(Stitches.Page.$elem);
+                var $div = $(S.Page.templates.stitches({}));
+                $div.appendTo(S.Page.$elem);
 
                 // set dom element references
-                Stitches.Page.$stitches = $(".stitches", Stitches.Page.$elem);
-                Stitches.Page.$drawer = $(".drawer", Stitches.Page.$elem);
-                Stitches.Page.$dropbox = $(".dropbox", Stitches.Page.$elem);
-                Stitches.Page.$droplabel = $(".droplabel", Stitches.Page.$elem);
-                Stitches.Page.$filelist = $(".filelist", Stitches.Page.$elem);
-                Stitches.Page.$buttons = $(".buttons", Stitches.Page.$elem);
-                Stitches.Page.buttons = {
-                    $generate:   $("a.generate", Stitches.Page.$buttons),
-                    $clear:      $("a.clear", Stitches.Page.$buttons),
-                    $sprite:     $("a.dlsprite", Stitches.Page.$buttons),
-                    $stylesheet: $("a.dlstylesheet", Stitches.Page.$buttons)
+                S.Page.$stitches = $(".stitches", S.Page.$elem);
+                S.Page.$drawer = $(".drawer", S.Page.$elem);
+                S.Page.$dropbox = $(".dropbox", S.Page.$elem);
+                S.Page.$droplabel = $(".droplabel", S.Page.$elem);
+                S.Page.$filelist = $(".filelist", S.Page.$elem);
+                S.Page.$buttons = $(".buttons", S.Page.$elem);
+                S.Page.buttons = {
+                    $generate:   $("a.generate", S.Page.$buttons),
+                    $clear:      $("a.clear", S.Page.$buttons),
+                    $sprite:     $("a.dlsprite", S.Page.$buttons),
+                    $stylesheet: $("a.dlstylesheet", S.Page.$buttons)
                 };
 
                 // set options
-                Stitches.Page.$options = $(".options", Stitches.Page.$elem);
-                Stitches.Page.inputs = {
-                    $prefix:     $("input[name=prefix]", Stitches.Page.$options),
-                    $padding:    $("input[name=padding]", Stitches.Page.$options),
-                    $dataURI:    $("input[name=dataURI]", Stitches.Page.$options)
+                S.Page.$options = $(".options", S.Page.$elem);
+                S.Page.inputs = {
+                    $prefix:     $("input[name=prefix]", S.Page.$options),
+                    $padding:    $("input[name=padding]", S.Page.$options),
+                    $dataURI:    $("input[name=dataURI]", S.Page.$options)
                 };
-                Stitches.Page.inputs.$prefix.val(Stitches.settings.prefix);
-                Stitches.Page.inputs.$padding.val(Stitches.settings.padding);
-                Stitches.Page.inputs.$dataURI.filter("[value=" + Stitches.settings.dataURI + "]").attr("checked", true);
+                S.Page.inputs.$prefix.val(S.settings.prefix);
+                S.Page.inputs.$padding.val(S.settings.padding);
+                S.Page.inputs.$dataURI.filter("[value=" + S.settings.dataURI + "]").attr("checked", true);
 
                 /* notify */
                 rendered = true;
-                Stitches.pub("page.render.done");
+                S.pub("page.render.done");
             },
 
             // ## errorHandler
@@ -628,7 +651,7 @@
             // Handles all error messages
             errorHandler: function (e) {
                 if (rendered) {
-                    Stitches.Page.$droplabel.html("&times; " + e.message).addClass("error");
+                    S.Page.$droplabel.html("&times; " + e.message).addClass("error");
                 }
                 throw e;
             },
@@ -637,12 +660,12 @@
             //
             // Handles all subscriptions
             subscribe: function () {
-                var buttons = Stitches.Page.buttons;
-                var $droplabel = Stitches.Page.$droplabel;
+                var buttons = S.Page.buttons;
+                var $droplabel = S.Page.$droplabel;
 
                 /* handle drop label and buttons on queue length changes */
-                Stitches.sub("file.icon.done", function (icon) {
-                    if (Stitches.iconQueue.length === 1) {
+                S.sub("file.icon.done", function (icon) {
+                    if (S.iconQueue.length === 1) {
                         $droplabel.fadeOut("fast");
                         buttons.$generate.removeClass("disabled");
                         buttons.$clear.removeClass("disabled");
@@ -650,8 +673,8 @@
                     buttons.$sprite.addClass("disabled");
                     buttons.$stylesheet.addClass("disabled");
                 });
-                Stitches.sub("file.remove.done", function (icon) {
-                    if (Stitches.iconQueue.length < 1) {
+                S.sub("file.remove.done", function (icon) {
+                    if (S.iconQueue.length < 1) {
                         $droplabel.fadeIn("fast");
                         buttons.$generate.addClass("disabled");
                         buttons.$clear.addClass("disabled");
@@ -661,7 +684,7 @@
                 });
 
                 /* handle sprite and stylesheet generation */
-                Stitches.sub("sprite.generate.done", function (sprite, stylesheet) {
+                S.sub("sprite.generate.done", function (sprite, stylesheet) {
                     buttons.$sprite.attr("href", sprite).removeClass("disabled");
                     buttons.$stylesheet.attr("href", stylesheet).removeClass("disabled");
                 });
@@ -677,34 +700,34 @@
             //
             // Bind all of the event listeners for drag and drop
             bindDragAndDrop: function () {
-                var dropbox = Stitches.Page.$dropbox.get(0);
-                dropbox.addEventListener("dragenter", Stitches.Page._dragStart, false);
-                dropbox.addEventListener("dragleave", Stitches.Page._dragStop, false);
-                dropbox.addEventListener("dragexit",  Stitches.Page._dragStop, false);
-                dropbox.addEventListener("dragover",  Stitches.Page._noop, false);
-                dropbox.addEventListener("drop",      Stitches.Page._drop, false);
+                var dropbox = S.Page.$dropbox.get(0);
+                dropbox.addEventListener("dragenter", S.Page._dragStart, false);
+                dropbox.addEventListener("dragleave", S.Page._dragStop, false);
+                dropbox.addEventListener("dragexit",  S.Page._dragStop, false);
+                dropbox.addEventListener("dragover",  S.Page._noop, false);
+                dropbox.addEventListener("drop",      S.Page._drop, false);
             },
 
             // #### *Private drag and drop methods*
             _dragStart: function (e) {
-                Stitches.Page.$dropbox.addClass("dropping");
+                S.Page.$dropbox.addClass("dropping");
             },
 
             _dragStop: function (e) {
                 if ($(e.target).parents(".dropbox").length === 0) {
-                    Stitches.Page.$dropbox.removeClass("dropping");
+                    S.Page.$dropbox.removeClass("dropping");
                 }
             },
 
             _drop: function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                Stitches.Page.$dropbox.removeClass("dropping");
+                S.Page.$dropbox.removeClass("dropping");
 
                 var evt = e || window.event;
                 var files = (evt.files || evt.dataTransfer.files);
                 if (files.length > 0) {
-                    Stitches.pub("page.drop.done", files);
+                    S.pub("page.drop.done", files);
                 }
             },
 
@@ -712,21 +735,21 @@
             //
             // Bind all of the event listeners for buttons
             bindButtons: function () {
-                var $elem = Stitches.Page.$elem;
-                $elem.delegate("a.disabled", "click", Stitches.Page._noop);
-                $elem.delegate("a.generate", "click", Stitches.Page._generate);
-                $elem.delegate("a.remove", "click",   Stitches.Page._removeFile);
-                $elem.delegate("a.clear", "click",    Stitches.Page._removeAllFiles);
+                var $elem = S.Page.$elem;
+                $elem.delegate("a.disabled", "click", S.Page._noop);
+                $elem.delegate("a.generate", "click", S.Page._generate);
+                $elem.delegate("a.remove", "click",   S.Page._removeFile);
+                $elem.delegate("a.clear", "click",    S.Page._removeAllFiles);
             },
 
             // ### bindCabinet
             //
             // Bind all of the event listeners for the cabinet
             bindCabinet: function () {
-                var $elem = Stitches.Page.$elem;
-                var $stitches = Stitches.Page.$stitches;
-                var $options = Stitches.Page.$options;
-                var $drawer = Stitches.Page.$drawer;
+                var $elem = S.Page.$elem;
+                var $stitches = S.Page.$stitches;
+                var $options = S.Page.$options;
+                var $drawer = S.Page.$drawer;
                 var $cabinet = $("form.cabinet", $drawer);
                 var $input = $("input.files", $drawer);
 
@@ -740,7 +763,7 @@
                 // on change event, use the drop event to handle files
                 $input.bind("change", function () {
                     if (this.files.length) {
-                        Stitches.pub("page.drop.done", this.files);
+                        S.pub("page.drop.done", this.files);
                     }
                     $cabinet.trigger("reset");
                 });
@@ -755,8 +778,8 @@
             //
             // Bind all of the event listeners for the options panel
             bindOptions: function () {
-                var $options = Stitches.Page.$options;
-                var buttons = Stitches.Page.buttons;
+                var $options = S.Page.$options;
+                var buttons = S.Page.buttons;
 
                 $options.delegate("a.close-options", "click", function () {
                     $options.fadeOut();
@@ -768,34 +791,34 @@
                 });
 
                 $options.delegate("input[name=prefix]", "change", function () {
-                    Stitches.settings.prefix = Stitches.Page.inputs.$prefix.val();
+                    S.settings.prefix = S.Page.inputs.$prefix.val();
                 });
 
                 $options.delegate("input[name=padding]", "change", function () {
-                    var padding = Stitches.Page.inputs.$padding.val();
-                    Stitches.settings.padding = +padding;
-                    Stitches.Page.updateIconDimensions();
+                    var padding = S.Page.inputs.$padding.val();
+                    S.settings.padding = +padding;
+                    S.Page.updateIconDimensions();
                 });
 
                 $options.delegate("input[name=dataURI]", "change", function () {
-                    var dataURI = Stitches.Page.inputs.$dataURI.filter(":checked").val();
-                    Stitches.settings.dataURI = dataURI === "true" ? true : false;
+                    var dataURI = S.Page.inputs.$dataURI.filter(":checked").val();
+                    S.settings.dataURI = dataURI === "true" ? true : false;
                 });
             },
 
             // #### *Private button methods*
             _generate: function (e) {
                 /* [].concat to copy array */
-                Stitches.pub("sprite.generate", [].concat(Stitches.iconQueue));
+                S.pub("sprite.generate", [].concat(S.iconQueue));
             },
 
             _removeFile: function (e) {
                 var icon = $(this).parent("li").data("icon");
-                Stitches.pub("file.unqueue", icon);
+                S.pub("file.unqueue", icon);
             },
 
             _removeAllFiles: function (e) {
-                Stitches.pub("file.unqueue.all");
+                S.pub("file.unqueue.all");
             },
 
             // ### addIcon
@@ -803,9 +826,9 @@
             // Add an icon to the file list
             //     @param {Icon} icon
             addIcon: function (icon) {
-                $(Stitches.Page.templates.icon(icon))
+                $(S.Page.templates.icon(icon))
                     .data("icon", icon)
-                    .appendTo(Stitches.Page.$filelist)
+                    .appendTo(S.Page.$filelist)
                     .fadeIn("fast");
             },
 
@@ -814,7 +837,7 @@
             // Remove an icon from the file list
             //     @param {Icon} icon
             removeIcon: function (icon) {
-                Stitches.Page.$filelist.find("li")
+                S.Page.$filelist.find("li")
                     .filter(function () {
                         return $(this).data("icon") === icon;
                     })
@@ -826,9 +849,9 @@
             //
             // Update icon dimensions after changing padding setting
             updateIconDimensions: function () {
-                var padding = Stitches.settings.padding;
+                var padding = S.settings.padding;
 
-                $.each(Stitches.iconQueue, function (i, icon) {
+                $.each(S.iconQueue, function (i, icon) {
                     icon.width = icon.image.width + padding;
                     icon.height = icon.image.height + padding;
                 });
@@ -853,6 +876,9 @@
     // Holds all File procesing methods
     Stitches.File = (function () {
 
+        /* shortcut */
+        var S = window.Stitches;
+
         /* track files to read */
         var readQueue = [];
 
@@ -866,7 +892,7 @@
                 $.each(files, function (i, file) {
                     if (/jpeg|png|gif/.test(file.type)) {
                         readQueue.push(file);
-                        Stitches.pub("file.queue.done", file);
+                        S.pub("file.queue.done", file);
                     }
                 });
             },
@@ -884,15 +910,15 @@
                         reader = new FileReader();
                         reader.onloadend = function (e) {
                             /* create an icon and add to the icon queue */
-                            var icon = new Stitches.Icon(file.name, e.target.result);
-                            Stitches.iconQueue.push(icon);
+                            var icon = new S.Icon(file.name, e.target.result);
+                            S.iconQueue.push(icon);
 
                             /* notify */
-                            Stitches.pub("file.icon.done", icon);
+                            S.pub("file.icon.done", icon);
                         };
                         reader.readAsDataURL(file);
                     } catch (e) {
-                        Stitches.pub("page.error", e);
+                        S.pub("page.error", e);
                     }
                 }
             },
@@ -904,23 +930,23 @@
             //     @param {Icon} icon
             unqueueIcon: function (icon) {
                 /* remove the icon from the queue */
-                Stitches.iconQueue = $.grep(Stitches.iconQueue, function (item) {
+                S.iconQueue = $.grep(S.iconQueue, function (item) {
                     return item !== icon;
                 });
-                Stitches.Icon.clearNameCache(icon.name);
+                S.Icon.clearNameCache(icon.name);
 
                 /* notify */
-                Stitches.pub("file.remove.done", icon);
+                S.pub("file.remove.done", icon);
             },
 
             // ### unqueueAllIcons
             //
             // Clear all icons from the queue
             unqueueAllIcons: function () {
-                $.each(Stitches.iconQueue, function (i, icon) {
-                    Stitches.File.unqueueIcon(icon);
+                $.each(S.iconQueue, function (i, icon) {
+                    S.File.unqueueIcon(icon);
                 });
-                Stitches.Icon.clearNameCache();
+                S.Icon.clearNameCache();
             }
         };
     })();

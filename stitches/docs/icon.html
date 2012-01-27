@@ -8,13 +8,21 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><strong>Maintain a unique id for each icon</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">guid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h2>Stitches.Icon namespace</h2>
 
-</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><strong>Maintains a unique name for each icon</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">nameCache</span> <span class="o">=</span> <span class="p">{};</span>
+<p>Constructs and manages icons</p>             </td>             <td class="code">               <div class="highlight"><pre>
+    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h2>Stitches.Icon class</h2>
+        <span class="cm">/* shortcut */</span>
+        <span class="kd">var</span> <span class="nx">S</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Stitches</span><span class="p">;</span>
+
+        <span class="cm">/* Maintain a unique id for each icon */</span>
+        <span class="kd">var</span> <span class="nx">guid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="cm">/* Maintains a unique name for each icon */</span>
+        <span class="kd">var</span> <span class="nx">nameCache</span> <span class="o">=</span> <span class="p">{};</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h3>Icon</h3>
 
 <p>Wraps a single icon. Creates a new image from the source
 and sets additional properties after the image loads.
@@ -23,29 +31,30 @@ The callback is generally used to handle queueuing</p>
 <pre><code>@param {String} name
 @param {String} src
 @param {Function} cb Optional callback
+@constructor
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">Icon</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">guid</span> <span class="o">=</span> <span class="nx">guid</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">getName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">guid</span> <span class="o">=</span> <span class="nx">guid</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">getName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">Stitches</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">S</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">S</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">cb</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">cb</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
+                <span class="p">}</span>
             <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span><span class="p">;</span>
-    <span class="p">};</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span><span class="p">;</span>
+        <span class="p">};</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h3>Stitches.Icon.getName</h3>
+</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h3>Icon.getName</h3>
 
 <p>Return a unique name. If the name is already in the nameCache,
 append a value until a unique name is found.</p>
@@ -53,36 +62,40 @@ append a value until a unique name is found.</p>
 <pre><code>@param {String} name
 @return {String}
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">fix</span><span class="p">;</span>
+        <span class="nx">Icon</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">fix</span><span class="p">;</span>
 
-        <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
-            <span class="k">do</span> <span class="p">{</span>
-                <span class="nx">fix</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">nameCache</span><span class="p">[</span><span class="nx">fix</span><span class="p">]);</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">fix</span><span class="p">;</span>
-        <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">do</span> <span class="p">{</span>
+                    <span class="nx">fix</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">nameCache</span><span class="p">[</span><span class="nx">fix</span><span class="p">]);</span>
+                <span class="nx">name</span> <span class="o">=</span> <span class="nx">fix</span><span class="p">;</span>
+            <span class="p">}</span>
 
-        <span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
-    <span class="p">};</span>
+            <span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
+        <span class="p">};</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h3>Stitches.Icon.clearNameCache</h3>
+</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h3>Icon.clearNameCache</h3>
 
 <p>Clear the name cache. If a name is passed in, only clear that key</p>
 
 <pre><code>@param {String} name
 @return {String}
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">delete</span> <span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="nx">nameCache</span> <span class="o">=</span> <span class="p">{};</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+        <span class="nx">Icon</span><span class="p">.</span><span class="nx">clearNameCache</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">delete</span> <span class="nx">nameCache</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">nameCache</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+
+        <span class="cm">/* return constructor */</span>
+        <span class="k">return</span> <span class="nx">Icon</span><span class="p">;</span>
+    <span class="p">})();</span>
 
 <span class="p">})(</span><span class="nb">window</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">);</span>
 
