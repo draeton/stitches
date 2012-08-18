@@ -15,16 +15,22 @@
         <div class="options">
             <a href="javascript:;" class="close-options">&times</a>
             <h2>options</h2>
-            <p>Prefix before CSS classes in stylesheet<br>
-                <label><input name="prefix" type="text" required></label>
+            <p><span class="optionspan">Prefix before CSS classes in stylesheet </span>   <label><input name="prefix" type="text" required></label>
             </p>
-            <p>Padding between images in pixels<br>
+            <p><span class="optionspan">Padding between images in pixels </span>
                 <label>0&nbsp;<input name="padding" type="range" min="0" max="20">&nbsp;20</label>
             </p>
-            <p>Include sprite in stylesheet as Data URI<br>
+            <p><span class="optionspan">Include sprite in stylesheet as Data URI</span>
                 <label>Yes&nbsp;<input name="dataURI" type="radio" value="true"></label>
                 <label>No&nbsp;<input name="dataURI" type="radio" value="false"></label>
             </p>
+			<p><span class="optionspan">Orientation of Sprite Result</span>
+                <label>Square&nbsp;<input name="orientation" type="radio" value="square"  /></label>
+                <label>Vertical&nbsp;<input name="orientation" type="radio" value="vertical"/></label>
+				<label>Horizontal&nbsp;<input name="orientation" type="radio" value="horizontal"/></label>
+				
+            </p>
+			
         </div>
         <div class="buttons">
             <a href="javascript:;" class="disabled generate">Generate</a>

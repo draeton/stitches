@@ -104,6 +104,13 @@
     background: #05FF3F;
 }
 
+.stitches .options .optionspan {
+float: left;
+width: 230px;
+display: inline-block;
+font-size: 13px;
+margin: 6px 20px 0px 0px;}
+
 /* dropbox */
 .stitches .dropbox {
     z-index: 0;
