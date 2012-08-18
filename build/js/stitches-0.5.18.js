@@ -20,7 +20,8 @@
             "jsdir": "js",
             "prefix": "sprite",
             "padding": 10,
-            "dataURI": false
+            "dataURI": false,
+			"orientation":"square"
         };
 
         return {
@@ -357,19 +358,24 @@
                 var maxW = 0;
                 var maxH = 0;
                 var area = 0;
-
+				var totalW=0;
+				var totalH=0;
+				var orientation= S.settings.orientation;
+		 console.log(S);
                 /* find the max height & width; the area is the sum of the areas
                    of the rectangles */
                 $(icons).each(function (idx, icon) {
                     maxW = icon.width > maxW ? icon.width : maxW;
+					totalW+=icon.width;
                     maxH = icon.height > maxH ? icon.height : maxH;
+					totalH+=icon.width;
                     area += icon.area;
                 });
 
                 /* ideal shape is a square, with sides the length of the square root of
                    the area */
                 var ideal = Math.ceil(Math.sqrt(area));
-
+				 
                 /* if there is a rectangle with a width or height greater than the square
                    root, increase the length of that side of the ideal square....
                    which I guess makes it an ideal rectangle */
@@ -378,9 +384,16 @@
 
                 /* create the sprite canvas */
                 var canvas = document.createElement("canvas");
-                canvas.width = idealW;
-                canvas.height = idealH;
-
+				if(orientation=='vertical') {
+					canvas.width = maxW;
+					canvas.height = totalH;
+				} else if(orientation=='horizontal') {
+					canvas.width = totalW;
+					canvas.height = maxH;
+				} else {
+					canvas.width = idealW;
+					canvas.height = idealH;
+				}
                 return canvas;
             },
 
@@ -702,11 +715,13 @@
                 S.Page.inputs = {
                     $prefix:     $("input[name=prefix]", S.Page.$options),
                     $padding:    $("input[name=padding]", S.Page.$options),
-                    $dataURI:    $("input[name=dataURI]", S.Page.$options)
+                    $dataURI:    $("input[name=dataURI]", S.Page.$options),
+					 $orientation:    $("input[name=orientation]", S.Page.$options)
                 };
                 S.Page.inputs.$prefix.val(S.settings.prefix);
                 S.Page.inputs.$padding.val(S.settings.padding);
                 S.Page.inputs.$dataURI.filter("[value=" + S.settings.dataURI + "]").attr("checked", true);
+				S.Page.inputs.$orientation.filter("[value=" + S.settings.orientation + "]").attr("checked", true);
 
                 /* notify */
                 rendered = true;
@@ -877,6 +892,11 @@
                     var padding = S.Page.inputs.$padding.val();
                     S.settings.padding = +padding;
                     S.Page.updateIconDimensions();
+                });
+				 $options.delegate("input[name=orientation]", "change", function () {
+                    var orientation = S.Page.inputs.$orientation.filter(":checked").val();
+                    S.settings.orientation = orientation;
+                    console.log(S.settings);
                 });
 
                 $options.delegate("input[name=dataURI]", "change", function () {
