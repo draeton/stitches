@@ -20,7 +20,8 @@
             "jsdir": "js",
             "prefix": "sprite",
             "padding": 10,
-            "dataURI": false
+            "dataURI": false,
+            "less": false
         };
 
         return {
@@ -133,7 +134,7 @@
             generateStitches: function (looseIcons) {
                 var placedIcons = S.positionImages(looseIcons);
                 var sprite = S.makeStitches(placedIcons);
-                var stylesheet = S.makeStylesheet(placedIcons, sprite);
+                var stylesheet = S.settings.less ? S.makeLessStylesheet(placedIcons, sprite) : S.makeStylesheet(placedIcons, sprite);
 
                 /* notify */
                 S.pub("sprite.generate.done", sprite, stylesheet);
@@ -246,6 +247,56 @@
 
                 /* create stylesheet link */
                 var data = "data:text/plain," + encodeURIComponent(css.join("\n"));
+
+                /* notify  and return */
+                S.pub("sprite.stylesheet.done", data);
+                return data;
+            },
+
+            
+            // ### makeLessStylesheet
+            //
+            // Create stylesheet text in less
+            //
+            //     @param {[Icon]} The placed images array
+            //     @param {String} The sprite data URI string
+            //     @return {String} The sprite stylesheet
+            makeLessStylesheet: function (placedIcons, sprite) {
+                /* sort by name for css output */
+                placedIcons = placedIcons.sort(function (a, b) {
+                    return a.name < b.name ? -1 : 1;
+                });
+
+                var prefix = S.settings.prefix;
+
+                var backgroundImage
+                if (S.settings.dataURI) {
+                    backgroundImage = sprite;
+                } else {
+                    backgroundImage = "../images/sprite.png";
+                }
+
+                var css = [
+                    ".sprite(@x: 0, @y: 0, @width: 0, @height: 0) {\n",
+                    "    background: url(" + backgroundImage + ") @x @y no-repeat;\n",
+                    "    display: block;\n",
+                    "    width: @width;\n",
+                    "    height: @height;\n",
+                    "}\n\n"
+                ];
+
+                $(placedIcons).each(function (idx, icon) {
+                    css = css.concat([
+                        "." + prefix + "-" + icon.name + " {",
+                        " .sprite(-" + icon.x + "px, -" + icon.y + "px, " + icon.image.width + "px, " + icon.image.height + "px); ",
+                        "}\n"
+                    ]);
+                });
+
+                css = css.concat(["\n"]);
+
+                /* create stylesheet link */
+                var data = "data:text/plain," + encodeURIComponent(css.join(""));
 
                 /* notify  and return */
                 S.pub("sprite.stylesheet.done", data);
