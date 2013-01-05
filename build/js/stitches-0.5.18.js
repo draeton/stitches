@@ -579,7 +579,10 @@
         Icon.getName = function (name) {
             var i = 1, fix;
 
-            name = name.replace(/[\s.]+/gi, "-").replace(/[^a-z0-9\-]/gi, "_");
+            name = name
+                .replace(/\.\w+?$/gi, "")       //remove extension
+                .replace(/[\s.]+/gi, "-")       //replace dots and spaces with -
+                .replace(/[^a-z0-9\-]/gi, "_"); //replace non-alphanumerics with _
 
             if (nameCache[name]) {
                 do {
