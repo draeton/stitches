@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //
-// Copyright 2011, Matthew Cobbs
+// Copyright 2013, Matthew Cobbs
 // Licensed under the MIT license.
 //
 /*global jQuery, Stitches */

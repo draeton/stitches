@@ -13,12 +13,13 @@
   <meta name="author" content="Matthew Cobbs">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS: implied media=all -->
-  <link rel="stylesheet" href="/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="/css/syntax.css">
   <link rel="stylesheet" href="/css/draeton.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
   <!-- link rel="stylesheet" href="/css/style.css" -->
   <!-- end CSS-->
 
@@ -29,40 +30,46 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
-  <!-- Le fav and touch icons -->
+  <!-- fav and touch icons -->
   <link rel="shortcut icon" href="/favicon.ico">
 </head>
 
 <body>
 
     <!-- top navigation -->
-    <nav>
-        <div class="topbar" data-dropdown="dropdown">
-            <div class="fill">
-                <div class="container span10">
-                    <a class="brand" href="/">Matthew Cobbs</a>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="/">Matthew Cobbs</a>
+                <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li><a href="/">Home</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">Projects</a>
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/stitches">Stitches</a></li>
                                 <li><a href="/lockdown">Lockdown</a></li>
                                 <li><a href="/tanchor">Tanchor</a></li>
+                                <li><a href="/deeplink">Deeplink</a></li>
                             </ul>
                         </li>
                         <li><a href="/archives.html">Archives</a></li>
                     </ul>
-                    <form action="/search.html" class="search pull-right">
-                        <input name="gsc" type="text" placeholder="Search" class="span3" />
+                    <form action="/search.html" class="navbar-form pull-right">
+                        <input class="span3" name="q" type="text" placeholder="Search"/>
                     </form>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 
     <!-- main content container -->
-    <div class="container span10">
+    <div class="container">
         <div class="content">
             <div class="page-header">
                 <h1>Stitches <small>An HTML5 sprite  sheet generator</small></h1>
@@ -76,16 +83,15 @@
 
             <!-- start section -->
             <section id="comments">
-                <div class="fb-comments" data-href="" data-num-posts="2" data-width="580"></div>
+                <div class="fb-comments" data-href="http://draeton.github.com/stitches/"  data-num-posts="10" data-width="940"></div>
             </section>
             <!-- end section -->
-
         </div>
     </div>
 
     <!-- footer -->
     <footer>
-        <div class="container span10">
+        <div class="container">
             <div class="content">
                 <div class="pull-left">
                     <p>
@@ -98,7 +104,7 @@
                     <p>
                         <a href="http://github.com/draeton/">github.com/draeton</a><br />
                         <a href="http://twitter.com/draeton/">twitter.com/draeton</a><br />
-                        &copy; 2011, Matthew Cobbs
+                        &copy;2013, Matthew Cobbs
                     </p>
                 </div>
             </div>
@@ -119,10 +125,7 @@
     ];
     Modernizr.load({
         load: [
-            '/bootstrap/js/bootstrap-dropdown.js',
-            '/bootstrap/js/bootstrap-buttons.js',
-            '/bootstrap/js/bootstrap-alerts.js',
-            '/bootstrap/js/bootstrap-modal.js',
+            '/bootstrap/js/bootstrap.js',
             '/js/draeton.js',
             ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
         ]
