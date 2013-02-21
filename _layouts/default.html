@@ -36,61 +36,67 @@
 
 <body>
 
-    <!-- top navigation -->
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="/">Matthew Cobbs</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="/">Home</a></li>
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/stitches">Stitches</a></li>
-                                <li><a href="/lockdown">Lockdown</a></li>
-                                <li><a href="/tanchor">Tanchor</a></li>
-                                <li><a href="/deeplink">Deeplink</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/archives.html">Archives</a></li>
-                    </ul>
-                    <form action="/search.html" class="navbar-form pull-right">
-                        <div class="input-append">
-                            <input class="span3" name="q" type="text" placeholder="Search"/>
-                            <a href="javascript:void(0);" class="add-on"><i class="icon-search"></i></a>
-                        </div>
-                    </form>
+    <div id="wrap">
+
+        <!-- top navigation -->
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="/">Matthew Cobbs</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="/">Home</a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/stitches">Stitches</a></li>
+                                    <li><a href="/lockdown">Lockdown</a></li>
+                                    <li><a href="/tanchor">Tanchor</a></li>
+                                    <li><a href="/deeplink">Deeplink</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                        <form action="/search.html" class="navbar-form pull-right">
+                            <div class="input-append">
+                                <input class="span3" name="q" type="text" placeholder="Search"/>
+                                <a href="javascript:void(0);" class="add-on"><i class="icon-search"></i></a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- main content container -->
-    <div class="container">
-        <div class="content">
-            <div class="page-header">
-                <h1>Stitches <small>An HTML5 sprite  sheet generator</small></h1>
+        <!-- main content container -->
+        <div class="container">
+            <div class="content">
+                <div class="page-header">
+                    <h1>Stitches <small>An HTML5 sprite  sheet generator</small></h1>
+                </div>
+
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Fork me on Github!</strong> <a href="http://github.com/draeton/stitches">http://github.com/draeton/stitches</a>
+                </div>
+
+                {{ content }}
+
+                <!-- start section -->
+                <section id="comments">
+                    <div class="fb-comments" data-href="http://draeton.github.com/stitches/"  data-num-posts="10" data-width="940"></div>
+                </section>
+                <!-- end section -->
             </div>
-
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Fork me on Github!</strong> <a href="http://github.com/draeton/stitches">http://github.com/draeton/stitches</a>
-            </div>
-
-            {{ content }}
-
-            <!-- start section -->
-            <section id="comments">
-                <div class="fb-comments" data-href="http://draeton.github.com/stitches/"  data-num-posts="10" data-width="940"></div>
-            </section>
-            <!-- end section -->
         </div>
+
+        <div id="push"></div>
+
     </div>
 
     <!-- footer -->
@@ -98,14 +104,14 @@
         <div class="container">
             <div class="content">
                 <div class="pull-left">
-                    <p>
+                    <p class="muted">
                         Matthew Cobbs<br />
                         Detroit Web Developer<br />
                         draeton@gmail.com
                     </p>
                 </div>
                 <div class="pull-right text-right">
-                    <p>
+                    <p class="muted">
                         <a href="http://github.com/draeton/">github.com/draeton</a><br />
                         <a href="http://twitter.com/draeton/">twitter.com/draeton</a><br />
                         &copy;2013, Matthew Cobbs
