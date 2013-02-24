@@ -148,11 +148,11 @@
             positionImages: function (looseIcons) {
                 var placedIcons = [];
 
-            	/* reset position of icons */
-            	$(looseIcons).each(function (idx, icon) {
-            		icon.x = icon.y = 0;
-            		icon.isPlaced = false;
-            	});
+                /* reset position of icons */
+                $(looseIcons).each(function (idx, icon) {
+                    icon.x = icon.y = 0;
+                    icon.isPlaced = false;
+                });
 
                 /* reverse sort by area */
                 looseIcons = looseIcons.sort(function (a, b) {
@@ -221,7 +221,7 @@
 
                 var prefix = S.settings.prefix;
 
-                var backgroundImage
+                var backgroundImage;
                 if (S.settings.dataURI) {
                     backgroundImage = sprite;
                 } else {
@@ -267,7 +267,7 @@
                 if (dataParts[0].indexOf('base64') >= 0) {
                     byteString = atob(dataParts[1]);
                 } else {
-                    byteString = unescape(dataParts[1]);
+                    byteString = decodeURIComponent(dataParts[1]);
                 }
 
                 // separate out the mime component
@@ -293,10 +293,10 @@
             //
             // Polyfill
             createBlob: function (arrayBuffer, mimeString) {
-                var BlobBuilder = BlobBuilder || WebKitBlobBuilder;
+                var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
 
                 if (!BlobBuilder) {
-                    throw new Error("BlobBuilder is unsupported.")
+                    throw new Error("BlobBuilder is unsupported.");
                 }
 
                 var bb = new BlobBuilder();
@@ -318,7 +318,7 @@
                 }
 
                 /* if we reached here, it's unsupported */
-                throw new Error("createObjectURL is unsupported.")
+                throw new Error("createObjectURL is unsupported.");
             }
         };
     })();
@@ -397,12 +397,14 @@
 
                 /* loop through all of the icons, attempting to place them within the sprite
                    without intersections */
+                var place = function (idx, icon) {
+                    if (!icon.isPlaced) {
+                        icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
+                    }
+                };
+
                 while (loose.length && i < 10) {
-                    $(loose).each(function (idx, icon) {
-                        if (!icon.isPlaced) {
-                            icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
-                        }
-                    });
+                    $(loose).each(place);
 
                     i++;
                 }
@@ -428,15 +430,18 @@
             //     @return {Boolean} Have this icon been placed?
             placeIcon: function (icon, placed, canvas) {
                 var i = 0;
+                var x;
+                var y;
+                var overlap;
 
                 /* two tries to place the icon... */
                 while (i < 2) {
-                    for (var y = 0; y <= canvas.height - icon.height; y++) {
-                        for (var x = 0; x <= canvas.width - icon.width; x++) {
+                    for (y = 0; y <= canvas.height - icon.height; y++) {
+                        for (x = 0; x <= canvas.width - icon.width; x++) {
                             icon.x = x;
                             icon.y = y;
 
-                            var overlap = S.Icons.isOverlapped(icon, placed);
+                            overlap = S.Icons.isOverlapped(icon, placed);
                             if (!overlap) {
                                 return true;
                             }
@@ -565,7 +570,7 @@
                 if (cb) {
                     cb(self);
                 }
-            }
+            };
             this.image.src = src;
         };
 
@@ -612,7 +617,11 @@
 
 })(window, Stitches);/* Simple JavaScript Templating
    John Resig - http://ejohn.org/ - MIT Licensed */
-(function () {
+/*global Stitches */
+(function (window, Stitches) {
+
+    "use strict";
+
     var cache = {};
 
     Stitches.tmpl = function tmpl(str, data) {
@@ -622,7 +631,9 @@
 
         /* Generate a reusable function that will serve as a template
            generator (and which will be cached). */
+        /*jshint evil:true*/
         new Function("obj", "var p=[],print=function(){p.push.apply(p,arguments);};" +
+        /*jshint evil:false*/
 
         /* Introduce the data as local variables using with(){} */
         "with(obj){p.push('" +
@@ -633,7 +644,8 @@
         /* Provide some basic currying to the user */
         return data ? fn(data) : fn;
     };
-})();// ## Stitches.Page
+
+})(window, Stitches);// ## Stitches.Page
 //
 // [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
 //

@@ -1,6 +1,10 @@
 /* Simple JavaScript Templating
    John Resig - http://ejohn.org/ - MIT Licensed */
-(function () {
+/*global Stitches */
+(function (window, Stitches) {
+
+    "use strict";
+
     var cache = {};
 
     Stitches.tmpl = function tmpl(str, data) {
@@ -10,7 +14,9 @@
 
         /* Generate a reusable function that will serve as a template
            generator (and which will be cached). */
+        /*jshint evil:true*/
         new Function("obj", "var p=[],print=function(){p.push.apply(p,arguments);};" +
+        /*jshint evil:false*/
 
         /* Introduce the data as local variables using with(){} */
         "with(obj){p.push('" +
@@ -21,4 +27,5 @@
         /* Provide some basic currying to the user */
         return data ? fn(data) : fn;
     };
-})();
+
+})(window, Stitches);

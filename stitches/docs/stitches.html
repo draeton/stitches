@@ -152,11 +152,11 @@ updates button state</p>
             <span class="nx">positionImages</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">looseIcons</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">placedIcons</span> <span class="o">=</span> <span class="p">[];</span>
 
-              <span class="cm">/* reset position of icons */</span>
-              <span class="nx">$</span><span class="p">(</span><span class="nx">looseIcons</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">idx</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">icon</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">icon</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="nx">icon</span><span class="p">.</span><span class="nx">isPlaced</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-              <span class="p">});</span>
+                <span class="cm">/* reset position of icons */</span>
+                <span class="nx">$</span><span class="p">(</span><span class="nx">looseIcons</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">idx</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">icon</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">icon</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="nx">icon</span><span class="p">.</span><span class="nx">isPlaced</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="p">});</span>
 
                 <span class="cm">/* reverse sort by area */</span>
                 <span class="nx">looseIcons</span> <span class="o">=</span> <span class="nx">looseIcons</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
@@ -227,7 +227,7 @@ updates button state</p>
 
                 <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">S</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
 
-                <span class="kd">var</span> <span class="nx">backgroundImage</span>
+                <span class="kd">var</span> <span class="nx">backgroundImage</span><span class="p">;</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">S</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dataURI</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
                 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -274,7 +274,7 @@ See: http://stackoverflow.com/a/5100158/230483</p>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">byteString</span> <span class="o">=</span> <span class="nx">atob</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
                 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="nx">byteString</span> <span class="o">=</span> <span class="nx">unescape</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                    <span class="nx">byteString</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
                 <span class="p">}</span>
 
 </pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>separate out the mime component</p>             </td>             <td class="code">               <div class="highlight"><pre>
@@ -300,10 +300,10 @@ See: http://stackoverflow.com/a/5100158/230483</p>
 
 <p>Polyfill</p>             </td>             <td class="code">               <div class="highlight"><pre>
             <span class="nx">createBlob</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arrayBuffer</span><span class="p">,</span> <span class="nx">mimeString</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">BlobBuilder</span> <span class="o">=</span> <span class="nx">BlobBuilder</span> <span class="o">||</span> <span class="nx">WebKitBlobBuilder</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">BlobBuilder</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">BlobBuilder</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">WebKitBlobBuilder</span><span class="p">;</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">BlobBuilder</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;BlobBuilder is unsupported.&quot;</span><span class="p">)</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;BlobBuilder is unsupported.&quot;</span><span class="p">);</span>
                 <span class="p">}</span>
 
                 <span class="kd">var</span> <span class="nx">bb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlobBuilder</span><span class="p">();</span>
@@ -325,7 +325,7 @@ See: http://stackoverflow.com/a/5100158/230483</p>
                 <span class="p">}</span>
 
                 <span class="cm">/* if we reached here, it&#39;s unsupported */</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;createObjectURL is unsupported.&quot;</span><span class="p">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;createObjectURL is unsupported.&quot;</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">})();</span>
