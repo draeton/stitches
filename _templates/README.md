@@ -1,4 +1,4 @@
-[![build status](https://raw.github.com/draeton/stitches/master/status.png)](http://draeton.github.com/stitches/)
+[![build status](https://raw.github.com/draeton/stitches/master/out/status.png)](http://draeton.github.com/stitches/)
 
 [Stitches](http://draeton.github.com/stitches/)
 ==========
