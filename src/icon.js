@@ -51,7 +51,7 @@
                 if (cb) {
                     cb(self);
                 }
-            }
+            };
             this.image.src = src;
         };
 

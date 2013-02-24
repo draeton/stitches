@@ -72,12 +72,14 @@
 
                 /* loop through all of the icons, attempting to place them within the sprite
                    without intersections */
+                var place = function (idx, icon) {
+                    if (!icon.isPlaced) {
+                        icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
+                    }
+                };
+
                 while (loose.length && i < 10) {
-                    $(loose).each(function (idx, icon) {
-                        if (!icon.isPlaced) {
-                            icon.isPlaced = S.Icons.placeIcon(icon, placed, canvas);
-                        }
-                    });
+                    $(loose).each(place);
 
                     i++;
                 }
@@ -103,15 +105,18 @@
             //     @return {Boolean} Have this icon been placed?
             placeIcon: function (icon, placed, canvas) {
                 var i = 0;
+                var x;
+                var y;
+                var overlap;
 
                 /* two tries to place the icon... */
                 while (i < 2) {
-                    for (var y = 0; y <= canvas.height - icon.height; y++) {
-                        for (var x = 0; x <= canvas.width - icon.width; x++) {
+                    for (y = 0; y <= canvas.height - icon.height; y++) {
+                        for (x = 0; x <= canvas.width - icon.width; x++) {
                             icon.x = x;
                             icon.y = y;
 
-                            var overlap = S.Icons.isOverlapped(icon, placed);
+                            overlap = S.Icons.isOverlapped(icon, placed);
                             if (!overlap) {
                                 return true;
                             }

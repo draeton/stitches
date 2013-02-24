@@ -148,11 +148,11 @@
             positionImages: function (looseIcons) {
                 var placedIcons = [];
 
-            	/* reset position of icons */
-            	$(looseIcons).each(function (idx, icon) {
-            		icon.x = icon.y = 0;
-            		icon.isPlaced = false;
-            	});
+                /* reset position of icons */
+                $(looseIcons).each(function (idx, icon) {
+                    icon.x = icon.y = 0;
+                    icon.isPlaced = false;
+                });
 
                 /* reverse sort by area */
                 looseIcons = looseIcons.sort(function (a, b) {
@@ -221,7 +221,7 @@
 
                 var prefix = S.settings.prefix;
 
-                var backgroundImage
+                var backgroundImage;
                 if (S.settings.dataURI) {
                     backgroundImage = sprite;
                 } else {
@@ -267,7 +267,7 @@
                 if (dataParts[0].indexOf('base64') >= 0) {
                     byteString = atob(dataParts[1]);
                 } else {
-                    byteString = unescape(dataParts[1]);
+                    byteString = decodeURIComponent(dataParts[1]);
                 }
 
                 // separate out the mime component
@@ -293,10 +293,10 @@
             //
             // Polyfill
             createBlob: function (arrayBuffer, mimeString) {
-                var BlobBuilder = BlobBuilder || WebKitBlobBuilder;
+                var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
 
                 if (!BlobBuilder) {
-                    throw new Error("BlobBuilder is unsupported.")
+                    throw new Error("BlobBuilder is unsupported.");
                 }
 
                 var bb = new BlobBuilder();
@@ -318,7 +318,7 @@
                 }
 
                 /* if we reached here, it's unsupported */
-                throw new Error("createObjectURL is unsupported.")
+                throw new Error("createObjectURL is unsupported.");
             }
         };
     })();
