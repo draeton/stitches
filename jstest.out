@@ -1,0 +1,16 @@
+JS Test Results
+===============================================================================
+
+Running file:///c:/home/github/stitches/tests/index.html...
+1. main: Basic requirements (4, 0, 4)
+    1. Pass: window
+    2. Pass: Stitches
+    3. Pass: jQuery
+    4. Pass: $
+Test passed.
+2. main: Stitches.init() (2, 0, 2)
+    1. Pass: 
+    2. Pass: 
+Test passed.
+===============================================================================
+JS tests passed. 2 tests passed.

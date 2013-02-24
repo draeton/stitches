@@ -47,9 +47,9 @@
         depends="
             -init,
             -load.properties,
-            jshint,
-            -commit.message,
             -clean,
+            -check-status,
+            -commit.message,
             -increment,
             -readme,
             -docco,

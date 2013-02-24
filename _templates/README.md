@@ -1,6 +1,9 @@
-## Stitches
+[![build status](https://raw.github.com/draeton/stitches/master/status.png)](http://draeton.github.com/stitches/)
 
-[Stitches](http://draeton.github.com/stitches/) is an HTML5 sprite sheet generator.
+[Stitches](http://draeton.github.com/stitches/)
+==========
+
+Stitches is an HTML5 sprite sheet generator.
 The current version is `@VERSION@`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/docs/stitches.html).
 
