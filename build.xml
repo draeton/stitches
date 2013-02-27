@@ -13,17 +13,6 @@
 
     <target name="-init" description="Starting new build">
         <echo>Starting new build</echo>
-
-        <fileset id="src.js" dir="${src.dir}/js">
-            <include name="**/*.js"/>
-        </fileset>
-
-        <filelist id="src.css" dir="${src.dir}">
-            <file name="${repo}.css"/>
-            <file name="toolbar.css"/>
-            <file name="palette.css"/>
-            <file name="sprite.css"/>
-        </filelist>
     </target>
 
 
