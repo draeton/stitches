@@ -15,16 +15,14 @@
         <echo>Starting new build</echo>
 
         <filelist id="src.js" dir="${src.dir}">
-            <file name="${repo}.js"/>
-            <file name="icons.js"/>
-            <file name="icon.js"/>
-            <file name="tmpl.js"/>
-            <file name="page.js"/>
-            <file name="file.js"/>
+            <file name="**/*.js"/>
         </filelist>
 
         <filelist id="src.css" dir="${src.dir}">
             <file name="${repo}.css"/>
+            <file name="toolbar.css"/>
+            <file name="palette.css"/>
+            <file name="sprite.css"/>
         </filelist>
     </target>
 
@@ -35,7 +33,7 @@
        <copy todir="${build.dir}/js">
            <fileset dir="${src.dir}" includes="*.html"/>
        </copy>
-        <copy todir="${build.dir}/js">
+        <copy todir="${build.dir}/lib">
             <fileset dir="${src.dir}/lib"/>
         </copy>
     </target>
