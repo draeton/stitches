@@ -28,11 +28,12 @@
 
 
     <target name="-copy-depends" depends="-init" description="Copying dependencies">
-        <echo>Copying dependencies IMPORTANT</echo>
+        <echo>Copying dependencies</echo>
 
         <copy todir="${build.dir}/img">
             <fileset dir="${src.dir}/img"/>
         </copy>
+
         <copy todir="${build.dir}/lib">
             <fileset dir="${src.dir}/lib"/>
         </copy>
