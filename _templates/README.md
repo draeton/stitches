@@ -21,7 +21,7 @@ The sprite sheet generator is automatically created in elements that have the `s
 
 ## Dependencies
 
-[jQuery](http://jquery.com/) 1.7.1, [Modernizr](http://modernizr.com/) 2.0.6, [Bootstrap](http://twitter.github.com/bootstrap/) 2.3.0
+[jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/)
 
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
