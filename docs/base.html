@@ -1,0 +1,49 @@
+<!DOCTYPE html>  <html> <head>   <title>base.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="base.html">                 base.js               </a>                                           <a class="source" href="compact.html">                 compact.js               </a>                                           <a class="source" href="horizontal.html">                 horizontal.js               </a>                                           <a class="source" href="vertical.html">                 vertical.js               </a>                                           <a class="source" href="canvas.html">                 canvas.js               </a>                                           <a class="source" href="drop-box.html">                 drop-box.js               </a>                                           <a class="source" href="file-manager.html">                 file-manager.js               </a>                                           <a class="source" href="palette.html">                 palette.js               </a>                                           <a class="source" href="sprite.html">                 sprite.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="toolbar.html">                 toolbar.js               </a>                                           <a class="source" href="require.html">                 require.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="text.html">                 text.js               </a>                                           <a class="source" href="array.html">                 array.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="templates.html">                 templates.js               </a>                                           <a class="source" href="util.html">                 util.js               </a>                                           <a class="source" href="modernizr.html">                 modernizr.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               base.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h2>layouts/base</h2>
+
+<p><a href="http://draeton.github.com/stitches">http://draeton.github.com/stitches</a></p>
+
+<p>Copyright 2013, Matthew Cobbs
+Licensed under the MIT license.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*global require, define */</span>
+<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">],</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">BaseLayout</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+
+    <span class="nx">BaseLayout</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">constructor</span><span class="o">:</span> <span class="nx">BaseLayout</span><span class="p">,</span>
+
+        <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+
+        <span class="nx">placeSprites</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+
+        <span class="nx">intersection</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">obstacles</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">y2</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">intersections</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="kd">var</span> <span class="nx">intersection</span><span class="p">;</span>
+
+            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">obstacles</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obstacle</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">x1</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obstacle</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+                <span class="nx">x2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obstacle</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obstacle</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
+                <span class="nx">y1</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obstacle</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+                <span class="nx">y2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obstacle</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obstacle</span><span class="p">.</span><span class="nx">height</span> <span class="o">&gt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">x1</span> <span class="o">&amp;&amp;</span> <span class="nx">x2</span> <span class="o">&amp;&amp;</span> <span class="nx">y1</span> <span class="o">&amp;&amp;</span> <span class="nx">y2</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">intersections</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obstacle</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">intersections</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">intersection</span> <span class="o">=</span> <span class="nx">intersections</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nx">intersection</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">BaseLayout</span><span class="p">;</span>
+
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

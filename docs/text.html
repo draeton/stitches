@@ -1,0 +1,365 @@
+<!DOCTYPE html>  <html> <head>   <title>text.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="base.html">                 base.js               </a>                                           <a class="source" href="compact.html">                 compact.js               </a>                                           <a class="source" href="horizontal.html">                 horizontal.js               </a>                                           <a class="source" href="vertical.html">                 vertical.js               </a>                                           <a class="source" href="canvas.html">                 canvas.js               </a>                                           <a class="source" href="drop-box.html">                 drop-box.js               </a>                                           <a class="source" href="file-manager.html">                 file-manager.js               </a>                                           <a class="source" href="palette.html">                 palette.js               </a>                                           <a class="source" href="sprite.html">                 sprite.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="toolbar.html">                 toolbar.js               </a>                                           <a class="source" href="require.html">                 require.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="text.html">                 text.js               </a>                                           <a class="source" href="array.html">                 array.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="templates.html">                 templates.js               </a>                                           <a class="source" href="util.html">                 util.js               </a>                                           <a class="source" href="modernizr.html">                 modernizr.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               text.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * @license RequireJS text 2.0.5+ Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.</span>
+<span class="cm"> * Available via the MIT or new BSD license.</span>
+<span class="cm"> * see: http://github.com/requirejs/text for details</span>
+<span class="cm"> */</span>
+<span class="cm">/*jslint regexp: true */</span>
+<span class="cm">/*global require, XMLHttpRequest, ActiveXObject,</span>
+<span class="cm">  define, window, process, Packages,</span>
+<span class="cm">  java, location, Components, FileUtils */</span>
+
+<span class="nx">define</span><span class="p">([</span><span class="s1">&#39;module&#39;</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">fs</span><span class="p">,</span> <span class="nx">Cc</span><span class="p">,</span> <span class="nx">Ci</span><span class="p">,</span>
+        <span class="nx">progIds</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Msxml2.XMLHTTP&#39;</span><span class="p">,</span> <span class="s1">&#39;Microsoft.XMLHTTP&#39;</span><span class="p">,</span> <span class="s1">&#39;Msxml2.XMLHTTP.4.0&#39;</span><span class="p">],</span>
+        <span class="nx">xmlRegExp</span> <span class="o">=</span> <span class="sr">/^\s*&lt;\?xml(\s)+version=[\&#39;\&quot;](\d)*.(\d)*[\&#39;\&quot;](\s)*\?&gt;/im</span><span class="p">,</span>
+        <span class="nx">bodyRegExp</span> <span class="o">=</span> <span class="sr">/&lt;body[^&gt;]*&gt;\s*([\s\S]+)\s*&lt;\/body&gt;/im</span><span class="p">,</span>
+        <span class="nx">hasLocation</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">location</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
+        <span class="nx">defaultProtocol</span> <span class="o">=</span> <span class="nx">hasLocation</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\:/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+        <span class="nx">defaultHostName</span> <span class="o">=</span> <span class="nx">hasLocation</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="p">,</span>
+        <span class="nx">defaultPort</span> <span class="o">=</span> <span class="nx">hasLocation</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">port</span> <span class="o">||</span> <span class="kc">undefined</span><span class="p">),</span>
+        <span class="nx">buildMap</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="nx">masterConfig</span> <span class="o">=</span> <span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">config</span> <span class="o">&amp;&amp;</span> <span class="nx">module</span><span class="p">.</span><span class="nx">config</span><span class="p">())</span> <span class="o">||</span> <span class="p">{};</span>
+
+    <span class="nx">text</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;2.0.5+&#39;</span><span class="p">,</span>
+
+        <span class="nx">strip</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Strips <?xml ...?> declarations so that external SVG and XML
+documents can be added to a document without worry. Also, if the string
+is an HTML document, only the part inside the body tag is returned.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">content</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">xmlRegExp</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">matches</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">bodyRegExp</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">content</span> <span class="o">=</span> <span class="nx">matches</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">content</span><span class="p">;</span>
+        <span class="p">},</span>
+
+        <span class="nx">jsEscape</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">content</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/([&#39;\\])/g</span><span class="p">,</span> <span class="s1">&#39;\\$1&#39;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\f]/g</span><span class="p">,</span> <span class="s2">&quot;\\f&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\b]/g</span><span class="p">,</span> <span class="s2">&quot;\\b&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\n]/g</span><span class="p">,</span> <span class="s2">&quot;\\n&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\t]/g</span><span class="p">,</span> <span class="s2">&quot;\\t&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\r]/g</span><span class="p">,</span> <span class="s2">&quot;\\r&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\u2028]/g</span><span class="p">,</span> <span class="s2">&quot;\\u2028&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\u2029]/g</span><span class="p">,</span> <span class="s2">&quot;\\u2029&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">createXhr</span><span class="o">:</span> <span class="nx">masterConfig</span><span class="p">.</span><span class="nx">createXhr</span> <span class="o">||</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Would love to dump the ActiveX crap in here. Need IE 6 to die first.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="kd">var</span> <span class="nx">xhr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">progId</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">XMLHttpRequest</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">ActiveXObject</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">progId</span> <span class="o">=</span> <span class="nx">progIds</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="nx">progId</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">progIds</span> <span class="o">=</span> <span class="p">[</span><span class="nx">progId</span><span class="p">];</span>  <span class="c1">// so faster next time</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nx">xhr</span><span class="p">;</span>
+        <span class="p">},</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Parses a resource name into its component parts. Resource names</span>
+<span class="cm">         * look like: module/name.ext!strip, where the !strip part is</span>
+<span class="cm">         * optional.</span>
+<span class="cm">         * @param {String} name the resource name</span>
+<span class="cm">         * @returns {Object} with properties &quot;moduleName&quot;, &quot;ext&quot; and &quot;strip&quot;</span>
+<span class="cm">         * where strip is a boolean.</span>
+<span class="cm">         */</span>
+        <span class="nx">parseName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">modName</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">temp</span><span class="p">,</span>
+                <span class="nx">strip</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nx">index</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span>
+                <span class="nx">isRelative</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span>
+                             <span class="nx">name</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="nx">isRelative</span> <span class="o">||</span> <span class="nx">index</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">modName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+                <span class="nx">ext</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">modName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nx">temp</span> <span class="o">=</span> <span class="nx">ext</span> <span class="o">||</span> <span class="nx">modName</span><span class="p">;</span>
+            <span class="nx">index</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Pull off the strip arg.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">strip</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;strip&quot;</span><span class="p">;</span>
+                <span class="nx">temp</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">ext</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">ext</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">modName</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">moduleName</span><span class="o">:</span> <span class="nx">modName</span><span class="p">,</span>
+                <span class="nx">ext</span><span class="o">:</span> <span class="nx">ext</span><span class="p">,</span>
+                <span class="nx">strip</span><span class="o">:</span> <span class="nx">strip</span>
+            <span class="p">};</span>
+        <span class="p">},</span>
+
+        <span class="nx">xdRegExp</span><span class="o">:</span> <span class="sr">/^((\w+)\:)?\/\/([^\/\\]+)/</span><span class="p">,</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Is an URL on another domain. Only works for browser use, returns</span>
+<span class="cm">         * false in non-browser environments. Only used to know if an</span>
+<span class="cm">         * optimized .js version of a text resource should be loaded</span>
+<span class="cm">         * instead.</span>
+<span class="cm">         * @param {String} url</span>
+<span class="cm">         * @returns Boolean</span>
+<span class="cm">         */</span>
+        <span class="nx">useXhr</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">protocol</span><span class="p">,</span> <span class="nx">hostname</span><span class="p">,</span> <span class="nx">port</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">uProtocol</span><span class="p">,</span> <span class="nx">uHostName</span><span class="p">,</span> <span class="nx">uPort</span><span class="p">,</span>
+                <span class="nx">match</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">xdRegExp</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">match</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">uProtocol</span> <span class="o">=</span> <span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+            <span class="nx">uHostName</span> <span class="o">=</span> <span class="nx">match</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+            <span class="nx">uHostName</span> <span class="o">=</span> <span class="nx">uHostName</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">);</span>
+            <span class="nx">uPort</span> <span class="o">=</span> <span class="nx">uHostName</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+            <span class="nx">uHostName</span> <span class="o">=</span> <span class="nx">uHostName</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+            <span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="nx">uProtocol</span> <span class="o">||</span> <span class="nx">uProtocol</span> <span class="o">===</span> <span class="nx">protocol</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="p">(</span><span class="o">!</span><span class="nx">uHostName</span> <span class="o">||</span> <span class="nx">uHostName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="nx">hostname</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="o">&amp;&amp;</span>
+                   <span class="p">((</span><span class="o">!</span><span class="nx">uPort</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">uHostName</span><span class="p">)</span> <span class="o">||</span> <span class="nx">uPort</span> <span class="o">===</span> <span class="nx">port</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">finishLoad</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">strip</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">content</span> <span class="o">=</span> <span class="nx">strip</span> <span class="o">?</span> <span class="nx">text</span><span class="p">.</span><span class="nx">strip</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="o">:</span> <span class="nx">content</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">isBuild</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">buildMap</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">content</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">onLoad</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">load</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Name has format: some.module.filext!strip
+The strip part is optional.
+if strip is present, then that means only get the string contents
+inside a body tag in an HTML string. For XML/SVG content it means
+removing the <?xml ...?> declarations so the content can be inserted
+into the current doc without problems.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Do not bother with the work if a build and text will
+not be inlined.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">isBuild</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">inlineText</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">onLoad</span><span class="p">();</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nx">masterConfig</span><span class="p">.</span><span class="nx">isBuild</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">isBuild</span><span class="p">;</span>
+
+            <span class="kd">var</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">parseName</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
+                <span class="nx">nonStripName</span> <span class="o">=</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">moduleName</span> <span class="o">+</span>
+                    <span class="p">(</span><span class="nx">parsed</span><span class="p">.</span><span class="nx">ext</span> <span class="o">?</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">ext</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                <span class="nx">url</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">toUrl</span><span class="p">(</span><span class="nx">nonStripName</span><span class="p">),</span>
+                <span class="nx">useXhr</span> <span class="o">=</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">useXhr</span><span class="p">)</span> <span class="o">||</span>
+                         <span class="nx">text</span><span class="p">.</span><span class="nx">useXhr</span><span class="p">;</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Load the text. Use XHR if possible and in a browser.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasLocation</span> <span class="o">||</span> <span class="nx">useXhr</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">defaultProtocol</span><span class="p">,</span> <span class="nx">defaultHostName</span><span class="p">,</span> <span class="nx">defaultPort</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">text</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">text</span><span class="p">.</span><span class="nx">finishLoad</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">strip</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+                <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">onLoad</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">onLoad</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Need to fetch the resource across domains. Assume
+the resource has been optimized into a JS module. Fetch
+by the module name + extension, but do not include the
+!strip part to avoid file system issues.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">req</span><span class="p">([</span><span class="nx">nonStripName</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">text</span><span class="p">.</span><span class="nx">finishLoad</span><span class="p">(</span><span class="nx">parsed</span><span class="p">.</span><span class="nx">moduleName</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">ext</span><span class="p">,</span>
+                                    <span class="nx">parsed</span><span class="p">.</span><span class="nx">strip</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">write</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="nx">moduleName</span><span class="p">,</span> <span class="nx">write</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">buildMap</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">))</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">jsEscape</span><span class="p">(</span><span class="nx">buildMap</span><span class="p">[</span><span class="nx">moduleName</span><span class="p">]);</span>
+                <span class="nx">write</span><span class="p">.</span><span class="nx">asModule</span><span class="p">(</span><span class="nx">pluginName</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span> <span class="o">+</span> <span class="nx">moduleName</span><span class="p">,</span>
+                               <span class="s2">&quot;define(function () { return &#39;&quot;</span> <span class="o">+</span>
+                                   <span class="nx">content</span> <span class="o">+</span>
+                               <span class="s2">&quot;&#39;;});\n&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">writeFile</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="nx">moduleName</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">write</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">parseName</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">),</span>
+                <span class="nx">extPart</span> <span class="o">=</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">ext</span> <span class="o">?</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">ext</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="nx">nonStripName</span> <span class="o">=</span> <span class="nx">parsed</span><span class="p">.</span><span class="nx">moduleName</span> <span class="o">+</span> <span class="nx">extPart</span><span class="p">,</span>
+</pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Use a '.js' file name so that it indicates it is a
+script that can be loaded across domains.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">toUrl</span><span class="p">(</span><span class="nx">parsed</span><span class="p">.</span><span class="nx">moduleName</span> <span class="o">+</span> <span class="nx">extPart</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.js&#39;</span><span class="p">;</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Leverage own load() method to load plugin value, but only
+write out values that do not have the strip argument,
+to avoid any potential issues with ! in file names.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="nx">text</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">nonStripName</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Use own write() method to construct full module value.
+But need to create shell that translates writeFile's
+write() to the right interface.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="kd">var</span> <span class="nx">textWrite</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">contents</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">write</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">contents</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="nx">textWrite</span><span class="p">.</span><span class="nx">asModule</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">moduleName</span><span class="p">,</span> <span class="nx">contents</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">write</span><span class="p">.</span><span class="nx">asModule</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">contents</span><span class="p">);</span>
+                <span class="p">};</span>
+
+                <span class="nx">text</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">pluginName</span><span class="p">,</span> <span class="nx">nonStripName</span><span class="p">,</span> <span class="nx">textWrite</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+            <span class="p">},</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="s1">&#39;node&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">&amp;&amp;</span>
+            <span class="k">typeof</span> <span class="nx">process</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">process</span><span class="p">.</span><span class="nx">versions</span> <span class="o">&amp;&amp;</span>
+            <span class="o">!!</span><span class="nx">process</span><span class="p">.</span><span class="nx">versions</span><span class="p">.</span><span class="nx">node</span><span class="p">))</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Using special require.nodeRequire, something added by r.js.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+        <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">.</span><span class="nx">nodeRequire</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+        <span class="nx">text</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Remove BOM (Byte Mark Order) from utf8 files if it is there.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;\uFEFF&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">file</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="s1">&#39;xhr&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">text</span><span class="p">.</span><span class="nx">createXhr</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="nx">text</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">errback</span><span class="p">,</span> <span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">createXhr</span><span class="p">(),</span> <span class="nx">header</span><span class="p">;</span>
+            <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>Allow plugins direct access to xhr headers</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">header</span> <span class="k">in</span> <span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">headers</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">header</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="nx">header</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">headers</span><span class="p">[</span><span class="nx">header</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Allow overrides specified in config</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">onXhr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">masterConfig</span><span class="p">.</span><span class="nx">onXhr</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">err</span><span class="p">;</span>
+</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Do not explicitly handle errors, those should be
+visible via console output in the browser.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">status</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;</span> <span class="mi">399</span> <span class="o">&amp;&amp;</span> <span class="nx">status</span> <span class="o">&lt;</span> <span class="mi">600</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>An http 4xx or 5xx error. Signal an error.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                        <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39; HTTP status: &#39;</span> <span class="o">+</span> <span class="nx">status</span><span class="p">);</span>
+                        <span class="nx">err</span><span class="p">.</span><span class="nx">xhr</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">;</span>
+                        <span class="nx">errback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">callback</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">};</span>
+            <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="s1">&#39;rhino&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">&amp;&amp;</span>
+            <span class="k">typeof</span> <span class="nb">Packages</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">java</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">))</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>Why Java, why is this so awkward?</p>             </td>             <td class="code">               <div class="highlight"><pre>
+        <span class="nx">text</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">stringBuffer</span><span class="p">,</span> <span class="nx">line</span><span class="p">,</span>
+                <span class="nx">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span>
+                <span class="nx">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">url</span><span class="p">),</span>
+                <span class="nx">lineSeparator</span> <span class="o">=</span> <span class="nx">java</span><span class="p">.</span><span class="nx">lang</span><span class="p">.</span><span class="nx">System</span><span class="p">.</span><span class="nx">getProperty</span><span class="p">(</span><span class="s2">&quot;line.separator&quot;</span><span class="p">),</span>
+                <span class="nx">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">BufferedReader</span><span class="p">(</span><span class="k">new</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">InputStreamReader</span><span class="p">(</span><span class="k">new</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">FileInputStream</span><span class="p">(</span><span class="nx">file</span><span class="p">),</span> <span class="nx">encoding</span><span class="p">)),</span>
+                <span class="nx">content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">stringBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">java</span><span class="p">.</span><span class="nx">lang</span><span class="p">.</span><span class="nx">StringBuffer</span><span class="p">();</span>
+                <span class="nx">line</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">readLine</span><span class="p">();</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>Byte Order Mark (BOM) - The Unicode Standard, version 3.0, page 324
+http://www.unicode.org/faq/utf_bom.html</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Note that when we use utf-8, the BOM should appear as "EF BB BF", but it doesn't due to this bug in the JDK:
+http://bugs.sun.com/bugdatabase/view<em>bug.do?bug</em>id=4508058</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">line</span> <span class="o">&amp;&amp;</span> <span class="nx">line</span><span class="p">.</span><span class="nx">length</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">line</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">===</span> <span class="mh">0xfeff</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>Eat the BOM, since we've already found the encoding on this file,
+and we plan to concatenating this buffer with others; the BOM should
+only appear at the top of a file.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                    <span class="nx">line</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="nx">stringBuffer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+
+                <span class="k">while</span> <span class="p">((</span><span class="nx">line</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">readLine</span><span class="p">())</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">stringBuffer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">lineSeparator</span><span class="p">);</span>
+                    <span class="nx">stringBuffer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+                <span class="p">}</span>
+</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>Make sure we return a JavaScript string and not a Java string.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+                <span class="nx">content</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">stringBuffer</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span> <span class="c1">//String</span>
+            <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+                <span class="nx">input</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="s1">&#39;xpconnect&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterConfig</span><span class="p">.</span><span class="nx">env</span> <span class="o">&amp;&amp;</span>
+            <span class="k">typeof</span> <span class="nx">Components</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">Components</span><span class="p">.</span><span class="nx">classes</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">Components</span><span class="p">.</span><span class="nx">interfaces</span><span class="p">))</span> <span class="p">{</span>
+</pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>Avert your gaze!</p>             </td>             <td class="code">               <div class="highlight"><pre>
+        <span class="nx">Cc</span> <span class="o">=</span> <span class="nx">Components</span><span class="p">.</span><span class="nx">classes</span><span class="p">,</span>
+        <span class="nx">Ci</span> <span class="o">=</span> <span class="nx">Components</span><span class="p">.</span><span class="nx">interfaces</span><span class="p">;</span>
+        <span class="nx">Components</span><span class="p">.</span><span class="nx">utils</span><span class="p">[</span><span class="s1">&#39;import&#39;</span><span class="p">](</span><span class="s1">&#39;resource://gre/modules/FileUtils.jsm&#39;</span><span class="p">);</span>
+
+        <span class="nx">text</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">inStream</span><span class="p">,</span> <span class="nx">convertStream</span><span class="p">,</span>
+                <span class="nx">readData</span> <span class="o">=</span> <span class="p">{},</span>
+                <span class="nx">fileObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileUtils</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>XPCOM, you so crazy</p>             </td>             <td class="code">               <div class="highlight"><pre>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">inStream</span> <span class="o">=</span> <span class="nx">Cc</span><span class="p">[</span><span class="s1">&#39;@mozilla.org/network/file-input-stream;1&#39;</span><span class="p">]</span>
+                           <span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span><span class="nx">Ci</span><span class="p">.</span><span class="nx">nsIFileInputStream</span><span class="p">);</span>
+                <span class="nx">inStream</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+                <span class="nx">convertStream</span> <span class="o">=</span> <span class="nx">Cc</span><span class="p">[</span><span class="s1">&#39;@mozilla.org/intl/converter-input-stream;1&#39;</span><span class="p">]</span>
+                                <span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span><span class="nx">Ci</span><span class="p">.</span><span class="nx">nsIConverterInputStream</span><span class="p">);</span>
+                <span class="nx">convertStream</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">inStream</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="nx">inStream</span><span class="p">.</span><span class="nx">available</span><span class="p">(),</span>
+                <span class="nx">Ci</span><span class="p">.</span><span class="nx">nsIConverterInputStream</span><span class="p">.</span><span class="nx">DEFAULT_REPLACEMENT_CHARACTER</span><span class="p">);</span>
+
+                <span class="nx">convertStream</span><span class="p">.</span><span class="nx">readString</span><span class="p">(</span><span class="nx">inStream</span><span class="p">.</span><span class="nx">available</span><span class="p">(),</span> <span class="nx">readData</span><span class="p">);</span>
+                <span class="nx">convertStream</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                <span class="nx">inStream</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                <span class="nx">callback</span><span class="p">(</span><span class="nx">readData</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">((</span><span class="nx">fileObj</span> <span class="o">&amp;&amp;</span> <span class="nx">fileObj</span><span class="p">.</span><span class="nx">path</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

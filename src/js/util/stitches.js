@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global require, define */
-define(["wrap/jquery", "layouts/compact", "layouts/vertical", "layouts/horizontal"],
+define(["jquery", "layouts/compact", "layouts/vertical", "layouts/horizontal"],
 function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     "use strict";

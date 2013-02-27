@@ -6,17 +6,17 @@
 
 
     <property environment="env"/>
-    <property name="repo" value="stitches"/>
+    <property file="build.properties"/>
+    <property file="${common.properties}"/>
+    <import file="${common.targets}"/>
 
-    <import file="../_tools/github/common-targets.xml"/>
 
-
-    <target name="-init" depends="-load.properties" description="Starting new build">
+    <target name="-init" description="Starting new build">
         <echo>Starting new build</echo>
 
-        <filelist id="src.js" dir="${src.dir}">
-            <file name="**/*.js"/>
-        </filelist>
+        <fileset id="src.js" dir="${src.dir}/js">
+            <include name="**/*.js"/>
+        </fileset>
 
         <filelist id="src.css" dir="${src.dir}">
             <file name="${repo}.css"/>
@@ -28,11 +28,11 @@
 
 
     <target name="-copy-depends" depends="-init" description="Copying dependencies">
-        <echo>Copying dependencies</echo>
+        <echo>Copying dependencies IMPORTANT</echo>
 
-       <copy todir="${build.dir}/js">
-           <fileset dir="${src.dir}" includes="*.html"/>
-       </copy>
+        <copy todir="${build.dir}/img">
+            <fileset dir="${src.dir}/img"/>
+        </copy>
         <copy todir="${build.dir}/lib">
             <fileset dir="${src.dir}/lib"/>
         </copy>
@@ -44,18 +44,17 @@
         description="Builds project files for production use"
         depends="
             -init,
-            -load.properties,
             -clean,
-            -check-status,
-            -commit.message,
+            validate,
             -increment,
             -readme,
-            -docco,
+            docco,
+            require,
             -concat,
             -minify,
             -copy-depends,
             -zip,
-            -commit">
+            commit">
     </target>
 
     <target name="pages"

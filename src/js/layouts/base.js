@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global require, define */
-define(["wrap/jquery"],
+define(["jquery"],
 function ($) {
 
     "use strict";

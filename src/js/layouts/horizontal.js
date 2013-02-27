@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global require, define */
-define(["wrap/jquery", "util/util", "layouts/base"],
+define(["jquery", "util/util", "layouts/base"],
 function ($, util, BaseLayout) {
 
     "use strict";

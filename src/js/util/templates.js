@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global require, define */
-define(["wrap/jquery", "text!../../templates/stitches.html", "text!../../templates/sprite.html"],
+define(["jquery", "text!../../templates/stitches.html", "text!../../templates/sprite.html"],
 function ($, stitchesTemplate, spriteTemplate) {
 
     "use strict";

@@ -6,7 +6,7 @@
 // Licensed under the MIT license.
 //
 /*global require, define */
-define(["wrap/jquery", "util/util", "modules/toolbar"],
+define(["jquery", "util/util", "modules/toolbar"],
 function ($, util, Toolbar) {
 
     "use strict";

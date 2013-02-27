@@ -4,36 +4,31 @@
 ==========
 
 Stitches is an HTML5 sprite sheet generator.
-The current version is `1.0.33`. Documentation is available
+The current version is `1.0.37`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/docs/stitches.html).
-
-## Implementation
-
-Stitches requires a stylesheet, a script, and an HTML element to get the job done:
-
-    <link rel="stylesheet" href="css/stitches-1.0.33-min.css">
-
-    <script src="js/jquery-1.7.1.min.js"></script>
-    <script src="js/modernizr-2.0.6.min.js"></script>
-
-    <script src="js/stitches-1.0.33-min.js"></script>
-
-Once that's in place, the sprite sheet generator is created by the `init` method:
-
-    <div id="stitches"></div>
-
-    <script>
-    jQuery(document).ready(function ($) {
-
-        var $stitches = $("#stitches");
-        Stitches.init($stitches, {jsdir: "js"});
-
-    });
-    </script>
 
 ## Dependencies
 
-jQuery 1.7.1+, Modernizr; *Dropfile, Flashcanvas for older browser support*
+[jQuery](http://jquery.com/) 1.7.1, [Modernizr](http://modernizr.com/) 2.0.6, [Bootstrap](http://twitter.github.com/bootstrap/) 2.3.0:
+
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+
+    <script src="lib/jquery/jquery-1.7.1.js"></script>
+    <script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+## Implementation
+
+After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
+
+    <link rel="stylesheet" href="css/stitches-1.0.37-min.css">
+
+    <script data-main="js/stitches.js" src="js/stitches-1.0.37-min.js"></script>
+
+The sprite sheet generator is automatically created in elements that have the `stitches` class:
+
+    <div class="stitches"></div>
 
 ## License
 
