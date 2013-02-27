@@ -21,7 +21,7 @@ function ($, util, BaseLayout) {
             $.map(sprites, function (sprite) {
                 height = sprite.height > height ? sprite.height : height;
                 width += sprite.width;
-            })
+            });
 
             return {
                 width: width || defaults.width,

@@ -5,7 +5,8 @@
 // Copyright 2013, Matthew Cobbs
 // Licensed under the MIT license.
 //
-/*global require, define */
+/*global require, define, Modernizr */
 define(function () {
+    "use strict";
     return Modernizr;
 });

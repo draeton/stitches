@@ -37,7 +37,7 @@ function ($, stitchesTemplate, spriteTemplate) {
     var compile = function (template, id) {
         $(window.document.body).append(template);
 
-        return tmpl(id)
+        return tmpl(id);
     };
 
     return {

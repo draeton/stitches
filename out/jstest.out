@@ -1,27 +1,4 @@
 JS Test Results
 ===============================================================================
-
-Running file:///c:/home/github/stitches/tests/index.html...
-1. main: Basic requirements (1, 2, 3)
-    1. Pass: window
-    2. Fail: Died on test #2     at file:///c:/home/github/stitches/tests/qunit/qunit.js:412
-    at file:///c:/home/github/stitches/tests/unit/main.js:17
-    at file:///c:/home/github/stitches/tests/unit/main.js:34: Can't find variable: Stitches
-    Expected [undefined] but was [undefined].
-    3. Fail: Expected 4 assertions, but 2 were run
-    Expected [undefined] but was [undefined].
-Test failed.
-2. main: Stitches.init() (0, 2, 2)
-    1. Fail: Died on test #1     at file:///c:/home/github/stitches/tests/qunit/qunit.js:412
-    at file:///c:/home/github/stitches/tests/unit/main.js:25
-    at file:///c:/home/github/stitches/tests/unit/main.js:34: Can't find variable: Stitches
-    Expected [undefined] but was [undefined].
-    2. Fail: Expected 2 assertions, but 1 were run
-    Expected [undefined] but was [undefined].
-Test failed.
-3. main: global failure (0, 1, 1)
-    1. Fail: ReferenceError: Can't find variable: $
-    Expected [undefined] but was [undefined].
-Test failed.
 ===============================================================================
-JS tests failed. 3 tests failed. 0 error.
+JS tests passed. 0 test passed.

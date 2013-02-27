@@ -9,6 +9,8 @@
 define(["wrap/jquery"],
 function ($) {
 
+    "use strict";
+
     var BaseLayout = function () {};
 
     BaseLayout.prototype = {

@@ -238,7 +238,7 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
                             self.$element.trigger("close-properties");
                         }
                     },
-                    delete: {
+                    remove: {
                         click: function (e) {
                             var sprite = this.source;
 
@@ -299,7 +299,7 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
                     layout: this.settings.layout,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
-                    uri: this.settings.uri,
+                    uri: this.settings.uri
                 }
             });
 
@@ -361,8 +361,8 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
 
                 toolbar.enable("spritesheet stylesheet");
             } else {
-                $toolbar.find("[data-action=spritesheet]").attr("href", "javascript:void(0);");
-                $toolbar.find("[data-action=stylesheet]").attr("href", "javascript:void(0);");
+                $toolbar.find("[data-action=spritesheet]").attr("href", "#");
+                $toolbar.find("[data-action=stylesheet]").attr("href", "#");
 
                 toolbar.disable("spritesheet stylesheet");
             }

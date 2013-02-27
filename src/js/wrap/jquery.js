@@ -5,7 +5,8 @@
 // Copyright 2013, Matthew Cobbs
 // Licensed under the MIT license.
 //
-/*global require, define */
+/*global require, define, jQuery */
 define(function () {
+    "use strict";
     return jQuery;
 });

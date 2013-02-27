@@ -9,6 +9,8 @@
 define(["wrap/jquery"],
 function ($) {
 
+    "use strict";
+
     var defaults = {
         name: "",
         actions: {}

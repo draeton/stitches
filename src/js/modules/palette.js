@@ -9,6 +9,8 @@
 define(["wrap/jquery", "util/util", "modules/toolbar"],
 function ($, util, Toolbar) {
 
+    "use strict";
+
     var defaults = {
         name: "",
         visible: false,

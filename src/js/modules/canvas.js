@@ -174,8 +174,7 @@ function($, util, array, stitches, Sprite) {
 
         createSprite: function (e, name, src) {
             var self = this;
-
-            new Sprite({
+            var sprite = new Sprite({
                 name: name,
                 src: src,
                 padding: this.settings.padding,

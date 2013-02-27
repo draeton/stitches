@@ -19,9 +19,9 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     return {
         setLayout: function (type) {
-            var selected = layouts[type] || layouts.compact;
+            var Constructor = layouts[type] || layouts.compact;
 
-            this.layout = new selected();
+            this.layout = new Constructor();
         },
 
         getDimensions: function (sprites, defaults) {

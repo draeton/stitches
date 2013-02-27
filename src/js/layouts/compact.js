@@ -24,7 +24,7 @@ function ($, util, BaseLayout) {
                 width = sprite.width > width ? sprite.width : width;
                 height = sprite.height > height ? sprite.height : height;
                 area += sprite.area;
-            })
+            });
 
             mean = Math.ceil(Math.sqrt(area));
             width = width > mean ? width : mean;
