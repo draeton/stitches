@@ -1,36 +1,34 @@
-## Stitches
+[![build status](https://raw.github.com/draeton/stitches/master/out/status.png)](http://draeton.github.com/stitches/)
 
-[Stitches](http://draeton.github.com/stitches/) is an HTML5 sprite sheet generator.
-The current version is `0.5.27`. Documentation is available
+[Stitches](http://draeton.github.com/stitches/)
+==========
+
+Stitches is an HTML5 sprite sheet generator.
+The current version is `1.0.39`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/docs/stitches.html).
 
 ## Implementation
 
-Stitches requires a stylesheet, a script, and an HTML element to get the job done:
+After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
-    <link rel="stylesheet" href="css/stitches-0.5.27-min.css">
+    <link rel="stylesheet" href="css/stitches-1.0.39-min.css">
 
-    <script src="js/jquery-1.7.1.min.js"></script>
-    <script src="js/modernizr-2.0.6.min.js"></script>
+    <script data-main="js/stitches.js" src="js/stitches-1.0.39-min.js"></script>
 
-    <script src="js/stitches-0.5.27-min.js"></script>
+The sprite sheet generator is automatically created in elements that have the `stitches` class:
 
-Once that's in place, the sprite sheet generator is created by the `init` method:
-
-    <div id="stitches"></div>
-
-    <script>
-    jQuery(document).ready(function ($) {
-
-        var $stitches = $("#stitches");
-        Stitches.init($stitches, {jsdir: "js"});
-
-    });
-    </script>
+    <div class="stitches"></div>
 
 ## Dependencies
 
-jQuery 1.7.1+, Modernizr; *Dropfile, Flashcanvas for older browser support*
+[jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/)
+
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+
+    <script src="lib/jquery/jquery-1.7.1.js"></script>
+    <script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
 ## License
 

@@ -3,55 +3,49 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="http://draeton.github.com/stitches/stitches/build/css/stitches-@VERSION@-min.css">
+<link rel="stylesheet" href="/stitches/stitches/build/css/stitches-@VERSION@-min.css">
+<script data-main="js/stitches.js" src="/stitches/stitches/build/js/stitches-@VERSION@-min.js"></script>
 
 <section id="main" role="main">
 
-Drag and drop image files into the space below and click "Generate" to create a 
-sprite sheet and stylesheet. This demo uses a couple of HTML5 APIs, and **it is only 
-currently compatible with the latest versions of Chrome and Firefox.**
+Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em>
 
 <a href="http://www.w3.org/html/logo/"><img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-semantics-storage.png" height="50" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Semantics, and Offline &amp; Storage"></a>
 
-<div id="stitches"></div>
-    
+<div class="stitches"></div>
+
 
 ## Implementation
 
-Stitches requires a stylesheet, a script, and an HTML element to get the job done:
+After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
 <link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
 
-<script src="js/jquery-1.7.1.min.js"></script>
-<script src="js/modernizr-2.0.6.min.js"></script>
-
-<script src="js/stitches-@VERSION@-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-@VERSION@-min.js"></script>
 {% endhighlight %}
 
-Once that's in place, the sprite sheet generator is created by the `init` method:
+The sprite sheet generator is automatically created in elements that have the stitches class:
 
 {% highlight html %}
-<div id="stitches"></div>
-
-<script>
-jQuery(document).ready(function ($) {
-
-    var $stitches = $("#stitches");
-    Stitches.init($stitches, {jsdir: "js"});
-
-});
-</script>
+<div class="stitches"></div>
 {% endhighlight %}
 
 Documentation is available [here.](http://draeton.github.com/stitches/stitches/docs/stitches.html)
-    
+
 
 ## Dependencies
 
-[jQuery 1.7.1+](http://jquery.com/) <span class="label success">New</span>, [Modernizr](http://www.modernizr.com/), 
-*[Dropfile](https://github.com/MrSwitch/dropfile), [Flashcanvas](http://flashcanvas.net/) 
-for older browser support*
+[jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/) <span class="label success">New</span>
+
+{% highlight html %}
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+
+<script src="lib/jquery/jquery-1.7.1.js"></script>
+<script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+{% endhighlight %}
 
 
 ## Contributing
@@ -71,7 +65,7 @@ for older browser support*
 
 **The latest release, @VERSION@, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-@VERSION@.zip).**
 
-You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master) 
+You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
 
 You can also clone the project with [Git](http://git-scm.com) by running:
@@ -85,7 +79,7 @@ Modernizr.load({
     load: "/stitches/stitches/build/js/stitches-@VERSION@-min.js",
     complete: function () {
         $(function () {
-    
+
             var $stitches = $("#stitches");
             Stitches.init($stitches, {jsdir: "stitches/build/js"});
 
