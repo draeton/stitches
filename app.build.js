@@ -11,6 +11,7 @@
     ],
 
     paths: {
-        "jquery": "empty:"
+        "jquery": "wrap/jquery",
+        "modernizr": "wrap/modernizr"
     }
 })

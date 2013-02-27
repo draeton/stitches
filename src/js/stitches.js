@@ -8,7 +8,8 @@
 /*global requirejs, require, define */
 requirejs.config({
     paths: {
-        "jquery": "../lib/jquery/jquery-1.7.1.min"
+        "jquery": "wrap/jquery",
+        "modernizr": "wrap/modernizr"
     }
 });
 
