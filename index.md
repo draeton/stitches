@@ -3,8 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/stitches/build/css/stitches-1.0.39-min.css">
-<script data-main="js/stitches.js" src="/stitches/stitches/build/js/stitches-1.0.39-min.js"></script>
+<link rel="stylesheet" href="/stitches/repo/build/css/stitches-1.0.40-min.css">
 
 <section id="main" role="main">
 
@@ -20,9 +19,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-1.0.39-min.css">
+<link rel="stylesheet" href="css/stitches-1.0.40-min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.0.39-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.0.40-min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -31,12 +30,12 @@ The sprite sheet generator is automatically created in elements that have the st
 <div class="stitches"></div>
 {% endhighlight %}
 
-Documentation is available [here.](http://draeton.github.com/stitches/stitches/docs/stitches.html)
+Documentation is available [here.](/stitches/repo/docs/stitches.html)
 
 
 ## Dependencies
 
-[jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/) <span class="label success">New</span>
+[jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/) <span class="label label-success">New</span>
 
 {% highlight html %}
 <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
@@ -63,7 +62,7 @@ Documentation is available [here.](http://draeton.github.com/stitches/stitches/d
 
 ## Download
 
-**The latest release, 1.0.39, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-1.0.39.zip).**
+**The latest release, 1.0.40, is [available here](/stitches/repo/dist/stitches-1.0.40.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -74,16 +73,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script>
-Modernizr.load({
-    load: "/stitches/stitches/build/js/stitches-1.0.39-min.js",
-    complete: function () {
-        $(function () {
-
-            var $stitches = $("#stitches");
-            Stitches.init($stitches, {jsdir: "stitches/build/js"});
-
-        });
-    }
-});
-</script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/js/stitches-1.0.40-min.js"></script>
