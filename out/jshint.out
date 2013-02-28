@@ -1,3 +1,45 @@
 JSHint validation summary:
-18  JS files passed JSHint code checks
-February 27, 2013 10:40:17 PM EST
+----------------------------------------------------------------------
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\base.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\compact.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\horizontal.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\vertical.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\canvas.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\drop-box.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\file-manager.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\palette.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\sprite.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\stitches.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\toolbar.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\stitches.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\array.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\stitches.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\templates.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\util.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\wrap\jquery.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\wrap\modernizr.js
+
+JSHint validation failed for c:\home\github\stitches\src\require.js
+Missing "use strict" statement. (line: 13, character: 5)
+ >     var req, s, head, baseElement, dataMain, src,
+----------------------------------------------------------------------
+JSHint found 1 error.
+February 27, 2013 11:23:58 PM EST

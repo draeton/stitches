@@ -11,25 +11,22 @@
     <import file="${common.targets}"/>
 
 
+    <!--
+
+        REPO TARGETS
+
+    -->
+
+
     <target name="-init" description="Starting new build">
         <echo>Starting new build</echo>
+
+        <fileset id="repo.depends" dir="${src.dir}">
+            <include name="**/img/**"/>
+        </fileset>
     </target>
 
 
-    <target name="-copy-depends" depends="-init" description="Copying dependencies">
-        <echo>Copying dependencies</echo>
-
-        <copy todir="${build.dir}/img">
-            <fileset dir="${src.dir}/img"/>
-        </copy>
-
-        <copy todir="${build.dir}/lib">
-            <fileset dir="${src.dir}/lib"/>
-        </copy>
-    </target>
-
-
-    <!-- * build * -->
     <target name="prod"
         description="Builds project files for production use"
         depends="
@@ -46,6 +43,7 @@
             -zip,
             commit">
     </target>
+
 
     <target name="pages"
         description="Builds project pages (and prod)"
