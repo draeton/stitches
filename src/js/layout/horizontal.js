@@ -1,4 +1,4 @@
-// # layouts/horizontal
+// # layout/horizontal
 //
 // ...
 //
@@ -7,7 +7,7 @@
 // > Licensed under the MIT license.
 /*global require, define */
 
-define(["jquery", "util/util", "layouts/base"],
+define(["jquery", "util/util", "layout/base"],
 function ($, util, BaseLayout) {
 
     "use strict";

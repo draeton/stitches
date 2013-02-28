@@ -1,4 +1,4 @@
-// # modules/drop-box
+// # module/drop-box
 //
 // ...
 //

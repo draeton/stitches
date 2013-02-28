@@ -1,4 +1,4 @@
-// # modules/canvas
+// # module/canvas
 //
 // ...
 //
@@ -7,7 +7,7 @@
 // > Licensed under the MIT license.
 /*global require, define */
 
-define(["jquery", "util/util", "util/array", "util/stitches", "modules/sprite"],
+define(["jquery", "util/util", "util/array", "util/stitches", "module/sprite"],
 function($, util, array, stitches, Sprite) {
 
     "use strict";

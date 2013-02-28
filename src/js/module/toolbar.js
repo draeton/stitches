@@ -1,4 +1,4 @@
-// # modules/toolbar
+// # module/toolbar
 //
 // ...
 //

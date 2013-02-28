@@ -1,4 +1,4 @@
-// # layouts/vertical
+// # layout/compact
 //
 // ...
 //
@@ -7,22 +7,29 @@
 // > Licensed under the MIT license.
 /*global require, define */
 
-define(["jquery", "util/util", "layouts/base"],
+define(["jquery", "util/util", "layout/base"],
 function ($, util, BaseLayout) {
 
     "use strict";
 
-    var VerticalLayout = function () {};
+    var CompactLayout = function () {};
 
-    util.inherit(VerticalLayout, BaseLayout, {
+    util.inherit(CompactLayout, BaseLayout, {
         getDimensions: function (sprites, defaults) {
             var width = 0;
             var height = 0;
+            var area = 0;
+            var mean = 0;
 
             $.map(sprites, function (sprite) {
                 width = sprite.width > width ? sprite.width : width;
-                height += sprite.height;
+                height = sprite.height > height ? sprite.height : height;
+                area += sprite.area;
             });
+
+            mean = Math.ceil(Math.sqrt(area));
+            width = width > mean ? width : mean;
+            height = height > mean ? height : mean;
 
             return {
                 width: width || defaults.width,
@@ -33,20 +40,24 @@ function ($, util, BaseLayout) {
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
             var tries = 0;
-            var x = 0;
+            var x;
             var y;
 
             while (tries < 2) {
                 for (y = 0; y <= dimensions.height - sprite.height; y++) {
-                    sprite.x = x;
-                    sprite.y = y;
+                    for (x = 0; x <= dimensions.width - sprite.width; x++) {
+                        sprite.x = x;
+                        sprite.y = y;
 
-                    intersection = this.intersection(sprite, placed);
+                        intersection = this.intersection(sprite, placed);
 
-                    if (!intersection) {
-                        placed.push(sprite);
-                        sprite.show();
-                        return true;
+                        if (!intersection) {
+                            placed.push(sprite);
+                            sprite.show();
+                            return true;
+                        }
+
+                        x = intersection.x + intersection.width - 1;
                     }
 
                     y = intersection.y + intersection.height - 1;
@@ -61,6 +72,6 @@ function ($, util, BaseLayout) {
         }
     });
 
-    return VerticalLayout;
+    return CompactLayout;
 
 });

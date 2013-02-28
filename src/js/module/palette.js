@@ -1,4 +1,4 @@
-// # modules/palette
+// # module/palette
 //
 // ...
 //
@@ -7,7 +7,7 @@
 // > Licensed under the MIT license.
 /*global require, define */
 
-define(["jquery", "util/util", "modules/toolbar"],
+define(["jquery", "util/util", "module/toolbar"],
 function ($, util, Toolbar) {
 
     "use strict";

@@ -1,4 +1,4 @@
-// # modules/stitches
+// # module/stitches
 //
 // ...
 //

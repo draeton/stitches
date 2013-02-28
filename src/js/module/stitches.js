@@ -7,7 +7,7 @@
 // > Licensed under the MIT license.
 /*global require, define */
 
-define(["jquery", "modernizr", "util/util", "util/stitches", "util/templates", "modules/file-manager", "modules/drop-box", "modules/canvas", "modules/toolbar", "modules/palette"],
+define(["jquery", "modernizr", "util/util", "util/stitches", "util/templates", "module/file-manager", "module/drop-box", "module/canvas", "module/toolbar", "module/palette"],
 function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";

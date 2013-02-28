@@ -1,4 +1,4 @@
-// # modules/file-manager
+// # module/file-manager
 //
 // ...
 //

@@ -1,4 +1,4 @@
-// # layouts/base
+// # layout/base
 //
 // ...
 //
