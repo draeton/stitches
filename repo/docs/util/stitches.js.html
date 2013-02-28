@@ -20,8 +20,35 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
-      <div class="heading h1">
+      <div class="heading h2">
         <a href="#util-stitches">util/stitches</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.setlayout">stitches.setLayout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.getdimensions">stitches.getDimensions</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.placesprites">stitches.placeSprites</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.trim">stitches.trim</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.makespritesheet">stitches.makeSpritesheet</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.makestylesheet">stitches.makeStylesheet</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.datatoobjecturl">stitches.dataToObjectURL</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.createblob">stitches.createBlob</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.createobjecturl">stitches.createObjectURL</a>
       </div>
     </div>
   </div>
@@ -31,46 +58,194 @@
   <tbody>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="util-stitches">
-  <h1>
-    <a href="#util-stitches" class="pilcrow">&#182;</a>
-    util/stitches
-  </h1>
+          <h1>stitches.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
-
-
-<p>...</p>
-
-<blockquote>
+<div class="dox">
+  <div class="summary"><p>Utility methods for setting the canvas layout
+and stitching the sprites together (i.e. placing them
+on the canvas)</p>
+  </div>
+  <div class="body"><blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;layout/compact&quot;</span><span class="p">,</span> <span class="s2">&quot;layout/vertical&quot;</span><span class="p">,</span> <span class="s2">&quot;layout/horizontal&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;layout/compact&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;layout/vertical&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;layout/horizontal&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">CompactLayout</span><span class="p">,</span> <span class="nx">VerticalLayout</span><span class="p">,</span> <span class="nx">HorizontalLayout</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>Canvas layout constructors</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
     <span class="kd">var</span> <span class="nx">layouts</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">compact</span><span class="o">:</span> <span class="nx">CompactLayout</span><span class="p">,</span>
         <span class="nx">vertical</span><span class="o">:</span> <span class="nx">VerticalLayout</span><span class="p">,</span>
         <span class="nx">horizontal</span><span class="o">:</span> <span class="nx">HorizontalLayout</span>
     <span class="p">};</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="util-stitches">
+  <h2>
+    <a href="#util-stitches" class="pilcrow">&#182;</a>
+    util/stitches
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
     <span class="k">return</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.setlayout">
+  <h3>
+    <a href="#stitches.setlayout" class="pilcrow">&#182;</a>
+    stitches.setLayout
+  </h3>
+</div>
+
+
+<p>Set the working layout manager instance by type</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">type</span>
+      <span class="dox_type">string</span>
+      <span>The layout manager type</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setLayout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">Constructor</span> <span class="o">=</span> <span class="nx">layouts</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="nx">layouts</span><span class="p">.</span><span class="nx">compact</span><span class="p">;</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Constructor</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.getdimensions">
+  <h3>
+    <a href="#stitches.getdimensions" class="pilcrow">&#182;</a>
+    stitches.getDimensions
+  </h3>
+</div>
+
+
+<p>Get the dimensions necessary to place the sprites</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites to place</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">defaults</span>
+      <span class="dox_type">object</span>
+      <span>Default dimensions if no sprites</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>object</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.placesprites">
+  <h3>
+    <a href="#stitches.placesprites" class="pilcrow">&#182;</a>
+    stitches.placeSprites
+  </h3>
+</div>
+
+
+<p>Position a list of sprites to fit in dimensions and layout</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>To place</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">placed</span>
+      <span class="dox_type">array</span>
+      <span>Already placed</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_type">object</span>
+      <span>Working width and height</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">progress</span>
+      <span class="dox_type">function</span>
+      <span>Function to update display on progress</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">placeSprites</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -89,11 +264,45 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
-        <span class="nx">trim</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">placed</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.trim">
+  <h3>
+    <a href="#stitches.trim" class="pilcrow">&#182;</a>
+    stitches.trim
+  </h3>
+</div>
+
+
+<p>Trim dimensions to only contain placed sprites</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_type">object</span>
+      <span>Working width and height</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">trim</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">placed</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">w</span> <span class="o">=</span> <span class="nx">w</span> <span class="o">&gt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">width</span> <span class="o">?</span> <span class="nx">w</span> <span class="o">:</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
                 <span class="nx">h</span> <span class="o">=</span> <span class="nx">h</span> <span class="o">&gt;</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">height</span> <span class="o">?</span> <span class="nx">h</span> <span class="o">:</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
             <span class="p">});</span>
@@ -102,6 +311,46 @@
             <span class="nx">dimensions</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">h</span> <span class="o">||</span> <span class="nx">dimensions</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.makespritesheet">
+  <h3>
+    <a href="#stitches.makespritesheet" class="pilcrow">&#182;</a>
+    stitches.makeSpritesheet
+  </h3>
+</div>
+
+
+<p>Make an image using the browser canvas element's drawing context.
+Triggers a non-fatal error if anything fails</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_type">object</span>
+      <span>Working width and height</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">makeSpritesheet</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">canvas</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">context</span><span class="p">;</span>
@@ -129,6 +378,55 @@
             <span class="k">return</span> <span class="nx">spritesheet</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.makestylesheet">
+  <h3>
+    <a href="#stitches.makestylesheet" class="pilcrow">&#182;</a>
+    stitches.makeStylesheet
+  </h3>
+</div>
+
+
+<p>Make a CSS stylesheet to place images with spritesheet</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">spritesheet</span>
+      <span class="dox_type">string</span>
+      <span>The data URL of the spritesheet</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">prefix</span>
+      <span class="dox_type">string</span>
+      <span>Used to create CSS classes</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">uri</span>
+      <span class="dox_type">boolean</span>
+      <span>Switch including image as data URI</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">makeStylesheet</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="nx">uri</span> <span class="o">?</span> <span class="nx">spritesheet</span> <span class="o">:</span> <span class="s2">&quot;download.png&quot;</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
@@ -158,6 +456,41 @@
             <span class="k">return</span> <span class="nx">stylesheet</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.datatoobjecturl">
+  <h3>
+    <a href="#stitches.datatoobjecturl" class="pilcrow">&#182;</a>
+    stitches.dataToObjectURL
+  </h3>
+</div>
+
+
+<p>Convert base64 data or raw binary data to an object URL
+See: <a href='http://stackoverflow.com/a/5100158/230483'>http://stackoverflow.com/a/5100158/230483</a></p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dataURI
+</span>
+      <span class="dox_type">string</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">dataToObjectURL</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">dataURI</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">dataParts</span> <span class="o">=</span> <span class="nx">dataURI</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">byteString</span><span class="p">;</span>
@@ -168,7 +501,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
 </div>
 <p>convert base64 to raw binary data held in a string</p>
         </td>
@@ -185,7 +518,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
 </div>
 <p>separate out the mime component</p>
         </td>
@@ -198,7 +531,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
 </div>
 <p>write the bytes of the string to an ArrayBuffer</p>
         </td>
@@ -217,7 +550,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
 </div>
 <p>get the blob and create an object URL</p>
         </td>
@@ -228,6 +561,27 @@
             <span class="k">return</span> <span class="nx">url</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.createblob">
+  <h3>
+    <a href="#stitches.createblob" class="pilcrow">&#182;</a>
+    stitches.createBlob
+  </h3>
+</div>
+
+
+<p>Polyfill</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">createBlob</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arrayBuffer</span><span class="p">,</span> <span class="nx">mimeString</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">BlobBuilder</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">BlobBuilder</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">WebKitBlobBuilder</span><span class="p">;</span>
 
@@ -241,6 +595,27 @@
             <span class="k">return</span> <span class="nx">bb</span><span class="p">.</span><span class="nx">getBlob</span><span class="p">(</span><span class="nx">mimeString</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.createobjecturl">
+  <h3>
+    <a href="#stitches.createobjecturl" class="pilcrow">&#182;</a>
+    stitches.createObjectURL
+  </h3>
+</div>
+
+
+<p>Polyfill</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">createObjectURL</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">URL</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>

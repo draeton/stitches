@@ -38,14 +38,124 @@ g&&g.context&&(h=g.context);(x=i(B,h))||(x=B[h]=l.s.newContext(h));g&&x.configur
 C=document.getElementsByTagName("base")[0]))A=v.head=C.parentNode;l.onError=function(b){throw b;};l.load=function(b,c,d){var i=b&&b.config||{},g;if(y)return g=i.xhtml?document.createElementNS("http://www.w3.org/1999/xhtml","html:script"):document.createElement("script"),g.type=i.scriptType||"text/javascript",g.charset="utf-8",g.async=!0,g.setAttribute("data-requirecontext",b.contextName),g.setAttribute("data-requiremodule",c),g.attachEvent&&!(g.attachEvent.toString&&0>g.attachEvent.toString().indexOf("[native code"))&&
 !U?(N=!0,g.attachEvent("onreadystatechange",b.onScriptLoad)):(g.addEventListener("load",b.onScriptLoad,!1),g.addEventListener("error",b.onScriptError,!1)),g.src=d,J=g,C?A.insertBefore(g,C):A.appendChild(g),J=null,g;Z&&(importScripts(d),b.completeLoad(c))};y&&L(document.getElementsByTagName("script"),function(b){A||(A=b.parentNode);if(r=b.getAttribute("data-main"))return p.baseUrl||(G=r.split("/"),aa=G.pop(),ba=G.length?G.join("/")+"/":"./",p.baseUrl=ba,r=aa),r=r.replace($,""),p.deps=p.deps?p.deps.concat(r):
 [r],!0});define=function(b,c,d){var i,g;"string"!==typeof b&&(d=c,c=b,b=null);I(c)||(d=c,c=[]);!c.length&&H(d)&&d.length&&(d.toString().replace(ha,"").replace(ia,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c));if(N){if(!(i=J))O&&"interactive"===O.readyState||L(document.getElementsByTagName("script"),function(b){if("interactive"===b.readyState)return O=b}),i=O;i&&(b||(b=i.getAttribute("data-requiremodule")),g=B[i.getAttribute("data-requirecontext")])}(g?
-g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(p)}})(this);// > Copyright 2013, Matthew Cobbs<br/>
+g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(p)}})(this);/**
+ * # wrap/jquery
+ *
+ * Wrap global instance for use in RequireJS modules
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 
-// > Licensed under the MIT license.
+/**
+ * # wrap/modernizr
+ *
+ * Wrap global instance for use in RequireJS modules
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * This is the home for wayward methods who have lost their way.
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * Base constructor for the canvas layout managers
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * Constructor for the compact canvas layout manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * Constructor for the vertical canvas layout manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * Constructor for the horizontal canvas layout manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * Utility methods for setting the canvas layout
+ * and stitching the sprites together (i.e. placing them
+ * on the canvas)
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 
 /**
  * @license RequireJS text 2.0.5+ Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/requirejs/text for details
+ */
+
+/**
+ * Utility methods for working with JS templates and holding references
+ * to pre-compiled templates
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+// > Copyright 2013, Matthew Cobbs<br/>
+
+// > Licensed under the MIT license.
+
+/**
+ * Utility methods for working with arrays
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # Stitches
+ * ### _An HTML5 Sprite Sheet Generator_
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ *
+ * Stitches is an HTML5 sprite sheet generator.
+ *
+ * Stitches is developed by Matthew Cobbs in concert with the lovely open-source
+ * community at Github. Thanks are owed to the developers at Twitter for
+ * [Bootstrap](http://twitter.github.com/bootstrap), and
+ * [Glyphicons](http://glyphicons.com/) for some cool little icons.
+ *
+ * Addtionally, I want to thank [James Taylor](https://github.com/jbt)
+ * for the [Docker](https://github.com/jbt/docker) documentation tool, and
+ * [Phil Mander](https://github.com/philmander) for his JSHint and JSTestRunner
+ * Ant tasks, which round out my build toolchain, and most of all the good folks
+ * who develop [RequireJS](http://requirejs.org/) for helping this all make
+ * sense.
  */
 
 /*
@@ -54,9 +164,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  see: http://github.com/requirejs/text for details
 */
 define("jquery",[],function(){return jQuery});define("modernizr",[],function(){return Modernizr});
-define("util/util",["jquery"],function(e){return{proxy:function(d,h){"string"===typeof h&&(h=h.split(" "));e.map(h,function(c){d[c]=e.proxy(d[c],d)})},inherit:function(d,h,c){d.prototype=new h;d.prototype.constructor=h;e.each(c,function(b,a){d.prototype[b]=a});d.prototype._super=function(b,a,g){return h.prototype[b].apply(a,g)}},removeValue:function(d,h){return e(d).filter(function(){return this!==h})},debounce:function(d,e,c){var b;return function(){var a=this,g=arguments;b?window.clearTimeout(b):
-c&&d.apply(a,g);b=setTimeout(function(){c||d.apply(a,g);b=null},e||50)}},cleanName:function(d){d=d.replace(/\.[a-z]{3,4}$/i,"");return d=d.replace(/[\s.]+/gi,"-").replace(/[^a-z0-9\-]/gi,"_")}}});
-define("layout/base",["jquery"],function(e){var d=function(){};d.prototype={constructor:d,getDimensions:function(){},placeSprites:function(){},intersection:function(d,c){var b,a,g,f,i=[],k;e.map(c,function(c){b=c.x<d.x+d.width;a=c.x+c.width>d.x;g=c.y<d.y+d.height;f=c.y+c.height>d.y;b&&(a&&g&&f)&&i.push(c)});i.length&&(k=i.pop());return k}};return d});
+define("util/util",["jquery"],function(e){return{proxy:function(d,h){"string"===typeof h&&(h=h.split(" "));e.map(h,function(c){d[c]=e.proxy(d[c],d)})},inherit:function(d,h,c){d.prototype=new h;d.prototype.constructor=h;e.each(c,function(b,a){d.prototype[b]=a});d.prototype._super=function(b,a,g){return h.prototype[b].apply(a,g)}},debounce:function(d,e,c){var b;return function(){var a=this,g=arguments;b?window.clearTimeout(b):c&&d.apply(a,g);b=setTimeout(function(){c||d.apply(a,g);b=null},e||50)}},
+cleanName:function(d){d=d.replace(/\.\w+$/i,"");d=d.replace(/[\s.]+/gi,"-");return d=d.replace(/[^a-z0-9\-]/gi,"_")}}});define("layout/base",["jquery"],function(e){var d=function(){};d.prototype={constructor:d,getDimensions:function(){},placeSprites:function(){},intersection:function(d,c){var b,a,g,f,i=[],k;e.map(c,function(c){b=c.x<d.x+d.width;a=c.x+c.width>d.x;g=c.y<d.y+d.height;f=c.y+c.height>d.y;b&&(a&&g&&f)&&i.push(c)});i.length&&(k=i.pop());return k}};return d});
 define("layout/compact",["jquery","util/util","layout/base"],function(e,d,h){var c=function(){};d.inherit(c,h,{getDimensions:function(b,a){var g=0,f=0,d=0,c=0;e.map(b,function(a){g=a.width>g?a.width:g;f=a.height>f?a.height:f;d+=a.area});c=Math.ceil(Math.sqrt(d));g=g>c?g:c;f=f>c?f:c;return{width:g||a.width,height:f||a.height}},placeSprite:function(b,a,g){for(var f,c=0,d,e;2>c;){for(e=0;e<=g.height-b.height;e++){for(d=0;d<=g.width-b.width;d++){b.x=d;b.y=e;f=this.intersection(b,a);if(!f)return a.push(b),
 b.show(),!0;d=f.x+f.width-1}e=f.y+f.height-1}g.width+=b.width;g.height+=b.height;c++}return!1}});return c});
 define("layout/vertical",["jquery","util/util","layout/base"],function(e,d,h){var c=function(){};d.inherit(c,h,{getDimensions:function(b,a){var g=0,f=0;e.map(b,function(a){g=a.width>g?a.width:g;f+=a.height});return{width:g||a.width,height:f||a.height}},placeSprite:function(b,a,g){for(var f,d=0;2>d;){for(f=0;f<=g.height-b.height;f++){b.x=0;b.y=f;f=this.intersection(b,a);if(!f)return a.push(b),b.show(),!0;f=f.y+f.height-1}g.width+=b.width;g.height+=b.height;d++}return!1}});return c});
@@ -77,7 +186,7 @@ d.get=function(a,f){var d,e,g={},h=new FileUtils.File(a);try{d=c["@mozilla.org/n
 define("text!util/../../templates/stitches.html",[],function(){return'\x3cscript type\x3d"text/html" id\x3d"stitches_tmpl"\x3e\r\n\r\n    \x3cdiv class\x3d"stitches"\x3e\r\n        \x3c!-- .stitches-toolbar --\x3e\r\n        \x3cdiv class\x3d"stitches-toolbar btn-toolbar"\x3e\r\n            \x3cdiv class\x3d"btn-group shrink"\x3e\r\n                \x3ca href\x3d"http://draeton.github.com/stitches/" class\x3d"btn btn-small btn-link"\x3e\x3cstrong\x3eStitches\x3c/strong\x3e\x3c/a\x3e\r\n                \x3cbutton data-action\x3d"open" class\x3d"btn btn-small files" title\x3d"Open"\x3e\x3ci class\x3d"icon-folder-open"\x3e\x3c/i\x3e \x3cspan\x3eOpen\x3c/span\x3e\x3cinput class\x3d"file" type\x3d"file" multiple\x3d""\x3e\x3c/button\x3e\r\n                \x3cbutton data-action\x3d"settings" class\x3d"btn btn-small" title\x3d"Settings"\x3e\x3ci class\x3d"icon-cog"\x3e\x3c/i\x3e \x3cspan\x3eSettings\x3c/span\x3e\x3c/button\x3e\r\n                \x3cbutton data-action\x3d"generate" class\x3d"btn btn-small disabled" title\x3d"Generate"\x3e\x3ci class\x3d"icon-tasks"\x3e\x3c/i\x3e \x3cspan\x3eGenerate\x3c/span\x3e\x3c/button\x3e\r\n                \x3cbutton data-action\x3d"clear" class\x3d"btn btn-small disabled" title\x3d"Clear"\x3e\x3ci class\x3d"icon-remove"\x3e\x3c/i\x3e \x3cspan\x3eClear\x3c/span\x3e\x3c/button\x3e\r\n            \x3c/div\x3e\r\n            \x3cdiv class\x3d"btn-group shrink"\x3e\r\n                \x3ca href\x3d"#" data-action\x3d"spritesheet" class\x3d"btn btn-small disabled" title\x3d"Spritesheet" target\x3d"_blank"\x3e\x3ci class\x3d"icon-download-alt"\x3e\x3c/i\x3e \x3cspan\x3eSpritesheet\x3c/span\x3e\x3c/a\x3e\r\n                \x3ca href\x3d"#" data-action\x3d"stylesheet" class\x3d"btn btn-small disabled" title\x3d"Stylesheet" target\x3d"_blank"\x3e\x3ci class\x3d"icon-download-alt"\x3e\x3c/i\x3e \x3cspan\x3eStylesheet\x3c/span\x3e\x3c/a\x3e\r\n            \x3c/div\x3e\r\n            \x3cdiv class\x3d"btn-group shrink"\x3e\r\n                \x3cbutton data-action\x3d"about" class\x3d"btn btn-small" title\x3d"About Stitches"\x3e\x3ci class\x3d"icon-info-sign"\x3e\x3c/i\x3e \x3cspan\x3eAbout\x3c/span\x3e\x3c/button\x3e\r\n            \x3c/div\x3e\r\n        \x3c/div\x3e\r\n        \x3c!-- /.stitches-toolbar --\x3e\r\n\r\n        \x3c!-- .stitches-progress --\x3e\r\n        \x3cdiv class\x3d"stitches-progress collapse"\x3e\r\n            \x3cdiv class\x3d"progress progress-warning"\x3e\r\n                \x3cdiv class\x3d"bar" style\x3d"width: 0%;"\x3e\x3c/div\x3e\r\n            \x3c/div\x3e\r\n        \x3c/div\x3e\r\n        \x3c!-- /.stitches-progress --\x3e\r\n\r\n        \x3c!-- .stitches-drop-box --\x3e\r\n        \x3cdiv class\x3d"stitches-drop-box"\x3e\r\n            \x3cdiv class\x3d"stitches-overlay"\x3e\x3c/div\x3e\r\n\r\n            \x3cdiv class\x3d"stitches-wrap"\x3e\r\n\r\n                \x3c!-- .stitches-canvas --\x3e\r\n                \x3cdiv class\x3d"stitches-canvas"\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/github.png" data-name\x3d"github"/\x3e\x3c/div\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/gmail.png" data-name\x3d"gmail"/\x3e\x3c/div\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/linkedin.png" data-name\x3d"linkedin"/\x3e\x3c/div\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/stackoverflow.png" data-name\x3d"stackoverflow"\x3e\x3c/div\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/tumblr.png" data-name\x3d"tumblr"/\x3e\x3c/div\x3e\r\n                    \x3cdiv class\x3d"stitches-sprite"\x3e\x3cimg src\x3d"img/test/twitter.png" data-name\x3d"twitter"/\x3e\x3c/div\x3e\r\n                \x3c/div\x3e\r\n                \x3c!-- /.stitches-canvas --\x3e\r\n\r\n            \x3c/div\x3e\r\n\r\n            \x3c!-- .stitches-palettes --\x3e\r\n            \x3cdiv class\x3d"stitches-palettes"\x3e\r\n                \x3c!-- .stitches-settings --\x3e\r\n                \x3cdiv class\x3d"stitches-palette stitches-settings fade"\x3e\r\n                    \x3cdiv class\x3d"stitches-palette-header"\x3e\r\n                        \x3cbutton type\x3d"button" class\x3d"close" data-action\x3d"close"\x3e\x26times;\x3c/button\x3e\r\n                        \x3ch4\x3eSettings\x3c/h4\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-body"\x3e\r\n                        \x3cform class\x3d"form-horizontal"\x3e\r\n                            \x3cdiv class\x3d"control-group hide"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3ePosition\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3clabel class\x3d"checkbox"\x3e\r\n                                        \x3cinput name\x3d"position" type\x3d"checkbox" value\x3d"auto"/\x3e Auto\r\n                                    \x3c/label\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3eLayout\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3clabel class\x3d"radio inline"\x3e\r\n                                        \x3cinput name\x3d"layout" type\x3d"radio" value\x3d"compact"/\x3e Compact\r\n                                    \x3c/label\x3e\r\n                                    \x3clabel class\x3d"radio inline"\x3e\r\n                                        \x3cinput name\x3d"layout" type\x3d"radio" value\x3d"vertical"/\x3e Vertical\r\n                                    \x3c/label\x3e\r\n                                    \x3clabel class\x3d"radio inline"\x3e\r\n                                        \x3cinput name\x3d"layout" type\x3d"radio" value\x3d"horizontal"/\x3e Horizontal\r\n                                    \x3c/label\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3eCSS prefix\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3cinput name\x3d"prefix" type\x3d"text" placeholder\x3d"CSS class prefix\x26hellip;"\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3ePadding\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3cdiv class\x3d"input-append"\x3e\r\n                                        \x3cinput name\x3d"padding" type\x3d"number" min\x3d"0" required placeholder\x3d"Sprite padding\x26hellip;"\x3e\r\n                                        \x3cspan class\x3d"add-on"\x3epx\x3c/span\x3e\r\n                                    \x3c/div\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3eData URI\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3clabel class\x3d"checkbox"\x3e\r\n                                        \x3cinput name\x3d"uri" type\x3d"checkbox" value\x3d"true"/\x3e Include encoded image in CSS\r\n                                    \x3c/label\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n                        \x3c/form\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-footer"\x3e\r\n                        \x3cdiv class\x3d"btn-toolbar"\x3e\r\n                            \x3cdiv class\x3d"btn-group"\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"close"\x3e\x3cspan\x3eSave\x3c/span\x3e\x3c/button\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"close"\x3e\x3cspan\x3eClose\x3c/span\x3e\x3c/button\x3e\r\n                            \x3c/div\x3e\r\n                        \x3c/div\x3e\r\n\r\n                        \x3cdiv class\x3d"clearfix"\x3e\x3c/div\x3e\r\n                    \x3c/div\x3e\r\n                \x3c/div\x3e\r\n                \x3c!-- /.stitches-settings --\x3e\r\n\r\n                \x3c!-- .stitches-properties --\x3e\r\n                \x3cdiv class\x3d"stitches-palette stitches-properties fade"\x3e\r\n                    \x3cdiv class\x3d"stitches-palette-header"\x3e\r\n                        \x3cbutton type\x3d"button" class\x3d"close" data-action\x3d"close"\x3e\x26times;\x3c/button\x3e\r\n                        \x3ch4\x3eSprite Properties\x3c/h4\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-body"\x3e\r\n                        \x3cform class\x3d"form-horizontal"\x3e\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3eName\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3cinput name\x3d"name" type\x3d"text" required placeholder\x3d"Sprite name\x26hellip;"\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n\r\n                            \x3cdiv class\x3d"control-group"\x3e\r\n                                \x3clabel class\x3d"control-label"\x3eCoordinates (x, y)\x3c/label\x3e\r\n                                \x3cdiv class\x3d"controls"\x3e\r\n                                    \x3cdiv class\x3d"input-append"\x3e\r\n                                        \x3cinput name\x3d"x" required disabled placeholder\x3d"From left\x26hellip;" class\x3d"input-mini"\x3e\r\n                                        \x3cspan class\x3d"add-on"\x3epx\x3c/span\x3e\r\n                                    \x3c/div\x3e\r\n                                    \x3cdiv class\x3d"input-append"\x3e\r\n                                        \x3cinput name\x3d"y" required disabled placeholder\x3d"From top\x26hellip;" class\x3d"input-mini"\x3e\r\n                                        \x3cspan class\x3d"add-on"\x3epx\x3c/span\x3e\r\n                                    \x3c/div\x3e\r\n                                \x3c/div\x3e\r\n                            \x3c/div\x3e\r\n                        \x3c/form\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-footer"\x3e\r\n                        \x3cdiv class\x3d"btn-toolbar"\x3e\r\n                            \x3cdiv class\x3d"btn-group"\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"remove"\x3e\x3cspan\x3eDelete\x3c/span\x3e\x3c/button\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"close"\x3e\x3cspan\x3eSave\x3c/span\x3e\x3c/button\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"close"\x3e\x3cspan\x3eClose\x3c/span\x3e\x3c/button\x3e\r\n                            \x3c/div\x3e\r\n                        \x3c/div\x3e\r\n\r\n                        \x3cdiv class\x3d"clearfix"\x3e\x3c/div\x3e\r\n                    \x3c/div\x3e\r\n                \x3c/div\x3e\r\n                \x3c!-- /.stitches-properties --\x3e\r\n\r\n                \x3c!-- .stitches-about --\x3e\r\n                \x3cdiv class\x3d"stitches-palette stitches-about fade in"\x3e\r\n                    \x3cdiv class\x3d"stitches-palette-header"\x3e\r\n                        \x3cbutton type\x3d"button" class\x3d"close" data-action\x3d"close"\x3e\x26times;\x3c/button\x3e\r\n                        \x3ch4\x3eAbout Stitches\x3c/h4\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-body"\x3e\r\n                        \x3cp\x3e\x3ca href\x3d"http://draeton.github.com/stitches/"\x3eStitches\x3ca/\x3e is an HTML5 \x3ca href\x3d"http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS"\x3esprite sheet\x3c/a\x3e generator.\x3c/p\x3e\r\n\r\n                        \x3cp\x3eDrag \x26amp; drop image files onto the space below, or use the \x26ldquo;Open\x26rdquo; link to load images using the file browser. Then, click \x26ldquo;Generate\x26rdquo; to create a sprite sheet and stylesheet. \x3cem\x3eThis demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.\x3c/em\x3e\x3c/p\x3e\r\n\r\n                        \x3cp\x3eStitches is developed by \x3ca href\x3d"http://draeton.github.com"\x3eMatthew Cobbs\x3c/a\x3e in concert with the lovely open-source community at \x3ca href\x3d"http://github.com"\x3eGithub\x3c/a\x3e. Thanks are owed to the developers at Twitter for \x3ca href\x3d"http://twitter.github.com/bootstrap"\x3eBootstrap\x3c/a\x3e, and \x3ca href\x3d"http://glyphicons.com/"\x3eGlyphicons\x3c/a\x3e for some cool little icons.\x3c/p\x3e\r\n                    \x3c/div\x3e\r\n\r\n                    \x3cdiv class\x3d"stitches-palette-footer"\x3e\r\n                        \x3cdiv class\x3d"btn-toolbar"\x3e\r\n                            \x3cdiv class\x3d"btn-group"\x3e\r\n                                \x3cbutton class\x3d"btn btn-small" data-action\x3d"close"\x3e\x3cspan\x3eClose\x3c/span\x3e\x3c/button\x3e\r\n                            \x3c/div\x3e\r\n                        \x3c/div\x3e\r\n\r\n                        \x3cdiv class\x3d"clearfix"\x3e\x3c/div\x3e\r\n                    \x3c/div\x3e\r\n                \x3c/div\x3e\r\n                \x3c!-- /.stitches-properties --\x3e\r\n            \x3c/div\x3e\r\n            \x3c!-- /.stitches-palettes --\x3e\r\n        \x3c/div\x3e\r\n        \x3c!-- /.stitches-drop-box --\x3e\r\n    \x3c/div\x3e\r\n\r\n\x3c/script\x3e'});
 define("text!util/../../templates/sprite.html",[],function(){return'\x3cscript type\x3d"text/html" id\x3d"stitches_sprite_tmpl"\x3e\r\n    \x3cdiv class\x3d"stitches-sprite" style\x3d"top: \x3c%\x3dy%\x3epx; left: \x3c%\x3dx%\x3epx;"\x3e\r\n        \x3cimg src\x3d"\x3c%\x3dimage.src%\x3e"/\x3e\r\n    \x3c/div\x3e\r\n\x3c/script\x3e'});
 define("util/templates",["jquery","text!../../templates/stitches.html","text!../../templates/sprite.html"],function(e,d,h){var c={},b=function(a,f){var d=!/\W/.test(a)?c[a]=c[a]||b(document.getElementById(a).innerHTML):new Function("obj","var p\x3d[],print\x3dfunction(){p.push.apply(p,arguments);};with(obj){p.push('"+a.replace(/[\r\t\n]/g," ").split("\x3c%").join("\t").replace(/((^|%>)[^\t]*)'/g,"$1\r").replace(/\t=(.*?)%>/g,"',$1,'").split("\t").join("');").split("%\x3e").join("p.push('").split("\r").join("\\'")+
-"');}return p.join('');");return f?d(f):d},a=function(a,f){e(window.document.body).append(a);return b(f)};return{tmpl:b,stitches:a(d,"stitches_tmpl"),sprite:a(h,"stitches_sprite_tmpl")}});
+"');}return p.join('');");return f?d(f):d},a=function(a,f){e(window.document.body).append(a);return b(f)};return{tmpl:b,compile:a,stitches:a(d,"stitches_tmpl"),sprite:a(h,"stitches_sprite_tmpl")}});
 define("module/file-manager",["jquery","util/util"],function(e){var d={progress:function(){}},h=function(c,b){this.$element=e(c);this.settings=e.extend({},d,b);this.progress=this.settings.progress;this.processed=this.total=0;this.init()};h.prototype={constructor:h,init:function(){},processFiles:function(c){var b=this;this.total=c.length;this.processed=0;e.map(c,function(a){/jpeg|png|gif/.test(a.type)&&b.processFile(a)});this.progress(0,"info")},processFile:function(c){var b=this,a;try{a=new FileReader,
 a.onloadend=function(a){b.$element.trigger("create-sprite",[c.name,a.target.result]);b.progress(++b.processed/b.total)},a.readAsDataURL(c)}catch(d){this.$element.trigger("error",[d])}}};return h});
 define("module/drop-box",["jquery","util/util"],function(e,d){var h={},c=function(b,a){this.$element=e(b);this.$overlay=this.$element.find(".stitches-overlay");this.settings=e.extend({},h,a);this.init()};c.classname=".stitches-drop-box";c.prototype={constructor:c,init:function(){this.proxy();this.bind()},proxy:function(){d.proxy(this,"dragStart dragStop drop")},bind:function(){var b=this.$element.get(0),a=this.$overlay.get(0);b.addEventListener("dragenter",this.dragStart,!1);a.addEventListener("dragleave",
