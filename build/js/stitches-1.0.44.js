@@ -38,9 +38,9 @@ g&&g.context&&(h=g.context);(x=i(B,h))||(x=B[h]=l.s.newContext(h));g&&x.configur
 C=document.getElementsByTagName("base")[0]))A=v.head=C.parentNode;l.onError=function(b){throw b;};l.load=function(b,c,d){var i=b&&b.config||{},g;if(y)return g=i.xhtml?document.createElementNS("http://www.w3.org/1999/xhtml","html:script"):document.createElement("script"),g.type=i.scriptType||"text/javascript",g.charset="utf-8",g.async=!0,g.setAttribute("data-requirecontext",b.contextName),g.setAttribute("data-requiremodule",c),g.attachEvent&&!(g.attachEvent.toString&&0>g.attachEvent.toString().indexOf("[native code"))&&
 !U?(N=!0,g.attachEvent("onreadystatechange",b.onScriptLoad)):(g.addEventListener("load",b.onScriptLoad,!1),g.addEventListener("error",b.onScriptError,!1)),g.src=d,J=g,C?A.insertBefore(g,C):A.appendChild(g),J=null,g;Z&&(importScripts(d),b.completeLoad(c))};y&&L(document.getElementsByTagName("script"),function(b){A||(A=b.parentNode);if(r=b.getAttribute("data-main"))return p.baseUrl||(G=r.split("/"),aa=G.pop(),ba=G.length?G.join("/")+"/":"./",p.baseUrl=ba,r=aa),r=r.replace($,""),p.deps=p.deps?p.deps.concat(r):
 [r],!0});define=function(b,c,d){var i,g;"string"!==typeof b&&(d=c,c=b,b=null);I(c)||(d=c,c=[]);!c.length&&H(d)&&d.length&&(d.toString().replace(ha,"").replace(ia,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c));if(N){if(!(i=J))O&&"interactive"===O.readyState||L(document.getElementsByTagName("script"),function(b){if("interactive"===b.readyState)return O=b}),i=O;i&&(b||(b=i.getAttribute("data-requiremodule")),g=B[i.getAttribute("data-requirecontext")])}(g?
-g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(p)}})(this);// Copyright 2013, Matthew Cobbs
+g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(p)}})(this);// > Copyright 2013, Matthew Cobbs<br/>
 
-// Licensed under the MIT license.
+// > Licensed under the MIT license.
 
 /**
  * @license RequireJS text 2.0.5+ Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.

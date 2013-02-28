@@ -1,11 +1,12 @@
-// ## modules/canvas
+// # modules/canvas
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery", "util/util", "util/array", "util/stitches", "modules/sprite"],
 function($, util, array, stitches, Sprite) {
 
@@ -19,6 +20,15 @@ function($, util, array, stitches, Sprite) {
         progress: function () {}
     };
 
+    /**
+     * ## Canvas
+     *
+     * Create a new `Canvas` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var Canvas = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);

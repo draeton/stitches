@@ -1,11 +1,12 @@
-// ## wrap/modernizr
+// # wrap/modernizr
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// Wrap global instance for use in RequireJS modules
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define, Modernizr */
+
 define(function () {
     "use strict";
     return Modernizr;

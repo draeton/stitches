@@ -1,11 +1,12 @@
-// ## modules/palette
+// # modules/palette
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery", "util/util", "modules/toolbar"],
 function ($, util, Toolbar) {
 
@@ -18,6 +19,15 @@ function ($, util, Toolbar) {
         fields: {}
     };
 
+    /**
+     * ## Palette
+     *
+     * Create a new `Palette` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var Palette = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);

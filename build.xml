@@ -38,7 +38,7 @@
             validate,
             -increment,
             -readme,
-            docco,
+            docker,
             require,
             -concat,
             -minify,

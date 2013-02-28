@@ -1,11 +1,12 @@
-// ## modules/stitches
+// # util/array
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery", "modernizr", "util/util", "util/stitches", "util/templates", "modules/file-manager", "modules/drop-box", "modules/canvas", "modules/toolbar", "modules/palette"],
 function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
@@ -28,6 +29,15 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
         uri: false
     };
 
+    /**
+     * ## Stitches
+     *
+     * Create a new `Stitches` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var Stitches = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);

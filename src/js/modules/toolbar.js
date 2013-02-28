@@ -1,11 +1,12 @@
-// ## modules/toolbar
+// # modules/toolbar
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery"],
 function ($) {
 
@@ -16,6 +17,15 @@ function ($) {
         actions: {}
     };
 
+    /**
+     * ## Toolbar
+     *
+     * Create a new `Toolbar` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var Toolbar = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);

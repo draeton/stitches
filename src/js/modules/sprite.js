@@ -1,11 +1,12 @@
-// ## modules/sprite
+// # modules/stitches
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery", "util/util", "util/templates"],
 function($, util, templates) {
 
@@ -18,6 +19,15 @@ function($, util, templates) {
         callback: null
     };
 
+    /**
+     * ## Sprite
+     *
+     * Create a new `Sprite` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var Sprite = function (options) {
         this.settings = $.extend({}, defaults, options);
         this.$element = null;

@@ -1,11 +1,12 @@
-// ## modules/file-manager
+// # modules/file-manager
 //
-// [http://draeton.github.com/stitches](http://draeton.github.com/stitches)
+// ...
 //
-// Copyright 2013, Matthew Cobbs
-// Licensed under the MIT license.
-//
+// > http://draeton.github.com/stitches<br/>
+// > Copyright 2013, Matthew Cobbs<br/>
+// > Licensed under the MIT license.
 /*global require, define */
+
 define(["jquery", "util/util"],
 function($, util) {
 
@@ -15,6 +16,15 @@ function($, util) {
         progress: function () {}
     };
 
+    /**
+     * ## FileManager
+     *
+     * Create a new `FileManager` instance
+     *
+     * @constructor
+     * @param {element} element
+     * @param {object} options
+     */
     var FileManager = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);
