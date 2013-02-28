@@ -18,6 +18,10 @@ function ($, util, BaseLayout) {
 
     "use strict";
 
+    var defaults = {
+        maxPass: 2
+    };
+
     /**
      * ## VerticalLayout
      *
@@ -26,7 +30,9 @@ function ($, util, BaseLayout) {
      * @constructor
      * @param {object} options
      */
-    var VerticalLayout = function (options) {};
+    var VerticalLayout = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
 
     util.inherit(VerticalLayout, BaseLayout, {
         /**
@@ -54,11 +60,11 @@ function ($, util, BaseLayout) {
          */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
-            var tries = 0;
+            var pass = 0;
             var x = 0;
-            var y;
+            var y = 0;
 
-            while (tries < 2) {
+            while (pass++ < this.settings.maxPass) {
                 for (y = 0; y <= dimensions.height - sprite.height; y++) {
                     sprite.x = x;
                     sprite.y = y;
@@ -76,7 +82,6 @@ function ($, util, BaseLayout) {
 
                 dimensions.width += sprite.width;
                 dimensions.height += sprite.height;
-                tries++;
             }
 
             return false;

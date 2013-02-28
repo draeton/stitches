@@ -48,6 +48,9 @@
         <a href="#stitches.prototype.setlayout">Stitches.prototype.setLayout</a>
       </div>
       <div class="heading h3">
+        <a href="#stitches.prototype.setimages">Stitches.prototype.setImages</a>
+      </div>
+      <div class="heading h3">
         <a href="#stitches.prototype.setcanvas">Stitches.prototype.setCanvas</a>
       </div>
       <div class="heading h3">
@@ -129,14 +132,14 @@
     <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tpl!../../templates/stitches.html&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/palette&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -230,6 +233,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">setDropBox</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setToolbar</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setImages</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setCanvas</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setPalettes</span><span class="p">();</span>
         <span class="p">},</span>
@@ -256,7 +260,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">stitches</span><span class="p">({});</span>
+            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">stitchesTemplate</span><span class="p">({});</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-overlay&quot;</span><span class="p">);</span>
@@ -414,6 +418,31 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setimages">
+  <h3>
+    <a href="#stitches.prototype.setimages" class="pilcrow">&#182;</a>
+    Stitches.prototype.setImages
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">setImages</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">images</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;&gt; img&quot;</span><span class="p">).</span><span class="nx">get</span><span class="p">();</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="stitches.prototype.setcanvas">
   <h3>
     <a href="#stitches.prototype.setcanvas" class="pilcrow">&#182;</a>
@@ -431,6 +460,7 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setCanvas</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">images</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span>
                 <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
                 <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
             <span class="p">});</span>

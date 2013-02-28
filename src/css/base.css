@@ -12,6 +12,10 @@
     min-width: 400px;
 }
 
+.stitches > img {
+    display: none;
+}
+
 .stitches-toolbar {
     margin: 0;
     padding: 6px;

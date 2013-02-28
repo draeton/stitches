@@ -21,6 +21,7 @@ function($, util, array, stitches, Sprite) {
     "use strict";
 
     var defaults = {
+        images: null,
         dimensions: {
             width: 400,
             height: 400
@@ -40,6 +41,7 @@ function($, util, array, stitches, Sprite) {
     var Canvas = function (element, options) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);
+        this.images = this.settings.images;
         this.dimensions = this.settings.dimensions;
         this.progress = this.settings.progress;
         this.sprites = [];
@@ -90,9 +92,8 @@ function($, util, array, stitches, Sprite) {
         setup: function () {
             var self = this;
 
-            this.$element.find(".stitches-sprite").each(function () {
-                var $sprite = $(this);
-                var $img = $(this).find("img");
+            $(this.images).each(function () {
+                var $img = $(this);
                 var name = $img.data("name");
                 var src = $img.attr("src");
 

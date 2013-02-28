@@ -10,6 +10,9 @@
 .stitches {
     min-width: 400px;
 }
+.stitches > img {
+    display: none;
+}
 .stitches-toolbar {
     margin: 0;
     padding: 6px;
@@ -158,6 +161,9 @@
     }
     .stitches-palette-body .form-horizontal .controls {
         margin-left: 0;
+    }
+    .stitches-palette-body img {
+        max-width: 150px;
     }
 }
 .stitches-palette-footer {

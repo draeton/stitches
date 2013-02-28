@@ -18,6 +18,10 @@ function ($, util, BaseLayout) {
 
     "use strict";
 
+    var defaults = {
+        maxPass: 2
+    };
+
     /**
      * ## CompactLayout
      *
@@ -26,7 +30,9 @@ function ($, util, BaseLayout) {
      * @constructor
      * @param {object} options
      */
-    var CompactLayout = function (options) {};
+    var CompactLayout = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
 
     util.inherit(CompactLayout, BaseLayout, {
         /**
@@ -61,11 +67,11 @@ function ($, util, BaseLayout) {
          */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
-            var tries = 0;
-            var x;
-            var y;
+            var pass = 0;
+            var x = 0;
+            var y = 0;
 
-            while (tries < 2) {
+            while (pass++ < this.settings.maxPass) {
                 for (y = 0; y <= dimensions.height - sprite.height; y++) {
                     for (x = 0; x <= dimensions.width - sprite.width; x++) {
                         sprite.x = x;
@@ -87,10 +93,7 @@ function ($, util, BaseLayout) {
 
                 dimensions.width += sprite.width;
                 dimensions.height += sprite.height;
-                tries++;
             }
-
-            return false;
         }
     });
 

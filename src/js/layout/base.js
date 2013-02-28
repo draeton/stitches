@@ -16,6 +16,10 @@ function ($) {
 
     "use strict";
 
+    var defaults = {
+        maxPass: 2
+    };
+
     /**
      * ## BaseLayout
      *
@@ -24,7 +28,9 @@ function ($) {
      * @constructor
      * @param {object} options
      */
-    var BaseLayout = function (options) {};
+    var BaseLayout = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
 
     BaseLayout.prototype = {
         constructor: BaseLayout,

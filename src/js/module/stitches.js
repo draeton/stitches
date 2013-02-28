@@ -14,14 +14,14 @@ define([
     "modernizr",
     "util/util",
     "util/stitches",
-    "util/templates",
+    "tpl!../../templates/stitches.html",
     "module/file-manager",
     "module/drop-box",
     "module/canvas",
     "module/toolbar",
     "module/palette"
 ],
-function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
+function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -74,6 +74,7 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.setDropBox();
             this.setToolbar();
             this.setLayout();
+            this.setImages();
             this.setCanvas();
             this.setPalettes();
         },
@@ -83,7 +84,7 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
          * ...
          */
         render: function () {
-            var html = templates.stitches({});
+            var html = stitchesTemplate({});
 
             this.$element.append(html);
             this.$overlay = this.$element.find(".stitches-overlay");
@@ -151,11 +152,20 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
         },
 
         /**
+         * ### Stitches.prototype.setImages
+         * ...
+         */
+        setImages: function () {
+            this.images = this.$element.find("> img").get();
+        },
+
+        /**
          * ### Stitches.prototype.setCanvas
          * ...
          */
         setCanvas: function () {
             this.canvas = new Canvas(this.$canvas, {
+                images: this.images,
                 padding: this.settings.padding,
                 progress: this.updateProgress
             });

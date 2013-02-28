@@ -72,6 +72,10 @@
     .stitches-palette-body .form-horizontal .controls {
         margin-left: 0;
     }
+
+    .stitches-palette-body img {
+        max-width: 150px;
+    }
 }
 
 .stitches-palette-footer {

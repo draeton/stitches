@@ -27,19 +27,21 @@
  *
  * Configuring RequireJS paths for wrapped globals
  */
-requirejs.config({
-    paths: {
-        "jquery": "wrap/jquery",
-        "modernizr": "wrap/modernizr"
-    }
-});
+requirejs.config();
 
 /**
  * ### RequireJS Main
  *
  * Kicks off application on elements matching `.stitches`
  */
-require([
+require({
+    paths: {
+        "tpl" : "../tpl",
+        "jquery": "wrap/jquery",
+        "modernizr": "wrap/modernizr"
+    }
+},
+[
     "jquery",
     "module/stitches"
 ],
