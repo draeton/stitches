@@ -54,4 +54,12 @@
     </target>
 
 
+    <target name="just-pages"
+        description="Builds project pages"
+        depends="
+            -gh-pages-update,
+            -gh-pages-commit">
+    </target>
+
+
 </project>
