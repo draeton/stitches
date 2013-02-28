@@ -33,7 +33,6 @@
             -init,
             -clean,
             validate,
-            -increment,
             -readme,
             docker,
             require,
@@ -46,15 +45,6 @@
 
 
     <target name="pages"
-        description="Builds project pages (and prod)"
-        depends="
-            prod,
-            -gh-pages-update,
-            -gh-pages-commit">
-    </target>
-
-
-    <target name="just-pages"
         description="Builds project pages"
         depends="
             -gh-pages-update,
