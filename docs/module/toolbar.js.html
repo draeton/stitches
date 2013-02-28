@@ -26,6 +26,24 @@
       <div class="heading h2">
         <a href="#toolbar">Toolbar</a>
       </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.init">Toolbar.prototype.init</a>
+      </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.bind">Toolbar.prototype.bind</a>
+      </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.gethandler">Toolbar.prototype.getHandler</a>
+      </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.toggleactions">Toolbar.prototype.toggleActions</a>
+      </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.enable">Toolbar.prototype.enable</a>
+      </div>
+      <div class="heading h3">
+        <a href="#toolbar.prototype.disable">Toolbar.prototype.disable</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -33,7 +51,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="module-toolbar">
   <h1>
     <a href="#module-toolbar" class="pilcrow">&#182;</a>
@@ -41,18 +60,22 @@
   </h1>
 </div>
 
-
-<p>...</p>
+  </div>
+  <div class="body"><p>...</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -109,10 +132,52 @@
     <span class="nx">Toolbar</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">Toolbar</span><span class="p">,</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.init">
+  <h3>
+    <a href="#toolbar.prototype.init" class="pilcrow">&#182;</a>
+    Toolbar.prototype.init
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.bind">
+  <h3>
+    <a href="#toolbar.prototype.bind" class="pilcrow">&#182;</a>
+    Toolbar.prototype.bind
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -130,6 +195,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.gethandler">
+  <h3>
+    <a href="#toolbar.prototype.gethandler" class="pilcrow">&#182;</a>
+    Toolbar.prototype.getHandler
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getHandler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
@@ -143,6 +229,27 @@
             <span class="p">};</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.toggleactions">
+  <h3>
+    <a href="#toolbar.prototype.toggleactions" class="pilcrow">&#182;</a>
+    Toolbar.prototype.toggleActions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">toggleActions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">actions</span><span class="p">,</span> <span class="nx">disable</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -157,10 +264,52 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.enable">
+  <h3>
+    <a href="#toolbar.prototype.enable" class="pilcrow">&#182;</a>
+    Toolbar.prototype.enable
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">enable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">actions</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">toggleActions</span><span class="p">(</span><span class="nx">actions</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="toolbar.prototype.disable">
+  <h3>
+    <a href="#toolbar.prototype.disable" class="pilcrow">&#182;</a>
+    Toolbar.prototype.disable
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">disable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">actions</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">toggleActions</span><span class="p">(</span><span class="nx">actions</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
         <span class="p">}</span>

@@ -1,4 +1,6 @@
 /**
+ * # layout/base
+ *
  * Base constructor for the canvas layout managers
  *
  * > http://draeton.github.com/stitches<br/>
@@ -7,7 +9,9 @@
  */
 /*global require, define */
 
-define(["jquery"],
+define([
+    "jquery"
+],
 function ($) {
 
     "use strict";
@@ -20,10 +24,22 @@ function ($) {
     BaseLayout.prototype = {
         constructor: BaseLayout,
 
+        /**
+         * ### BaseLayout.prototype.getDimensions
+         * ...
+         */
         getDimensions: function () {},
 
+        /**
+         * ### BaseLayout.prototype.getDimensions
+         * ...
+         */
         placeSprites: function () {},
 
+        /**
+         * ### BaseLayout.prototype.getDimensions
+         * ...
+         */
         intersection: function (sprite, obstacles) {
             var x1, x2, y1, y2;
             var intersections = [];

@@ -1,4 +1,6 @@
 /**
+ * # util/stitches
+ *
  * Utility methods for setting the canvas layout
  * and stitching the sprites together (i.e. placing them
  * on the canvas)
@@ -26,7 +28,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         horizontal: HorizontalLayout
     };
 
-    // ## util/stitches
+    // Module definition
     return {
         /**
          * ### stitches.setLayout

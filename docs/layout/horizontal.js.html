@@ -20,8 +20,17 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h1">
+        <a href="#layout-horizontal">layout/horizontal</a>
+      </div>
       <div class="heading h2">
-        <a href="#compactlayout">CompactLayout</a>
+        <a href="#horizontallayout">HorizontalLayout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#horizontallayout.prototype.getdimensions">HorizontalLayout.prototype.getDimensions</a>
+      </div>
+      <div class="heading h3">
+        <a href="#horizontallayout.prototype.getdimensions">HorizontalLayout.prototype.getDimensions</a>
       </div>
     </div>
   </div>
@@ -30,20 +39,19 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
-          <h1>horizontal.js</h1>
-        </td>
-        <td class="code highlight"></td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="layout-horizontal">
+  <h1>
+    <a href="#layout-horizontal" class="pilcrow">&#182;</a>
+    layout/horizontal
+  </h1>
 </div>
-<div class="dox">
-  <div class="summary"><p>Constructor for the horizontal canvas layout manager</p>
+
   </div>
-  <div class="body"><blockquote>
+  <div class="body"><p>Constructor for the horizontal canvas layout manager</p>
+
+<blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
@@ -53,7 +61,11 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">,</span> <span class="s2">&quot;layout/base&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;layout/base&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">BaseLayout</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -64,10 +76,10 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="compactlayout">
+<div class="pilwrap" id="horizontallayout">
   <h2>
-    <a href="#compactlayout" class="pilcrow">&#182;</a>
-    CompactLayout
+    <a href="#horizontallayout" class="pilcrow">&#182;</a>
+    HorizontalLayout
   </h2>
 </div>
 
@@ -80,6 +92,27 @@
     <span class="kd">var</span> <span class="nx">HorizontalLayout</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
 
     <span class="nx">util</span><span class="p">.</span><span class="nx">inherit</span><span class="p">(</span><span class="nx">HorizontalLayout</span><span class="p">,</span> <span class="nx">BaseLayout</span><span class="p">,</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="horizontallayout.prototype.getdimensions">
+  <h3>
+    <a href="#horizontallayout.prototype.getdimensions" class="pilcrow">&#182;</a>
+    HorizontalLayout.prototype.getDimensions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -95,6 +128,27 @@
             <span class="p">};</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="horizontallayout.prototype.getdimensions">
+  <h3>
+    <a href="#horizontallayout.prototype.getdimensions" class="pilcrow">&#182;</a>
+    HorizontalLayout.prototype.getDimensions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">placeSprite</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">intersection</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">tries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>

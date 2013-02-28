@@ -1,13 +1,26 @@
-// # util/array
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # util/array
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "modernizr", "util/util", "util/stitches", "util/templates", "module/file-manager", "module/drop-box", "module/canvas", "module/toolbar", "module/palette"],
+define([
+    "jquery",
+    "modernizr",
+    "util/util",
+    "util/stitches",
+    "util/templates",
+    "module/file-manager",
+    "module/drop-box",
+    "module/canvas",
+    "module/toolbar",
+    "module/palette"
+],
 function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
@@ -48,6 +61,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
     Stitches.prototype = {
         constructor: Stitches,
 
+        /**
+         * ### Stitches.prototype.init
+         * ...
+         */
         init: function () {
             this.render();
             this.proxy();
@@ -61,6 +78,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.setPalettes();
         },
 
+        /**
+         * ### Stitches.prototype.render
+         * ...
+         */
         render: function () {
             var html = templates.stitches({});
 
@@ -76,10 +97,18 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.$properties = this.$element.find(".stitches-properties");
         },
 
+        /**
+         * ### Stitches.prototype.proxy
+         * ...
+         */
         proxy: function () {
             util.proxy(this, "showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress errorHandler");
         },
 
+        /**
+         * ### Stitches.prototype.bind
+         * ...
+         */
         bind: function () {
             this.$element.on("show-overlay", this.showOverlay);
             this.$element.on("hide-overlay", this.hideOverlay);
@@ -95,20 +124,36 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.$element.on("error", this.errorHandler);
         },
 
+        /**
+         * ### Stitches.prototype.setFileManager
+         * ...
+         */
         setFileManager: function () {
             this.fileManager = new FileManager(this.$canvas, {
                 progress: this.updateProgress
             });
         },
 
+        /**
+         * ### Stitches.prototype.setDropBox
+         * ...
+         */
         setDropBox: function () {
             this.dropBox = new DropBox(this.$dropBox);
         },
 
+        /**
+         * ### Stitches.prototype.setLayout
+         * ...
+         */
         setLayout: function () {
             stitches.setLayout(this.settings.layout);
         },
 
+        /**
+         * ### Stitches.prototype.setCanvas
+         * ...
+         */
         setCanvas: function () {
             this.canvas = new Canvas(this.$canvas, {
                 padding: this.settings.padding,
@@ -116,6 +161,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             });
         },
 
+        /**
+         * ### Stitches.prototype.setToolbar
+         * ...
+         */
         setToolbar: function () {
             var self = this;
 
@@ -169,6 +218,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             });
         },
 
+        /**
+         * ### Stitches.prototype.setPalettes
+         * ...
+         */
         setPalettes: function () {
             var self = this;
 
@@ -280,26 +333,46 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             };
         },
 
+        /**
+         * ### Stitches.prototype.showOverlay
+         * ...
+         */
         showOverlay: function (e, type) {
             this.$overlay.fadeTo("fast", 0.4);
         },
 
+        /**
+         * ### Stitches.prototype.hideOverlay
+         * ...
+         */
         hideOverlay: function (e) {
             this.$overlay.fadeOut("fast");
         },
 
+        /**
+         * ### Stitches.prototype.openAbout
+         * ...
+         */
         openAbout: function (e) {
             this.closePalettes();
 
             this.palettes.about.open();
         },
 
+        /**
+         * ### Stitches.prototype.closeAbout
+         * ...
+         */
         closeAbout: function (e) {
             if (this.palettes.about.visible) {
                 this.palettes.about.close();
             }
         },
 
+        /**
+         * ### Stitches.prototype.openSettings
+         * ...
+         */
         openSettings: function (e) {
             this.closePalettes();
 
@@ -316,12 +389,20 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.palettes.settings.open();
         },
 
+        /**
+         * ### Stitches.prototype.closeSettings
+         * ...
+         */
         closeSettings: function (e) {
             if (this.palettes.settings.visible) {
                 this.palettes.settings.close();
             }
         },
 
+        /**
+         * ### Stitches.prototype.openProperties
+         * ...
+         */
         openProperties: function (e, sprite) {
             this.closePalettes();
 
@@ -337,6 +418,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             this.palettes.properties.open();
         },
 
+        /**
+         * ### Stitches.prototype.closeProperties
+         * ...
+         */
         closeProperties: function (e) {
             if (this.palettes.properties.visible) {
                 this.palettes.properties.close();
@@ -344,16 +429,28 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             }
         },
 
+        /**
+         * ### Stitches.prototype.closePalettes
+         * ...
+         */
         closePalettes: function (e) {
             this.closeAbout();
             this.closeSettings();
             this.closeProperties();
         },
 
+        /**
+         * ### Stitches.prototype.processFiles
+         * ...
+         */
         processFiles: function (e, files) {
             this.fileManager.processFiles(files);
         },
 
+        /**
+         * ### Stitches.prototype.updateToolbar
+         * ...
+         */
         updateToolbar: function (e) {
             var $toolbar = this.toolbar.$element;
             var toolbar = this.toolbar;
@@ -378,6 +475,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             }
         },
 
+        /**
+         * ### Stitches.prototype.updateProgress
+         * ...
+         */
         updateProgress: function (progress, type) {
             var percent = Math.ceil(progress * 100);
 
@@ -396,6 +497,10 @@ function($, Modernizr, util, stitches, templates, FileManager, DropBox, Canvas, 
             });
         },
 
+        /**
+         * ### Stitches.prototype.errorHandler
+         * ...
+         */
         errorHandler: function (e, err, type) {
             this.updateProgress(1, type || "warning");
         }

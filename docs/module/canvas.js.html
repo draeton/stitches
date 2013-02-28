@@ -26,6 +26,48 @@
       <div class="heading h2">
         <a href="#canvas">Canvas</a>
       </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.init">Canvas.prototype.init</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.proxy">Canvas.prototype.proxy</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.bind">Canvas.prototype.bind</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.setup">Canvas.prototype.setup</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.reset">Canvas.prototype.reset</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.measure">Canvas.prototype.measure</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.place">Canvas.prototype.place</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.cut">Canvas.prototype.cut</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.add">Canvas.prototype.add</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.remove">Canvas.prototype.remove</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.clear">Canvas.prototype.clear</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.generatesheets">Canvas.prototype.generateSheets</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.clearactive">Canvas.prototype.clearActive</a>
+      </div>
+      <div class="heading h3">
+        <a href="#canvas.prototype.createsprite">Canvas.prototype.createSprite</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -33,7 +75,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="module-canvas">
   <h1>
     <a href="#module-canvas" class="pilcrow">&#182;</a>
@@ -41,18 +84,26 @@
   </h1>
 </div>
 
-
-<p>...</p>
+  </div>
+  <div class="body"><p>...</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">,</span> <span class="s2">&quot;util/array&quot;</span><span class="p">,</span> <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span> <span class="s2">&quot;module/sprite&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/array&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/sprite&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">array</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">Sprite</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -115,6 +166,27 @@
     <span class="nx">Canvas</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">Canvas</span><span class="p">,</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.init">
+  <h3>
+    <a href="#canvas.prototype.init" class="pilcrow">&#182;</a>
+    Canvas.prototype.init
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">debounce</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
@@ -123,15 +195,78 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.proxy">
+  <h3>
+    <a href="#canvas.prototype.proxy" class="pilcrow">&#182;</a>
+    Canvas.prototype.proxy
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;createSprite clearActive&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.bind">
+  <h3>
+    <a href="#canvas.prototype.bind" class="pilcrow">&#182;</a>
+    Canvas.prototype.bind
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;create-sprite&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;clear-active&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">clearActive</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.setup">
+  <h3>
+    <a href="#canvas.prototype.setup" class="pilcrow">&#182;</a>
+    Canvas.prototype.setup
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -145,6 +280,27 @@
             <span class="p">}).</span><span class="nx">remove</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.reset">
+  <h3>
+    <a href="#canvas.prototype.reset" class="pilcrow">&#182;</a>
+    Canvas.prototype.reset
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">reset</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">measure</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">);</span>
@@ -153,10 +309,52 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.measure">
+  <h3>
+    <a href="#canvas.prototype.measure" class="pilcrow">&#182;</a>
+    Canvas.prototype.measure
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">measure</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.place">
+  <h3>
+    <a href="#canvas.prototype.place" class="pilcrow">&#182;</a>
+    Canvas.prototype.place
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">place</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">placed</span> <span class="o">=</span> <span class="p">[];</span>
 
@@ -175,6 +373,27 @@
             <span class="nx">stitches</span><span class="p">.</span><span class="nx">placeSprites</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.cut">
+  <h3>
+    <a href="#canvas.prototype.cut" class="pilcrow">&#182;</a>
+    Canvas.prototype.cut
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">cut</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">stitches</span><span class="p">.</span><span class="nx">trim</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
 
@@ -184,6 +403,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.add">
+  <h3>
+    <a href="#canvas.prototype.add" class="pilcrow">&#182;</a>
+    Canvas.prototype.add
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
@@ -193,6 +433,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.remove">
+  <h3>
+    <a href="#canvas.prototype.remove" class="pilcrow">&#182;</a>
+    Canvas.prototype.remove
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">);</span>
@@ -203,6 +464,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.clear">
+  <h3>
+    <a href="#canvas.prototype.clear" class="pilcrow">&#182;</a>
+    Canvas.prototype.clear
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
@@ -214,6 +496,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.generatesheets">
+  <h3>
+    <a href="#canvas.prototype.generatesheets" class="pilcrow">&#182;</a>
+    Canvas.prototype.generateSheets
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
@@ -239,6 +542,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.clearactive">
+  <h3>
+    <a href="#canvas.prototype.clearactive" class="pilcrow">&#182;</a>
+    Canvas.prototype.clearActive
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">clearActive</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.active&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">$active</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
@@ -251,6 +575,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="canvas.prototype.createsprite">
+  <h3>
+    <a href="#canvas.prototype.createsprite" class="pilcrow">&#182;</a>
+    Canvas.prototype.createSprite
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">createSprite</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sprite</span><span class="p">({</span>

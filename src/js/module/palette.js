@@ -1,13 +1,19 @@
-// # module/palette
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # module/palette
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "util/util", "module/toolbar"],
+define([
+    "jquery",
+    "util/util",
+    "module/toolbar"
+],
 function ($, util, Toolbar) {
 
     "use strict";
@@ -43,12 +49,20 @@ function ($, util, Toolbar) {
     Palette.classname = ".stitches-palette";
 
     util.inherit(Palette, Toolbar, {
+        /**
+         * ### Palette.prototype.init
+         * ...
+         */
         init: function () {
             this._super("init", this, arguments);
 
             this.$element.toggleClass("in", this.visible);
         },
 
+        /**
+         * ### Palette.prototype.bind
+         * ...
+         */
         bind: function () {
             var self = this;
 
@@ -64,16 +78,28 @@ function ($, util, Toolbar) {
             });
         },
 
+        /**
+         * ### Palette.prototype.open
+         * ...
+         */
         open: function () {
             this.$element.addClass("in");
             this.visible = true;
         },
 
+        /**
+         * ### Palette.prototype.close
+         * ...
+         */
         close: function () {
             this.$element.removeClass("in");
             this.visible = false;
         },
 
+        /**
+         * ### Palette.prototype.configure
+         * ...
+         */
         configure: function (properties) {
             var self = this;
 

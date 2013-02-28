@@ -39,7 +39,10 @@ requirejs.config({
  *
  * Kicks off application on elements matching `.stitches`
  */
-require(["jquery", "module/stitches"],
+require([
+    "jquery",
+    "module/stitches"
+],
 function($, Stitches) {
 
     "use strict";

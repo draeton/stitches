@@ -1,13 +1,19 @@
-// # module/stitches
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # module/stitches
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "util/util", "util/templates"],
+define([
+    "jquery",
+    "util/util",
+    "util/templates"
+],
 function($, util, templates) {
 
     "use strict";
@@ -46,10 +52,18 @@ function($, util, templates) {
     Sprite.prototype = {
         constructor: Sprite,
 
+        /**
+         * ### Sprite.prototype.init
+         * ...
+         */
         init: function () {
             this.load();
         },
 
+        /**
+         * ### Sprite.prototype.load
+         * ...
+         */
         load: function () {
             var self = this;
 
@@ -72,6 +86,10 @@ function($, util, templates) {
             this.image.src = this.src;
         },
 
+        /**
+         * ### Sprite.prototype.render
+         * ...
+         */
         render: function () {
             var html = templates.sprite(this);
 
@@ -79,14 +97,26 @@ function($, util, templates) {
             this.$element.data("sprite", this);
         },
 
+        /**
+         * ### Sprite.prototype.proxy
+         * ...
+         */
         proxy: function () {
             util.proxy(this, "click");
         },
 
+        /**
+         * ### Sprite.prototype.bind
+         * ...
+         */
         bind: function () {
             this.$element.on("click", this.click);
         },
 
+        /**
+         * ### Sprite.prototype.reset
+         * ...
+         */
         reset: function () {
             this.x = 0;
             this.y = 0;
@@ -94,6 +124,10 @@ function($, util, templates) {
             this.$element.removeClass("placed");
         },
 
+        /**
+         * ### Sprite.prototype.show
+         * ...
+         */
         show: function () {
             this.$element.css({
                 left: this.x + "px",
@@ -102,6 +136,10 @@ function($, util, templates) {
             }).addClass("placed");
         },
 
+        /**
+         * ### Sprite.prototype.click
+         * ...
+         */
         click: function (e) {
             this.active = !this.active;
 
@@ -115,6 +153,10 @@ function($, util, templates) {
             this.$element.toggleClass("active");
         },
 
+        /**
+         * ### Sprite.prototype.configure
+         * ...
+         */
         configure: function (properties) {
             if (properties.padding) {
                 this.padding = parseInt(properties.padding, 10);

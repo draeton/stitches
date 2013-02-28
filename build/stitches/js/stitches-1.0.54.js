@@ -59,6 +59,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # util/util
+ *
  * This is the home for wayward methods who have lost their way.
  *
  * > http://draeton.github.com/stitches<br/>
@@ -67,6 +69,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # layout/base
+ *
  * Base constructor for the canvas layout managers
  *
  * > http://draeton.github.com/stitches<br/>
@@ -75,6 +79,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # layout/compact
+ *
  * Constructor for the compact canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -83,6 +89,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # layout/vertical
+ *
  * Constructor for the vertical canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -91,6 +99,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # layout/horizontal
+ *
  * Constructor for the horizontal canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -99,6 +109,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # util/stitches
+ *
  * Utility methods for setting the canvas layout
  * and stitching the sprites together (i.e. placing them
  * on the canvas)
@@ -115,6 +127,8 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  */
 
 /**
+ * # util/templates
+ *
  * Utility methods for working with JS templates and holding references
  * to pre-compiled templates
  *
@@ -123,12 +137,80 @@ g.defQueue:Q).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return ev
  * > Licensed under the MIT license.
  */
 
-// > Copyright 2013, Matthew Cobbs<br/>
-
-// > Licensed under the MIT license.
+/**
+ * # module/file-manager
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 
 /**
+ * # module/drop-box
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # util/array
+ *
  * Utility methods for working with arrays
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # module/stitches
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # module/canvas
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # module/toolbar
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # module/palette
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * # util/array
+ *
+ * ...
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013, Matthew Cobbs<br/>

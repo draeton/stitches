@@ -1,13 +1,18 @@
-// # module/file-manager
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # module/file-manager
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "util/util"],
+define([
+    "jquery",
+    "util/util"
+],
 function($, util) {
 
     "use strict";
@@ -38,8 +43,16 @@ function($, util) {
     FileManager.prototype = {
         constructor: FileManager,
 
+        /**
+         * ### FileManager.prototype.init
+         * ...
+         */
         init: function () {},
 
+        /**
+         * ### FileManager.prototype.processFiles
+         * ...
+         */
         processFiles: function (files) {
             var self = this;
 
@@ -55,6 +68,10 @@ function($, util) {
             this.progress(0, "info");
         },
 
+        /**
+         * ### FileManager.prototype.processFile
+         * ...
+         */
         processFile: function (file) {
             var self = this;
             var reader;

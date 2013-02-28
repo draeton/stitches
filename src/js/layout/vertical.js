@@ -1,4 +1,6 @@
 /**
+ * # layout/vertical
+ *
  * Constructor for the vertical canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -7,7 +9,11 @@
  */
 /*global require, define */
 
-define(["jquery", "util/util", "layout/base"],
+define([
+    "jquery",
+    "util/util",
+    "layout/base"
+],
 function ($, util, BaseLayout) {
 
     "use strict";
@@ -18,6 +24,10 @@ function ($, util, BaseLayout) {
     var VerticalLayout = function () {};
 
     util.inherit(VerticalLayout, BaseLayout, {
+        /**
+         * ### VerticalLayout.prototype.getDimensions
+         * ...
+         */
         getDimensions: function (sprites, defaults) {
             var width = 0;
             var height = 0;
@@ -33,6 +43,10 @@ function ($, util, BaseLayout) {
             };
         },
 
+        /**
+         * ### VerticalLayout.prototype.getDimensions
+         * ...
+         */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
             var tries = 0;

@@ -1,4 +1,6 @@
 /**
+ * # layout/horizontal
+ *
  * Constructor for the horizontal canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -7,17 +9,25 @@
  */
 /*global require, define */
 
-define(["jquery", "util/util", "layout/base"],
+define([
+    "jquery",
+    "util/util",
+    "layout/base"
+],
 function ($, util, BaseLayout) {
 
     "use strict";
 
     /**
-     * ## CompactLayout
+     * ## HorizontalLayout
      */
     var HorizontalLayout = function () {};
 
     util.inherit(HorizontalLayout, BaseLayout, {
+        /**
+         * ### HorizontalLayout.prototype.getDimensions
+         * ...
+         */
         getDimensions: function (sprites, defaults) {
             var width = 0;
             var height = 0;
@@ -33,6 +43,10 @@ function ($, util, BaseLayout) {
             };
         },
 
+        /**
+         * ### HorizontalLayout.prototype.getDimensions
+         * ...
+         */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
             var tries = 0;

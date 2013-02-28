@@ -20,8 +20,20 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h1">
+        <a href="#layout-base">layout/base</a>
+      </div>
       <div class="heading h2">
         <a href="#baselayout">BaseLayout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#baselayout.prototype.getdimensions">BaseLayout.prototype.getDimensions</a>
+      </div>
+      <div class="heading h3">
+        <a href="#baselayout.prototype.getdimensions">BaseLayout.prototype.getDimensions</a>
+      </div>
+      <div class="heading h3">
+        <a href="#baselayout.prototype.getdimensions">BaseLayout.prototype.getDimensions</a>
       </div>
     </div>
   </div>
@@ -30,20 +42,19 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
-          <h1>base.js</h1>
-        </td>
-        <td class="code highlight"></td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="layout-base">
+  <h1>
+    <a href="#layout-base" class="pilcrow">&#182;</a>
+    layout/base
+  </h1>
 </div>
-<div class="dox">
-  <div class="summary"><p>Base constructor for the canvas layout managers</p>
+
   </div>
-  <div class="body"><blockquote>
+  <div class="body"><p>Base constructor for the canvas layout managers</p>
+
+<blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
@@ -53,7 +64,9 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -82,10 +95,73 @@
     <span class="nx">BaseLayout</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">BaseLayout</span><span class="p">,</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="baselayout.prototype.getdimensions">
+  <h3>
+    <a href="#baselayout.prototype.getdimensions" class="pilcrow">&#182;</a>
+    BaseLayout.prototype.getDimensions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="baselayout.prototype.getdimensions">
+  <h3>
+    <a href="#baselayout.prototype.getdimensions" class="pilcrow">&#182;</a>
+    BaseLayout.prototype.getDimensions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">placeSprites</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="baselayout.prototype.getdimensions">
+  <h3>
+    <a href="#baselayout.prototype.getdimensions" class="pilcrow">&#182;</a>
+    BaseLayout.prototype.getDimensions
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">intersection</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">obstacles</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">y2</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">intersections</span> <span class="o">=</span> <span class="p">[];</span>

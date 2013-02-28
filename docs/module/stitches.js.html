@@ -26,6 +26,75 @@
       <div class="heading h2">
         <a href="#stitches">Stitches</a>
       </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.init">Stitches.prototype.init</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.render">Stitches.prototype.render</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.proxy">Stitches.prototype.proxy</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.bind">Stitches.prototype.bind</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.setfilemanager">Stitches.prototype.setFileManager</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.setdropbox">Stitches.prototype.setDropBox</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.setlayout">Stitches.prototype.setLayout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.setcanvas">Stitches.prototype.setCanvas</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.settoolbar">Stitches.prototype.setToolbar</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.setpalettes">Stitches.prototype.setPalettes</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.showoverlay">Stitches.prototype.showOverlay</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.hideoverlay">Stitches.prototype.hideOverlay</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.openabout">Stitches.prototype.openAbout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.closeabout">Stitches.prototype.closeAbout</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.opensettings">Stitches.prototype.openSettings</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.closesettings">Stitches.prototype.closeSettings</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.openproperties">Stitches.prototype.openProperties</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.closeproperties">Stitches.prototype.closeProperties</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.closepalettes">Stitches.prototype.closePalettes</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.processfiles">Stitches.prototype.processFiles</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.updatetoolbar">Stitches.prototype.updateToolbar</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.updateprogress">Stitches.prototype.updateProgress</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.errorhandler">Stitches.prototype.errorHandler</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -33,7 +102,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="util-array">
   <h1>
     <a href="#util-array" class="pilcrow">&#182;</a>
@@ -41,18 +111,31 @@
   </h1>
 </div>
 
-
-<p>...</p>
+  </div>
+  <div class="body"><p>...</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">,</span> <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span> <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span> <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span> <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span> <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span> <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span> <span class="s2">&quot;module/palette&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/palette&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -117,6 +200,27 @@
     <span class="nx">Stitches</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">Stitches</span><span class="p">,</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.init">
+  <h3>
+    <a href="#stitches.prototype.init" class="pilcrow">&#182;</a>
+    Stitches.prototype.init
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
@@ -130,6 +234,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">setPalettes</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.render">
+  <h3>
+    <a href="#stitches.prototype.render" class="pilcrow">&#182;</a>
+    Stitches.prototype.render
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">stitches</span><span class="p">({});</span>
 
@@ -145,10 +270,52 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$properties</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-properties&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.proxy">
+  <h3>
+    <a href="#stitches.prototype.proxy" class="pilcrow">&#182;</a>
+    Stitches.prototype.proxy
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress errorHandler&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.bind">
+  <h3>
+    <a href="#stitches.prototype.bind" class="pilcrow">&#182;</a>
+    Stitches.prototype.bind
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">showOverlay</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">hideOverlay</span><span class="p">);</span>
@@ -164,20 +331,104 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setfilemanager">
+  <h3>
+    <a href="#stitches.prototype.setfilemanager" class="pilcrow">&#182;</a>
+    Stitches.prototype.setFileManager
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setFileManager</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileManager</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setdropbox">
+  <h3>
+    <a href="#stitches.prototype.setdropbox" class="pilcrow">&#182;</a>
+    Stitches.prototype.setDropBox
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setDropBox</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">dropBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DropBox</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$dropBox</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setlayout">
+  <h3>
+    <a href="#stitches.prototype.setlayout" class="pilcrow">&#182;</a>
+    Stitches.prototype.setLayout
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setLayout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="nx">stitches</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setcanvas">
+  <h3>
+    <a href="#stitches.prototype.setcanvas" class="pilcrow">&#182;</a>
+    Stitches.prototype.setCanvas
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setCanvas</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
@@ -185,6 +436,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.settoolbar">
+  <h3>
+    <a href="#stitches.prototype.settoolbar" class="pilcrow">&#182;</a>
+    Stitches.prototype.setToolbar
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setToolbar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -238,6 +510,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.setpalettes">
+  <h3>
+    <a href="#stitches.prototype.setpalettes" class="pilcrow">&#182;</a>
+    Stitches.prototype.setPalettes
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setPalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -349,26 +642,131 @@
             <span class="p">};</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.showoverlay">
+  <h3>
+    <a href="#stitches.prototype.showoverlay" class="pilcrow">&#182;</a>
+    Stitches.prototype.showOverlay
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">showOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span><span class="p">.</span><span class="nx">fadeTo</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.hideoverlay">
+  <h3>
+    <a href="#stitches.prototype.hideoverlay" class="pilcrow">&#182;</a>
+    Stitches.prototype.hideOverlay
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">hideOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.openabout">
+  <h3>
+    <a href="#stitches.prototype.openabout" class="pilcrow">&#182;</a>
+    Stitches.prototype.openAbout
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">openAbout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.closeabout">
+  <h3>
+    <a href="#stitches.prototype.closeabout" class="pilcrow">&#182;</a>
+    Stitches.prototype.closeAbout
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">closeAbout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
             <span class="p">}</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.opensettings">
+  <h3>
+    <a href="#stitches.prototype.opensettings" class="pilcrow">&#182;</a>
+    Stitches.prototype.openSettings
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">openSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
 
@@ -385,12 +783,54 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.closesettings">
+  <h3>
+    <a href="#stitches.prototype.closesettings" class="pilcrow">&#182;</a>
+    Stitches.prototype.closeSettings
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">closeSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
             <span class="p">}</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.openproperties">
+  <h3>
+    <a href="#stitches.prototype.openproperties" class="pilcrow">&#182;</a>
+    Stitches.prototype.openProperties
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">openProperties</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
 
@@ -406,6 +846,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.closeproperties">
+  <h3>
+    <a href="#stitches.prototype.closeproperties" class="pilcrow">&#182;</a>
+    Stitches.prototype.closeProperties
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">closeProperties</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
@@ -413,16 +874,79 @@
             <span class="p">}</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.closepalettes">
+  <h3>
+    <a href="#stitches.prototype.closepalettes" class="pilcrow">&#182;</a>
+    Stitches.prototype.closePalettes
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">closePalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">();</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.processfiles">
+  <h3>
+    <a href="#stitches.prototype.processfiles" class="pilcrow">&#182;</a>
+    Stitches.prototype.processFiles
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">processFiles</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.updatetoolbar">
+  <h3>
+    <a href="#stitches.prototype.updatetoolbar" class="pilcrow">&#182;</a>
+    Stitches.prototype.updateToolbar
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">updateToolbar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">$toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">.</span><span class="nx">$element</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">;</span>
@@ -447,6 +971,27 @@
             <span class="p">}</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.updateprogress">
+  <h3>
+    <a href="#stitches.prototype.updateprogress" class="pilcrow">&#182;</a>
+    Stitches.prototype.updateProgress
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">updateProgress</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">progress</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">percent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">progress</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
 
@@ -465,6 +1010,27 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.errorhandler">
+  <h3>
+    <a href="#stitches.prototype.errorhandler" class="pilcrow">&#182;</a>
+    Stitches.prototype.errorHandler
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">errorHandler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">type</span> <span class="o">||</span> <span class="s2">&quot;warning&quot;</span><span class="p">);</span>
         <span class="p">}</span>

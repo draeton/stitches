@@ -1,4 +1,6 @@
 /**
+ * # util/templates
+ *
  * Utility methods for working with JS templates and holding references
  * to pre-compiled templates
  *
@@ -16,8 +18,6 @@ define([
 function ($, stitchesTemplate, spriteTemplate) {
 
     "use strict";
-
-    // ## util/templates
 
     // A string cache for the `tmpl` function
     var cache = {};
@@ -68,7 +68,7 @@ function ($, stitchesTemplate, spriteTemplate) {
         return tmpl(id);
     };
 
-    // Return reference
+    // Module definition
     return {
         tmpl: tmpl,
         compile: compile,

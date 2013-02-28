@@ -1,4 +1,6 @@
 /**
+ * # layout/compact
+ *
  * Constructor for the compact canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
@@ -7,7 +9,11 @@
  */
 /*global require, define */
 
-define(["jquery", "util/util", "layout/base"],
+define([
+    "jquery",
+    "util/util",
+    "layout/base"
+],
 function ($, util, BaseLayout) {
 
     "use strict";
@@ -18,6 +24,10 @@ function ($, util, BaseLayout) {
     var CompactLayout = function () {};
 
     util.inherit(CompactLayout, BaseLayout, {
+        /**
+         * ### CompactLayout.prototype.getDimensions
+         * ...
+         */
         getDimensions: function (sprites, defaults) {
             var width = 0;
             var height = 0;
@@ -40,6 +50,10 @@ function ($, util, BaseLayout) {
             };
         },
 
+        /**
+         * ### CompactLayout.prototype.getDimensions
+         * ...
+         */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
             var tries = 0;

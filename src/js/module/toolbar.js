@@ -1,13 +1,17 @@
-// # module/toolbar
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # module/toolbar
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery"],
+define([
+    "jquery"
+],
 function ($) {
 
     "use strict";
@@ -40,10 +44,18 @@ function ($) {
     Toolbar.prototype = {
         constructor: Toolbar,
 
+        /**
+         * ### Toolbar.prototype.init
+         * ...
+         */
         init: function () {
             this.bind();
         },
 
+        /**
+         * ### Toolbar.prototype.bind
+         * ...
+         */
         bind: function () {
             var self = this;
 
@@ -61,6 +73,10 @@ function ($) {
             });
         },
 
+        /**
+         * ### Toolbar.prototype.getHandler
+         * ...
+         */
         getHandler: function (context, callback) {
             return function (e) {
                 var $target = $(e.currentTarget);
@@ -74,6 +90,10 @@ function ($) {
             };
         },
 
+        /**
+         * ### Toolbar.prototype.toggleActions
+         * ...
+         */
         toggleActions: function (actions, disable) {
             var self = this;
 
@@ -88,10 +108,18 @@ function ($) {
             });
         },
 
+        /**
+         * ### Toolbar.prototype.enable
+         * ...
+         */
         enable: function (actions) {
             this.toggleActions(actions, false);
         },
 
+        /**
+         * ### Toolbar.prototype.disable
+         * ...
+         */
         disable: function (actions) {
             this.toggleActions(actions, true);
         }

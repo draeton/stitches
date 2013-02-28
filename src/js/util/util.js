@@ -1,4 +1,6 @@
 /**
+ * # util/util
+ *
  * This is the home for wayward methods who have lost their way.
  *
  * > http://draeton.github.com/stitches<br/>
@@ -14,7 +16,7 @@ function ($) {
 
     "use strict";
 
-    // ## util/util
+    // Module definition
     return {
         /**
          * ### util.proxy

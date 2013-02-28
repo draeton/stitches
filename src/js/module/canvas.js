@@ -1,13 +1,21 @@
-// # module/canvas
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * # module/canvas
+ *
+ * ...
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "util/util", "util/array", "util/stitches", "module/sprite"],
+define([
+    "jquery",
+    "util/util",
+    "util/array",
+    "util/stitches",
+    "module/sprite"
+],
 function($, util, array, stitches, Sprite) {
 
     "use strict";
@@ -46,6 +54,10 @@ function($, util, array, stitches, Sprite) {
     Canvas.prototype = {
         constructor: Canvas,
 
+        /**
+         * ### Canvas.prototype.init
+         * ...
+         */
         init: function () {
             this.reset = util.debounce(this.reset, 500);
             this.proxy();
@@ -54,15 +66,27 @@ function($, util, array, stitches, Sprite) {
             this.reset();
         },
 
+        /**
+         * ### Canvas.prototype.proxy
+         * ...
+         */
         proxy: function () {
             util.proxy(this, "createSprite clearActive");
         },
 
+        /**
+         * ### Canvas.prototype.bind
+         * ...
+         */
         bind: function () {
             this.$element.on("create-sprite", this.createSprite);
             this.$element.on("clear-active", this.clearActive);
         },
 
+        /**
+         * ### Canvas.prototype.setup
+         * ...
+         */
         setup: function () {
             var self = this;
 
@@ -76,6 +100,10 @@ function($, util, array, stitches, Sprite) {
             }).remove();
         },
 
+        /**
+         * ### Canvas.prototype.reset
+         * ...
+         */
         reset: function () {
             this.$element.trigger("show-overlay");
             this.measure(this.sprites);
@@ -84,10 +112,18 @@ function($, util, array, stitches, Sprite) {
             this.$element.trigger("hide-overlay");
         },
 
+        /**
+         * ### Canvas.prototype.measure
+         * ...
+         */
         measure: function (sprites) {
             this.dimensions = stitches.getDimensions(sprites, this.settings.dimensions);
         },
 
+        /**
+         * ### Canvas.prototype.place
+         * ...
+         */
         place: function (sprites) {
             var placed = [];
 
@@ -106,6 +142,10 @@ function($, util, array, stitches, Sprite) {
             stitches.placeSprites(sprites, placed, this.dimensions, this.progress);
         },
 
+        /**
+         * ### Canvas.prototype.cut
+         * ...
+         */
         cut: function (sprites) {
             stitches.trim(sprites, this.dimensions);
 
@@ -115,6 +155,10 @@ function($, util, array, stitches, Sprite) {
             });
         },
 
+        /**
+         * ### Canvas.prototype.add
+         * ...
+         */
         add: function (sprite) {
             this.$element.trigger("show-overlay");
             this.sprites.push(sprite);
@@ -124,6 +168,10 @@ function($, util, array, stitches, Sprite) {
             this.reset();
         },
 
+        /**
+         * ### Canvas.prototype.remove
+         * ...
+         */
         remove: function (sprite) {
             this.$element.trigger("show-overlay");
             this.sprites = array.remove(this.sprites, sprite);
@@ -134,6 +182,10 @@ function($, util, array, stitches, Sprite) {
             this.reset();
         },
 
+        /**
+         * ### Canvas.prototype.clear
+         * ...
+         */
         clear: function () {
             this.$element.trigger("show-overlay");
             this.sprites = [];
@@ -145,6 +197,10 @@ function($, util, array, stitches, Sprite) {
             this.reset();
         },
 
+        /**
+         * ### Canvas.prototype.generateSheets
+         * ...
+         */
         generateSheets: function (settings) {
             var sprites = this.sprites;
             var dimensions = this.dimensions;
@@ -170,6 +226,10 @@ function($, util, array, stitches, Sprite) {
             this.progress(1, "success");
         },
 
+        /**
+         * ### Canvas.prototype.clearActive
+         * ...
+         */
         clearActive: function (e, sprite) {
             this.$element.find(".active").each(function () {
                 var $active = $(this);
@@ -182,6 +242,10 @@ function($, util, array, stitches, Sprite) {
             });
         },
 
+        /**
+         * ### Canvas.prototype.createSprite
+         * ...
+         */
         createSprite: function (e, name, src) {
             var self = this;
             var sprite = new Sprite({

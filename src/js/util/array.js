@@ -1,4 +1,6 @@
 /**
+ * # util/array
+ *
  * Utility methods for working with arrays
  *
  * > http://draeton.github.com/stitches<br/>
@@ -14,7 +16,7 @@ function ($) {
 
     "use strict";
 
-    // ## util/array
+    // Module definition
     return {
         /**
          * ### array.remove
