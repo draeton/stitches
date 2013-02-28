@@ -26,6 +26,21 @@
       <div class="heading h2">
         <a href="#palette">Palette</a>
       </div>
+      <div class="heading h3">
+        <a href="#palette.prototype.init">Palette.prototype.init</a>
+      </div>
+      <div class="heading h3">
+        <a href="#palette.prototype.bind">Palette.prototype.bind</a>
+      </div>
+      <div class="heading h3">
+        <a href="#palette.prototype.open">Palette.prototype.open</a>
+      </div>
+      <div class="heading h3">
+        <a href="#palette.prototype.close">Palette.prototype.close</a>
+      </div>
+      <div class="heading h3">
+        <a href="#palette.prototype.configure">Palette.prototype.configure</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -33,7 +48,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="module-palette">
   <h1>
     <a href="#module-palette" class="pilcrow">&#182;</a>
@@ -41,18 +57,24 @@
   </h1>
 </div>
 
-
-<p>...</p>
+  </div>
+  <div class="body"><p>...</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">,</span> <span class="s2">&quot;module/toolbar&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module/toolbar&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -112,12 +134,54 @@
     <span class="nx">Palette</span><span class="p">.</span><span class="nx">classname</span> <span class="o">=</span> <span class="s2">&quot;.stitches-palette&quot;</span><span class="p">;</span>
 
     <span class="nx">util</span><span class="p">.</span><span class="nx">inherit</span><span class="p">(</span><span class="nx">Palette</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="palette.prototype.init">
+  <h3>
+    <a href="#palette.prototype.init" class="pilcrow">&#182;</a>
+    Palette.prototype.init
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">(</span><span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">visible</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="palette.prototype.bind">
+  <h3>
+    <a href="#palette.prototype.bind" class="pilcrow">&#182;</a>
+    Palette.prototype.bind
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -133,16 +197,79 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="palette.prototype.open">
+  <h3>
+    <a href="#palette.prototype.open" class="pilcrow">&#182;</a>
+    Palette.prototype.open
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="palette.prototype.close">
+  <h3>
+    <a href="#palette.prototype.close" class="pilcrow">&#182;</a>
+    Palette.prototype.close
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">close</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="palette.prototype.configure">
+  <h3>
+    <a href="#palette.prototype.configure" class="pilcrow">&#182;</a>
+    Palette.prototype.configure
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">configure</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">properties</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 

@@ -26,6 +26,15 @@
       <div class="heading h2">
         <a href="#filemanager">FileManager</a>
       </div>
+      <div class="heading h3">
+        <a href="#filemanager.prototype.init">FileManager.prototype.init</a>
+      </div>
+      <div class="heading h3">
+        <a href="#filemanager.prototype.processfiles">FileManager.prototype.processFiles</a>
+      </div>
+      <div class="heading h3">
+        <a href="#filemanager.prototype.processfile">FileManager.prototype.processFile</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -33,7 +42,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
       <tr>
-        <td class="docs">
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="module-file-manager">
   <h1>
     <a href="#module-file-manager" class="pilcrow">&#182;</a>
@@ -41,18 +51,23 @@
   </h1>
 </div>
 
-
-<p>...</p>
+  </div>
+  <div class="body"><p>...</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/util&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
@@ -107,8 +122,50 @@
     <span class="nx">FileManager</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">FileManager</span><span class="p">,</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="filemanager.prototype.init">
+  <h3>
+    <a href="#filemanager.prototype.init" class="pilcrow">&#182;</a>
+    FileManager.prototype.init
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="filemanager.prototype.processfiles">
+  <h3>
+    <a href="#filemanager.prototype.processfiles" class="pilcrow">&#182;</a>
+    FileManager.prototype.processFiles
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">processFiles</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
@@ -124,6 +181,27 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="filemanager.prototype.processfile">
+  <h3>
+    <a href="#filemanager.prototype.processfile" class="pilcrow">&#182;</a>
+    FileManager.prototype.processFile
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">processFile</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">reader</span><span class="p">;</span>
