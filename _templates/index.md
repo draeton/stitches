@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/repo/build/css/stitches-@VERSION@-min.css">
+<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-@VERSION@-min.css">
 
 <section id="main" role="main">
 
@@ -73,4 +73,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/repo/build/js/stitches-@VERSION@-min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-@VERSION@-min.js"></script>
