@@ -23,7 +23,7 @@
 /*global requirejs, require, define */
 
 /**
- * ## RequireJS Configuration
+ * ### RequireJS Configuration
  *
  * Configuring RequireJS paths for wrapped globals
  */
@@ -35,7 +35,7 @@ requirejs.config({
 });
 
 /**
- * ## RequireJS Main
+ * ### RequireJS Main
  *
  * Kicks off application on elements matching `.stitches`
  */

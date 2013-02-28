@@ -20,8 +20,13 @@ function ($, util, BaseLayout) {
 
     /**
      * ## VerticalLayout
+     *
+     * Create a new `VerticalLayout` instance
+     *
+     * @constructor
+     * @param {object} options
      */
-    var VerticalLayout = function () {};
+    var VerticalLayout = function (options) {};
 
     util.inherit(VerticalLayout, BaseLayout, {
         /**

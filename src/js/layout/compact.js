@@ -20,8 +20,13 @@ function ($, util, BaseLayout) {
 
     /**
      * ## CompactLayout
+     *
+     * Create a new `CompactLayout` instance
+     *
+     * @constructor
+     * @param {object} options
      */
-    var CompactLayout = function () {};
+    var CompactLayout = function (options) {};
 
     util.inherit(CompactLayout, BaseLayout, {
         /**

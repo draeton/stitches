@@ -16,7 +16,7 @@ function ($) {
 
     "use strict";
 
-    // Module definition
+    // **Module definition**
     return {
         /**
          * ### util.proxy

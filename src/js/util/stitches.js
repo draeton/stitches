@@ -21,14 +21,14 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     "use strict";
 
-    // Canvas layout constructors
+    // **Canvas layout constructors**
     var layouts = {
         compact: CompactLayout,
         vertical: VerticalLayout,
         horizontal: HorizontalLayout
     };
 
-    // Module definition
+    // **Module definition**
     return {
         /**
          * ### stitches.setLayout

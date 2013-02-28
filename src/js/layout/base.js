@@ -18,8 +18,13 @@ function ($) {
 
     /**
      * ## BaseLayout
+     *
+     * Create a new `BaseLayout` instance
+     *
+     * @constructor
+     * @param {object} options
      */
-    var BaseLayout = function () {};
+    var BaseLayout = function (options) {};
 
     BaseLayout.prototype = {
         constructor: BaseLayout,

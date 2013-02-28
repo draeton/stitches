@@ -68,7 +68,7 @@ function ($, stitchesTemplate, spriteTemplate) {
         return tmpl(id);
     };
 
-    // Module definition
+    // **Module definition**
     return {
         tmpl: tmpl,
         compile: compile,
