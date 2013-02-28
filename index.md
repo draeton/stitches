@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/repo/build/css/stitches-1.0.42-min.css">
+<link rel="stylesheet" href="/stitches/repo/build/css/stitches-1.0.45-min.css">
 
 <section id="main" role="main">
 
@@ -19,9 +19,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-1.0.42-min.css">
+<link rel="stylesheet" href="css/stitches-1.0.45-min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.0.42-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.0.45-min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -30,7 +30,7 @@ The sprite sheet generator is automatically created in elements that have the st
 <div class="stitches"></div>
 {% endhighlight %}
 
-Documentation is available [here.](/stitches/repo/docs/stitches.html)
+Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 
 
 ## Dependencies
@@ -62,7 +62,7 @@ Documentation is available [here.](/stitches/repo/docs/stitches.html)
 
 ## Download
 
-**The latest release, 1.0.42, is [available here](/stitches/repo/dist/stitches-1.0.42.zip).**
+**The latest release, 1.0.45, is [available here](/stitches/repo/dist/stitches-1.0.45.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -73,4 +73,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/repo/build/js/stitches-1.0.42-min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/js/stitches-1.0.45-min.js"></script>

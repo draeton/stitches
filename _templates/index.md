@@ -30,7 +30,7 @@ The sprite sheet generator is automatically created in elements that have the st
 <div class="stitches"></div>
 {% endhighlight %}
 
-Documentation is available [here.](/stitches/repo/docs/stitches.html)
+Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 
 
 ## Dependencies

@@ -1,9 +1,54 @@
-<!DOCTYPE html>  <html> <head>   <title>stitches.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="base.html">                 base.js               </a>                                           <a class="source" href="compact.html">                 compact.js               </a>                                           <a class="source" href="horizontal.html">                 horizontal.js               </a>                                           <a class="source" href="vertical.html">                 vertical.js               </a>                                           <a class="source" href="canvas.html">                 canvas.js               </a>                                           <a class="source" href="drop-box.html">                 drop-box.js               </a>                                           <a class="source" href="file-manager.html">                 file-manager.js               </a>                                           <a class="source" href="palette.html">                 palette.js               </a>                                           <a class="source" href="sprite.html">                 sprite.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="toolbar.html">                 toolbar.js               </a>                                           <a class="source" href="require.html">                 require.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="text.html">                 text.js               </a>                                           <a class="source" href="array.html">                 array.js               </a>                                           <a class="source" href="stitches.html">                 stitches.js               </a>                                           <a class="source" href="templates.html">                 templates.js               </a>                                           <a class="source" href="util.html">                 util.js               </a>                                           <a class="source" href="jquery.html">                 jquery.js               </a>                                           <a class="source" href="modernizr.html">                 modernizr.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               stitches.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h2>util/stitches</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stitches.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = '../', thisFile = 'c:\\home\\github\\stitches\\src\\js\\util\\stitches.js', defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#util-stitches">util/stitches</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="util-stitches">
+  <h1>
+    <a href="#util-stitches" class="pilcrow">&#182;</a>
+    util/stitches
+  </h1>
+</div>
 
-<p><a href="http://draeton.github.com/stitches">http://draeton.github.com/stitches</a></p>
 
-<p>Copyright 2013, Matthew Cobbs
-Licensed under the MIT license.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*global require, define */</span>
+<p>...</p>
+
+<blockquote>
+  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  Copyright 2013, Matthew Cobbs<br/>
+  Licensed under the MIT license.</p>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
+
 <span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;layouts/compact&quot;</span><span class="p">,</span> <span class="s2">&quot;layouts/vertical&quot;</span><span class="p">,</span> <span class="s2">&quot;layouts/horizontal&quot;</span><span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">CompactLayout</span><span class="p">,</span> <span class="nx">VerticalLayout</span><span class="p">,</span> <span class="nx">HorizontalLayout</span><span class="p">)</span> <span class="p">{</span>
 
@@ -117,17 +162,47 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
             <span class="kd">var</span> <span class="nx">dataParts</span> <span class="o">=</span> <span class="nx">dataURI</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">byteString</span><span class="p">;</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>convert base64 to raw binary data held in a string</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>convert base64 to raw binary data held in a string</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="k">if</span> <span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">byteString</span> <span class="o">=</span> <span class="nx">atob</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
                 <span class="nx">byteString</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">dataParts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
             <span class="p">}</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>separate out the mime component</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>separate out the mime component</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">mimeString</span> <span class="o">=</span> <span class="nx">dataParts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>write the bytes of the string to an ArrayBuffer</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>write the bytes of the string to an ArrayBuffer</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="nx">byteString</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">ab</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayBuffer</span><span class="p">(</span><span class="nx">bl</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">ia</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">ab</span><span class="p">);</span>
@@ -136,7 +211,17 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
                 <span class="nx">ia</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">byteString</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
             <span class="p">}</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>get the blob and create an object URL</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>get the blob and create an object URL</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createBlob</span><span class="p">(</span><span class="nx">ab</span><span class="p">,</span> <span class="nx">mimeString</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
 
@@ -170,5 +255,11 @@ Licensed under the MIT license.</p>             </td>             <td class="cod
     <span class="p">};</span>
 
 <span class="p">});</span>
-
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stitches.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = '', thisFile = 'c:\\home\\github\\stitches\\src\\js\\stitches.js', defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+  <script src="fileSearch.js"></script>
+  <link rel="stylesheet" href="fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#stitches">Stitches</a>
+      </div>
+      <div class="heading h3">
+        <a href="#an-html5-sprite-sheet-generator">An HTML5 Sprite Sheet Generator</a>
+      </div>
+      <div class="heading h2">
+        <a href="#requirejs-configuration">RequireJS Configuration</a>
+      </div>
+      <div class="heading h2">
+        <a href="#requirejs-main">RequireJS Main</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="stitches">
+  <h1>
+    <a href="#stitches" class="pilcrow">&#182;</a>
+    Stitches
+  </h1>
+</div>
+
+
+
+<div class="pilwrap" id="an-html5-sprite-sheet-generator">
+  <h3>
+    <a href="#an-html5-sprite-sheet-generator" class="pilcrow">&#182;</a>
+    <em>An HTML5 Sprite Sheet Generator</em>
+  </h3>
+</div>
+
+
+<blockquote>
+  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  Copyright 2013, Matthew Cobbs<br/>
+  Licensed under the MIT license.</p>
+</blockquote>
+
+<p>Stitches is an HTML5 sprite sheet generator.</p>
+
+<p>Stitches is developed by Matthew Cobbs in concert with the lovely open-source
+community at Github. Thanks are owed to the developers at Twitter for
+<a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and
+<a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>
+
+<p>Addtionally, I want to thank <a href="https://github.com/jbt">James Taylor</a>
+for the <a href="https://github.com/jbt/docker">Docker</a> documentation tool, and
+<a href="https://github.com/philmander">Phil Mander</a> for his JSHint and JSTestRunner
+Ant tasks, which round out my build toolchain, and most of all the good folks
+who develop <a href="http://requirejs.org/">RequireJS</a> for helping this all make
+sense.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global requirejs, require, define */</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="requirejs-configuration">
+  <h2>
+    <a href="#requirejs-configuration" class="pilcrow">&#182;</a>
+    RequireJS Configuration
+  </h2>
+</div>
+
+
+<p>Configuring RequireJS paths for wrapped globals</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;wrap/jquery&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modernizr&quot;</span><span class="o">:</span> <span class="s2">&quot;wrap/modernizr&quot;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="requirejs-main">
+  <h2>
+    <a href="#requirejs-main" class="pilcrow">&#182;</a>
+    RequireJS Main
+  </h2>
+</div>
+
+
+<p>Kicks off application on elements matching <code>.stitches</code></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">require</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/stitches&quot;</span><span class="p">],</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Stitches</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">selector</span> <span class="o">=</span> <span class="s2">&quot;.stitches&quot;</span><span class="p">;</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">stitches</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stitches</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+
+<span class="p">});</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

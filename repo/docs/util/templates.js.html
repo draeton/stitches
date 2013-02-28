@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>templates.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = '../', thisFile = 'c:\\home\\github\\stitches\\src\\js\\util\\templates.js', defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#util-templates">util/templates</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="util-templates">
+  <h1>
+    <a href="#util-templates" class="pilcrow">&#182;</a>
+    util/templates
+  </h1>
+</div>
+
+
+<p>...</p>
+
+<blockquote>
+  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  Copyright 2013, Matthew Cobbs<br/>
+  Licensed under the MIT license.</p>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
+
+<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;text!../../templates/stitches.html&quot;</span><span class="p">,</span> <span class="s2">&quot;text!../../templates/sprite.html&quot;</span><span class="p">],</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="nx">spriteTemplate</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="kd">var</span> <span class="nx">tmpl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Figure out if we're getting a template, or if we need to
+load the template - and be sure to cache the result.   </p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="o">!</span><span class="sr">/\W/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">?</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">str</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">str</span><span class="p">]</span> <span class="o">||</span> <span class="nx">tmpl</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">innerHTML</span><span class="p">)</span> <span class="o">:</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Generate a reusable function that will serve as a template
+generator (and which will be cached).   </p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="cm">/*jshint evil:true*/</span>
+        <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;obj&quot;</span><span class="p">,</span> <span class="s2">&quot;var p=[],print=function(){p.push.apply(p,arguments);};&quot;</span> <span class="o">+</span>
+        <span class="cm">/*jshint evil:false*/</span>
+
+        <span class="cm">/* Introduce the data as local variables using with(){} */</span>
+        <span class="s2">&quot;with(obj){p.push(&#39;&quot;</span> <span class="o">+</span>
+
+        <span class="cm">/* Convert the template into pure JavaScript */</span>
+        <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\r\t\n]/g</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&lt;%&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\t&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/((^|%&gt;)[^\t]*)&#39;/g</span><span class="p">,</span> <span class="s2">&quot;$1\r&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\t=(.*?)%&gt;/g</span><span class="p">,</span> <span class="s2">&quot;&#39;,$1,&#39;&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\t&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&#39;);&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;%&gt;&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;p.push(&#39;&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\r&quot;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\\&#39;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;);}return p.join(&#39;&#39;);&quot;</span><span class="p">);</span>
+
+        <span class="cm">/* Provide some basic currying to the user */</span>
+        <span class="k">return</span> <span class="nx">data</span> <span class="o">?</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">:</span> <span class="nx">fn</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="kd">var</span> <span class="nx">compile</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">template</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nx">tmpl</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">tmpl</span><span class="o">:</span> <span class="nx">tmpl</span><span class="p">,</span>
+        <span class="nx">stitches</span><span class="o">:</span> <span class="nx">compile</span><span class="p">(</span><span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="s2">&quot;stitches_tmpl&quot;</span><span class="p">),</span>
+        <span class="nx">sprite</span><span class="o">:</span> <span class="nx">compile</span><span class="p">(</span><span class="nx">spriteTemplate</span><span class="p">,</span> <span class="s2">&quot;stitches_sprite_tmpl&quot;</span><span class="p">)</span>
+    <span class="p">};</span>
+
+<span class="p">});</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

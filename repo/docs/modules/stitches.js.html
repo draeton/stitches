@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stitches.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = '../', thisFile = 'c:\\home\\github\\stitches\\src\\js\\modules\\stitches.js', defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#util-array">util/array</a>
+      </div>
+      <div class="heading h2">
+        <a href="#stitches">Stitches</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="util-array">
+  <h1>
+    <a href="#util-array" class="pilcrow">&#182;</a>
+    util/array
+  </h1>
+</div>
+
+
+<p>...</p>
+
+<blockquote>
+  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  Copyright 2013, Matthew Cobbs<br/>
+  Licensed under the MIT license.</p>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
+
+<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span> <span class="s2">&quot;util/util&quot;</span><span class="p">,</span> <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span> <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/file-manager&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/drop-box&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/canvas&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/toolbar&quot;</span><span class="p">,</span> <span class="s2">&quot;modules/palette&quot;</span><span class="p">],</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+    <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">FileReader</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">draganddrop</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../lib/dropfile/dropfile&quot;</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">canvas</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../lib/flashcanvas/flashcanvas&quot;</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}());</span>
+
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">layout</span><span class="o">:</span> <span class="s2">&quot;compact&quot;</span><span class="p">,</span>
+        <span class="nx">prefix</span><span class="o">:</span> <span class="s2">&quot;sprite&quot;</span><span class="p">,</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">};</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches">
+  <h2>
+    <a href="#stitches" class="pilcrow">&#182;</a>
+    Stitches
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>Create a new <code>Stitches</code> instance</p>
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">element
+</span>
+      <span class="dox_type">element</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options
+
+</span>
+      <span class="dox_type">object</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">var</span> <span class="nx">Stitches</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="nx">Stitches</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">constructor</span><span class="o">:</span> <span class="nx">Stitches</span><span class="p">,</span>
+
+        <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">setFileManager</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setDropBox</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setToolbar</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setCanvas</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setPalettes</span><span class="p">();</span>
+        <span class="p">},</span>
+
+        <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">stitches</span><span class="p">({});</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-overlay&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$dropBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-drop-box&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-toolbar&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-canvas&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$progress</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-progress .progress&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$progressBar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-progress .bar&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$about</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-about&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$settings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-settings&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$properties</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-properties&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress errorHandler&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">showOverlay</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">hideOverlay</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-about&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openAbout</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-about&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openSettings</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-properties&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openProperties</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">setFileManager</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileManager</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+        <span class="nx">setDropBox</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">dropBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DropBox</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$dropBox</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">setLayout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">stitches</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">setCanvas</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+                <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+        <span class="nx">setToolbar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Toolbar</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$toolbar</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;toolbar&quot;</span><span class="p">,</span>
+                <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">open</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">change</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input[type=file]&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">$clone</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">files</span><span class="p">]);</span>
+                            <span class="nx">$input</span><span class="p">.</span><span class="nx">replaceWith</span><span class="p">(</span><span class="nx">$clone</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">settings</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">reset</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">generate</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">clear</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span>
+                    <span class="p">},</span>
+                    <span class="nx">stylesheet</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span>
+                    <span class="p">},</span>
+                    <span class="nx">about</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;open-about&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+        <span class="nx">setPalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+            <span class="kd">var</span> <span class="nx">about</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$about</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span>
+                <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$settings</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;settings&quot;</span><span class="p">,</span>
+                <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="nx">fields</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">$checked</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input[name=layout]:checked&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">layout</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">;</span>
+                            <span class="nx">stitches</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="nx">layout</span><span class="p">);</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">prefix</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">prefix</span> <span class="o">=</span> <span class="nx">prefix</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">padding</span><span class="p">;</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">padding</span><span class="p">;</span>
+
+                            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">sprite</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+                                    <span class="nx">padding</span><span class="o">:</span> <span class="nx">padding</span>
+                                <span class="p">});</span>
+                            <span class="p">});</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">uri</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s2">&quot;:checked&quot;</span><span class="p">);</span>
+
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">uri</span> <span class="o">=</span> <span class="nx">uri</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="kd">var</span> <span class="nx">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$properties</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;properties&quot;</span><span class="p">,</span>
+                <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="nx">remove</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="nx">fields</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+                            <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">clean</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">cleanName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">clean</span><span class="p">;</span>
+
+                            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">!==</span> <span class="nx">clean</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">clean</span><span class="p">);</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">about</span><span class="o">:</span> <span class="nx">about</span><span class="p">,</span>
+                <span class="nx">settings</span><span class="o">:</span> <span class="nx">settings</span><span class="p">,</span>
+                <span class="nx">properties</span><span class="o">:</span> <span class="nx">properties</span>
+            <span class="p">};</span>
+        <span class="p">},</span>
+
+        <span class="nx">showOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span><span class="p">.</span><span class="nx">fadeTo</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">hideOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">openAbout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+        <span class="p">},</span>
+
+        <span class="nx">closeAbout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">openSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+                <span class="nx">source</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span>
+                <span class="nx">inputs</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">layout</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">,</span>
+                    <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
+                    <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+                    <span class="nx">uri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+        <span class="p">},</span>
+
+        <span class="nx">closeSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">openProperties</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+                <span class="nx">source</span><span class="o">:</span> <span class="nx">sprite</span><span class="p">,</span>
+                <span class="nx">inputs</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">name</span><span class="o">:</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                    <span class="nx">x</span><span class="o">:</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+                    <span class="nx">y</span><span class="o">:</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">padding</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+        <span class="p">},</span>
+
+        <span class="nx">closeProperties</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;clear-active&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">closePalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">();</span>
+        <span class="p">},</span>
+
+        <span class="nx">processFiles</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">updateToolbar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">$toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">.</span><span class="nx">$element</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear&quot;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">&amp;&amp;</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
+
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;spritesheet stylesheet&quot;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
+
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;spritesheet stylesheet&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="nx">updateProgress</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">progress</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">percent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">progress</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">percent</span> <span class="o">===</span> <span class="mi">100</span> <span class="o">&amp;&amp;</span> <span class="nx">type</span> <span class="o">!==</span> <span class="s2">&quot;danger&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">type</span> <span class="o">!==</span> <span class="s2">&quot;warning&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">type</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$progress</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+                    <span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;progress progress-striped progress-&quot;</span> <span class="o">+</span> <span class="nx">type</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$progressBar</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                <span class="nx">width</span><span class="o">:</span> <span class="nx">percent</span> <span class="o">+</span> <span class="s2">&quot;%&quot;</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+        <span class="nx">errorHandler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">type</span> <span class="o">||</span> <span class="s2">&quot;warning&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">Stitches</span><span class="p">;</span>
+
+<span class="p">});</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
