@@ -1,34 +1,66 @@
-// # util/stitches
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * Utility methods for setting the canvas layout
+ * and stitching the sprites together (i.e. placing them
+ * on the canvas)
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
-define(["jquery", "layout/compact", "layout/vertical", "layout/horizontal"],
+define([
+    "jquery",
+    "layout/compact",
+    "layout/vertical",
+    "layout/horizontal"
+],
 function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     "use strict";
 
+    // Canvas layout constructors
     var layouts = {
         compact: CompactLayout,
         vertical: VerticalLayout,
         horizontal: HorizontalLayout
     };
 
+    // ## util/stitches
     return {
+        /**
+         * ### stitches.setLayout
+         * Set the working layout manager instance by type
+         *
+         * @param {string} type The layout manager type
+         */
         setLayout: function (type) {
             var Constructor = layouts[type] || layouts.compact;
 
             this.layout = new Constructor();
         },
 
+        /**
+         * ### stitches.getDimensions
+         * Get the dimensions necessary to place the sprites
+         *
+         * @param {array} sprites A list of sprites to place
+         * @param {object} defaults Default dimensions if no sprites
+         * @return object
+         */
         getDimensions: function (sprites, defaults) {
             return this.layout.getDimensions(sprites, defaults);
         },
 
+        /**
+         * ### stitches.placeSprites
+         * Position a list of sprites to fit in dimensions and layout
+         *
+         * @param {array} sprites To place
+         * @param {array} placed Already placed
+         * @param {object} dimensions Working width and height
+         * @param {function} progress Function to update display on progress
+         */
         placeSprites: function (sprites, placed, dimensions, progress) {
             var self = this;
 
@@ -47,11 +79,18 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             });
         },
 
-        trim: function (placed, dimensions) {
+        /**
+         * ### stitches.trim
+         * Trim dimensions to only contain placed sprites
+         *
+         * @param {array} sprites A list of sprites
+         * @param {object} dimensions Working width and height
+         */
+        trim: function (sprites, dimensions) {
             var w = 0;
             var h = 0;
 
-            $.map(placed, function (sprite) {
+            $.map(sprites, function (sprite) {
                 w = w > sprite.x + sprite.width ? w : sprite.x + sprite.width;
                 h = h > sprite.y + sprite.height ? h : sprite.y + sprite.height;
             });
@@ -60,6 +99,15 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             dimensions.height = h || dimensions.height;
         },
 
+        /**
+         * ### stitches.makeSpritesheet
+         * Make an image using the browser canvas element's drawing context.
+         * Triggers a non-fatal error if anything fails
+         *
+         * @param {array} sprites A list of sprites
+         * @param {object} dimensions Working width and height
+         * @return string
+         */
         makeSpritesheet: function (sprites, dimensions) {
             var canvas;
             var context;
@@ -87,6 +135,16 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             return spritesheet;
         },
 
+        /**
+         * ### stitches.makeStylesheet
+         * Make a CSS stylesheet to place images with spritesheet
+         *
+         * @param {array} sprites A list of sprites
+         * @param {string} spritesheet The data URL of the spritesheet
+         * @param {string} prefix Used to create CSS classes
+         * @param {boolean} uri Switch including image as data URI
+         * @return string
+         */
         makeStylesheet: function (sprites, spritesheet, prefix, uri) {
             var backgroundImage = uri ? spritesheet : "download.png";
             var stylesheet;
@@ -116,6 +174,14 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             return stylesheet;
         },
 
+        /**
+         * ### stitches.dataToObjectURL
+         * Convert base64 data or raw binary data to an object URL
+         * See: http://stackoverflow.com/a/5100158/230483
+         *
+         * @param {string} dataURI
+         * @return string
+         */
         dataToObjectURL: function (dataURI) {
             var dataParts = dataURI.split(',');
             var byteString;
@@ -146,6 +212,10 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             return url;
         },
 
+        /**
+         * ### stitches.createBlob
+         * Polyfill
+         */
         createBlob: function (arrayBuffer, mimeString) {
             var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
 
@@ -159,6 +229,10 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             return bb.getBlob(mimeString);
         },
 
+        /**
+         * ### stitches.createObjectURL
+         * Polyfill
+         */
         createObjectURL: function (file) {
             if (window.URL && window.URL.createObjectURL) {
                 return window.URL.createObjectURL(file);

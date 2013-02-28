@@ -1,10 +1,10 @@
-// # layout/compact
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * Constructor for the compact canvas layout manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
 define(["jquery", "util/util", "layout/base"],
@@ -12,6 +12,9 @@ function ($, util, BaseLayout) {
 
     "use strict";
 
+    /**
+     * ## CompactLayout
+     */
     var CompactLayout = function () {};
 
     util.inherit(CompactLayout, BaseLayout, {

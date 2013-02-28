@@ -1,10 +1,10 @@
-// # layout/base
-//
-// ...
-//
-// > http://draeton.github.com/stitches<br/>
-// > Copyright 2013, Matthew Cobbs<br/>
-// > Licensed under the MIT license.
+/**
+ * Base constructor for the canvas layout managers
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
 /*global require, define */
 
 define(["jquery"],
@@ -12,6 +12,9 @@ function ($) {
 
     "use strict";
 
+    /**
+     * ## BaseLayout
+     */
     var BaseLayout = function () {};
 
     BaseLayout.prototype = {

@@ -11,24 +11,30 @@ The current version is `@VERSION@`. Documentation is available
 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
-    <link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
+```html
+<link rel="stylesheet" href="css/stitches-1.0.52-min.css">
 
-    <script data-main="js/stitches.js" src="js/stitches-@VERSION@-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.0.52-min.js"></script>
+```
 
 The sprite sheet generator is automatically created in elements that have the `stitches` class:
 
-    <div class="stitches"></div>
+```html
+<div class="stitches"></div>
+```
 
 ## Dependencies
 
 [jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/)
 
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+```html
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
 
-    <script src="lib/jquery/jquery-1.7.1.js"></script>
-    <script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/jquery/jquery-1.7.1.js"></script>
+<script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+```
 
 ## License
 

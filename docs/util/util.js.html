@@ -20,8 +20,20 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
-      <div class="heading h1">
+      <div class="heading h2">
         <a href="#util-util">util/util</a>
+      </div>
+      <div class="heading h3">
+        <a href="#util.proxy">util.proxy</a>
+      </div>
+      <div class="heading h3">
+        <a href="#util.inherit">util.inherit</a>
+      </div>
+      <div class="heading h3">
+        <a href="#util.debounce">util.debounce</a>
+      </div>
+      <div class="heading h3">
+        <a href="#util.cleanname">util.cleanName</a>
       </div>
     </div>
   </div>
@@ -31,30 +43,85 @@
   <tbody>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="util-util">
-  <h1>
-    <a href="#util-util" class="pilcrow">&#182;</a>
-    util/util
-  </h1>
+          <h1>util.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
-
-
-<p>...</p>
-
-<blockquote>
+<div class="dox">
+  <div class="summary"><p>This is the home for wayward methods who have lost their way.</p>
+  </div>
+  <div class="body"><blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
   Copyright 2013, Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">],</span>
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span>
+<span class="p">],</span>
 <span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="util-util">
+  <h2>
+    <a href="#util-util" class="pilcrow">&#182;</a>
+    util/util
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
     <span class="k">return</span> <span class="p">{</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.proxy">
+  <h3>
+    <a href="#util.proxy" class="pilcrow">&#182;</a>
+    util.proxy
+  </h3>
+</div>
+
+
+<p>Bind methods to a specific context</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">context</span>
+      <span class="dox_type">object</span>
+      <span>The binding execution context</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">methods</span>
+      <span class="dox_type">string</span>
+      <span class="dox_type">array</span>
+      <span>Space-separated string or array</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">methods</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">methods</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">methods</span> <span class="o">=</span> <span class="nx">methods</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
@@ -65,6 +132,45 @@
             <span class="p">});</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.inherit">
+  <h3>
+    <a href="#util.inherit" class="pilcrow">&#182;</a>
+    util.inherit
+  </h3>
+</div>
+
+
+<p>Set up prototypical inheritance</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">Child</span>
+      <span class="dox_type">function</span>
+      <span>Constructor</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">Parent</span>
+      <span class="dox_type">function</span>
+      <span>Constructor</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">methods</span>
+      <span class="dox_type">object</span>
+      <span>To add to Child.prototype</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">inherit</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">,</span> <span class="nx">methods</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">();</span>
             <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">;</span>
@@ -80,12 +186,51 @@
             <span class="p">};</span>
         <span class="p">},</span>
 
-        <span class="nx">removeValue</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="nx">array</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">this</span> <span class="o">!==</span> <span class="nx">value</span><span class="p">;</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.debounce">
+  <h3>
+    <a href="#util.debounce" class="pilcrow">&#182;</a>
+    util.debounce
+  </h3>
+</div>
 
+
+<p>Prevent a function from being called more than once within
+a certain threshold</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">func</span>
+      <span class="dox_type">function</span>
+      <span>Function to modify</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">threshold</span>
+      <span class="dox_type">number</span>
+      <span>In ms</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">execAsap</span>
+      <span class="dox_type">boolean</span>
+      <span>If true, run function on first call</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>function</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">debounce</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">threshold</span><span class="p">,</span> <span class="nx">execAsap</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">timeout</span><span class="p">;</span>
 
@@ -111,9 +256,45 @@
             <span class="p">};</span>
         <span class="p">},</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.cleanname">
+  <h3>
+    <a href="#util.cleanname" class="pilcrow">&#182;</a>
+    util.cleanName
+  </h3>
+</div>
+
+
+<p>Remove special characters and other markers from a string
+to be used as a sprite name</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">string</span>
+      <span>The name of the sprite</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">cleanName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\.[a-z]{3,4}$/i</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\.\w+$/i</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span> <span class="c1">// file extension</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">);</span> <span class="c1">// spaces to -</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span> <span class="c1">// other to _</span>
 
             <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
         <span class="p">}</span>
