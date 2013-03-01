@@ -23,6 +23,19 @@ The sprite sheet generator is automatically created in elements that have the `s
 <div class="stitches"></div>
 ```
 
+If you choose, any images that are a part of the initial markup will be loaded onto the canvas:
+
+```html
+<div class="stitches">
+    <img src="img/test/github.png" data-name="github"/>
+    <img src="img/test/gmail.png" data-name="gmail"/>
+    <img src="img/test/linkedin.png" data-name="linkedin"/>
+    <img src="img/test/stackoverflow.png" data-name="stackoverflow"/>
+    <img src="img/test/tumblr.png" data-name="tumblr"/>
+    <img src="img/test/twitter.png" data-name="twitter"/>
+</div>
+```
+
 ## Dependencies
 
 [jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/)
