@@ -4535,13 +4535,6 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
 /*global requirejs, require, define */
 
 /**
- * ### RequireJS Configuration
- *
- * Configuring RequireJS paths for wrapped globals
- */
-requirejs.config();
-
-/**
  * ### RequireJS Main
  *
  * Kicks off application on elements matching `.stitches`
