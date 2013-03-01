@@ -13,42 +13,35 @@
 
     <!--
 
+        REPO DEPENDENCIES
+
+    -->
+
+
+    <fileset id="repo.depends" dir="${src.dir}">
+        <include name="**/img/**"/>
+    </fileset>
+
+
+    <!--
+
         REPO TARGETS
 
     -->
 
 
-    <target name="-init" description="Starting new build">
-        <echo>Starting new build</echo>
-
-        <fileset id="repo.depends" dir="${src.dir}">
-            <include name="**/img/**"/>
-        </fileset>
+    <target name="prod" depends="-commit-message,validate,docs,build,commit">
+        <echo>Builds project files for production use</echo>
     </target>
 
 
-    <target name="prod"
-        description="Builds project files for production use"
-        depends="
-            -init,
-            -clean,
-            validate,
-            -readme,
-            docker,
-            require,
-            -concat,
-            -minify,
-            -copy-depends,
-            -zip,
-            commit">
+    <target name="pages" depends="pages-build,pages-commit">
+        <echo>Builds project pages</echo>
     </target>
 
 
-    <target name="pages"
-        description="Builds project pages"
-        depends="
-            -gh-pages-update,
-            -gh-pages-commit">
+    <target name="all" depends="prod,pages">
+        <echo>Build project and pages</echo>
     </target>
 
 
