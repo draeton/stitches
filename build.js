@@ -11,6 +11,7 @@
     ],
 
     paths: {
+        "lib": "../lib",
         "tpl" : "../tpl",
         "jquery": "wrap/jquery",
         "modernizr": "wrap/modernizr"

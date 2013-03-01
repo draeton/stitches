@@ -71,6 +71,10 @@ function ($) {
                     }
                 });
             });
+
+            this.$element.find("[data-toggle=tooltip]").tooltip({
+                placement: "bottom"
+            });
         },
 
         /**

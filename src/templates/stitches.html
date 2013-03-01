@@ -2,18 +2,34 @@
     <!-- .stitches-toolbar -->
     <div class="stitches-toolbar btn-toolbar">
         <div class="btn-group shrink">
-            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link"><strong>Stitches</strong></a>
-            <button data-action="open" class="btn btn-small files" title="Open"><i class="icon-folder-open"></i> <span>Open</span><input class="file" type="file" multiple=""></button>
-            <button data-action="settings" class="btn btn-small" title="Settings"><i class="icon-cog"></i> <span>Settings</span></button>
-            <button data-action="generate" class="btn btn-small disabled" title="Generate"><i class="icon-tasks"></i> <span>Generate</span></button>
-            <button data-action="clear" class="btn btn-small disabled" title="Clear"><i class="icon-remove"></i> <span>Clear</span></button>
+            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">
+                <strong>Stitches</strong>
+            </a>
+            <button data-action="open" class="btn btn-small btn-info files" title="Open">
+                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">
+            </button>
+            <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc." data-toggle="tooltip">
+                <i class="icon-cog icon-white"></i> <span>Settings</span>
+            </button>
+            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet" data-toggle="tooltip">
+                <i class="icon-tasks icon-white"></i> <span>Generate</span>
+            </button>
+            <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas" data-toggle="tooltip">
+                <i class="icon-remove icon-white"></i> <span>Clear</span>
+            </button>
         </div>
         <div class="btn-group shrink">
-            <a href="#" data-action="spritesheet" class="btn btn-small disabled" title="Spritesheet" target="_blank"><i class="icon-download-alt"></i> <span>Spritesheet</span></a>
-            <a href="#" data-action="stylesheet" class="btn btn-small disabled" title="Stylesheet" target="_blank"><i class="icon-download-alt"></i> <span>Stylesheet</span></a>
+            <a href="#" data-action="spritesheet" class="btn btn-small btn-info disabled" title="Open the spritesheet in a new tab" target="_blank" data-toggle="tooltip">
+                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>
+            </a>
+            <a href="#" data-action="stylesheet" class="btn btn-small btn-info disabled" title="Open the stylesheet in a new tab" target="_blank" data-toggle="tooltip">
+                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>
+            </a>
         </div>
         <div class="btn-group shrink">
-            <button data-action="about" class="btn btn-small" title="About Stitches"><i class="icon-info-sign"></i> <span>About</span></button>
+            <button data-action="about" class="btn btn-small btn-info" title="About Stitches" data-toggle="tooltip">
+                <i class="icon-info-sign icon-white"></i> <span>About</span>
+            </button>
         </div>
     </div>
     <!-- /.stitches-toolbar -->
@@ -43,7 +59,7 @@
             <!-- .stitches-settings -->
             <div class="stitches-palette stitches-settings fade">
                 <div class="stitches-palette-header">
-                    <button type="button" class="close" data-action="close">&times;</button>
+                    <button type="button" class="close" data-action="close" title="Close">&times;</button>
                     <h4>Settings</h4>
                 </div>
 
@@ -74,9 +90,9 @@
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">CSS prefix</label>
+                            <label class="control-label">Style prefix</label>
                             <div class="controls">
-                                <input name="prefix" type="text" placeholder="CSS class prefix&hellip;">
+                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">
                             </div>
                         </div>
 
@@ -104,8 +120,8 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button class="btn btn-small" data-action="close"><span>Save</span></button>
-                            <button class="btn btn-small" data-action="close"><span>Close</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
 
@@ -117,7 +133,7 @@
             <!-- .stitches-properties -->
             <div class="stitches-palette stitches-properties fade">
                 <div class="stitches-palette-header">
-                    <button type="button" class="close" data-action="close">&times;</button>
+                    <button type="button" class="close" data-action="close" title="Close">&times;</button>
                     <h4>Sprite Properties</h4>
                 </div>
 
@@ -149,9 +165,9 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button class="btn btn-small" data-action="remove"><span>Delete</span></button>
-                            <button class="btn btn-small" data-action="close"><span>Save</span></button>
-                            <button class="btn btn-small" data-action="close"><span>Close</span></button>
+                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
 
@@ -163,7 +179,7 @@
             <!-- .stitches-about -->
             <div class="stitches-palette stitches-about fade in">
                 <div class="stitches-palette-header">
-                    <button type="button" class="close" data-action="close">&times;</button>
+                    <button type="button" class="close" data-action="close" title="Close">&times;</button>
                     <h4>About Stitches</h4>
                 </div>
 
@@ -178,7 +194,7 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button class="btn btn-small" data-action="close"><span>Close</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
 
