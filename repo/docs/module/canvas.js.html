@@ -60,9 +60,6 @@
         <a href="#canvas.prototype.clear">Canvas.prototype.clear</a>
       </div>
       <div class="heading h3">
-        <a href="#canvas.prototype.generatesheets">Canvas.prototype.generateSheets</a>
-      </div>
-      <div class="heading h3">
         <a href="#canvas.prototype.clearactive">Canvas.prototype.clearActive</a>
       </div>
       <div class="heading h3">
@@ -307,6 +304,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">measure</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">place</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">cut</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
@@ -495,53 +493,6 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="canvas.prototype.generatesheets">
-  <h3>
-    <a href="#canvas.prototype.generatesheets" class="pilcrow">&#182;</a>
-    Canvas.prototype.generateSheets
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
-
-            <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeSpritesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
-            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
-
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
-                <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">e</span><span class="p">]);</span>
-            <span class="p">}</span>
-
-            <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">spritesheet</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheet</span><span class="p">;</span>
-
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
