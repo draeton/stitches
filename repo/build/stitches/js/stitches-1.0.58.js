@@ -3230,7 +3230,7 @@ function ($) {
 define('tpl!module/../../templates/sprite.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches-sprite" style="top: ',y,'px; left: ',x,'px;">    <img src="',image.src,'"/></div>');}return __p.join('');}});
 
 /**
- * # module/stitches
+ * # module/sprite
  *
  * ...
  *
@@ -3926,7 +3926,7 @@ function ($, util, Toolbar) {
 
 });
 /**
- * # util/array
+ * # module/stitches
  *
  * ...
  *
