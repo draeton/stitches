@@ -39,7 +39,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
         layout: "compact",
         prefix: "sprite",
         padding: 5,
-        uri: false
+        uri: false,
+        style: "css"
     };
 
     /**
@@ -269,6 +270,16 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                             self.canvas.reset();
                         }
                     },
+                    style: {
+                        "change": function (e) {
+                            var $checked = this.$element.find("input[name=style]:checked");
+                            var style = $checked.val();
+
+                            self.settings.style = style;
+
+                            self.canvas.reset();
+                        }
+                    },
                     prefix: {
                         "input blur": function (e) {
                             var prefix = $(e.currentTarget).val();
@@ -390,6 +401,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                 source: this.settings,
                 inputs: {
                     layout: this.settings.layout,
+                    style: this.settings.style,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
                     uri: this.settings.uri

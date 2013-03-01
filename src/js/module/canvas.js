@@ -207,11 +207,12 @@ function($, util, array, stitches, Sprite) {
             var dimensions = this.dimensions;
             var prefix = settings.prefix;
             var uri = settings.uri;
+            var style = settings.style;
             var spritesheet;
             var stylesheet;
 
             spritesheet = stitches.makeSpritesheet(sprites, dimensions);
-            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri);
+            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri, style);
 
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);

@@ -157,7 +157,8 @@
         <span class="nx">layout</span><span class="o">:</span> <span class="s2">&quot;compact&quot;</span><span class="p">,</span>
         <span class="nx">prefix</span><span class="o">:</span> <span class="s2">&quot;sprite&quot;</span><span class="p">,</span>
         <span class="nx">padding</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="nx">uri</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span>
     <span class="p">};</span>
 
 </pre></div>
@@ -598,6 +599,16 @@
                             <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
+                    <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">$checked</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input[name=style]:checked&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="nx">style</span><span class="p">;</span>
+
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
                     <span class="nx">prefix</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
@@ -804,6 +815,7 @@
                 <span class="nx">source</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span>
                 <span class="nx">inputs</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">layout</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">,</span>
+                    <span class="nx">style</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span><span class="p">,</span>
                     <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
                     <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
                     <span class="nx">uri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span>
