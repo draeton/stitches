@@ -30,7 +30,7 @@
     -->
 
 
-    <target name="prod" depends="-commit-message,validate,docs,build,commit">
+    <target name="deploy" depends="-commit-message,validate,docs,build,commit">
         <echo>Builds project files for production use</echo>
     </target>
 
@@ -40,7 +40,7 @@
     </target>
 
 
-    <target name="all" depends="prod,pages">
+    <target name="all" depends="deploy,pages">
         <echo>Build project and pages</echo>
     </target>
 
