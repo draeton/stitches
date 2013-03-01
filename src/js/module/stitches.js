@@ -226,8 +226,6 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     }
                 }
             });
-
-            this.$toolbar.find("[data-action=generate]").tooltip("show");
         },
 
         /**
