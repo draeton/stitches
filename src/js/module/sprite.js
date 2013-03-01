@@ -37,7 +37,7 @@ function($, util, spriteTemplate) {
     var Sprite = function (options) {
         this.settings = $.extend({}, defaults, options);
         this.$element = null;
-        this.name = util.cleanName(this.settings.name);
+        this.name = this.cleanName(this.settings.name);
         this.src = this.settings.src;
         this.padding = parseInt(this.settings.padding, 10);
         this.callback = this.settings.callback;
@@ -164,6 +164,22 @@ function($, util, spriteTemplate) {
                 this.height = this.image.height + this.padding * 2;
                 this.area = this.width * this.height;
             }
+        },
+
+        /**
+         * ### Sprite.prototype.cleanName
+         * Remove special characters and other markers from a string
+         * to be used as a sprite name
+         *
+         * @param {string} name The name of the sprite
+         * @return string
+         */
+        cleanName: function (name) {
+            name = name.replace(/\.\w+$/i, ""); // file extension
+            name = name.replace(/[\s.]+/gi, "-"); // spaces to -
+            name = name.replace(/[^a-z0-9\-]/gi, "_"); // other to _
+
+            return name;
         }
     };
 

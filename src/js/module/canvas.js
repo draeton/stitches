@@ -214,8 +214,8 @@ function($, util, array, stitches, Sprite) {
             stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri);
 
             try {
-                spritesheet = stitches.dataToObjectURL(spritesheet);
-                stylesheet = stitches.dataToObjectURL(stylesheet);
+                spritesheet = util.dataToObjectURL(spritesheet);
+                stylesheet = util.dataToObjectURL(stylesheet);
             } catch (e) {
                 this.$element.trigger("error", [e]);
             }

@@ -530,8 +530,8 @@
             <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
 
             <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
-                <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
+                <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
+                <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">e</span><span class="p">]);</span>
             <span class="p">}</span>

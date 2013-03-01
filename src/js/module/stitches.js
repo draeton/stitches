@@ -324,7 +324,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                         "input blur": function (e) {
                             var sprite = this.source;
                             var name = $(e.currentTarget).val();
-                            var clean = util.cleanName(name);
+                            var clean = sprite.cleanName(name);
 
                             this.source.name = clean;
 

@@ -2124,19 +2124,74 @@ function ($) {
         },
 
         /**
-         * ### util.cleanName
-         * Remove special characters and other markers from a string
-         * to be used as a sprite name
+         * ### util.dataToObjectURL
+         * Convert base64 data or raw binary data to an object URL
+         * See: http://stackoverflow.com/a/5100158/230483
          *
-         * @param {string} name The name of the sprite
+         * @param {string} dataURI
          * @return string
          */
-        cleanName: function (name) {
-            name = name.replace(/\.\w+$/i, ""); // file extension
-            name = name.replace(/[\s.]+/gi, "-"); // spaces to -
-            name = name.replace(/[^a-z0-9\-]/gi, "_"); // other to _
+        dataToObjectURL: function (dataURI) {
+            var dataParts = dataURI.split(',');
+            var byteString;
 
-            return name;
+            // convert base64 to raw binary data held in a string
+            if (dataParts[0].indexOf('base64') >= 0) {
+                byteString = atob(dataParts[1]);
+            } else {
+                byteString = decodeURIComponent(dataParts[1]);
+            }
+
+            // separate out the mime component
+            var mimeString = dataParts[0].split(':')[1].split(';')[0];
+
+            // write the bytes of the string to an ArrayBuffer
+            var bl = byteString.length;
+            var ab = new ArrayBuffer(bl);
+            var ia = new Uint8Array(ab);
+            var i;
+            for (i = 0; i < bl; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            // get the blob and create an object URL
+            var blob = this.createBlob(ab, mimeString);
+            var url = this.createObjectURL(blob);
+
+            return url;
+        },
+
+        /**
+         * ### util.createBlob
+         * Polyfill
+         */
+        createBlob: function (arrayBuffer, mimeString) {
+            var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+
+            if (!BlobBuilder) {
+                throw new Error("BlobBuilder is unsupported.");
+            }
+
+            var bb = new BlobBuilder();
+            bb.append(arrayBuffer);
+
+            return bb.getBlob(mimeString);
+        },
+
+        /**
+         * ### util.createObjectURL
+         * Polyfill
+         */
+        createObjectURL: function (file) {
+            if (window.URL && window.URL.createObjectURL) {
+                return window.URL.createObjectURL(file);
+            }
+
+            if (window.webkitURL && window.webkitURL.createObjectURL) {
+                return window.webkitURL.createObjectURL(file);
+            }
+
+            throw new Error("createObjectURL is unsupported.");
         }
     };
 
@@ -2688,77 +2743,6 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             stylesheet = "data:text/plain," + encodeURIComponent(css.join("\n"));
 
             return stylesheet;
-        },
-
-        /**
-         * ### stitches.dataToObjectURL
-         * Convert base64 data or raw binary data to an object URL
-         * See: http://stackoverflow.com/a/5100158/230483
-         *
-         * @param {string} dataURI
-         * @return string
-         */
-        dataToObjectURL: function (dataURI) {
-            var dataParts = dataURI.split(',');
-            var byteString;
-
-            // convert base64 to raw binary data held in a string
-            if (dataParts[0].indexOf('base64') >= 0) {
-                byteString = atob(dataParts[1]);
-            } else {
-                byteString = decodeURIComponent(dataParts[1]);
-            }
-
-            // separate out the mime component
-            var mimeString = dataParts[0].split(':')[1].split(';')[0];
-
-            // write the bytes of the string to an ArrayBuffer
-            var bl = byteString.length;
-            var ab = new ArrayBuffer(bl);
-            var ia = new Uint8Array(ab);
-            var i;
-            for (i = 0; i < bl; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-
-            // get the blob and create an object URL
-            var blob = this.createBlob(ab, mimeString);
-            var url = this.createObjectURL(blob);
-
-            return url;
-        },
-
-        /**
-         * ### stitches.createBlob
-         * Polyfill
-         */
-        createBlob: function (arrayBuffer, mimeString) {
-            var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
-
-            if (!BlobBuilder) {
-                throw new Error("BlobBuilder is unsupported.");
-            }
-
-            var bb = new BlobBuilder();
-            bb.append(arrayBuffer);
-
-            return bb.getBlob(mimeString);
-        },
-
-        /**
-         * ### stitches.createObjectURL
-         * Polyfill
-         */
-        createObjectURL: function (file) {
-            if (window.URL && window.URL.createObjectURL) {
-                return window.URL.createObjectURL(file);
-            }
-
-            if (window.webkitURL && window.webkitURL.createObjectURL) {
-                return window.webkitURL.createObjectURL(file);
-            }
-
-            throw new Error("createObjectURL is unsupported.");
         }
     };
 
@@ -3268,7 +3252,7 @@ function($, util, spriteTemplate) {
     var Sprite = function (options) {
         this.settings = $.extend({}, defaults, options);
         this.$element = null;
-        this.name = util.cleanName(this.settings.name);
+        this.name = this.cleanName(this.settings.name);
         this.src = this.settings.src;
         this.padding = parseInt(this.settings.padding, 10);
         this.callback = this.settings.callback;
@@ -3395,6 +3379,22 @@ function($, util, spriteTemplate) {
                 this.height = this.image.height + this.padding * 2;
                 this.area = this.width * this.height;
             }
+        },
+
+        /**
+         * ### Sprite.prototype.cleanName
+         * Remove special characters and other markers from a string
+         * to be used as a sprite name
+         *
+         * @param {string} name The name of the sprite
+         * @return string
+         */
+        cleanName: function (name) {
+            name = name.replace(/\.\w+$/i, ""); // file extension
+            name = name.replace(/[\s.]+/gi, "-"); // spaces to -
+            name = name.replace(/[^a-z0-9\-]/gi, "_"); // other to _
+
+            return name;
         }
     };
 
@@ -3617,8 +3617,8 @@ function($, util, array, stitches, Sprite) {
             stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri);
 
             try {
-                spritesheet = stitches.dataToObjectURL(spritesheet);
-                stylesheet = stitches.dataToObjectURL(stylesheet);
+                spritesheet = util.dataToObjectURL(spritesheet);
+                stylesheet = util.dataToObjectURL(stylesheet);
             } catch (e) {
                 this.$element.trigger("error", [e]);
             }
@@ -4251,7 +4251,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                         "input blur": function (e) {
                             var sprite = this.source;
                             var name = $(e.currentTarget).val();
-                            var clean = util.cleanName(name);
+                            var clean = sprite.cleanName(name);
 
                             this.source.name = clean;
 
