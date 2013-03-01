@@ -53,6 +53,9 @@
       <div class="heading h3">
         <a href="#sprite.prototype.configure">Sprite.prototype.configure</a>
       </div>
+      <div class="heading h3">
+        <a href="#sprite.prototype.cleanname">Sprite.prototype.cleanName</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -134,7 +137,7 @@
     <span class="kd">var</span> <span class="nx">Sprite</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">$element</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">cleanName</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cleanName</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">callback</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">callback</span><span class="p">;</span>
@@ -414,6 +417,49 @@
                 <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">padding</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
             <span class="p">}</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="sprite.prototype.cleanname">
+  <h3>
+    <a href="#sprite.prototype.cleanname" class="pilcrow">&#182;</a>
+    Sprite.prototype.cleanName
+  </h3>
+</div>
+
+
+<p>Remove special characters and other markers from a string
+to be used as a sprite name</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">string</span>
+      <span>The name of the sprite</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">cleanName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\.\w+$/i</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span> <span class="c1">// file extension</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\s.]+/gi</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">);</span> <span class="c1">// spaces to -</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span> <span class="c1">// other to _</span>
+
+            <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">};</span>
 
