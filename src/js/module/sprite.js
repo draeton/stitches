@@ -1,5 +1,5 @@
 /**
- * # module/stitches
+ * # module/sprite
  *
  * ...
  *

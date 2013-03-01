@@ -1,5 +1,5 @@
 /**
- * # util/array
+ * # module/stitches
  *
  * ...
  *
