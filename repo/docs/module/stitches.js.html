@@ -96,7 +96,10 @@
         <a href="#stitches.prototype.updateprogress">Stitches.prototype.updateProgress</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.prototype.errorhandler">Stitches.prototype.errorHandler</a>
+        <a href="#stitches.prototype.generatesheets">Stitches.prototype.generateSheets</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.generatesheets">Stitches.prototype.generateSheets</a>
       </div>
     </div>
   </div>
@@ -297,7 +300,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress errorHandler&quot;</span><span class="p">);</span>
+            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress generateSheets errorHandler&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -333,6 +336,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">);</span>
         <span class="p">},</span>
 
@@ -517,7 +521,7 @@
                     <span class="nx">generate</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">);</span>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">);</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
@@ -1058,10 +1062,35 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.prototype.errorhandler">
+<div class="pilwrap" id="stitches.prototype.generatesheets">
   <h3>
-    <a href="#stitches.prototype.errorhandler" class="pilcrow">&#182;</a>
-    Stitches.prototype.errorHandler
+    <a href="#stitches.prototype.generatesheets" class="pilcrow">&#182;</a>
+    Stitches.prototype.generateSheets
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.generatesheets">
+  <h3>
+    <a href="#stitches.prototype.generatesheets" class="pilcrow">&#182;</a>
+    Stitches.prototype.generateSheets
   </h3>
 </div>
 
