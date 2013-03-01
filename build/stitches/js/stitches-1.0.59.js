@@ -4089,7 +4089,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         proxy: function () {
-            util.proxy(this, "showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress errorHandler");
+            util.proxy(this, "showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress generateSheets errorHandler");
         },
 
         /**
@@ -4108,6 +4108,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             this.$element.on("close-palettes", this.closePalettes);
             this.$element.on("process-files", this.processFiles);
             this.$element.on("update-toolbar", this.updateToolbar);
+            this.$element.on("generate-sheets", this.generateSheets);
             this.$element.on("error", this.errorHandler);
         },
 
@@ -4190,7 +4191,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     generate: {
                         click: function (e) {
                             self.$element.trigger("show-overlay");
-                            self.canvas.generateSheets(self.settings);
+                            self.$element.trigger("generate-sheets");
                             self.$element.trigger("hide-overlay");
                         }
                     },
@@ -4505,7 +4506,15 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
         },
 
         /**
-         * ### Stitches.prototype.errorHandler
+         * ### Stitches.prototype.generateSheets
+         * ...
+         */
+        generateSheets: function (e) {
+            this.canvas.generateSheets(this.settings);
+        },
+
+        /**
+         * ### Stitches.prototype.generateSheets
          * ...
          */
         errorHandler: function (e, err, type) {
