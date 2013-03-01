@@ -110,6 +110,7 @@ function($, util, array, stitches, Sprite) {
             this.measure(this.sprites);
             this.place(this.sprites);
             this.cut(this.sprites);
+            this.$element.trigger("generate-sheets");
             this.$element.trigger("hide-overlay");
         },
 
@@ -196,36 +197,6 @@ function($, util, array, stitches, Sprite) {
             this.$element.trigger("open-settings");
 
             this.reset();
-        },
-
-        /**
-         * ### Canvas.prototype.generateSheets
-         * ...
-         */
-        generateSheets: function (settings) {
-            var sprites = this.sprites;
-            var dimensions = this.dimensions;
-            var prefix = settings.prefix;
-            var uri = settings.uri;
-            var style = settings.style;
-            var spritesheet;
-            var stylesheet;
-
-            spritesheet = stitches.makeSpritesheet(sprites, dimensions);
-            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri, style);
-
-            try {
-                spritesheet = util.dataToObjectURL(spritesheet);
-                stylesheet = util.dataToObjectURL(stylesheet);
-            } catch (e) {
-                this.$element.trigger("error", [e]);
-            }
-
-            this.spritesheet = spritesheet;
-            this.stylesheet = stylesheet;
-
-            this.$element.trigger("update-toolbar");
-            this.progress(1, "success");
         },
 
         /**

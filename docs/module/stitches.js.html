@@ -99,7 +99,7 @@
         <a href="#stitches.prototype.generatesheets">Stitches.prototype.generateSheets</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.prototype.generatesheets">Stitches.prototype.generateSheets</a>
+        <a href="#stitches.prototype.errorhandler">Stitches.prototype.errorHandler</a>
       </div>
     </div>
   </div>
@@ -999,21 +999,13 @@
             <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">;</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear&quot;</span><span class="p">);</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear spritesheet stylesheet&quot;</span><span class="p">);</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
+                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear&quot;</span><span class="p">);</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">&amp;&amp;</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
-
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;spritesheet stylesheet&quot;</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear spritesheet stylesheet&quot;</span><span class="p">);</span>
                 <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
                 <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
-
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;spritesheet stylesheet&quot;</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">},</span>
 
@@ -1078,7 +1070,31 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
+
+            <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeSpritesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
+            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
+                <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">e</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">spritesheet</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheet</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -1087,10 +1103,10 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.prototype.generatesheets">
+<div class="pilwrap" id="stitches.prototype.errorhandler">
   <h3>
-    <a href="#stitches.prototype.generatesheets" class="pilcrow">&#182;</a>
-    Stitches.prototype.generateSheets
+    <a href="#stitches.prototype.errorhandler" class="pilcrow">&#182;</a>
+    Stitches.prototype.errorHandler
   </h3>
 </div>
 

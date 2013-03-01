@@ -1,3 +1,45 @@
 JSHint validation summary:
-17  JS files passed JSHint code checks
-March 1, 2013 1:12:34 AM EST
+----------------------------------------------------------------------
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\base.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\compact.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\horizontal.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\layout\vertical.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\canvas.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\drop-box.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\file-manager.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\palette.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\sprite.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\stitches.js
+'sprites' is already defined. (line: 525, character: 25)
+ >             var sprites = this.canvas.sprites;
+'dimensions' is already defined. (line: 526, character: 28)
+ >             var dimensions = this.canvas.dimensions;
+Value of 'e' may be overwritten in IE. (line: 536, character: 25)
+ >             } catch (e) {
+
+JSHint validation failed for c:\home\github\stitches\src\js\module\toolbar.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\stitches.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\array.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\stitches.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\util\util.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\wrap\jquery.js
+
+JSHint validation failed for c:\home\github\stitches\src\js\wrap\modernizr.js
+----------------------------------------------------------------------
+JSHint found 3 errors.
+March 1, 2013 1:48:18 AM EST

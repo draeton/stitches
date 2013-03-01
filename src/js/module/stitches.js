@@ -480,21 +480,13 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             var canvas = this.canvas;
 
             if (canvas.sprites.length) {
-                toolbar.enable("reset generate clear");
+                toolbar.enable("reset generate clear spritesheet stylesheet");
+                $toolbar.find("[data-action=spritesheet]").attr("href", this.spritesheet);
+                $toolbar.find("[data-action=stylesheet]").attr("href", this.stylesheet);
             } else {
-                toolbar.disable("reset generate clear");
-            }
-
-            if (canvas.spritesheet && canvas.stylesheet) {
-                $toolbar.find("[data-action=spritesheet]").attr("href", canvas.spritesheet);
-                $toolbar.find("[data-action=stylesheet]").attr("href", canvas.stylesheet);
-
-                toolbar.enable("spritesheet stylesheet");
-            } else {
+                toolbar.disable("reset generate clear spritesheet stylesheet");
                 $toolbar.find("[data-action=spritesheet]").attr("href", "#");
                 $toolbar.find("[data-action=stylesheet]").attr("href", "#");
-
-                toolbar.disable("spritesheet stylesheet");
             }
         },
 
@@ -525,11 +517,35 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         generateSheets: function (e) {
-            this.canvas.generateSheets(this.settings);
+            var sprites = this.sprites;
+            var dimensions = this.dimensions;
+            var prefix = this.settings.prefix;
+            var uri = this.settings.uri;
+            var style = this.settings.style;
+            var sprites = this.canvas.sprites;
+            var dimensions = this.canvas.dimensions;
+            var spritesheet;
+            var stylesheet;
+
+            spritesheet = stitches.makeSpritesheet(sprites, dimensions);
+            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri, style);
+
+            try {
+                spritesheet = util.dataToObjectURL(spritesheet);
+                stylesheet = util.dataToObjectURL(stylesheet);
+            } catch (e) {
+                this.$element.trigger("error", [e]);
+            }
+
+            this.spritesheet = spritesheet;
+            this.stylesheet = stylesheet;
+
+            this.$element.trigger("update-toolbar");
+            this.updateProgress(1, "success");
         },
 
         /**
-         * ### Stitches.prototype.generateSheets
+         * ### Stitches.prototype.errorHandler
          * ...
          */
         errorHandler: function (e, err, type) {
