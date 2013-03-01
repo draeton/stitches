@@ -523,11 +523,12 @@
             <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
 
             <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeSpritesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
-            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
+            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
 
             <span class="k">try</span> <span class="p">{</span>
                 <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
