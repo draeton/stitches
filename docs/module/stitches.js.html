@@ -1070,13 +1070,11 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
 
@@ -1086,8 +1084,8 @@
             <span class="k">try</span> <span class="p">{</span>
                 <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
                 <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">e</span><span class="p">]);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ex</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">ex</span><span class="p">]);</span>
             <span class="p">}</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">spritesheet</span><span class="p">;</span>

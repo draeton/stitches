@@ -4473,13 +4473,11 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         generateSheets: function (e) {
-            var sprites = this.sprites;
-            var dimensions = this.dimensions;
+            var sprites = this.canvas.sprites;
+            var dimensions = this.canvas.dimensions;
             var prefix = this.settings.prefix;
             var uri = this.settings.uri;
             var style = this.settings.style;
-            var sprites = this.canvas.sprites;
-            var dimensions = this.canvas.dimensions;
             var spritesheet;
             var stylesheet;
 
@@ -4489,8 +4487,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);
                 stylesheet = util.dataToObjectURL(stylesheet);
-            } catch (e) {
-                this.$element.trigger("error", [e]);
+            } catch (ex) {
+                this.$element.trigger("error", [ex]);
             }
 
             this.spritesheet = spritesheet;
