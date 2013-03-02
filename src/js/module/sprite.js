@@ -75,7 +75,6 @@ function($, util, spriteTemplate) {
                 self.height = self.image.height + self.padding * 2;
                 self.area = self.width * self.height;
                 self.render();
-                self.proxy();
                 self.bind();
 
                 if (self.callback) {
@@ -98,19 +97,11 @@ function($, util, spriteTemplate) {
         },
 
         /**
-         * ### Sprite.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "click");
-        },
-
-        /**
          * ### Sprite.prototype.bind
          * ...
          */
         bind: function () {
-            this.$element.on("click", this.click);
+            this.$element.on("click", $.proxy(this.click, this));
         },
 
         /**

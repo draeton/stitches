@@ -46,16 +46,7 @@ function($, util) {
          * ...
          */
         init: function () {
-            this.proxy();
             this.bind();
-        },
-
-        /**
-         * ### DropBox.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "dragStart dragStop drop");
         },
 
         /**
@@ -66,11 +57,11 @@ function($, util) {
             var dropBox = this.$element.get(0);
             var overlay = this.$overlay.get(0);
 
-            dropBox.addEventListener("dragenter", this.dragStart, false);
-            overlay.addEventListener("dragleave", this.dragStop, false);
-            overlay.addEventListener("dragexit", this.dragStop, false);
+            dropBox.addEventListener("dragenter", $.proxy(this.dragStart, this), false);
+            overlay.addEventListener("dragleave", $.proxy(this.dragStop, this), false);
+            overlay.addEventListener("dragexit", $.proxy(this.dragStop, this), false);
             overlay.addEventListener("dragover", this.noop, false);
-            overlay.addEventListener("drop", this.drop, false);
+            overlay.addEventListener("drop", $.proxy(this.drop, this), false);
         },
 
         /**

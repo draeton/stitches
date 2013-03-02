@@ -36,9 +36,6 @@
         <a href="#sprite.prototype.render">Sprite.prototype.render</a>
       </div>
       <div class="heading h3">
-        <a href="#sprite.prototype.proxy">Sprite.prototype.proxy</a>
-      </div>
-      <div class="heading h3">
         <a href="#sprite.prototype.bind">Sprite.prototype.bind</a>
       </div>
       <div class="heading h3">
@@ -209,7 +206,6 @@
                 <span class="nx">self</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">self</span><span class="p">.</span><span class="nx">padding</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
-                <span class="nx">self</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
@@ -254,31 +250,6 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="sprite.prototype.proxy">
-  <h3>
-    <a href="#sprite.prototype.proxy" class="pilcrow">&#182;</a>
-    Sprite.prototype.proxy
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">);</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
 <div class="pilwrap" id="sprite.prototype.bind">
   <h3>
     <a href="#sprite.prototype.bind" class="pilcrow">&#182;</a>
@@ -295,7 +266,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">click</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">click</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
 
 </pre></div>

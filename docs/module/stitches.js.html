@@ -33,9 +33,6 @@
         <a href="#stitches.prototype.render">Stitches.prototype.render</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.prototype.proxy">Stitches.prototype.proxy</a>
-      </div>
-      <div class="heading h3">
         <a href="#stitches.prototype.bind">Stitches.prototype.bind</a>
       </div>
       <div class="heading h3">
@@ -230,7 +227,6 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">setFileManager</span><span class="p">();</span>
@@ -284,31 +280,6 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.prototype.proxy">
-  <h3>
-    <a href="#stitches.prototype.proxy" class="pilcrow">&#182;</a>
-    Stitches.prototype.proxy
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress generateSheets errorHandler&quot;</span><span class="p">);</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
 <div class="pilwrap" id="stitches.prototype.bind">
   <h3>
     <a href="#stitches.prototype.bind" class="pilcrow">&#182;</a>
@@ -325,19 +296,19 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">showOverlay</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">hideOverlay</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-about&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openAbout</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-about&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openSettings</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-properties&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">openProperties</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">showOverlay</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hideOverlay</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-about&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openAbout</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-about&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openSettings</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-properties&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openProperties</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -363,7 +334,7 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setFileManager</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileManager</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
+                <span class="nx">progress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
             <span class="p">});</span>
         <span class="p">},</span>
 
@@ -467,7 +438,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">images</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span>
                 <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
-                <span class="nx">progress</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span>
+                <span class="nx">progress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
             <span class="p">});</span>
         <span class="p">},</span>
 

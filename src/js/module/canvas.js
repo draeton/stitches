@@ -62,18 +62,9 @@ function($, util, array, stitches, Sprite) {
          */
         init: function () {
             this.reset = util.debounce(this.reset, 500);
-            this.proxy();
             this.bind();
             this.setup();
             this.reset();
-        },
-
-        /**
-         * ### Canvas.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "createSprite clearActive");
         },
 
         /**
@@ -81,8 +72,8 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         bind: function () {
-            this.$element.on("create-sprite", this.createSprite);
-            this.$element.on("clear-active", this.clearActive);
+            this.$element.on("create-sprite", $.proxy(this.createSprite, this));
+            this.$element.on("clear-active", $.proxy(this.clearActive, this));
         },
 
         /**

@@ -30,9 +30,6 @@
         <a href="#canvas.prototype.init">Canvas.prototype.init</a>
       </div>
       <div class="heading h3">
-        <a href="#canvas.prototype.proxy">Canvas.prototype.proxy</a>
-      </div>
-      <div class="heading h3">
         <a href="#canvas.prototype.bind">Canvas.prototype.bind</a>
       </div>
       <div class="heading h3">
@@ -188,35 +185,9 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">debounce</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">proxy</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setup</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="canvas.prototype.proxy">
-  <h3>
-    <a href="#canvas.prototype.proxy" class="pilcrow">&#182;</a>
-    Canvas.prototype.proxy
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">util</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;createSprite clearActive&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -241,8 +212,8 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;create-sprite&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;clear-active&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">clearActive</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;create-sprite&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;clear-active&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clearActive</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
 
 </pre></div>

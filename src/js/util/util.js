@@ -19,23 +19,6 @@ function ($) {
     // **Module definition**
     return {
         /**
-         * ### util.proxy
-         * Bind methods to a specific context
-         *
-         * @param {object} context The binding execution context
-         * @param {string|array} methods Space-separated string or array
-         */
-        proxy: function (context, methods) {
-            if (typeof methods === "string") {
-                methods = methods.split(" ");
-            }
-
-            $.map(methods, function (method) {
-                context[method] = $.proxy(context[method], context);
-            });
-        },
-
-        /**
          * ### util.inherit
          * Set up prototypical inheritance
          *
