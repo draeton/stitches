@@ -2049,23 +2049,6 @@ function ($) {
     // **Module definition**
     return {
         /**
-         * ### util.proxy
-         * Bind methods to a specific context
-         *
-         * @param {object} context The binding execution context
-         * @param {string|array} methods Space-separated string or array
-         */
-        proxy: function (context, methods) {
-            if (typeof methods === "string") {
-                methods = methods.split(" ");
-            }
-
-            $.map(methods, function (method) {
-                context[method] = $.proxy(context[method], context);
-            });
-        },
-
-        /**
          * ### util.inherit
          * Set up prototypical inheritance
          *
@@ -3156,16 +3139,7 @@ function($, util) {
          * ...
          */
         init: function () {
-            this.proxy();
             this.bind();
-        },
-
-        /**
-         * ### DropBox.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "dragStart dragStop drop");
         },
 
         /**
@@ -3176,11 +3150,11 @@ function($, util) {
             var dropBox = this.$element.get(0);
             var overlay = this.$overlay.get(0);
 
-            dropBox.addEventListener("dragenter", this.dragStart, false);
-            overlay.addEventListener("dragleave", this.dragStop, false);
-            overlay.addEventListener("dragexit", this.dragStop, false);
+            dropBox.addEventListener("dragenter", $.proxy(this.dragStart, this), false);
+            overlay.addEventListener("dragleave", $.proxy(this.dragStop, this), false);
+            overlay.addEventListener("dragexit", $.proxy(this.dragStop, this), false);
             overlay.addEventListener("dragover", this.noop, false);
-            overlay.addEventListener("drop", this.drop, false);
+            overlay.addEventListener("drop", $.proxy(this.drop, this), false);
         },
 
         /**
@@ -3347,7 +3321,6 @@ function($, util, spriteTemplate) {
                 self.height = self.image.height + self.padding * 2;
                 self.area = self.width * self.height;
                 self.render();
-                self.proxy();
                 self.bind();
 
                 if (self.callback) {
@@ -3370,19 +3343,11 @@ function($, util, spriteTemplate) {
         },
 
         /**
-         * ### Sprite.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "click");
-        },
-
-        /**
          * ### Sprite.prototype.bind
          * ...
          */
         bind: function () {
-            this.$element.on("click", this.click);
+            this.$element.on("click", $.proxy(this.click, this));
         },
 
         /**
@@ -3522,18 +3487,9 @@ function($, util, array, stitches, Sprite) {
          */
         init: function () {
             this.reset = util.debounce(this.reset, 500);
-            this.proxy();
             this.bind();
             this.setup();
             this.reset();
-        },
-
-        /**
-         * ### Canvas.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "createSprite clearActive");
         },
 
         /**
@@ -3541,8 +3497,8 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         bind: function () {
-            this.$element.on("create-sprite", this.createSprite);
-            this.$element.on("clear-active", this.clearActive);
+            this.$element.on("create-sprite", $.proxy(this.createSprite, this));
+            this.$element.on("clear-active", $.proxy(this.clearActive, this));
         },
 
         /**
@@ -4024,7 +3980,6 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          */
         init: function () {
             this.render();
-            this.proxy();
             this.bind();
 
             this.setFileManager();
@@ -4056,31 +4011,23 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
         },
 
         /**
-         * ### Stitches.prototype.proxy
-         * ...
-         */
-        proxy: function () {
-            util.proxy(this, "showOverlay hideOverlay openAbout closeAbout openSettings closeSettings openProperties closeProperties closePalettes processFiles updateToolbar updateProgress generateSheets errorHandler");
-        },
-
-        /**
          * ### Stitches.prototype.bind
          * ...
          */
         bind: function () {
-            this.$element.on("show-overlay", this.showOverlay);
-            this.$element.on("hide-overlay", this.hideOverlay);
-            this.$element.on("open-about", this.openAbout);
-            this.$element.on("close-about", this.closeAbout);
-            this.$element.on("open-settings", this.openSettings);
-            this.$element.on("close-settings", this.closeSettings);
-            this.$element.on("open-properties", this.openProperties);
-            this.$element.on("close-properties", this.closeProperties);
-            this.$element.on("close-palettes", this.closePalettes);
-            this.$element.on("process-files", this.processFiles);
-            this.$element.on("update-toolbar", this.updateToolbar);
-            this.$element.on("generate-sheets", this.generateSheets);
-            this.$element.on("error", this.errorHandler);
+            this.$element.on("show-overlay", $.proxy(this.showOverlay, this));
+            this.$element.on("hide-overlay", $.proxy(this.hideOverlay, this));
+            this.$element.on("open-about", $.proxy(this.openAbout, this));
+            this.$element.on("close-about", $.proxy(this.closeAbout, this));
+            this.$element.on("open-settings", $.proxy(this.openSettings, this));
+            this.$element.on("close-settings", $.proxy(this.closeSettings, this));
+            this.$element.on("open-properties", $.proxy(this.openProperties, this));
+            this.$element.on("close-properties", $.proxy(this.closeProperties, this));
+            this.$element.on("close-palettes", $.proxy(this.closePalettes, this));
+            this.$element.on("process-files", $.proxy(this.processFiles, this));
+            this.$element.on("update-toolbar", $.proxy(this.updateToolbar, this));
+            this.$element.on("generate-sheets", $.proxy(this.generateSheets, this));
+            this.$element.on("error", $.proxy(this.errorHandler, this));
         },
 
         /**
@@ -4089,7 +4036,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          */
         setFileManager: function () {
             this.fileManager = new FileManager(this.$canvas, {
-                progress: this.updateProgress
+                progress: $.proxy(this.updateProgress, this)
             });
         },
 
@@ -4125,7 +4072,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             this.canvas = new Canvas(this.$canvas, {
                 images: this.images,
                 padding: this.settings.padding,
-                progress: this.updateProgress
+                progress: $.proxy(this.updateProgress, this)
             });
         },
 

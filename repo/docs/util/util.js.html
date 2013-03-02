@@ -24,9 +24,6 @@
         <a href="#util-util">util/util</a>
       </div>
       <div class="heading h3">
-        <a href="#util.proxy">util.proxy</a>
-      </div>
-      <div class="heading h3">
         <a href="#util.inherit">util.inherit</a>
       </div>
       <div class="heading h3">
@@ -89,51 +86,6 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="k">return</span> <span class="p">{</span>
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="util.proxy">
-  <h3>
-    <a href="#util.proxy" class="pilcrow">&#182;</a>
-    util.proxy
-  </h3>
-</div>
-
-
-<p>Bind methods to a specific context</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">context</span>
-      <span class="dox_type">object</span>
-      <span>The binding execution context</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">methods</span>
-      <span class="dox_type">string</span>
-      <span class="dox_type">array</span>
-      <span>Space-separated string or array</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">proxy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">methods</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">methods</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">methods</span> <span class="o">=</span> <span class="nx">methods</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
-            <span class="p">}</span>
-
-            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">methods</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">context</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="nx">context</span><span class="p">[</span><span class="nx">method</span><span class="p">],</span> <span class="nx">context</span><span class="p">);</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-
 </pre></div>
         </td>
       </tr>
@@ -303,7 +255,7 @@ See: <a href='http://stackoverflow.com/a/5100158/230483'>http://stackoverflow.co
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
 </div>
 <p>convert base64 to raw binary data held in a string</p>
         </td>
@@ -320,7 +272,7 @@ See: <a href='http://stackoverflow.com/a/5100158/230483'>http://stackoverflow.co
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
 </div>
 <p>separate out the mime component</p>
         </td>
@@ -333,7 +285,7 @@ See: <a href='http://stackoverflow.com/a/5100158/230483'>http://stackoverflow.co
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
 <p>write the bytes of the string to an ArrayBuffer</p>
         </td>
@@ -352,7 +304,7 @@ See: <a href='http://stackoverflow.com/a/5100158/230483'>http://stackoverflow.co
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
 </div>
 <p>get the blob and create an object URL</p>
         </td>
