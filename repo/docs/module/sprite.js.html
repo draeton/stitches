@@ -53,6 +53,12 @@
       <div class="heading h3">
         <a href="#sprite.prototype.cleanname">Sprite.prototype.cleanName</a>
       </div>
+      <div class="heading h3">
+        <a href="#sprite.prototype.left">Sprite.prototype.left</a>
+      </div>
+      <div class="heading h3">
+        <a href="#sprite.prototype.top">Sprite.prototype.top</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -431,6 +437,70 @@ to be used as a sprite name</p>
             <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^a-z0-9\-]/gi</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">);</span> <span class="c1">// other to _</span>
 
             <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="sprite.prototype.left">
+  <h3>
+    <a href="#sprite.prototype.left" class="pilcrow">&#182;</a>
+    Sprite.prototype.left
+  </h3>
+</div>
+
+
+<p>Returns the x position of the sprite accounting for padding</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>number</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">left</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="sprite.prototype.top">
+  <h3>
+    <a href="#sprite.prototype.top" class="pilcrow">&#182;</a>
+    Sprite.prototype.top
+  </h3>
+</div>
+
+
+<p>Returns the y position of the sprite accounting for padding</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>number</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">top</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">};</span>
 

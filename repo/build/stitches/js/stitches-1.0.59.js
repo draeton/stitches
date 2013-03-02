@@ -2675,8 +2675,8 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
                 context = canvas.getContext("2d");
 
                 $.map(sprites, function (sprite) {
-                    var x = sprite.x + sprite.padding;
-                    var y = sprite.y + sprite.padding;
+                    var x = sprite.left();
+                    var y = sprite.top();
 
                     context.drawImage(sprite.image, x, y);
                 });
@@ -2746,7 +2746,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
                     "." + prefix + "-" + sprite.name + " {",
                     "    width: " + sprite.image.width + "px;",
                     "    height: " + sprite.image.height + "px;",
-                    "    background-position: -" + sprite.x + "px -" + sprite.y + "px;",
+                    "    background-position: -" + sprite.left() + "px -" + sprite.top() + "px;",
                     "}\n"
                 ]);
             });
@@ -2776,7 +2776,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             $.map(sprites, function (sprite) {
                 styles = styles.concat([
                     "." + prefix + "-" + sprite.name + " {",
-                    " .sprite(-" + sprite.x + "px, -" + sprite.y + "px, " + sprite.image.width + "px, " + sprite.image.height + "px); ",
+                    " .sprite(-" + sprite.left() + "px, -" + sprite.top() + "px, " + sprite.image.width + "px, " + sprite.image.height + "px); ",
                     "}\n"
                 ]);
             });
@@ -3417,6 +3417,26 @@ function($, util, spriteTemplate) {
             name = name.replace(/[^a-z0-9\-]/gi, "_"); // other to _
 
             return name;
+        },
+
+        /**
+         * ### Sprite.prototype.left
+         * Returns the x position of the sprite accounting for padding
+         *
+         * @return number
+         */
+        left: function () {
+            return this.x + this.padding;
+        },
+
+        /**
+         * ### Sprite.prototype.top
+         * Returns the y position of the sprite accounting for padding
+         *
+         * @return number
+         */
+        top: function () {
+            return this.y + this.padding;
         }
     };
 
@@ -4336,8 +4356,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                 source: sprite,
                 inputs: {
                     name: sprite.name,
-                    x: sprite.x + sprite.padding,
-                    y: sprite.y + sprite.padding
+                    x: sprite.left(),
+                    y: sprite.top()
                 }
             });
 
