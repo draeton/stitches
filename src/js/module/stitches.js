@@ -424,8 +424,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                 source: sprite,
                 inputs: {
                     name: sprite.name,
-                    x: sprite.x + sprite.padding,
-                    y: sprite.y + sprite.padding
+                    x: sprite.left(),
+                    y: sprite.top()
                 }
             });
 

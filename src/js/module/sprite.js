@@ -171,6 +171,26 @@ function($, util, spriteTemplate) {
             name = name.replace(/[^a-z0-9\-]/gi, "_"); // other to _
 
             return name;
+        },
+
+        /**
+         * ### Sprite.prototype.left
+         * Returns the x position of the sprite accounting for padding
+         *
+         * @return number
+         */
+        left: function () {
+            return this.x + this.padding;
+        },
+
+        /**
+         * ### Sprite.prototype.top
+         * Returns the y position of the sprite accounting for padding
+         *
+         * @return number
+         */
+        top: function () {
+            return this.y + this.padding;
         }
     };
 
