@@ -6,7 +6,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            build: ["amd/", "build/", "docs/"]
+            build: ["amd/", "build/", "docs/"],
+            pages: ["../gh-pages/<%= pkg.name %>/repo/"]
         },
 
         jshint: {
@@ -162,6 +163,30 @@ module.exports = function(grunt) {
                         dest: "build/"
                     }
                 ]
+            },
+            pages: {
+                files: [
+                    {
+                        expand: true,
+                        src: "build/",
+                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                    },
+                    {
+                        expand: true,
+                        src: "dist/",
+                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                    },
+                    {
+                        expand: true,
+                        src: "docs/",
+                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                    },
+                    {
+                        expand: true,
+                        src: "test/",
+                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                    },
+                ]
             }
         },
 
@@ -196,19 +221,33 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask("rebase-build", "Rebase cwd to build dir", function () {
+        var pkg = require("./package.json");
+        var build = "../../" + pkg.name;
+
+        grunt.file.setBase(build);
+    });
+
+    grunt.registerTask("rebase-pages", "Rebase cwd to gh-pages dir", function () {
+        var pkg = require("./package.json");
+        var pages = "../gh-pages/" + pkg.name;
+
+        grunt.file.setBase(pages);
+    });
 
     grunt.registerTask("validate", ["jshint"/*, "qunit"*/]);
 
     grunt.registerTask("docs", ["replace:version", "exec:docker"]);
 
-    grunt.registerTask("build", ["docs", "requirejs", "concat", "cssmin", "uglify", "copy", "zip"]);
+    grunt.registerTask("build", ["docs", "requirejs", "concat", "cssmin", "uglify", "copy:dependencies", "zip"]);
 
     grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
-    grunt.registerTask("commit-pages", ["commit-message", "exec:cdPages", "exec:gitAddPages", "exec:gitCommitPages", "exec:gitPushPages"]);
 
-    grunt.registerTask("deploy", ["clean", "validate", "docs", "build", "commit"]);
+    grunt.registerTask("commit-pages", ["commit-message", "copy:pages", "rebase-pages", "exec:gitAddPages", "exec:gitCommitPages", "exec:gitPushPages", "rebase-build"]);
 
-    grunt.registerTask("pages", ["replace:pages", "commit-pages"]);
+    grunt.registerTask("deploy", ["clean:build", "validate", "docs", "build", "commit"]);
 
-    grunt.registerTask("default", ["deploy"]);
+    grunt.registerTask("pages", ["clean:pages", "replace:pages", "commit-pages"]);
+
+    grunt.registerTask("default", ["deploy", "pages"]);
 };
