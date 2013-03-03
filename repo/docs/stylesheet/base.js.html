@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>base.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = '../', thisFile = 'c:\\home\\github\\stitches\\src\\js\\stylesheet\\base.js', defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#stylesheet-base">stylesheet/base</a>
+      </div>
+      <div class="heading h2">
+        <a href="#basestylesheet">BaseStylesheet</a>
+      </div>
+      <div class="heading h3">
+        <a href="#basestylesheet.prototype.get">BaseStylesheet.prototype.get</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stylesheet-base">
+  <h1>
+    <a href="#stylesheet-base" class="pilcrow">&#182;</a>
+    stylesheet/base
+  </h1>
+</div>
+
+  </div>
+  <div class="body"><p>Base constructor for the stylesheet managers</p>
+
+<blockquote>
+  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  Copyright 2013, Matthew Cobbs<br/>
+  Licensed under the MIT license.</p>
+</blockquote>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="cm">/*global require, define */</span>
+
+<span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;jquery&quot;</span>
+<span class="p">],</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">filename</span><span class="o">:</span> <span class="s2">&quot;download.png&quot;</span>
+    <span class="p">};</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="basestylesheet">
+  <h2>
+    <a href="#basestylesheet" class="pilcrow">&#182;</a>
+    BaseStylesheet
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>Create a new <code>BaseStylesheet</code> instance</p>
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options
+
+</span>
+      <span class="dox_type">object</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">var</span> <span class="nx">BaseStylesheet</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nx">BaseStylesheet</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">constructor</span><span class="o">:</span> <span class="nx">BaseStylesheet</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="basestylesheet.prototype.get">
+  <h3>
+    <a href="#basestylesheet.prototype.get" class="pilcrow">&#182;</a>
+    BaseStylesheet.prototype.get
+  </h3>
+</div>
+
+
+<p>Returns a stylesheet to place images with spritesheet</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">spritesheet</span>
+      <span class="dox_type">string</span>
+      <span>The data URL of the spritesheet</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">prefix</span>
+      <span class="dox_type">string</span>
+      <span>Used to create CSS classes</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">uri</span>
+      <span class="dox_type">boolean</span>
+      <span>Switch including image as data URI</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">BaseStylesheet</span><span class="p">;</span>
+
+<span class="p">});</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

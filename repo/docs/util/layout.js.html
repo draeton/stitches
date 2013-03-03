@@ -24,28 +24,28 @@
         <a href="#util-layout">util/layout</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.setlayout">stitches.setLayout</a>
+        <a href="#layout.set">layout.set</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.getdimensions">stitches.getDimensions</a>
+        <a href="#layout.getdimensions">layout.getDimensions</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.placesprites">stitches.placeSprites</a>
+        <a href="#layout.placesprites">layout.placeSprites</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.trim">stitches.trim</a>
+        <a href="#layout.trim">layout.trim</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.makespritesheet">stitches.makeSpritesheet</a>
+        <a href="#layout.getspritesheet">layout.getSpritesheet</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.makestylesheet">stitches.makeStylesheet</a>
+        <a href="#layout.makestylesheet">layout.makeStylesheet</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.makestylescss">stitches.makeStylesCSS</a>
+        <a href="#layout.makestylescss">layout.makeStylesCSS</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.makestylesless">stitches.makeStylesLESS</a>
+        <a href="#layout.makestylesless">layout.makeStylesLESS</a>
       </div>
     </div>
   </div>
@@ -64,9 +64,8 @@
 </div>
 
   </div>
-  <div class="body"><p>Utility methods for setting the canvas layout
-and stitching the sprites together (i.e. placing them
-on the canvas)</p>
+  <div class="body"><p>Utility methods for setting the canvas layout and stitching the sprites
+together (i.e. placing them on the canvas)</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -96,10 +95,10 @@ on the canvas)</p>
 <div class="pilwrap">
   <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
 </div>
-<p><strong>Canvas layout constructors</strong></p>
+<p><strong>Canvas layout managers</strong></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">layouts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">managers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">compact</span><span class="o">:</span> <span class="nx">CompactLayout</span><span class="p">,</span>
         <span class="nx">vertical</span><span class="o">:</span> <span class="nx">VerticalLayout</span><span class="p">,</span>
         <span class="nx">horizontal</span><span class="o">:</span> <span class="nx">HorizontalLayout</span>
@@ -123,10 +122,10 @@ on the canvas)</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.setlayout">
+<div class="pilwrap" id="layout.set">
   <h3>
-    <a href="#stitches.setlayout" class="pilcrow">&#182;</a>
-    stitches.setLayout
+    <a href="#layout.set" class="pilcrow">&#182;</a>
+    layout.set
   </h3>
 </div>
 
@@ -146,10 +145,10 @@ on the canvas)</p>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">setLayout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">Constructor</span> <span class="o">=</span> <span class="nx">layouts</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="nx">layouts</span><span class="p">.</span><span class="nx">compact</span><span class="p">;</span>
+        <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">Manager</span> <span class="o">=</span> <span class="nx">managers</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="nx">managers</span><span class="p">.</span><span class="nx">compact</span><span class="p">;</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Constructor</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -158,10 +157,10 @@ on the canvas)</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.getdimensions">
+<div class="pilwrap" id="layout.getdimensions">
   <h3>
-    <a href="#stitches.getdimensions" class="pilcrow">&#182;</a>
-    stitches.getDimensions
+    <a href="#layout.getdimensions" class="pilcrow">&#182;</a>
+    layout.getDimensions
   </h3>
 </div>
 
@@ -192,7 +191,7 @@ on the canvas)</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">);</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -201,10 +200,10 @@ on the canvas)</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.placesprites">
+<div class="pilwrap" id="layout.placesprites">
   <h3>
-    <a href="#stitches.placesprites" class="pilcrow">&#182;</a>
-    stitches.placeSprites
+    <a href="#layout.placesprites" class="pilcrow">&#182;</a>
+    layout.placeSprites
   </h3>
 </div>
 
@@ -246,7 +245,7 @@ on the canvas)</p>
 
             <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">placed</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">sprite</span><span class="p">.</span><span class="nx">placed</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">placeSprite</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
+                    <span class="nx">sprite</span><span class="p">.</span><span class="nx">placed</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">placeSprite</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
                 <span class="p">}</span>
 
                 <span class="nx">progress</span><span class="p">(</span><span class="nx">placed</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="nx">sprites</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
@@ -263,10 +262,10 @@ on the canvas)</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.trim">
+<div class="pilwrap" id="layout.trim">
   <h3>
-    <a href="#stitches.trim" class="pilcrow">&#182;</a>
-    stitches.trim
+    <a href="#layout.trim" class="pilcrow">&#182;</a>
+    layout.trim
   </h3>
 </div>
 
@@ -310,15 +309,15 @@ on the canvas)</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.makespritesheet">
+<div class="pilwrap" id="layout.getspritesheet">
   <h3>
-    <a href="#stitches.makespritesheet" class="pilcrow">&#182;</a>
-    stitches.makeSpritesheet
+    <a href="#layout.getspritesheet" class="pilcrow">&#182;</a>
+    layout.getSpritesheet
   </h3>
 </div>
 
 
-<p>Make an image using the browser canvas element's drawing context.
+<p>Returns an image using the browser canvas element's drawing context.
 Triggers a non-fatal error if anything fails</p>
   </div>
   <div class="body">
@@ -326,14 +325,9 @@ Triggers a non-fatal error if anything fails</p>
   <div class="details">
     <div class="dox_tag_title">Params</div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">sprites</span>
-      <span class="dox_type">array</span>
-      <span>A list of sprites</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_tag_name">options</span>
       <span class="dox_type">object</span>
-      <span>Working width and height</span>
+      <span>The generator parameters</span>
     </div>
     <div class="dox_tag_title">Returns</div>
     <div class="dox_tag_detail">
@@ -344,7 +338,9 @@ Triggers a non-fatal error if anything fails</p>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">makeSpritesheet</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">getSpritesheet</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">canvas</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">context</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
@@ -377,10 +373,10 @@ Triggers a non-fatal error if anything fails</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.makestylesheet">
+<div class="pilwrap" id="layout.makestylesheet">
   <h3>
-    <a href="#stitches.makestylesheet" class="pilcrow">&#182;</a>
-    stitches.makeStylesheet
+    <a href="#layout.makestylesheet" class="pilcrow">&#182;</a>
+    layout.makeStylesheet
   </h3>
 </div>
 
@@ -456,10 +452,10 @@ Triggers a non-fatal error if anything fails</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.makestylescss">
+<div class="pilwrap" id="layout.makestylescss">
   <h3>
-    <a href="#stitches.makestylescss" class="pilcrow">&#182;</a>
-    stitches.makeStylesCSS
+    <a href="#layout.makestylescss" class="pilcrow">&#182;</a>
+    layout.makeStylesCSS
   </h3>
 </div>
 
@@ -520,10 +516,10 @@ Triggers a non-fatal error if anything fails</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.makestylesless">
+<div class="pilwrap" id="layout.makestylesless">
   <h3>
-    <a href="#stitches.makestylesless" class="pilcrow">&#182;</a>
-    stitches.makeStylesLESS
+    <a href="#layout.makestylesless" class="pilcrow">&#182;</a>
+    layout.makeStylesLESS
   </h3>
 </div>
 
