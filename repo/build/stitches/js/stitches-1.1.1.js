@@ -2829,9 +2829,8 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
          * Returns an image using the browser canvas element's drawing context.
          * Triggers a non-fatal error if anything fails
          *
-         * @param {object} options The generator parameters
-         * @option {array} sprites A list of sprites
-         * @option{object} dimensions Working width and height
+         * @param {array} options.sprites A list of sprites
+         * @param{object} options.dimensions Working width and height
          * @return string
          */
         getSpritesheet: function (options) {
@@ -3461,11 +3460,10 @@ function ($, CssStylesheet, LessStylesheet) {
          * ### stylesheet.getStylesheet
          * Returns a stylesheet to place images with spritesheet
          *
-         * @param {object} options The generator parameters
-         * @option {array} sprites A list of sprites
-         * @option {string} spritesheet The data URL of the spritesheet
-         * @option {string} prefix Used to create CSS classes
-         * @option {boolean} uri Switch including image as data URI
+         * @param {array} options.sprites A list of sprites
+         * @param {string} options.spritesheet The data URL of the spritesheet
+         * @param {string} options.prefix Used to create CSS classes
+         * @param {boolean} options.uri Switch including image as data URI
          * @return string
          */
         getStylesheet: function (options) {
@@ -3476,8 +3474,6 @@ function ($, CssStylesheet, LessStylesheet) {
 
             var styles = this.manager.get(sprites, spritesheet, prefix, uri);
             styles = styles.replace(/\\n/g, "\n");
-
-            console.log(styles);
 
             return "data:text/plain," + encodeURIComponent(styles);
         }
