@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            build: ["amd/", "build/", "docs/", "out/"]
+            build: ["amd/", "build/", "docs/"]
         },
 
         jshint: {
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         },
 
         qunit: {
-            all: ["tests/unit/**/*.js"]
+            all: ["test/unit/**/*.js"]
         },
 
         replace: {
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                 },
                 files: [
                     {
-                        src: "_templates/README.md",
+                        src: "templates/README.md",
                         dest: "README.md"
                     }
                 ]
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                         }
                     ],
                     paths: {
-                        "lib": "../lib",
+                        "libs": "../libs",
                         "tpl" : "../tpl",
                         "jquery": "wrap/jquery",
                         "modernizr": "wrap/modernizr"
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        src: "lib/**",
+                        src: "libs/**",
                         dest: "build/"
                     }
                 ]

@@ -134,7 +134,7 @@
 <span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
     <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;../../../lib/store/store&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../../../libs/store/store&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/layout&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/stylesheet&quot;</span><span class="p">,</span>
@@ -151,11 +151,11 @@
 
     <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">FileReader</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">draganddrop</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../lib/dropfile/dropfile&quot;</span><span class="p">]);</span>
+            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../libs/dropfile/dropfile&quot;</span><span class="p">]);</span>
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">canvas</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../lib/flashcanvas/flashcanvas&quot;</span><span class="p">]);</span>
+            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../libs/flashcanvas/flashcanvas&quot;</span><span class="p">]);</span>
         <span class="p">}</span>
     <span class="p">}());</span>
 

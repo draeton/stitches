@@ -12,7 +12,7 @@
 define([
     "jquery",
     "modernizr",
-    "../../../lib/store/store",
+    "../../../libs/store/store",
     "util/util",
     "util/layout",
     "util/stylesheet",
@@ -29,11 +29,11 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
 
     (function () {
         if (typeof FileReader === "undefined" || !Modernizr.draganddrop) {
-            require(["../../../lib/dropfile/dropfile"]);
+            require(["../../../libs/dropfile/dropfile"]);
         }
 
         if (!Modernizr.canvas) {
-            require(["../../../lib/flashcanvas/flashcanvas"]);
+            require(["../../../libs/flashcanvas/flashcanvas"]);
         }
     }());
 

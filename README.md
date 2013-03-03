@@ -39,12 +39,12 @@ If you choose, any images that are a part of the initial markup will be loaded o
 [jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/)
 
 ```html
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="libs/bootstrap/css/bootstrap-responsive.min.css">
 
-<script src="lib/jquery/jquery-1.7.1.js"></script>
-<script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/jquery/jquery-1.7.1.js"></script>
+<script src="libs/modernizr/modernizr-2.0.6.min.js"></script>
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 ```
 
 ## License
