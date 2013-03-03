@@ -95,10 +95,10 @@
     <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/array&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/layout&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/sprite&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">array</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">Sprite</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">array</span><span class="p">,</span> <span class="nx">layout</span><span class="p">,</span> <span class="nx">Sprite</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -301,7 +301,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">measure</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -340,7 +340,7 @@
                 <span class="p">}</span>
             <span class="p">});</span>
 
-            <span class="nx">stitches</span><span class="p">.</span><span class="nx">placeSprites</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">);</span>
+            <span class="nx">layout</span><span class="p">.</span><span class="nx">placeSprites</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -365,7 +365,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">cut</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">stitches</span><span class="p">.</span><span class="nx">trim</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
+            <span class="nx">layout</span><span class="p">.</span><span class="nx">trim</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
                 <span class="nx">width</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">,</span>

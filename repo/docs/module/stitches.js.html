@@ -136,17 +136,17 @@
 <span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
     <span class="s2">&quot;modernizr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../../../lib/store/store&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;util/stitches&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tpl!../../templates/stitches.html&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/layout&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;module/palette&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;../../../lib/store/store&quot;</span>
+    <span class="s2">&quot;module/palette&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">stitches</span><span class="p">,</span> <span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">,</span> <span class="nx">store</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">layout</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -301,7 +301,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">stitchesTemplate</span><span class="p">({});</span>
+            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">stitches</span><span class="p">({});</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-overlay&quot;</span><span class="p">);</span>
@@ -426,7 +426,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setLayout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="nx">stitches</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
+            <span class="nx">layout</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -607,10 +607,10 @@
                     <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="kd">var</span> <span class="nx">$checked</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input[name=layout]:checked&quot;</span><span class="p">);</span>
-                            <span class="kd">var</span> <span class="nx">layout</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
 
-                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">;</span>
-                            <span class="nx">stitches</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="nx">layout</span><span class="p">);</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+                            <span class="nx">layout</span><span class="p">.</span><span class="nx">setLayout</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 
                             <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
                         <span class="p">}</span>
@@ -618,32 +618,32 @@
                     <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="kd">var</span> <span class="nx">$checked</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input[name=style]:checked&quot;</span><span class="p">);</span>
-                            <span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$checked</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="nx">style</span><span class="p">;</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
                             <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">prefix</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
 
-                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">prefix</span> <span class="o">=</span> <span class="nx">prefix</span><span class="p">;</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">prefix</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
                             <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
 
-                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">padding</span><span class="p">;</span>
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">padding</span><span class="p">;</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
                             <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
                                 <span class="nx">sprite</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
-                                    <span class="nx">padding</span><span class="o">:</span> <span class="nx">padding</span>
+                                    <span class="nx">padding</span><span class="o">:</span> <span class="nx">value</span>
                                 <span class="p">});</span>
                             <span class="p">});</span>
 
@@ -652,9 +652,9 @@
                     <span class="p">},</span>
                     <span class="nx">uri</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;change&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s2">&quot;:checked&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s2">&quot;:checked&quot;</span><span class="p">);</span>
 
-                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">uri</span> <span class="o">=</span> <span class="nx">uri</span><span class="p">;</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">uri</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
                             <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
                         <span class="p">}</span>
@@ -1123,8 +1123,8 @@
             <span class="kd">var</span> <span class="nx">spritesheet</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">stylesheet</span><span class="p">;</span>
 
-            <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeSpritesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
-            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stitches</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+            <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">.</span><span class="nx">makeSpritesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
+            <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">.</span><span class="nx">makeStylesheet</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
 
             <span class="k">try</span> <span class="p">{</span>
                 <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
