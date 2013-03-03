@@ -30,6 +30,19 @@ module.exports = function(grunt) {
                         dest: "README.md"
                     }
                 ]
+            },
+            pages: {
+                options: {
+                    variables: {
+                        version: "<%= pkg.version %>"
+                    }
+                },
+                files: [
+                    {
+                        src: "../gh-pages/<%= pkg.name %>/templates/index.md",
+                        dest: "../gh-pages/<%= pkg.name %>/index.md"
+                    }
+                ]
             }
         },
 
@@ -52,6 +65,30 @@ module.exports = function(grunt) {
             },
             gitPush: {
                 command: "git push origin master",
+                stdout: true
+            },
+            cdPages: {
+                command: function () {
+                    var pkg = require("./package.json");
+
+                    return "cd ../gh-pages/" + pkg.name;
+                },
+                stdout: true
+            },
+            gitAddPages: {
+                command: "git add .",
+                stdout: true
+            },
+            gitCommitPages: {
+                command: function () {
+                    var pkg = require("./package.json");
+
+                    return "git commit -am \"Pages " + pkg.version + " - " + global.message + "\"";
+                },
+                stdout: true
+            },
+            gitPushPages: {
+                command: "git push origin gh-pages",
                 stdout: true
             }
         },
@@ -167,10 +204,11 @@ module.exports = function(grunt) {
     grunt.registerTask("build", ["docs", "requirejs", "concat", "cssmin", "uglify", "copy", "zip"]);
 
     grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
+    grunt.registerTask("commit-pages", ["commit-message", "exec:cdPages", "exec:gitAddPages", "exec:gitCommitPages", "exec:gitPushPages"]);
 
     grunt.registerTask("deploy", ["clean", "validate", "docs", "build", "commit"]);
 
-    grunt.registerTask("pages", ["buildPages", "commitPages"]);
+    grunt.registerTask("pages", ["replace:pages", "commit-pages"]);
 
     grunt.registerTask("default", ["deploy"]);
 };
