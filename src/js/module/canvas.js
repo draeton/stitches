@@ -14,9 +14,10 @@ define([
     "util/util",
     "util/array",
     "util/layout",
+    "util/stylesheet",
     "module/sprite"
 ],
-function($, util, array, layout, Sprite) {
+function($, util, array, layout, stylesheet, Sprite) {
 
     "use strict";
 

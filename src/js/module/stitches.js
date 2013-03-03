@@ -15,6 +15,7 @@ define([
     "../../../lib/store/store",
     "util/util",
     "util/layout",
+    "util/stylesheet",
     "util/templates",
     "module/file-manager",
     "module/drop-box",
@@ -22,7 +23,7 @@ define([
     "module/toolbar",
     "module/palette"
 ],
-function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
+function($, Modernizr, store, util, layoutManager, stylesheetManager, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -41,7 +42,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
         prefix: "sprite",
         padding: 5,
         uri: false,
-        style: "css"
+        stylesheet: "css"
     };
 
     /**
@@ -75,7 +76,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
             this.setFileManager();
             this.setDropBox();
             this.setToolbar();
-            this.setLayout();
+            this.setManagers();
             this.setImages();
             this.setCanvas();
             this.setPalettes();
@@ -155,11 +156,12 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
         },
 
         /**
-         * ### Stitches.prototype.setLayout
+         * ### Stitches.prototype.setManagers
          * ...
          */
-        setLayout: function () {
-            layout.setLayout(this.settings.layout);
+        setManagers: function () {
+            layoutManager.set(this.settings.layout);
+            stylesheetManager.set(this.settings.stylesheet);
         },
 
         /**
@@ -275,17 +277,18 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
                             var value = $checked.val();
 
                             this.source.layout = value;
-                            layout.setLayout(value);
+                            layoutManager.set(value);
 
                             self.update();
                         }
                     },
-                    style: {
+                    stylesheet: {
                         "change": function (e) {
-                            var $checked = this.$element.find("input[name=style]:checked");
+                            var $checked = this.$element.find("input[name=stylesheet]:checked");
                             var value = $checked.val();
 
-                            self.settings.style = value;
+                            self.settings.stylesheet = value;
+                            stylesheetManager.set(value);
 
                             self.update();
                         }
@@ -427,7 +430,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
                 source: this.settings,
                 inputs: {
                     layout: this.settings.layout,
-                    style: this.settings.style,
+                    stylesheet: this.settings.stylesheet,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
                     uri: this.settings.uri
@@ -542,16 +545,17 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
          * ...
          */
         generateSheets: function (e) {
-            var sprites = this.canvas.sprites;
-            var dimensions = this.canvas.dimensions;
-            var prefix = this.settings.prefix;
-            var uri = this.settings.uri;
-            var style = this.settings.style;
-            var spritesheet;
-            var stylesheet;
+            var spritesheet = layoutManager.getSpritesheet({
+                sprites: this.canvas.sprites,
+                dimensions: this.canvas.dimensions
+            });
 
-            spritesheet = layout.makeSpritesheet(sprites, dimensions);
-            stylesheet = layout.makeStylesheet(sprites, spritesheet, prefix, uri, style);
+            var stylesheet = stylesheetManager.getStylesheet({
+                sprites: this.canvas.sprites,
+                spritesheet: spritesheet,
+                prefix: this.settings.prefix,
+                uri: this.settings.uri
+            });
 
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);

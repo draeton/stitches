@@ -2725,9 +2725,8 @@ function ($, util, BaseLayout) {
 /**
  * # util/layout
  *
- * Utility methods for setting the canvas layout
- * and stitching the sprites together (i.e. placing them
- * on the canvas)
+ * Utility methods for setting the canvas layout and stitching the sprites
+ * together (i.e. placing them on the canvas)
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013, Matthew Cobbs<br/>
@@ -2745,8 +2744,8 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     "use strict";
 
-    // **Canvas layout constructors**
-    var layouts = {
+    // **Canvas layout managers**
+    var managers = {
         compact: CompactLayout,
         vertical: VerticalLayout,
         horizontal: HorizontalLayout
@@ -2755,19 +2754,19 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
     // **Module definition**
     return {
         /**
-         * ### stitches.setLayout
+         * ### layout.set
          * Set the working layout manager instance by type
          *
          * @param {string} type The layout manager type
          */
-        setLayout: function (type) {
-            var Constructor = layouts[type] || layouts.compact;
+        set: function (type) {
+            var Manager = managers[type] || managers.compact;
 
-            this.layout = new Constructor();
+            this.manager = new Manager();
         },
 
         /**
-         * ### stitches.getDimensions
+         * ### layout.getDimensions
          * Get the dimensions necessary to place the sprites
          *
          * @param {array} sprites A list of sprites to place
@@ -2775,11 +2774,11 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
          * @return object
          */
         getDimensions: function (sprites, defaults) {
-            return this.layout.getDimensions(sprites, defaults);
+            return this.manager.getDimensions(sprites, defaults);
         },
 
         /**
-         * ### stitches.placeSprites
+         * ### layout.placeSprites
          * Position a list of sprites to fit in dimensions and layout
          *
          * @param {array} sprites To place
@@ -2794,7 +2793,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
             $.map(sprites, function (sprite) {
                 if (!sprite.placed) {
-                    sprite.placed = self.layout.placeSprite(sprite, placed, dimensions);
+                    sprite.placed = self.manager.placeSprite(sprite, placed, dimensions);
                 }
 
                 progress(placed.length / sprites.length);
@@ -2806,7 +2805,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.trim
+         * ### layout.trim
          * Trim dimensions to only contain placed sprites
          *
          * @param {array} sprites A list of sprites
@@ -2826,15 +2825,18 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeSpritesheet
-         * Make an image using the browser canvas element's drawing context.
+         * ### layout.getSpritesheet
+         * Returns an image using the browser canvas element's drawing context.
          * Triggers a non-fatal error if anything fails
          *
-         * @param {array} sprites A list of sprites
-         * @param {object} dimensions Working width and height
+         * @param {object} options The generator parameters
+         * @option {array} sprites A list of sprites
+         * @option{object} dimensions Working width and height
          * @return string
          */
-        makeSpritesheet: function (sprites, dimensions) {
+        getSpritesheet: function (options) {
+            var sprites = options.sprites;
+            var dimensions = options.dimensions;
             var canvas;
             var context;
             var spritesheet;
@@ -2862,7 +2864,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesheet
+         * ### layout.makeStylesheet
          * Make a stylesheet to place images with spritesheet
          *
          * @param {array} sprites A list of sprites
@@ -2898,7 +2900,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesCSS
+         * ### layout.makeStylesCSS
          * Make a CSS styles
          *
          * @param {array} sprites A list of sprites
@@ -2927,7 +2929,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesLESS
+         * ### layout.makeStylesLESS
          * Make a LESS styles
          *
          * @param {array} sprites A list of sprites
@@ -2956,6 +2958,272 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             return styles;
         }
 
+    };
+
+});
+/**
+ * # stylesheet/base
+ *
+ * Base constructor for the stylesheet managers
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+/*global require, define */
+
+define('stylesheet/base',[
+    "jquery"
+],
+function ($) {
+
+    "use strict";
+
+    var defaults = {
+        filename: "download.png"
+    };
+
+    /**
+     * ## BaseStylesheet
+     *
+     * Create a new `BaseStylesheet` instance
+     *
+     * @constructor
+     * @param {object} options
+     */
+    var BaseStylesheet = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
+
+    BaseStylesheet.prototype = {
+        constructor: BaseStylesheet,
+
+        /**
+         * ### BaseStylesheet.prototype.get
+         * Returns a stylesheet to place images with spritesheet
+         *
+         * @param {array} sprites A list of sprites
+         * @param {string} spritesheet The data URL of the spritesheet
+         * @param {string} prefix Used to create CSS classes
+         * @param {boolean} uri Switch including image as data URI
+         * @return string
+         */
+        get: function (sprites, spritesheet, prefix, uri) {}
+    };
+
+    return BaseStylesheet;
+
+});
+/**
+ * # stylesheet/css
+ *
+ * Base constructor for the CSS stylesheet manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+/*global require, define */
+
+define('stylesheet/css',[
+    "jquery",
+    "util/util",
+    "stylesheet/base"
+],
+function ($, util, BaseStylesheet) {
+
+    "use strict";
+
+    var defaults = {
+        filename: "download.png"
+    };
+
+    /**
+     * ## CssStylesheet
+     *
+     * Create a new `CssStylesheet` instance
+     *
+     * @constructor
+     * @param {object} options
+     */
+    var CssStylesheet = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
+
+    util.inherit(CssStylesheet, BaseStylesheet, {
+        /**
+         * ### CssStylesheet.prototype.get
+         * Returns a stylesheet to place images with spritesheet
+         *
+         * @param {array} sprites A list of sprites
+         * @param {string} spritesheet The data URL of the spritesheet
+         * @param {string} prefix Used to create CSS classes
+         * @param {boolean} uri Switch including image as data URI
+         * @return string
+         */
+        get: function (sprites, spritesheet, prefix, uri) {
+            var backgroundImage = uri ? spritesheet : this.settings.filename;
+
+            var styles = [
+                "." + prefix + " {",
+                "    background: url(" + backgroundImage + ") no-repeat;",
+                "}\n"
+            ];
+
+            $.map(sprites, function (sprite) {
+                styles = styles.concat([
+                    "." + prefix + "-" + sprite.name + " {",
+                    "    width: " + sprite.image.width + "px;",
+                    "    height: " + sprite.image.height + "px;",
+                    "    background-position: -" + sprite.left() + "px -" + sprite.top() + "px;",
+                    "}\n"
+                ]);
+            });
+
+            return styles;
+        }
+    });
+
+    return CssStylesheet;
+
+});
+/**
+ * # stylesheet/less
+ *
+ * Base constructor for the LESS stylesheet manager
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+/*global require, define */
+
+define('stylesheet/less',[
+    "jquery",
+    "util/util",
+    "stylesheet/base"
+],
+function ($, util, BaseStylesheet) {
+
+    "use strict";
+
+    var defaults = {
+        filename: "download.png"
+    };
+
+    /**
+     * ## LessStylesheet
+     *
+     * Create a new `LessStylesheet` instance
+     *
+     * @constructor
+     * @param {object} options
+     */
+    var LessStylesheet = function (options) {
+        this.settings = $.extend({}, defaults, options);
+    };
+
+    util.inherit(LessStylesheet, BaseStylesheet, {
+        /**
+         * ### LessStylesheet.prototype.get
+         * Returns a stylesheet to place images with spritesheet
+         *
+         * @param {array} sprites A list of sprites
+         * @param {string} spritesheet The data URL of the spritesheet
+         * @param {string} prefix Used to create CSS classes
+         * @param {boolean} uri Switch including image as data URI
+         * @return string
+         */
+        get: function (sprites, spritesheet, prefix, uri) {
+            var backgroundImage = uri ? spritesheet : this.settings.filename;
+
+            var styles = [
+                "." + prefix + " (@x: 0, @y: 0, @width: 0, @height: 0) {",
+                "    background: url(" + backgroundImage + ") @x @y no-repeat;",
+                "    display: block;",
+                "    width: @width;",
+                "    height: @height;",
+                "}\n"
+            ];
+
+            $.map(sprites, function (sprite) {
+                styles = styles.concat([
+                    "." + prefix + "-" + sprite.name + " {",
+                    " .sprite(-" + sprite.left() + "px, -" + sprite.top() + "px, " + sprite.image.width + "px, " + sprite.image.height + "px); ",
+                    "}\n"
+                ]);
+            });
+
+            return styles;
+        }
+    });
+
+    return LessStylesheet;
+
+});
+/**
+ * # util/stylesheet
+ *
+ * Utility methods for setting the canvas stylesheet type and making the
+ * stylesheets
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+/*global require, define */
+
+define('util/stylesheet',[
+    "jquery",
+    "stylesheet/css",
+    "stylesheet/less"
+],
+function ($, CssStylesheet, LessStylesheet) {
+
+    "use strict";
+
+    // **Canvas stylesheet managers**
+    var managers = {
+        css: CssStylesheet,
+        less: LessStylesheet
+    };
+
+    // **Module definition**
+    return {
+        /**
+         * ### stylesheet.set
+         * Set the working stylesheet manager instance by type
+         *
+         * @param {string} type The stylesheet manager type
+         */
+        set: function (type) {
+            var Manager = managers[type] || managers.css;
+
+            this.manager = new Manager();
+        },
+
+        /**
+         * ### stylesheet.getStylesheet
+         * Returns a stylesheet to place images with spritesheet
+         *
+         * @param {object} options The generator parameters
+         * @option {array} sprites A list of sprites
+         * @option {string} spritesheet The data URL of the spritesheet
+         * @option {string} prefix Used to create CSS classes
+         * @option {boolean} uri Switch including image as data URI
+         * @return string
+         */
+        getStylesheet: function (options) {
+            var sprites = options.sprites;
+            var spritesheet = options.spritesheet;
+            var prefix = options.prefix;
+            var uri = options.uri;
+
+            var styles = this.manager.get(sprites, spritesheet, prefix, uri);
+            var stylesheet = "data:text/plain," + encodeURIComponent(styles.join("\n"));
+
+            return stylesheet;
+        }
     };
 
 });
@@ -3164,7 +3432,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
     });
 //>>excludeEnd('excludeTpl')
 }());
-define('tpl!util/../../templates/stitches.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches">    <!-- .stitches-toolbar -->    <div class="stitches-toolbar btn-toolbar">        <div class="btn-group shrink">            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">                <strong>Stitches</strong>            </a>            <button data-action="open" class="btn btn-small btn-info files" title="Open">                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">            </button>            <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">                <i class="icon-cog icon-white"></i> <span>Settings</span>            </button>            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">                <i class="icon-tasks icon-white"></i> <span>Generate</span>            </button>            <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">                <i class="icon-remove icon-white"></i> <span>Clear</span>            </button>        </div>        <div class="btn-group shrink">            <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>            </a>            <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>            </a>        </div>        <div class="btn-group shrink">            <button data-action="about" class="btn btn-small btn-info" title="About Stitches">                <i class="icon-info-sign icon-white"></i> <span>About</span>            </button>        </div>    </div>    <!-- /.stitches-toolbar -->    <!-- .stitches-progress -->    <div class="stitches-progress collapse">        <div class="progress progress-warning">            <div class="bar" style="width: 0%;"></div>        </div>    </div>    <!-- /.stitches-progress -->    <!-- .stitches-drop-box -->    <div class="stitches-drop-box">        <div class="stitches-overlay"></div>        <div class="stitches-wrap">            <!-- .stitches-canvas -->            <div class="stitches-canvas"></div>            <!-- /.stitches-canvas -->        </div>        <!-- .stitches-palettes -->        <div class="stitches-palettes">            <!-- .stitches-settings -->            <div class="stitches-palette stitches-settings fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Settings</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group hide">                            <label class="control-label">Position</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="position" type="checkbox" value="auto"/> Auto                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Layout</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="layout" type="radio" value="compact"/> Compact                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="vertical"/> Vertical                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="horizontal"/> Horizontal                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">CSS/LESS</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="style" type="radio" value="css"/> CSS                                </label>                                <label class="radio inline">                                    <input name="style" type="radio" value="less"/> LESS                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Style prefix</label>                            <div class="controls">                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Padding</label>                            <div class="controls">                                <div class="input-append">                                    <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Data URI</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS                                </label>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-settings -->            <!-- .stitches-properties -->            <div class="stitches-palette stitches-properties fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Sprite Properties</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group">                            <label class="control-label">Name</label>                            <div class="controls">                                <input name="name" type="text" required placeholder="Sprite name&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Coordinates (x, y)</label>                            <div class="controls">                                <div class="input-append">                                    <input name="x" required disabled placeholder="From left&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                                <div class="input-append">                                    <input name="y" required disabled placeholder="From top&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->            <!-- .stitches-about -->            <div class="stitches-palette stitches-about fade in">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>About Stitches</h4>                </div>                <div class="stitches-palette-body">                    <p><a href="http://draeton.github.com/stitches/">Stitches<a/> is an HTML5 <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS">sprite sheet</a> generator.</p>                    <p>Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em></p>                    <p>Stitches is developed by <a href="http://draeton.github.com">Matthew Cobbs</a> in concert with the lovely open-source community at <a href="http://github.com">Github</a>. Thanks are owed to the developers at Twitter for <a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and <a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>                    <p>&copy; 2013, Matthew Cobbs<br/>                        Licensed under the MIT license.</p>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->        </div>        <!-- /.stitches-palettes -->    </div>    <!-- /.stitches-drop-box --></div>');}return __p.join('');}});
+define('tpl!util/../../templates/stitches.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches">    <!-- .stitches-toolbar -->    <div class="stitches-toolbar btn-toolbar">        <div class="btn-group shrink">            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">                <strong>Stitches</strong>            </a>            <button data-action="open" class="btn btn-small btn-info files" title="Open">                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">            </button>            <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">                <i class="icon-cog icon-white"></i> <span>Settings</span>            </button>            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">                <i class="icon-tasks icon-white"></i> <span>Generate</span>            </button>            <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">                <i class="icon-remove icon-white"></i> <span>Clear</span>            </button>        </div>        <div class="btn-group shrink">            <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>            </a>            <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>            </a>        </div>        <div class="btn-group shrink">            <button data-action="about" class="btn btn-small btn-info" title="About Stitches">                <i class="icon-info-sign icon-white"></i> <span>About</span>            </button>        </div>    </div>    <!-- /.stitches-toolbar -->    <!-- .stitches-progress -->    <div class="stitches-progress collapse">        <div class="progress progress-warning">            <div class="bar" style="width: 0%;"></div>        </div>    </div>    <!-- /.stitches-progress -->    <!-- .stitches-drop-box -->    <div class="stitches-drop-box">        <div class="stitches-overlay"></div>        <div class="stitches-wrap">            <!-- .stitches-canvas -->            <div class="stitches-canvas"></div>            <!-- /.stitches-canvas -->        </div>        <!-- .stitches-palettes -->        <div class="stitches-palettes">            <!-- .stitches-settings -->            <div class="stitches-palette stitches-settings fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Settings</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group hide">                            <label class="control-label">Position</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="position" type="checkbox" value="auto"/> Auto                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Layout</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="layout" type="radio" value="compact"/> Compact                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="vertical"/> Vertical                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="horizontal"/> Horizontal                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">CSS/LESS</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="stylesheet" type="radio" value="css"/> CSS                                </label>                                <label class="radio inline">                                    <input name="stylesheet" type="radio" value="less"/> LESS                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Style prefix</label>                            <div class="controls">                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Padding</label>                            <div class="controls">                                <div class="input-append">                                    <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Data URI</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS                                </label>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-settings -->            <!-- .stitches-properties -->            <div class="stitches-palette stitches-properties fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Sprite Properties</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group">                            <label class="control-label">Name</label>                            <div class="controls">                                <input name="name" type="text" required placeholder="Sprite name&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Coordinates (x, y)</label>                            <div class="controls">                                <div class="input-append">                                    <input name="x" required disabled placeholder="From left&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                                <div class="input-append">                                    <input name="y" required disabled placeholder="From top&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->            <!-- .stitches-about -->            <div class="stitches-palette stitches-about fade in">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>About Stitches</h4>                </div>                <div class="stitches-palette-body">                    <p><a href="http://draeton.github.com/stitches/">Stitches<a/> is an HTML5 <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS">sprite sheet</a> generator.</p>                    <p>Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em></p>                    <p>Stitches is developed by <a href="http://draeton.github.com">Matthew Cobbs</a> in concert with the lovely open-source community at <a href="http://github.com">Github</a>. Thanks are owed to the developers at Twitter for <a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and <a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>                    <p class="text-right"><small>&copy; 2013, Matthew Cobbs<br/>                        Licensed under the MIT license.</small></p>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->        </div>        <!-- /.stitches-palettes -->    </div>    <!-- /.stitches-drop-box --></div>');}return __p.join('');}});
 
 define('tpl!util/../../templates/sprite.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches-sprite" style="top: ',y,'px; left: ',x,'px;">    <img src="',image.src,'"/></div>');}return __p.join('');}});
 
@@ -3674,9 +3942,10 @@ define('module/canvas',[
     "util/util",
     "util/array",
     "util/layout",
+    "util/stylesheet",
     "module/sprite"
 ],
-function($, util, array, layout, Sprite) {
+function($, util, array, layout, stylesheet, Sprite) {
 
     "use strict";
 
@@ -4162,6 +4431,7 @@ define('module/stitches',[
     "../../../lib/store/store",
     "util/util",
     "util/layout",
+    "util/stylesheet",
     "util/templates",
     "module/file-manager",
     "module/drop-box",
@@ -4169,7 +4439,7 @@ define('module/stitches',[
     "module/toolbar",
     "module/palette"
 ],
-function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
+function($, Modernizr, store, util, layoutManager, stylesheetManager, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -4188,7 +4458,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
         prefix: "sprite",
         padding: 5,
         uri: false,
-        style: "css"
+        stylesheet: "css"
     };
 
     /**
@@ -4222,7 +4492,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
             this.setFileManager();
             this.setDropBox();
             this.setToolbar();
-            this.setLayout();
+            this.setManagers();
             this.setImages();
             this.setCanvas();
             this.setPalettes();
@@ -4302,11 +4572,12 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
         },
 
         /**
-         * ### Stitches.prototype.setLayout
+         * ### Stitches.prototype.setManagers
          * ...
          */
-        setLayout: function () {
-            layout.setLayout(this.settings.layout);
+        setManagers: function () {
+            layoutManager.set(this.settings.layout);
+            stylesheetManager.set(this.settings.stylesheet);
         },
 
         /**
@@ -4422,17 +4693,18 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
                             var value = $checked.val();
 
                             this.source.layout = value;
-                            layout.setLayout(value);
+                            layoutManager.set(value);
 
                             self.update();
                         }
                     },
-                    style: {
+                    stylesheet: {
                         "change": function (e) {
-                            var $checked = this.$element.find("input[name=style]:checked");
+                            var $checked = this.$element.find("input[name=stylesheet]:checked");
                             var value = $checked.val();
 
-                            self.settings.style = value;
+                            self.settings.stylesheet = value;
+                            stylesheetManager.set(value);
 
                             self.update();
                         }
@@ -4574,7 +4846,7 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
                 source: this.settings,
                 inputs: {
                     layout: this.settings.layout,
-                    style: this.settings.style,
+                    stylesheet: this.settings.stylesheet,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
                     uri: this.settings.uri
@@ -4689,16 +4961,17 @@ function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Can
          * ...
          */
         generateSheets: function (e) {
-            var sprites = this.canvas.sprites;
-            var dimensions = this.canvas.dimensions;
-            var prefix = this.settings.prefix;
-            var uri = this.settings.uri;
-            var style = this.settings.style;
-            var spritesheet;
-            var stylesheet;
+            var spritesheet = layoutManager.getSpritesheet({
+                sprites: this.canvas.sprites,
+                dimensions: this.canvas.dimensions
+            });
 
-            spritesheet = layout.makeSpritesheet(sprites, dimensions);
-            stylesheet = layout.makeStylesheet(sprites, spritesheet, prefix, uri, style);
+            var stylesheet = stylesheetManager.getStylesheet({
+                sprites: this.canvas.sprites,
+                spritesheet: spritesheet,
+                prefix: this.settings.prefix,
+                uri: this.settings.uri
+            });
 
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);

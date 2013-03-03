@@ -1,9 +1,8 @@
 /**
  * # util/layout
  *
- * Utility methods for setting the canvas layout
- * and stitching the sprites together (i.e. placing them
- * on the canvas)
+ * Utility methods for setting the canvas layout and stitching the sprites
+ * together (i.e. placing them on the canvas)
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013, Matthew Cobbs<br/>
@@ -21,8 +20,8 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
     "use strict";
 
-    // **Canvas layout constructors**
-    var layouts = {
+    // **Canvas layout managers**
+    var managers = {
         compact: CompactLayout,
         vertical: VerticalLayout,
         horizontal: HorizontalLayout
@@ -31,19 +30,19 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
     // **Module definition**
     return {
         /**
-         * ### stitches.setLayout
+         * ### layout.set
          * Set the working layout manager instance by type
          *
          * @param {string} type The layout manager type
          */
-        setLayout: function (type) {
-            var Constructor = layouts[type] || layouts.compact;
+        set: function (type) {
+            var Manager = managers[type] || managers.compact;
 
-            this.layout = new Constructor();
+            this.manager = new Manager();
         },
 
         /**
-         * ### stitches.getDimensions
+         * ### layout.getDimensions
          * Get the dimensions necessary to place the sprites
          *
          * @param {array} sprites A list of sprites to place
@@ -51,11 +50,11 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
          * @return object
          */
         getDimensions: function (sprites, defaults) {
-            return this.layout.getDimensions(sprites, defaults);
+            return this.manager.getDimensions(sprites, defaults);
         },
 
         /**
-         * ### stitches.placeSprites
+         * ### layout.placeSprites
          * Position a list of sprites to fit in dimensions and layout
          *
          * @param {array} sprites To place
@@ -70,7 +69,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
             $.map(sprites, function (sprite) {
                 if (!sprite.placed) {
-                    sprite.placed = self.layout.placeSprite(sprite, placed, dimensions);
+                    sprite.placed = self.manager.placeSprite(sprite, placed, dimensions);
                 }
 
                 progress(placed.length / sprites.length);
@@ -82,7 +81,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.trim
+         * ### layout.trim
          * Trim dimensions to only contain placed sprites
          *
          * @param {array} sprites A list of sprites
@@ -102,15 +101,18 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeSpritesheet
-         * Make an image using the browser canvas element's drawing context.
+         * ### layout.getSpritesheet
+         * Returns an image using the browser canvas element's drawing context.
          * Triggers a non-fatal error if anything fails
          *
-         * @param {array} sprites A list of sprites
-         * @param {object} dimensions Working width and height
+         * @param {object} options The generator parameters
+         * @option {array} sprites A list of sprites
+         * @option{object} dimensions Working width and height
          * @return string
          */
-        makeSpritesheet: function (sprites, dimensions) {
+        getSpritesheet: function (options) {
+            var sprites = options.sprites;
+            var dimensions = options.dimensions;
             var canvas;
             var context;
             var spritesheet;
@@ -138,7 +140,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesheet
+         * ### layout.makeStylesheet
          * Make a stylesheet to place images with spritesheet
          *
          * @param {array} sprites A list of sprites
@@ -174,7 +176,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesCSS
+         * ### layout.makeStylesCSS
          * Make a CSS styles
          *
          * @param {array} sprites A list of sprites
@@ -203,7 +205,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### stitches.makeStylesLESS
+         * ### layout.makeStylesLESS
          * Make a LESS styles
          *
          * @param {array} sprites A list of sprites
