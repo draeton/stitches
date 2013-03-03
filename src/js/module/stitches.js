@@ -12,17 +12,17 @@
 define([
     "jquery",
     "modernizr",
+    "../../../lib/store/store",
     "util/util",
-    "util/stitches",
-    "tpl!../../templates/stitches.html",
+    "util/layout",
+    "util/templates",
     "module/file-manager",
     "module/drop-box",
     "module/canvas",
     "module/toolbar",
-    "module/palette",
-    "../../../lib/store/store"
+    "module/palette"
 ],
-function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, Canvas, Toolbar, Palette, store) {
+function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -102,7 +102,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         render: function () {
-            var html = stitchesTemplate({});
+            var html = templates.stitches({});
 
             this.$element.append(html);
             this.$overlay = this.$element.find(".stitches-overlay");
@@ -159,7 +159,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         setLayout: function () {
-            stitches.setLayout(this.settings.layout);
+            layout.setLayout(this.settings.layout);
         },
 
         /**
@@ -272,10 +272,10 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     layout: {
                         "change": function (e) {
                             var $checked = this.$element.find("input[name=layout]:checked");
-                            var layout = $checked.val();
+                            var value = $checked.val();
 
-                            this.source.layout = layout;
-                            stitches.setLayout(layout);
+                            this.source.layout = value;
+                            layout.setLayout(value);
 
                             self.update();
                         }
@@ -283,32 +283,32 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     style: {
                         "change": function (e) {
                             var $checked = this.$element.find("input[name=style]:checked");
-                            var style = $checked.val();
+                            var value = $checked.val();
 
-                            self.settings.style = style;
+                            self.settings.style = value;
 
                             self.update();
                         }
                     },
                     prefix: {
                         "input blur": function (e) {
-                            var prefix = $(e.currentTarget).val();
+                            var value = $(e.currentTarget).val();
 
-                            this.source.prefix = prefix;
+                            this.source.prefix = value;
 
                             self.update();
                         }
                     },
                     padding: {
                         "input blur": function (e) {
-                            var padding = $(e.currentTarget).val();
+                            var value = $(e.currentTarget).val();
 
-                            this.source.padding = padding;
-                            self.canvas.padding = padding;
+                            this.source.padding = value;
+                            self.canvas.padding = value;
 
                             $.map(self.canvas.sprites, function (sprite) {
                                 sprite.configure({
-                                    padding: padding
+                                    padding: value
                                 });
                             });
 
@@ -317,9 +317,9 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     },
                     uri: {
                         "change": function (e) {
-                            var uri = $(e.currentTarget).is(":checked");
+                            var value = $(e.currentTarget).is(":checked");
 
-                            this.source.uri = uri;
+                            this.source.uri = value;
 
                             self.update();
                         }
@@ -550,8 +550,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             var spritesheet;
             var stylesheet;
 
-            spritesheet = stitches.makeSpritesheet(sprites, dimensions);
-            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri, style);
+            spritesheet = layout.makeSpritesheet(sprites, dimensions);
+            stylesheet = layout.makeStylesheet(sprites, spritesheet, prefix, uri, style);
 
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);

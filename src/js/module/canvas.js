@@ -13,10 +13,10 @@ define([
     "jquery",
     "util/util",
     "util/array",
-    "util/stitches",
+    "util/layout",
     "module/sprite"
 ],
-function($, util, array, stitches, Sprite) {
+function($, util, array, layout, Sprite) {
 
     "use strict";
 
@@ -110,7 +110,7 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         measure: function (sprites) {
-            this.dimensions = stitches.getDimensions(sprites, this.settings.dimensions);
+            this.dimensions = layout.getDimensions(sprites, this.settings.dimensions);
         },
 
         /**
@@ -132,7 +132,7 @@ function($, util, array, stitches, Sprite) {
                 }
             });
 
-            stitches.placeSprites(sprites, placed, this.dimensions, this.progress);
+            layout.placeSprites(sprites, placed, this.dimensions, this.progress);
         },
 
         /**
@@ -140,7 +140,7 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         cut: function (sprites) {
-            stitches.trim(sprites, this.dimensions);
+            layout.trim(sprites, this.dimensions);
 
             this.$element.css({
                 width: this.dimensions.width + "px",

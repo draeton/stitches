@@ -12,9 +12,9 @@
 define([
     "jquery",
     "util/util",
-    "tpl!../../templates/sprite.html"
+    "util/templates"
 ],
-function($, util, spriteTemplate) {
+function($, util, templates) {
 
     "use strict";
 
@@ -90,7 +90,7 @@ function($, util, spriteTemplate) {
          * ...
          */
         render: function () {
-            var html = spriteTemplate(this);
+            var html = templates.sprite(this);
 
             this.$element = $(html);
             this.$element.data("sprite", this);

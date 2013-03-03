@@ -1,5 +1,5 @@
 /**
- * # util/stitches
+ * # util/layout
  *
  * Utility methods for setting the canvas layout
  * and stitching the sprites together (i.e. placing them

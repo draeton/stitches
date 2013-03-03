@@ -2028,6 +2028,178 @@ define('modernizr',[],function () {
     "use strict";
     return Modernizr;
 });
+/* Copyright (c) 2010-2012 Marcus Westin */;(function(){
+	var store = {},
+		win = window,
+		doc = win.document,
+		localStorageName = 'localStorage',
+		namespace = '__storejs__',
+		storage
+
+	store.disabled = false
+	store.set = function(key, value) {}
+	store.get = function(key) {}
+	store.remove = function(key) {}
+	store.clear = function() {}
+	store.transact = function(key, defaultVal, transactionFn) {
+		var val = store.get(key)
+		if (transactionFn == null) {
+			transactionFn = defaultVal
+			defaultVal = null
+		}
+		if (typeof val == 'undefined') { val = defaultVal || {} }
+		transactionFn(val)
+		store.set(key, val)
+	}
+	store.setAll = function() {}
+	store.getAll = function() {}
+
+	store.serialize = function(value) {
+		return JSON.stringify(value)
+	}
+	store.deserialize = function(value) {
+		if (typeof value != 'string') { return undefined }
+		try { return JSON.parse(value) }
+		catch(e) { return value || undefined }
+	}
+
+	// Functions to encapsulate questionable FireFox 3.6.13 behavior
+	// when about.config::dom.storage.enabled === false
+	// See https://github.com/marcuswestin/store.js/issues#issue/13
+	function isLocalStorageNameSupported() {
+		try { return (localStorageName in win && win[localStorageName]) }
+		catch(err) { return false }
+	}
+
+	if (isLocalStorageNameSupported()) {
+		storage = win[localStorageName]
+		store.set = function(key, val) {
+			if (typeof key == "object") { return store.setAll(key) }
+			if (val === undefined) { return store.remove(key) }
+			storage.setItem(key, store.serialize(val))
+			return val
+		}
+		store.get = function(key) {
+			if (key === undefined) { return store.getAll() }
+			return store.deserialize(storage.getItem(key))
+		}
+		store.remove = function(key) { storage.removeItem(key) }
+		store.clear = function() { storage.clear() }
+		store.setAll = function (vals) {
+			for (var i in vals) {
+				vals[i] = store.set(i, vals[i])
+			}
+		}
+		store.getAll = function() {
+			var ret = {}
+			for (var i=0; i<storage.length; ++i) {
+				var key = storage.key(i)
+				ret[key] = store.get(key)
+			}
+			return ret
+		}
+	} else if (doc.documentElement.addBehavior) {
+		var storageOwner,
+			storageContainer
+		// Since #userData storage applies only to specific paths, we need to
+		// somehow link our data to a specific path.  We choose /favicon.ico
+		// as a pretty safe option, since all browsers already make a request to
+		// this URL anyway and being a 404 will not hurt us here.  We wrap an
+		// iframe pointing to the favicon in an ActiveXObject(htmlfile) object
+		// (see: http://msdn.microsoft.com/en-us/library/aa752574(v=VS.85).aspx)
+		// since the iframe access rules appear to allow direct access and
+		// manipulation of the document element, even for a 404 page.  This
+		// document can be used instead of the current document (which would
+		// have been limited to the current path) to perform #userData storage.
+		try {
+			storageContainer = new ActiveXObject('htmlfile')
+			storageContainer.open()
+			storageContainer.write('<s' + 'cript>document.w=window</s' + 'cript><iframe src="/favicon.ico"></frame>')
+			storageContainer.close()
+			storageOwner = storageContainer.w.frames[0].document
+			storage = storageOwner.createElement('div')
+		} catch(e) {
+			// somehow ActiveXObject instantiation failed (perhaps some special
+			// security settings or otherwse), fall back to per-path storage
+			storage = doc.createElement('div')
+			storageOwner = doc.body
+		}
+		function withIEStorage(storeFunction) {
+			return function() {
+				var args = Array.prototype.slice.call(arguments, 0)
+				args.unshift(storage)
+				// See http://msdn.microsoft.com/en-us/library/ms531081(v=VS.85).aspx
+				// and http://msdn.microsoft.com/en-us/library/ms531424(v=VS.85).aspx
+				storageOwner.appendChild(storage)
+				storage.addBehavior('#default#userData')
+				storage.load(localStorageName)
+				var result = storeFunction.apply(store, args)
+				storageOwner.removeChild(storage)
+				return result
+			}
+		}
+
+		// In IE7, keys may not contain special chars. See all of https://github.com/marcuswestin/store.js/issues/40
+		var forbiddenCharsRegex = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g")
+		function ieKeyFix(key) {
+			return key.replace(forbiddenCharsRegex, '___')
+		}
+		store.set = withIEStorage(function(storage, key, val) {
+			if (typeof key == "object") { return store.setAll(key) }
+			key = ieKeyFix(key)
+			if (val === undefined) { return store.remove(key) }
+			storage.setAttribute(key, store.serialize(val))
+			storage.save(localStorageName)
+			return val
+		})
+		store.get = withIEStorage(function(storage, key) {
+			if (key === undefined) { return store.getAll() }
+			key = ieKeyFix(key)
+			return store.deserialize(storage.getAttribute(key))
+		})
+		store.remove = withIEStorage(function(storage, key) {
+			key = ieKeyFix(key)
+			storage.removeAttribute(key)
+			storage.save(localStorageName)
+		})
+		store.clear = withIEStorage(function(storage) {
+			var attributes = storage.XMLDocument.documentElement.attributes
+			storage.load(localStorageName)
+			for (var i=0, attr; attr=attributes[i]; i++) {
+				storage.removeAttribute(attr.name)
+			}
+			storage.save(localStorageName)
+		})
+		store.setAll = withIEStorage(function(storage, vals) {
+			for (var i in vals) {
+				vals[i] = store.set(i, vals[i])
+			}
+			return vals
+		})
+		store.getAll = withIEStorage(function(storage) {
+			var attributes = storage.XMLDocument.documentElement.attributes
+			storage.load(localStorageName)
+			var ret = {}
+			for (var i=0, attr; attr=attributes[i]; ++i) {
+				ret[attr] = store.get(attr)
+			}
+			return ret
+		})
+	}
+
+	try {
+		store.set(namespace, namespace)
+		if (store.get(namespace) != namespace) { store.disabled = true }
+		store.remove(namespace)
+	} catch(e) {
+		store.disabled = true
+	}
+	store.enabled = !store.disabled
+
+	if (typeof module != 'undefined' && typeof module != 'function') { module.exports = store }
+	else if (typeof define === 'function' && define.amd) { define('module/../../../lib/store/store',store) }
+	else { this.store = store }
+})();
 /**
  * # util/util
  *
@@ -2551,7 +2723,7 @@ function ($, util, BaseLayout) {
 });
 
 /**
- * # util/stitches
+ * # util/layout
  *
  * Utility methods for setting the canvas layout
  * and stitching the sprites together (i.e. placing them
@@ -2563,7 +2735,7 @@ function ($, util, BaseLayout) {
  */
 /*global require, define */
 
-define('util/stitches',[
+define('util/layout',[
     "jquery",
     "layout/compact",
     "layout/vertical",
@@ -2992,8 +3164,53 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
     });
 //>>excludeEnd('excludeTpl')
 }());
-define('tpl!module/../../templates/stitches.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches">    <!-- .stitches-toolbar -->    <div class="stitches-toolbar btn-toolbar">        <div class="btn-group shrink">            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">                <strong>Stitches</strong>            </a>            <button data-action="open" class="btn btn-small btn-info files" title="Open">                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">            </button>            <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">                <i class="icon-cog icon-white"></i> <span>Settings</span>            </button>            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">                <i class="icon-tasks icon-white"></i> <span>Generate</span>            </button>            <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">                <i class="icon-remove icon-white"></i> <span>Clear</span>            </button>        </div>        <div class="btn-group shrink">            <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>            </a>            <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>            </a>        </div>        <div class="btn-group shrink">            <button data-action="about" class="btn btn-small btn-info" title="About Stitches">                <i class="icon-info-sign icon-white"></i> <span>About</span>            </button>        </div>    </div>    <!-- /.stitches-toolbar -->    <!-- .stitches-progress -->    <div class="stitches-progress collapse">        <div class="progress progress-warning">            <div class="bar" style="width: 0%;"></div>        </div>    </div>    <!-- /.stitches-progress -->    <!-- .stitches-drop-box -->    <div class="stitches-drop-box">        <div class="stitches-overlay"></div>        <div class="stitches-wrap">            <!-- .stitches-canvas -->            <div class="stitches-canvas"></div>            <!-- /.stitches-canvas -->        </div>        <!-- .stitches-palettes -->        <div class="stitches-palettes">            <!-- .stitches-settings -->            <div class="stitches-palette stitches-settings fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Settings</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group hide">                            <label class="control-label">Position</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="position" type="checkbox" value="auto"/> Auto                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Layout</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="layout" type="radio" value="compact"/> Compact                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="vertical"/> Vertical                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="horizontal"/> Horizontal                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">CSS/LESS</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="style" type="radio" value="css"/> CSS                                </label>                                <label class="radio inline">                                    <input name="style" type="radio" value="less"/> LESS                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Style prefix</label>                            <div class="controls">                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Padding</label>                            <div class="controls">                                <div class="input-append">                                    <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Data URI</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS                                </label>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-settings -->            <!-- .stitches-properties -->            <div class="stitches-palette stitches-properties fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Sprite Properties</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group">                            <label class="control-label">Name</label>                            <div class="controls">                                <input name="name" type="text" required placeholder="Sprite name&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Coordinates (x, y)</label>                            <div class="controls">                                <div class="input-append">                                    <input name="x" required disabled placeholder="From left&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                                <div class="input-append">                                    <input name="y" required disabled placeholder="From top&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->            <!-- .stitches-about -->            <div class="stitches-palette stitches-about fade in">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>About Stitches</h4>                </div>                <div class="stitches-palette-body">                    <p><a href="http://draeton.github.com/stitches/">Stitches<a/> is an HTML5 <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS">sprite sheet</a> generator.</p>                    <p>Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em></p>                    <p>Stitches is developed by <a href="http://draeton.github.com">Matthew Cobbs</a> in concert with the lovely open-source community at <a href="http://github.com">Github</a>. Thanks are owed to the developers at Twitter for <a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and <a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->        </div>        <!-- /.stitches-palettes -->    </div>    <!-- /.stitches-drop-box --></div>');}return __p.join('');}});
+define('tpl!util/../../templates/stitches.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches">    <!-- .stitches-toolbar -->    <div class="stitches-toolbar btn-toolbar">        <div class="btn-group shrink">            <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">                <strong>Stitches</strong>            </a>            <button data-action="open" class="btn btn-small btn-info files" title="Open">                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">            </button>            <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">                <i class="icon-cog icon-white"></i> <span>Settings</span>            </button>            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">                <i class="icon-tasks icon-white"></i> <span>Generate</span>            </button>            <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">                <i class="icon-remove icon-white"></i> <span>Clear</span>            </button>        </div>        <div class="btn-group shrink">            <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>            </a>            <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>            </a>        </div>        <div class="btn-group shrink">            <button data-action="about" class="btn btn-small btn-info" title="About Stitches">                <i class="icon-info-sign icon-white"></i> <span>About</span>            </button>        </div>    </div>    <!-- /.stitches-toolbar -->    <!-- .stitches-progress -->    <div class="stitches-progress collapse">        <div class="progress progress-warning">            <div class="bar" style="width: 0%;"></div>        </div>    </div>    <!-- /.stitches-progress -->    <!-- .stitches-drop-box -->    <div class="stitches-drop-box">        <div class="stitches-overlay"></div>        <div class="stitches-wrap">            <!-- .stitches-canvas -->            <div class="stitches-canvas"></div>            <!-- /.stitches-canvas -->        </div>        <!-- .stitches-palettes -->        <div class="stitches-palettes">            <!-- .stitches-settings -->            <div class="stitches-palette stitches-settings fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Settings</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group hide">                            <label class="control-label">Position</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="position" type="checkbox" value="auto"/> Auto                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Layout</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="layout" type="radio" value="compact"/> Compact                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="vertical"/> Vertical                                </label>                                <label class="radio inline">                                    <input name="layout" type="radio" value="horizontal"/> Horizontal                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">CSS/LESS</label>                            <div class="controls">                                <label class="radio inline">                                    <input name="style" type="radio" value="css"/> CSS                                </label>                                <label class="radio inline">                                    <input name="style" type="radio" value="less"/> LESS                                </label>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Style prefix</label>                            <div class="controls">                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Padding</label>                            <div class="controls">                                <div class="input-append">                                    <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Data URI</label>                            <div class="controls">                                <label class="checkbox">                                    <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS                                </label>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-settings -->            <!-- .stitches-properties -->            <div class="stitches-palette stitches-properties fade">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>Sprite Properties</h4>                </div>                <div class="stitches-palette-body">                    <form class="form-horizontal">                        <div class="control-group">                            <label class="control-label">Name</label>                            <div class="controls">                                <input name="name" type="text" required placeholder="Sprite name&hellip;">                            </div>                        </div>                        <div class="control-group">                            <label class="control-label">Coordinates (x, y)</label>                            <div class="controls">                                <div class="input-append">                                    <input name="x" required disabled placeholder="From left&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                                <div class="input-append">                                    <input name="y" required disabled placeholder="From top&hellip;" class="input-mini">                                    <span class="add-on">px</span>                                </div>                            </div>                        </div>                    </form>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->            <!-- .stitches-about -->            <div class="stitches-palette stitches-about fade in">                <div class="stitches-palette-header">                    <button type="button" class="close" data-action="close" title="Close">&times;</button>                    <h4>About Stitches</h4>                </div>                <div class="stitches-palette-body">                    <p><a href="http://draeton.github.com/stitches/">Stitches<a/> is an HTML5 <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS">sprite sheet</a> generator.</p>                    <p>Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em></p>                    <p>Stitches is developed by <a href="http://draeton.github.com">Matthew Cobbs</a> in concert with the lovely open-source community at <a href="http://github.com">Github</a>. Thanks are owed to the developers at Twitter for <a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and <a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>                </div>                <div class="stitches-palette-footer">                    <div class="btn-toolbar">                        <div class="btn-group">                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>                        </div>                    </div>                    <div class="clearfix"></div>                </div>            </div>            <!-- /.stitches-properties -->        </div>        <!-- /.stitches-palettes -->    </div>    <!-- /.stitches-drop-box --></div>');}return __p.join('');}});
 
+define('tpl!util/../../templates/sprite.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches-sprite" style="top: ',y,'px; left: ',x,'px;">    <img src="',image.src,'"/></div>');}return __p.join('');}});
+
+/**
+ * # util/templates
+ *
+ * Utility methods for referencing js templates
+ *
+ * > http://draeton.github.com/stitches<br/>
+ * > Copyright 2013, Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+/*global require, define */
+
+define('util/templates',[
+    "tpl!../../templates/stitches.html",
+    "tpl!../../templates/sprite.html"
+],
+function (stitchesTemplate, spriteTemplate) {
+
+    "use strict";
+
+    // **Module definition**
+    return {
+        /**
+         * ### templates.stitches
+         * Returns the `Stitches` template
+         *
+         * @return string
+         */
+        stitches: function () {
+            return stitchesTemplate;
+        },
+
+        /**
+         * ### templates.sprite
+         * Returns the `Sprite` template
+         *
+         * @return string
+         */
+        sprite: function () {
+            return spriteTemplate;
+        }
+    };
+
+});
 /**
  * # module/file-manager
  *
@@ -3242,8 +3459,6 @@ function ($) {
     };
 
 });
-define('tpl!module/../../templates/sprite.html', function() {return function(obj) { var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div class="stitches-sprite" style="top: ',y,'px; left: ',x,'px;">    <img src="',image.src,'"/></div>');}return __p.join('');}});
-
 /**
  * # module/sprite
  *
@@ -3258,9 +3473,9 @@ define('tpl!module/../../templates/sprite.html', function() {return function(obj
 define('module/sprite',[
     "jquery",
     "util/util",
-    "tpl!../../templates/sprite.html"
+    "util/templates"
 ],
-function($, util, spriteTemplate) {
+function($, util, templates) {
 
     "use strict";
 
@@ -3336,7 +3551,7 @@ function($, util, spriteTemplate) {
          * ...
          */
         render: function () {
-            var html = spriteTemplate(this);
+            var html = templates.sprite(this);
 
             this.$element = $(html);
             this.$element.data("sprite", this);
@@ -3458,10 +3673,10 @@ define('module/canvas',[
     "jquery",
     "util/util",
     "util/array",
-    "util/stitches",
+    "util/layout",
     "module/sprite"
 ],
-function($, util, array, stitches, Sprite) {
+function($, util, array, layout, Sprite) {
 
     "use strict";
 
@@ -3555,7 +3770,7 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         measure: function (sprites) {
-            this.dimensions = stitches.getDimensions(sprites, this.settings.dimensions);
+            this.dimensions = layout.getDimensions(sprites, this.settings.dimensions);
         },
 
         /**
@@ -3577,7 +3792,7 @@ function($, util, array, stitches, Sprite) {
                 }
             });
 
-            stitches.placeSprites(sprites, placed, this.dimensions, this.progress);
+            layout.placeSprites(sprites, placed, this.dimensions, this.progress);
         },
 
         /**
@@ -3585,7 +3800,7 @@ function($, util, array, stitches, Sprite) {
          * ...
          */
         cut: function (sprites) {
-            stitches.trim(sprites, this.dimensions);
+            layout.trim(sprites, this.dimensions);
 
             this.$element.css({
                 width: this.dimensions.width + "px",
@@ -3930,178 +4145,6 @@ function ($, util, Toolbar) {
     return Palette;
 
 });
-/* Copyright (c) 2010-2012 Marcus Westin */;(function(){
-	var store = {},
-		win = window,
-		doc = win.document,
-		localStorageName = 'localStorage',
-		namespace = '__storejs__',
-		storage
-
-	store.disabled = false
-	store.set = function(key, value) {}
-	store.get = function(key) {}
-	store.remove = function(key) {}
-	store.clear = function() {}
-	store.transact = function(key, defaultVal, transactionFn) {
-		var val = store.get(key)
-		if (transactionFn == null) {
-			transactionFn = defaultVal
-			defaultVal = null
-		}
-		if (typeof val == 'undefined') { val = defaultVal || {} }
-		transactionFn(val)
-		store.set(key, val)
-	}
-	store.setAll = function() {}
-	store.getAll = function() {}
-
-	store.serialize = function(value) {
-		return JSON.stringify(value)
-	}
-	store.deserialize = function(value) {
-		if (typeof value != 'string') { return undefined }
-		try { return JSON.parse(value) }
-		catch(e) { return value || undefined }
-	}
-
-	// Functions to encapsulate questionable FireFox 3.6.13 behavior
-	// when about.config::dom.storage.enabled === false
-	// See https://github.com/marcuswestin/store.js/issues#issue/13
-	function isLocalStorageNameSupported() {
-		try { return (localStorageName in win && win[localStorageName]) }
-		catch(err) { return false }
-	}
-
-	if (isLocalStorageNameSupported()) {
-		storage = win[localStorageName]
-		store.set = function(key, val) {
-			if (typeof key == "object") { return store.setAll(key) }
-			if (val === undefined) { return store.remove(key) }
-			storage.setItem(key, store.serialize(val))
-			return val
-		}
-		store.get = function(key) {
-			if (key === undefined) { return store.getAll() }
-			return store.deserialize(storage.getItem(key))
-		}
-		store.remove = function(key) { storage.removeItem(key) }
-		store.clear = function() { storage.clear() }
-		store.setAll = function (vals) {
-			for (var i in vals) {
-				vals[i] = store.set(i, vals[i])
-			}
-		}
-		store.getAll = function() {
-			var ret = {}
-			for (var i=0; i<storage.length; ++i) {
-				var key = storage.key(i)
-				ret[key] = store.get(key)
-			}
-			return ret
-		}
-	} else if (doc.documentElement.addBehavior) {
-		var storageOwner,
-			storageContainer
-		// Since #userData storage applies only to specific paths, we need to
-		// somehow link our data to a specific path.  We choose /favicon.ico
-		// as a pretty safe option, since all browsers already make a request to
-		// this URL anyway and being a 404 will not hurt us here.  We wrap an
-		// iframe pointing to the favicon in an ActiveXObject(htmlfile) object
-		// (see: http://msdn.microsoft.com/en-us/library/aa752574(v=VS.85).aspx)
-		// since the iframe access rules appear to allow direct access and
-		// manipulation of the document element, even for a 404 page.  This
-		// document can be used instead of the current document (which would
-		// have been limited to the current path) to perform #userData storage.
-		try {
-			storageContainer = new ActiveXObject('htmlfile')
-			storageContainer.open()
-			storageContainer.write('<s' + 'cript>document.w=window</s' + 'cript><iframe src="/favicon.ico"></frame>')
-			storageContainer.close()
-			storageOwner = storageContainer.w.frames[0].document
-			storage = storageOwner.createElement('div')
-		} catch(e) {
-			// somehow ActiveXObject instantiation failed (perhaps some special
-			// security settings or otherwse), fall back to per-path storage
-			storage = doc.createElement('div')
-			storageOwner = doc.body
-		}
-		function withIEStorage(storeFunction) {
-			return function() {
-				var args = Array.prototype.slice.call(arguments, 0)
-				args.unshift(storage)
-				// See http://msdn.microsoft.com/en-us/library/ms531081(v=VS.85).aspx
-				// and http://msdn.microsoft.com/en-us/library/ms531424(v=VS.85).aspx
-				storageOwner.appendChild(storage)
-				storage.addBehavior('#default#userData')
-				storage.load(localStorageName)
-				var result = storeFunction.apply(store, args)
-				storageOwner.removeChild(storage)
-				return result
-			}
-		}
-
-		// In IE7, keys may not contain special chars. See all of https://github.com/marcuswestin/store.js/issues/40
-		var forbiddenCharsRegex = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g")
-		function ieKeyFix(key) {
-			return key.replace(forbiddenCharsRegex, '___')
-		}
-		store.set = withIEStorage(function(storage, key, val) {
-			if (typeof key == "object") { return store.setAll(key) }
-			key = ieKeyFix(key)
-			if (val === undefined) { return store.remove(key) }
-			storage.setAttribute(key, store.serialize(val))
-			storage.save(localStorageName)
-			return val
-		})
-		store.get = withIEStorage(function(storage, key) {
-			if (key === undefined) { return store.getAll() }
-			key = ieKeyFix(key)
-			return store.deserialize(storage.getAttribute(key))
-		})
-		store.remove = withIEStorage(function(storage, key) {
-			key = ieKeyFix(key)
-			storage.removeAttribute(key)
-			storage.save(localStorageName)
-		})
-		store.clear = withIEStorage(function(storage) {
-			var attributes = storage.XMLDocument.documentElement.attributes
-			storage.load(localStorageName)
-			for (var i=0, attr; attr=attributes[i]; i++) {
-				storage.removeAttribute(attr.name)
-			}
-			storage.save(localStorageName)
-		})
-		store.setAll = withIEStorage(function(storage, vals) {
-			for (var i in vals) {
-				vals[i] = store.set(i, vals[i])
-			}
-			return vals
-		})
-		store.getAll = withIEStorage(function(storage) {
-			var attributes = storage.XMLDocument.documentElement.attributes
-			storage.load(localStorageName)
-			var ret = {}
-			for (var i=0, attr; attr=attributes[i]; ++i) {
-				ret[attr] = store.get(attr)
-			}
-			return ret
-		})
-	}
-
-	try {
-		store.set(namespace, namespace)
-		if (store.get(namespace) != namespace) { store.disabled = true }
-		store.remove(namespace)
-	} catch(e) {
-		store.disabled = true
-	}
-	store.enabled = !store.disabled
-
-	if (typeof module != 'undefined' && typeof module != 'function') { module.exports = store }
-	else if (typeof define === 'function' && define.amd) { define('module/../../../lib/store/store',store) }
-	else { this.store = store }
-})();
 /**
  * # module/stitches
  *
@@ -4116,17 +4159,17 @@ function ($, util, Toolbar) {
 define('module/stitches',[
     "jquery",
     "modernizr",
+    "../../../lib/store/store",
     "util/util",
-    "util/stitches",
-    "tpl!../../templates/stitches.html",
+    "util/layout",
+    "util/templates",
     "module/file-manager",
     "module/drop-box",
     "module/canvas",
     "module/toolbar",
-    "module/palette",
-    "../../../lib/store/store"
+    "module/palette"
 ],
-function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, Canvas, Toolbar, Palette, store) {
+function($, Modernizr, store, util, layout, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -4206,7 +4249,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         render: function () {
-            var html = stitchesTemplate({});
+            var html = templates.stitches({});
 
             this.$element.append(html);
             this.$overlay = this.$element.find(".stitches-overlay");
@@ -4263,7 +4306,7 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
          * ...
          */
         setLayout: function () {
-            stitches.setLayout(this.settings.layout);
+            layout.setLayout(this.settings.layout);
         },
 
         /**
@@ -4376,10 +4419,10 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     layout: {
                         "change": function (e) {
                             var $checked = this.$element.find("input[name=layout]:checked");
-                            var layout = $checked.val();
+                            var value = $checked.val();
 
-                            this.source.layout = layout;
-                            stitches.setLayout(layout);
+                            this.source.layout = value;
+                            layout.setLayout(value);
 
                             self.update();
                         }
@@ -4387,32 +4430,32 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     style: {
                         "change": function (e) {
                             var $checked = this.$element.find("input[name=style]:checked");
-                            var style = $checked.val();
+                            var value = $checked.val();
 
-                            self.settings.style = style;
+                            self.settings.style = value;
 
                             self.update();
                         }
                     },
                     prefix: {
                         "input blur": function (e) {
-                            var prefix = $(e.currentTarget).val();
+                            var value = $(e.currentTarget).val();
 
-                            this.source.prefix = prefix;
+                            this.source.prefix = value;
 
                             self.update();
                         }
                     },
                     padding: {
                         "input blur": function (e) {
-                            var padding = $(e.currentTarget).val();
+                            var value = $(e.currentTarget).val();
 
-                            this.source.padding = padding;
-                            self.canvas.padding = padding;
+                            this.source.padding = value;
+                            self.canvas.padding = value;
 
                             $.map(self.canvas.sprites, function (sprite) {
                                 sprite.configure({
-                                    padding: padding
+                                    padding: value
                                 });
                             });
 
@@ -4421,9 +4464,9 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
                     },
                     uri: {
                         "change": function (e) {
-                            var uri = $(e.currentTarget).is(":checked");
+                            var value = $(e.currentTarget).is(":checked");
 
-                            this.source.uri = uri;
+                            this.source.uri = value;
 
                             self.update();
                         }
@@ -4654,8 +4697,8 @@ function($, Modernizr, util, stitches, stitchesTemplate, FileManager, DropBox, C
             var spritesheet;
             var stylesheet;
 
-            spritesheet = stitches.makeSpritesheet(sprites, dimensions);
-            stylesheet = stitches.makeStylesheet(sprites, spritesheet, prefix, uri, style);
+            spritesheet = layout.makeSpritesheet(sprites, dimensions);
+            stylesheet = layout.makeStylesheet(sprites, spritesheet, prefix, uri, style);
 
             try {
                 spritesheet = util.dataToObjectURL(spritesheet);
