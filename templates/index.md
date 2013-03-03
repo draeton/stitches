@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-@VERSION@-min.css">
+<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-@@version-min.css">
 
 <section id="main" role="main">
 
@@ -23,9 +23,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-@VERSION@-min.css">
+<link rel="stylesheet" href="css/stitches-@@version-min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-@VERSION@-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-@@version-min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -55,12 +55,12 @@ Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 [jQuery 1.7.1](http://jquery.com/), [Modernizr 2.0.6](http://modernizr.com/), [Bootstrap 2.3.0](http://twitter.github.com/bootstrap/) <span class="label label-success">New</span>
 
 {% highlight html %}
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="libs/bootstrap/css/bootstrap-responsive.min.css">
 
-<script src="lib/jquery/jquery-1.7.1.js"></script>
-<script src="lib/modernizr/modernizr-2.0.6.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/jquery/jquery-1.7.1.js"></script>
+<script src="libs/modernizr/modernizr-2.0.6.min.js"></script>
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 {% endhighlight %}
 
 
@@ -79,7 +79,7 @@ Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 
 ## Download
 
-**The latest release, @VERSION@, is [available here](/stitches/repo/dist/stitches-@VERSION@.zip).**
+**The latest release, @@version, is [available here](/stitches/repo/dist/stitches-@@version.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -90,4 +90,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-@VERSION@-min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-@@version-min.js"></script>
