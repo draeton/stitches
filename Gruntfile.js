@@ -113,12 +113,14 @@ module.exports = function(grunt) {
         copy: {
             dependencies: {
                 files: [
-                    /*{
-                        src: "**",
-                        dest: "build/<%= pkg.repo %>/img/",
-                        cwd: "src/img/"
-                    },*/
                     {
+                        expand: true,
+                        cwd: "src/img/",
+                        src: "**",
+                        dest: "build/<%= pkg.repo %>/img/"
+                    },
+                    {
+                        expand: true,
                         src: "lib/**",
                         dest: "build/"
                     }
@@ -162,11 +164,11 @@ module.exports = function(grunt) {
 
     grunt.registerTask("docs", ["replace:version", "exec:docker"]);
 
-    grunt.registerTask("build", ["clean", "docs", "requirejs", "concat", "cssmin", "uglify", "copy", "zip"]);
+    grunt.registerTask("build", ["docs", "requirejs", "concat", "cssmin", "uglify", "copy", "zip"]);
 
     grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
 
-    grunt.registerTask("deploy", ["validate", "docs", "build", "commit"]);
+    grunt.registerTask("deploy", ["clean", "validate", "docs", "build", "commit"]);
 
     grunt.registerTask("pages", ["buildPages", "commitPages"]);
 
