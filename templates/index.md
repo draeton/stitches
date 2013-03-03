@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-@@version-min.css">
+<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-@@version.min.css">
 
 <section id="main" role="main">
 
@@ -23,9 +23,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-@@version-min.css">
+<link rel="stylesheet" href="css/stitches-@@version.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-@@version-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-@@version.min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -90,4 +90,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-@@version-min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-@@version.min.js"></script>
