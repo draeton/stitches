@@ -43,7 +43,9 @@ module.exports = function(grunt) {
                 stdout: true
             },
             gitCommit: {
-                command: "git commit -m \"Build <%= pkg.version %> - <%= message %>\"",
+                command: function () {
+                    return "git commit -am \"Build <%= pkg.version %> - " + global.message + "\"";
+                },
                 stdout: true
             },
             gitPush: {
@@ -58,14 +60,11 @@ module.exports = function(grunt) {
                     appDir: "src",
                     baseUrl: "js",
                     dir: "amd",
-                    //optimize: "closure",
-
                     modules: [
                         {
                             name: "stitches"
                         }
                     ],
-
                     paths: {
                         "lib": "../lib",
                         "tpl" : "../tpl",
@@ -145,6 +144,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-zip");
+    grunt.loadNpmTasks("grunt-bump");
 
 
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
@@ -157,11 +157,16 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask("validate", ["jshint"/*, "qunit"*/]);
+
     grunt.registerTask("docs", ["replace:version", "exec:docker"]);
+
     grunt.registerTask("build", ["clean", "docs", "requirejs", "concat", "cssmin", "uglify", "copy", "zip"]);
+
     grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
 
     grunt.registerTask("deploy", ["validate", "docs", "build", "commit"]);
+
     grunt.registerTask("pages", ["buildPages", "commitPages"]);
+
     grunt.registerTask("default", ["deploy"]);
 };
