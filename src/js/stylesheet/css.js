@@ -12,9 +12,10 @@
 define([
     "jquery",
     "util/util",
+    "util/templates",
     "stylesheet/base"
 ],
-function ($, util, BaseStylesheet) {
+function ($, util, templates, BaseStylesheet) {
 
     "use strict";
 
@@ -48,23 +49,11 @@ function ($, util, BaseStylesheet) {
         get: function (sprites, spritesheet, prefix, uri) {
             var backgroundImage = uri ? spritesheet : this.settings.filename;
 
-            var styles = [
-                "." + prefix + " {",
-                "    background: url(" + backgroundImage + ") no-repeat;",
-                "}\n"
-            ];
-
-            $.map(sprites, function (sprite) {
-                styles = styles.concat([
-                    "." + prefix + "-" + sprite.name + " {",
-                    "    width: " + sprite.image.width + "px;",
-                    "    height: " + sprite.image.height + "px;",
-                    "    background-position: -" + sprite.left() + "px -" + sprite.top() + "px;",
-                    "}\n"
-                ]);
+            return templates.css({
+                prefix: prefix,
+                backgroundImage: backgroundImage,
+                sprites: sprites
             });
-
-            return styles;
         }
     });
 

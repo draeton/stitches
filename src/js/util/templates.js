@@ -10,10 +10,12 @@
 /*global require, define */
 
 define([
-    "tpl!../../templates/stitches.html",
-    "tpl!../../templates/sprite.html"
+    "tpl!../../templates/stitches.tpl",
+    "tpl!../../templates/sprite.tpl",
+    "tpl!../../templates/css.tpl",
+    "tpl!../../templates/less.tpl"
 ],
-function (stitchesTemplate, spriteTemplate) {
+function (stitchesTemplate, spriteTemplate, cssTemplate, lessTemplate) {
 
     "use strict";
 
@@ -21,7 +23,7 @@ function (stitchesTemplate, spriteTemplate) {
     return {
         /**
          * ### templates.stitches
-         * Returns the `Stitches` template
+         * Returns the app template
          *
          * @return string
          */
@@ -31,12 +33,32 @@ function (stitchesTemplate, spriteTemplate) {
 
         /**
          * ### templates.sprite
-         * Returns the `Sprite` template
+         * Returns the sprite template
          *
          * @return string
          */
         sprite: function () {
             return spriteTemplate.apply(this, arguments);
+        },
+
+        /**
+         * ### templates.css
+         * Returns the css template
+         *
+         * @return string
+         */
+        css: function () {
+            return cssTemplate.apply(this, arguments);
+        },
+
+        /**
+         * ### templates.less
+         * Returns the less template
+         *
+         * @return string
+         */
+        less: function () {
+            return lessTemplate.apply(this, arguments);
         }
     };
 

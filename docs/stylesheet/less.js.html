@@ -61,9 +61,10 @@
 <span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;jquery&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;stylesheet/base&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -156,24 +157,11 @@
         <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="nx">uri</span> <span class="o">?</span> <span class="nx">spritesheet</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
 
-            <span class="kd">var</span> <span class="nx">styles</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="s2">&quot; (@x: 0, @y: 0, @width: 0, @height: 0) {&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;    background: url(&quot;</span> <span class="o">+</span> <span class="nx">backgroundImage</span> <span class="o">+</span> <span class="s2">&quot;) @x @y no-repeat;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;    display: block;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;    width: @width;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;    height: @height;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;}\n&quot;</span>
-            <span class="p">];</span>
-
-            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">styles</span> <span class="o">=</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
-                    <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot; {&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot; .sprite(-&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">left</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px, -&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">top</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px, &quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s2">&quot;px, &quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s2">&quot;px); &quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;}\n&quot;</span>
-                <span class="p">]);</span>
+            <span class="k">return</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">less</span><span class="p">({</span>
+                <span class="nx">prefix</span><span class="o">:</span> <span class="nx">prefix</span><span class="p">,</span>
+                <span class="nx">backgroundImage</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">,</span>
+                <span class="nx">sprites</span><span class="o">:</span> <span class="nx">sprites</span>
             <span class="p">});</span>
-
-            <span class="k">return</span> <span class="nx">styles</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">});</span>
 

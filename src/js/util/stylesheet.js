@@ -57,9 +57,11 @@ function ($, CssStylesheet, LessStylesheet) {
             var uri = options.uri;
 
             var styles = this.manager.get(sprites, spritesheet, prefix, uri);
-            var stylesheet = "data:text/plain," + encodeURIComponent(styles.join("\n"));
+            styles = styles.replace(/\\n/g, "\n");
 
-            return stylesheet;
+            console.log(styles);
+
+            return "data:text/plain," + encodeURIComponent(styles);
         }
     };
 
