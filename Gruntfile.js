@@ -80,10 +80,6 @@ module.exports = function(grunt) {
                 },
                 stdout: true
             },
-            gitStatusPages: {
-                command: "ls && git status",
-                stdout: true
-            },
             gitPushPages: {
                 command: "git push origin gh-pages",
                 stdout: true
@@ -194,6 +190,9 @@ module.exports = function(grunt) {
         }
     });
 
+    /**
+     * load node modules
+     */
 
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -208,6 +207,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-zip");
     grunt.loadNpmTasks("grunt-bump");
 
+    /**
+     * register custom tasks
+     */
 
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
         global.message = grunt.option("m");
@@ -235,29 +237,74 @@ module.exports = function(grunt) {
      * master tasks
      */
 
-    grunt.registerTask("validate", ["jshint"/*, "qunit"*/]);
+    grunt.registerTask("validate", [
+        "jshint"/*,
+        "qunit"*/
+    ]);
 
-    grunt.registerTask("docs", ["replace:version", "exec:docker"]);
+    grunt.registerTask("docs", [
+        "replace:version",
+        "exec:docker"
+    ]);
 
-    grunt.registerTask("build", ["docs", "requirejs", "concat", "cssmin", "uglify", "copy:dependencies", "zip"]);
+    grunt.registerTask("build", [
+        "docs",
+        "requirejs",
+        "concat",
+        "cssmin",
+        "uglify",
+        "copy:dependencies",
+        "zip"
+    ]);
 
-    grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
+    grunt.registerTask("commit", [
+        "commit-message",
+        "exec:gitAdd",
+        "exec:gitCommit",
+        "exec:gitPush"
+    ]);
 
-    grunt.registerTask("deploy", ["clean:build", "validate", "docs", "build", "commit"]);
+    grunt.registerTask("deploy", [
+        "clean:build",
+        "validate",
+        "docs",
+        "build",
+        "commit"
+    ]);
 
     /**
      * gh-pages tasks
      */
 
-    grunt.registerTask("build-pages", ["rebase-pages", "clean:pages", "rebase-build", "copy:pages", "replace:pages", "commit-pages"]);
+    grunt.registerTask("build-pages", [
+        "rebase-pages",
+        "clean:pages",
+        "rebase-build",
+        "copy:pages",
+        "replace:pages",
+        "commit-pages"
+    ]);
 
-    grunt.registerTask("commit-pages", ["commit-message", "rebase-pages", "exec:gitAddPages", "exec:gitStatusPages", "exec:gitCommitPages", "exec:gitPushPages", "rebase-build"]);
+    grunt.registerTask("commit-pages", [
+        "commit-message",
+        "rebase-pages",
+        "exec:gitAddPages",
+        "exec:gitCommitPages",
+        "exec:gitPushPages",
+        "rebase-build"
+    ]);
 
-    grunt.registerTask("pages", ["build-pages", "commit-pages"]);
+    grunt.registerTask("pages", [
+        "build-pages",
+        "commit-pages"
+    ]);
 
     /**
      * default
      */
 
-    grunt.registerTask("default", ["deploy", "pages"]);
+    grunt.registerTask("default", [
+        "deploy",
+        "pages"
+    ]);
 };
