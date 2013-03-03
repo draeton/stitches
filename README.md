@@ -10,9 +10,9 @@ The current version is `1.1.4`. Documentation is available
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 ```html
-<link rel="stylesheet" href="css/stitches-1.1.4-min.css">
+<link rel="stylesheet" href="css/stitches-1.1.4.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.1.4-min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.1.4.min.js"></script>
 ```
 
 The sprite sheet generator is automatically created in elements that have the `stitches` class:

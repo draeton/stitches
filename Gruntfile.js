@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
         clean: {
             build: ["amd/", "build/", "docs/"],
-            pages: ["../gh-pages/<%= pkg.name %>/repo/"]
+            pages: ["repo/"]
         },
 
         jshint: {
@@ -68,14 +68,6 @@ module.exports = function(grunt) {
                 command: "git push origin master",
                 stdout: true
             },
-            cdPages: {
-                command: function () {
-                    var pkg = require("./package.json");
-
-                    return "cd ../gh-pages/" + pkg.name;
-                },
-                stdout: true
-            },
             gitAddPages: {
                 command: "git add .",
                 stdout: true
@@ -86,6 +78,10 @@ module.exports = function(grunt) {
 
                     return "git commit -am \"Pages " + pkg.version + " - " + global.message + "\"";
                 },
+                stdout: true
+            },
+            gitStatusPages: {
+                command: "ls && git status",
                 stdout: true
             },
             gitPushPages: {
@@ -168,22 +164,22 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        src: "build/",
+                        src: "build/**",
                         dest: "../gh-pages/<%= pkg.name %>/repo/"
                     },
                     {
                         expand: true,
-                        src: "dist/",
+                        src: "dist/**",
                         dest: "../gh-pages/<%= pkg.name %>/repo/"
                     },
                     {
                         expand: true,
-                        src: "docs/",
+                        src: "docs/**",
                         dest: "../gh-pages/<%= pkg.name %>/repo/"
                     },
                     {
                         expand: true,
-                        src: "test/",
+                        src: "test/**",
                         dest: "../gh-pages/<%= pkg.name %>/repo/"
                     },
                 ]
@@ -235,6 +231,10 @@ module.exports = function(grunt) {
         grunt.file.setBase(pages);
     });
 
+    /**
+     * master tasks
+     */
+
     grunt.registerTask("validate", ["jshint"/*, "qunit"*/]);
 
     grunt.registerTask("docs", ["replace:version", "exec:docker"]);
@@ -243,11 +243,21 @@ module.exports = function(grunt) {
 
     grunt.registerTask("commit", ["commit-message", "exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
 
-    grunt.registerTask("commit-pages", ["commit-message", "copy:pages", "rebase-pages", "exec:gitAddPages", "exec:gitCommitPages", "exec:gitPushPages", "rebase-build"]);
-
     grunt.registerTask("deploy", ["clean:build", "validate", "docs", "build", "commit"]);
 
-    grunt.registerTask("pages", ["clean:pages", "replace:pages", "commit-pages"]);
+    /**
+     * gh-pages tasks
+     */
+
+    grunt.registerTask("build-pages", ["rebase-pages", "clean:pages", "rebase-build", "copy:pages", "replace:pages", "commit-pages"]);
+
+    grunt.registerTask("commit-pages", ["commit-message", "rebase-pages", "exec:gitAddPages", "exec:gitStatusPages", "exec:gitCommitPages", "exec:gitPushPages", "rebase-build"]);
+
+    grunt.registerTask("pages", ["build-pages", "commit-pages"]);
+
+    /**
+     * default
+     */
 
     grunt.registerTask("default", ["deploy", "pages"]);
 };
