@@ -51,7 +51,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 
 (The MIT License)
 
-Copyright (c) 2013, <[Matthew Cobbs](mailto:draeton@gmail.com)>
+Copyright (c) 2013 [Matthew Cobbs](mailto:draeton@gmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

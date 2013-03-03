@@ -79,12 +79,12 @@ module.exports = function(grunt) {
 
         concat: {
             js: {
-                src: ["amd/require.js", "amd/js/<%= pkg.repo %>.js"],
-                dest: "build/<%= pkg.repo %>/js/<%= pkg.repo %>-<%= pkg.version %>.js"
+                src: ["amd/require.js", "amd/js/<%= pkg.name %>.js"],
+                dest: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.js"
             },
             css: {
-                src: ["amd/css/<%= pkg.repo %>.css"],
-                dest: "build/<%= pkg.repo %>/css/<%= pkg.repo %>-<%= pkg.version %>.css"
+                src: ["amd/css/<%= pkg.name %>.css"],
+                dest: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.css"
             }
         },
 
@@ -92,8 +92,8 @@ module.exports = function(grunt) {
             compress: {
                 files: [
                     {
-                        src: "build/<%= pkg.repo %>/css/<%= pkg.repo %>-<%= pkg.version %>.css",
-                        dest: "build/<%= pkg.repo %>/css/<%= pkg.repo %>-<%= pkg.version %>.min.css"
+                        src: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.css",
+                        dest: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.min.css"
                     }
                 ]
             }
@@ -103,8 +103,8 @@ module.exports = function(grunt) {
             compress: {
                 files: [
                     {
-                        src: "build/<%= pkg.repo %>/js/<%= pkg.repo %>-<%= pkg.version %>.js",
-                        dest: "build/<%= pkg.repo %>/js/<%= pkg.repo %>-<%= pkg.version %>.min.js"
+                        src: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.js",
+                        dest: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.min.js"
                     }
                 ]
             }
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: "src/img/",
                         src: "**",
-                        dest: "build/<%= pkg.repo %>/img/"
+                        dest: "build/<%= pkg.name %>/img/"
                     },
                     {
                         expand: true,
@@ -131,7 +131,7 @@ module.exports = function(grunt) {
         zip: {
             distribution: {
                 src: "build/**",
-                dest: "dist/<%= pkg.repo %>-<%= pkg.version %>.zip"
+                dest: "dist/<%= pkg.name %>-<%= pkg.version %>.zip"
             }
         }
     });

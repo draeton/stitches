@@ -1,10 +1,24 @@
 {
-  "name": "Stitches",
-  "repo": "stitches",
+  "name": "stitches",
+  "title": "Stitches",
   "description": "Stitches is an HTML5 sprite sheet generator.",
   "version": "1.1.4",
   "homepage": "http://draeton.github.com/stitches/",
-  "author": "Matthew Cobbs <draeton@gmail.com> (http://draeton.github.com/)",
+  "author": {
+    "name": "Matthew Cobbs",
+    "email": "draeton@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/draeton/stitches.git"
+  },
+  "bugs": "https://github.com/draeton/stitches/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/draeton/stitches/blob/master/LICENSE"
+    }
+  ],
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-contrib-jshint": "~0.2.0",
