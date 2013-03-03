@@ -170,5 +170,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask("pages", ["buildPages", "commitPages"]);
 
-    grunt.registerTask("default", ["deploy"]);
+    grunt.registerTask("default", ["bump", "deploy"]);
 };
