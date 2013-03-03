@@ -105,9 +105,8 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
          * Returns an image using the browser canvas element's drawing context.
          * Triggers a non-fatal error if anything fails
          *
-         * @param {object} options The generator parameters
-         * @option {array} sprites A list of sprites
-         * @option{object} dimensions Working width and height
+         * @param {array} options.sprites A list of sprites
+         * @param{object} options.dimensions Working width and height
          * @return string
          */
         getSpritesheet: function (options) {
