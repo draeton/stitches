@@ -1,8 +1,9 @@
 #!/bin/sh
 
-if [ -n "$1" ]
+
+read -p "Please enter a commit message: " message
+
+if [ -n "$message" ]
 then
-	grunt -m="$1"
-else
-	echo "Please enter a commit message."
+	grunt -m="$message"
 fi
