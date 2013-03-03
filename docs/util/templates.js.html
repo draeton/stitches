@@ -107,7 +107,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">stitches</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">stitchesTemplate</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">stitchesTemplate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
         <span class="p">},</span>
 
 </pre></div>
@@ -139,7 +139,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">sprite</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">spriteTemplate</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">spriteTemplate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">};</span>
 

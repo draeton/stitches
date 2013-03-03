@@ -26,7 +26,7 @@ function (stitchesTemplate, spriteTemplate) {
          * @return string
          */
         stitches: function () {
-            return stitchesTemplate;
+            return stitchesTemplate.apply(this, arguments);
         },
 
         /**
@@ -36,7 +36,7 @@ function (stitchesTemplate, spriteTemplate) {
          * @return string
          */
         sprite: function () {
-            return spriteTemplate;
+            return spriteTemplate.apply(this, arguments);
         }
     };
 
