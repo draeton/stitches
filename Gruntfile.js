@@ -44,7 +44,9 @@ module.exports = function(grunt) {
             },
             gitCommit: {
                 command: function () {
-                    return "git commit -am \"Build <%= pkg.version %> - " + global.message + "\"";
+                    var pkg = require("./package.json");
+
+                    return "git commit -am \"Build " + pkg.version + " - " + global.message + "\"";
                 },
                 stdout: true
             },
