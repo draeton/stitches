@@ -172,9 +172,11 @@ stylesheets</p>
             <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
 
             <span class="kd">var</span> <span class="nx">styles</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
-            <span class="kd">var</span> <span class="nx">stylesheet</span> <span class="o">=</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">));</span>
+            <span class="nx">styles</span> <span class="o">=</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\n/g</span><span class="p">,</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
 
-            <span class="k">return</span> <span class="nx">stylesheet</span><span class="p">;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">styles</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">styles</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">};</span>
 
