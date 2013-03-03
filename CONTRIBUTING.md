@@ -24,6 +24,11 @@ Test that Grunt's CLI is installed by running `grunt --version`.  If the command
 
 Assuming that you don't see any red, you're ready to go. Just be sure to run `grunt` after making any changes, to ensure that nothing is broken.
 
+This project includes two shell scripts to assist with passing commit messages to grunt:
+
+* Run `build.sh "Your commit message"` to run the default task
+* Run `pages.sh "Your commit message"` to run the pages task
+
 ## Submitting pull requests
 
 1. Create a new branch, please don't work in your `master` branch directly.
