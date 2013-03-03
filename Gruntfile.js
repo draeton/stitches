@@ -281,8 +281,7 @@ module.exports = function(grunt) {
         "clean:pages",
         "rebase-build",
         "copy:pages",
-        "replace:pages",
-        "commit-pages"
+        "replace:pages"
     ]);
 
     grunt.registerTask("commit-pages", [
