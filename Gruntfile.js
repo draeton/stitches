@@ -250,11 +250,9 @@ module.exports = function(grunt) {
         var shell = require("shelljs");
         var pkg = require("./package.json");
 
-        grunt.task.run("rebase:pages");
         shell.exec("git add .");
         shell.exec("git commit -am \"Pages " + pkg.version + " - " + commitMessage + "\"");
         shell.exec("git push origin gh-pages");
-        grunt.task.run("rebase:repo");
     });
 
     /**
@@ -312,7 +310,9 @@ module.exports = function(grunt) {
     grunt.registerTask("pages", [
         "commit-message",
         "build-pages",
-        "commit-pages"
+        "rebase:pages",
+        "commit-pages",
+        "rebase:repo"
     ]);
 
     /**
