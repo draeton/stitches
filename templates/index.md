@@ -18,22 +18,6 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
     <img src="/stitches/repo/build/stitches/img/test/twitter.png" data-name="twitter"/>
 </div>
 
-<a href="#modal" role="button" class="btn" data-toggle="modal">Try Stitches in a modal</a>
-
-<!-- Modal -->
-<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Stitches</h3>
-    </div>
-    <div class="modal-body">
-        <div class="stitches"></div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    </div>
-</div>
-
 ## Implementation
 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
