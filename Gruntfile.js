@@ -246,13 +246,10 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
-        var done;
-        var prompt;
+        var done = this.async();
+        var prompt = require("prompt");
 
         if (!global.message) {
-            done = this.async();
-            prompt = require("prompt");
-
             grunt.log.writeln("Please enter a commit message.");
             prompt.start();
             prompt.get(["msg"], function (err, result) {
@@ -263,6 +260,8 @@ module.exports = function(grunt) {
                 global.message = result.msg;
                 done();
             });
+        } else {
+            done();
         }
     });
 
