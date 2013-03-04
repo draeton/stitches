@@ -562,7 +562,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
                 lines: this.stylesheet.split("\n").length,
-                markup: this.markup
+                markup: templates.markup(this.canvas.sprites)
             });
 
             $section.html(html);
