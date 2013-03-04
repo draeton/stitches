@@ -3,7 +3,7 @@
  * ### _An HTML5 Sprite Sheet Generator_
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  *
  * Stitches is an HTML5 sprite sheet generator.

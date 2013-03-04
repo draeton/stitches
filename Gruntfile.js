@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            build: ["amd/", "build/", "docs/"],
+            repo: ["amd/", "build/", "docs/"],
             pages: ["repo/"]
         },
 
@@ -183,9 +183,21 @@ module.exports = function(grunt) {
         },
 
         zip: {
-            distribution: {
-                src: "build/**",
-                dest: "dist/<%= pkg.name %>-<%= pkg.version %>.zip"
+            dist: {
+                src: "**",
+                dest: "../dist/<%= pkg.name %>-<%= pkg.version %>.zip"
+            }
+        },
+
+        rebase: {
+            repo: {
+                dir: process.cwd()
+            },
+            pages: {
+                dir: "../gh-pages/<%= pkg.name %>/"
+            },
+            build: {
+                dir: "build/"
             }
         }
     });
@@ -211,26 +223,19 @@ module.exports = function(grunt) {
      * register custom tasks
      */
 
+    grunt.registerMultiTask("rebase", "Rebase cwd", function () {
+        var dir = this.data.dir;
+
+        grunt.file.setBase(dir);
+        grunt.log.ok("Base dir is now " + process.cwd());
+    });
+
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
         global.message = grunt.option("m");
 
         if (!global.message) {
             grunt.fail.fatal("The commit task requires a message passed in the -m parameter.")
         }
-    });
-
-    grunt.registerTask("rebase-build", "Rebase cwd to build dir", function () {
-        var pkg = require("./package.json");
-        var build = "../../" + pkg.name;
-
-        grunt.file.setBase(build);
-    });
-
-    grunt.registerTask("rebase-pages", "Rebase cwd to gh-pages dir", function () {
-        var pkg = require("./package.json");
-        var pages = "../gh-pages/" + pkg.name;
-
-        grunt.file.setBase(pages);
     });
 
     /**
@@ -247,29 +252,35 @@ module.exports = function(grunt) {
         "exec:docker"
     ]);
 
-    grunt.registerTask("build", [
+    grunt.registerTask("compress", [
+        "rebase:build",
+        "zip",
+        "rebase:repo"
+    ]);
+
+    grunt.registerTask("build-repo", [
         "docs",
         "requirejs",
         "concat",
         "cssmin",
         "uglify",
         "copy:dependencies",
-        "zip"
+        "compress"
     ]);
 
-    grunt.registerTask("commit", [
+    grunt.registerTask("commit-repo", [
         "commit-message",
         "exec:gitAdd",
         "exec:gitCommit",
         "exec:gitPush"
     ]);
 
-    grunt.registerTask("deploy", [
-        "clean:build",
+    grunt.registerTask("repo", [
+        "clean:repo",
         "validate",
         "docs",
-        "build",
-        "commit"
+        "build-repo",
+        "commit-repo"
     ]);
 
     /**
@@ -277,20 +288,20 @@ module.exports = function(grunt) {
      */
 
     grunt.registerTask("build-pages", [
-        "rebase-pages",
+        "rebase:pages",
         "clean:pages",
-        "rebase-build",
+        "rebase:repo",
         "copy:pages",
         "replace:pages"
     ]);
 
     grunt.registerTask("commit-pages", [
         "commit-message",
-        "rebase-pages",
+        "rebase:pages",
         "exec:gitAddPages",
         "exec:gitCommitPages",
         "exec:gitPushPages",
-        "rebase-build"
+        "rebase:repo"
     ]);
 
     grunt.registerTask("pages", [
@@ -303,7 +314,7 @@ module.exports = function(grunt) {
      */
 
     grunt.registerTask("default", [
-        "deploy",
+        "repo",
         "pages"
     ]);
 };
