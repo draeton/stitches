@@ -219,11 +219,11 @@
             <div class="stitches-palette stitches-downloads fade">
                 <div class="stitches-palette-header">
                     <button type="button" class="close" data-action="close" title="Close">&times;</button>
-                    <div class="btn-group">
+                    <h4 class="btn-group">
                         <a href="#" class="btn btn-small btn-link">Downloads</a>
                         <a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
                         <a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
-                    </div>
+                    </h4>
                 </div>
 
                 <div class="stitches-palette-body">
