@@ -225,11 +225,11 @@
                 <div class="stitches-palette-body">
                     <div class="container-fluid">
                         <div class="row-fluid">
-                            <div class="span12">
-                                <div class="btn-group">
-                                    <a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
-                                    <a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
-                                </div>
+                            <div class="span4">
+                                <p><a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a></p>
+                            </div>
+                            <div class="span8">
+                                <p><a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a></p>
                             </div>
                         </div>
                         <div class="row-fluid">
