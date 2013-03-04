@@ -63,41 +63,6 @@ module.exports = function(grunt) {
             }
         },
 
-        exec: {
-            gitAdd: {
-                command: "git add .",
-                stdout: true
-            },
-            gitCommit: {
-                command: function () {
-                    var pkg = require("./package.json");
-
-                    return "git commit -am \"Build " + pkg.version + " - " + global.message + "\"";
-                },
-                stdout: true
-            },
-            gitPush: {
-                command: "git push origin master",
-                stdout: true
-            },
-            gitAddPages: {
-                command: "git add .",
-                stdout: true
-            },
-            gitCommitPages: {
-                command: function () {
-                    var pkg = require("./package.json");
-
-                    return "git commit -am \"Pages " + pkg.version + " - " + global.message + "\"";
-                },
-                stdout: true
-            },
-            gitPushPages: {
-                command: "git push origin gh-pages",
-                stdout: true
-            }
-        },
-
         requirejs: {
             compile: {
                 options: {
@@ -226,7 +191,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-qunit");
     grunt.loadNpmTasks("grunt-replace");
     grunt.loadNpmTasks("grunt-docker");
-    grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-contrib-requirejs");
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
@@ -246,10 +210,12 @@ module.exports = function(grunt) {
         grunt.log.ok("Base dir is now " + process.cwd());
     });
 
-    var setGlobalMessage = function (callback) {
+    var commitMessage = "";
+
+    var setCommitMessage = function (callback) {
         var prompt = require("prompt");
 
-        if (!global.message) {
+        if (!commitMessage) {
             grunt.log.writeln("Please enter a commit message.");
             prompt.start();
             prompt.get(["msg"], function (err, result) {
@@ -257,7 +223,7 @@ module.exports = function(grunt) {
                     grunt.fail.fatal("This task requires a message.");
                 }
 
-                global.message = result.msg;
+                commitMessage = result.msg;
                 callback && callback();
             });
         } else {
@@ -268,20 +234,27 @@ module.exports = function(grunt) {
     grunt.registerTask("commit-message", "Set the global commit message.", function () {
         var done = this.async();
 
-        setGlobalMessage(done);
+        setCommitMessage(done);
     });
 
-    grunt.registerTask("commit-test", "Commit the repo and push to github", function () {
+    grunt.registerTask("commit-repo", "Commit the repo and push to github", function () {
         var shell = require("shelljs");
         var pkg = require("./package.json");
 
-        if (!shell.which("git")) {
-            grunt.fail.fatal("The commit-test task requires git.");
-        }
-
         shell.exec("git add .");
-        shell.exec("git commit -am \"Build " + pkg.version + " - " + global.message + "\"");
+        shell.exec("git commit -am \"Build " + pkg.version + " - " + commitMessage + "\"");
         shell.exec("git push origin master");
+    });
+
+    grunt.registerTask("commit-pages", "Commit the repo and push to github", function () {
+        var shell = require("shelljs");
+        var pkg = require("./package.json");
+
+        grunt.task.run("rebase:pages");
+        shell.exec("git add .");
+        shell.exec("git commit -am \"Pages " + pkg.version + " - " + commitMessage + "\"");
+        shell.exec("git push origin gh-pages");
+        grunt.task.run("rebase:repo");
     });
 
     /**
@@ -314,12 +287,6 @@ module.exports = function(grunt) {
         "rebase:repo"
     ]);
 
-    grunt.registerTask("commit-repo", [
-        "exec:gitAdd",
-        "exec:gitCommit",
-        "exec:gitPush"
-    ]);
-
     grunt.registerTask("repo", [
         "commit-message",
         "clean:repo",
@@ -340,14 +307,6 @@ module.exports = function(grunt) {
         "rebase:repo",
         "copy:pages",
         "replace:pages"
-    ]);
-
-    grunt.registerTask("commit-pages", [
-        "rebase:pages",
-        "exec:gitAddPages",
-        "exec:gitCommitPages",
-        "exec:gitPushPages",
-        "rebase:repo"
     ]);
 
     grunt.registerTask("pages", [
