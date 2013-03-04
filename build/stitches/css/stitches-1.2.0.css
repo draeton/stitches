@@ -169,7 +169,7 @@
     float: right;
 }
 .stitches-downloads {
-    width: 720px;
+    width: 600px;
 }
 .stitches-downloads .stitches-palette-body {
     max-height: 250px;
@@ -177,6 +177,9 @@
 }
 .stitches-downloads textarea {
     width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 @media (max-width: 767px) {
     .stitches-palette {
