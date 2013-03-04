@@ -245,8 +245,7 @@ module.exports = function(grunt) {
         grunt.log.ok("Base dir is now " + process.cwd());
     });
 
-    grunt.registerTask("commit-message", "Enter a git commit message", function () {
-        var done = this.async();
+    var setGlobalMessage = function (callback) {
         var prompt = require("prompt");
 
         if (!global.message) {
@@ -258,11 +257,20 @@ module.exports = function(grunt) {
                 }
 
                 global.message = result.msg;
-                done();
+                callback && callback();
             });
         } else {
-            done();
+            callback && callback();
         }
+    };
+
+    grunt.registerTask("commit-repo", "Commit the master branch files.", function () {
+        var done = this.async();
+
+        setGlobalMessage(function () {
+            grunt.task.run(["exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
+            done();
+        });
     });
 
     /**
@@ -295,13 +303,6 @@ module.exports = function(grunt) {
         "uglify",
         "copy:dependencies",
         "compress"
-    ]);
-
-    grunt.registerTask("commit-repo", [
-        "commit-message",
-        "exec:gitAdd",
-        "exec:gitCommit",
-        "exec:gitPush"
     ]);
 
     grunt.registerTask("repo", [
