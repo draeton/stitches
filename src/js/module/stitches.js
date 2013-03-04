@@ -558,11 +558,15 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             var $spritesheet = this.$downloads.find(".downloads-spritesheet");
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
 
+            var markup = templates.markup({
+                sprites: this.canvas.sprites
+            });
+
             var html = templates.downloads({
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
                 lines: this.stylesheet.split("\n").length,
-                markup: templates.markup(this.canvas.sprites)
+                markup: markup
             });
 
             $section.html(html);
