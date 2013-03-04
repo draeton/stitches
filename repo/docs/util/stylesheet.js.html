@@ -27,6 +27,9 @@
       <div class="heading h3">
         <a href="#stylesheet.getstylesheet">stylesheet.getStylesheet</a>
       </div>
+      <div class="heading h3">
+        <a href="#stylesheet.getmarkup">stylesheet.getMarkup</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -190,6 +193,56 @@ stylesheets</p>
             <span class="nx">styles</span> <span class="o">=</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\n/g</span><span class="p">,</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
 
             <span class="k">return</span> <span class="nx">styles</span><span class="p">;</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stylesheet.getmarkup">
+  <h3>
+    <a href="#stylesheet.getmarkup" class="pilcrow">&#182;</a>
+    stylesheet.getMarkup
+  </h3>
+</div>
+
+
+<p>Returns markup for spritesheet example usage</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options.sprites</span>
+      <span class="dox_type">array</span>
+      <span>A list of sprites</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options.prefix</span>
+      <span class="dox_type">string</span>
+      <span>Used to create CSS classes</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">getMarkup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
+
+            <span class="kd">var</span> <span class="nx">markup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">markup</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">);</span>
+            <span class="nx">markup</span> <span class="o">=</span> <span class="nx">markup</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\n/g</span><span class="p">,</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="nx">markup</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">};</span>
 
