@@ -58,7 +58,7 @@ Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-responsive.min.css">
 
-<script src="libs/jquery/jquery-1.7.1.js"></script>
+<script src="libs/jquery/jquery-1.7.1.min.js"></script>
 <script src="libs/modernizr/modernizr-2.0.6.min.js"></script>
 <script src="libs/bootstrap/js/bootstrap.min.js"></script>
 {% endhighlight %}

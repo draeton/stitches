@@ -11,7 +11,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Wrap global instance for use in RequireJS modules
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -21,7 +21,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Wrap global instance for use in RequireJS modules
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -33,7 +33,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * This is the home for wayward methods who have lost their way.
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -43,7 +43,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Base constructor for the canvas layout managers
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -53,7 +53,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Constructor for the compact canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -63,7 +63,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Constructor for the vertical canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -73,7 +73,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Constructor for the horizontal canvas layout manager
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -84,7 +84,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * together (i.e. placing them on the canvas)
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -106,7 +106,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Utility methods for referencing js templates
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -116,7 +116,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Base constructor for the stylesheet managers
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -126,7 +126,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Base constructor for the CSS stylesheet manager
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -136,7 +136,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Base constructor for the LESS stylesheet manager
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -147,7 +147,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * stylesheets
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -157,7 +157,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -167,7 +167,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -177,7 +177,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * Utility methods for working with arrays
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -187,7 +187,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -197,7 +197,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -207,7 +207,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -217,7 +217,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -227,7 +227,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ...
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
 
@@ -236,7 +236,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
  * ### _An HTML5 Sprite Sheet Generator_
  *
  * > http://draeton.github.com/stitches<br/>
- * > Copyright 2013, Matthew Cobbs<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  *
  * Stitches is an HTML5 sprite sheet generator.
