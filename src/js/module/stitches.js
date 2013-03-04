@@ -559,6 +559,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
 
             var markup = templates.markup({
+                prefix: this.settings.prefix,
                 sprites: this.canvas.sprites
             });
 
