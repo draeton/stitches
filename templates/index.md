@@ -7,7 +7,7 @@ title: Stitches - An HTML5 sprite sheet generator
 
 <section id="main" role="main">
 
-Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em>
+Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only compatible with modern browsers.</em>
 
 <div class="stitches">
     <img src="/stitches/repo/build/stitches/img/test/github.png" data-name="github"/>

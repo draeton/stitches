@@ -3,11 +3,11 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-1.1.8.min.css">
+<link rel="stylesheet" href="/stitches/repo/build/stitches/css/stitches-1.2.0.min.css">
 
 <section id="main" role="main">
 
-Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only currently compatible with WebKit and Firefox browsers.</em>
+Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; link to load images using the file browser. Then, click &ldquo;Generate&rdquo; to create a sprite sheet and stylesheet. <em>This demo uses a couple of HTML5 APIs, and it is only compatible with modern browsers.</em>
 
 <div class="stitches">
     <img src="/stitches/repo/build/stitches/img/test/github.png" data-name="github"/>
@@ -23,9 +23,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-1.1.8.min.css">
+<link rel="stylesheet" href="css/stitches-1.2.0.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.1.8.min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.2.0.min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -79,7 +79,7 @@ Documentation is available [here.](/stitches/repo/docs/stitches.js.html)
 
 ## Download
 
-**The latest release, 1.1.8, is [available here](/stitches/repo/dist/stitches-1.1.8.zip).**
+**The latest release, 1.2.0, is [available here](/stitches/repo/dist/stitches-1.2.0.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -90,4 +90,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-1.1.8.min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/repo/build/stitches/js/stitches-1.2.0.min.js"></script>
