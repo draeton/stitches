@@ -96,3 +96,23 @@
         border-right: 0;
     }
 }
+
+/** downloads */
+
+.stitches-downloads {
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+    margin: 0;
+    top: 0;
+    right: 0;
+}
+
+.stitches-downloads .stitches-palette-body {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.stitches-downloads textarea {
+    width: 100%;
+}

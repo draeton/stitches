@@ -19,12 +19,9 @@
             </button>
         </div>
         <div class="btn-group">
-            <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">
-                <i class="icon-download-alt icon-white"></i> <span class="hidden-phone">Spritesheet</span>
-            </a>
-            <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">
-                <i class="icon-download-alt icon-white"></i> <span class="hidden-phone">Stylesheet</span>
-            </a>
+            <button data-action="downloads" class="btn btn-small btn-success disabled" title="Get the generated sprite sheet and stylesheet">
+                <i class="icon-download-alt icon-white"></i> <span class="hidden-phone">Downloads</span>
+            </button>
         </div>
         <div class="btn-group">
             <button data-action="about" class="btn btn-small btn-info" title="About Stitches">
@@ -216,7 +213,44 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <!-- /.stitches-properties -->
+            <!-- /.stitches-about -->
+
+            <!-- .stitches-downloads -->
+            <div class="stitches-palette stitches-downloads fade">
+                <div class="stitches-palette-header">
+                    <button type="button" class="close" data-action="close" title="Close">&times;</button>
+                    <h4>Downloads
+                        <div class="btn-group">
+                            <a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
+                            <a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
+                        </div>
+                    </h4>
+                </div>
+
+                <div class="stitches-palette-body">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <p><a href="#" class="thumbnail"><img data-toggle="tooltip" title="right-click to download" data-placement="right"/></a></p>
+                            </div>
+                            <div class="span8">
+                                <p><textarea rows="80"></textarea></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stitches-palette-footer">
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- /.stitches-downloads -->
         </div>
         <!-- /.stitches-palettes -->
     </div>

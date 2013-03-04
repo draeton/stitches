@@ -73,6 +73,12 @@
         <a href="#stitches.prototype.closeabout">Stitches.prototype.closeAbout</a>
       </div>
       <div class="heading h3">
+        <a href="#stitches.prototype.opendownloads">Stitches.prototype.openDownloads</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.closedownloads">Stitches.prototype.closeDownloads</a>
+      </div>
+      <div class="heading h3">
         <a href="#stitches.prototype.opensettings">Stitches.prototype.openSettings</a>
       </div>
       <div class="heading h3">
@@ -92,6 +98,9 @@
       </div>
       <div class="heading h3">
         <a href="#stitches.prototype.updatetoolbar">Stitches.prototype.updateToolbar</a>
+      </div>
+      <div class="heading h3">
+        <a href="#stitches.prototype.updatedownloads">Stitches.prototype.updateDownloads</a>
       </div>
       <div class="heading h3">
         <a href="#stitches.prototype.updateprogress">Stitches.prototype.updateProgress</a>
@@ -312,6 +321,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$progress</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-progress .progress&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$progressBar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-progress .bar&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$about</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-about&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-downloads&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$settings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-settings&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$properties</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-properties&quot;</span><span class="p">);</span>
         <span class="p">},</span>
@@ -343,6 +353,8 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hideOverlay</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-about&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openAbout</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-about&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-downloads&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openDownloads</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-downloads&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeDownloads</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openSettings</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;open-properties&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openProperties</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
@@ -350,6 +362,7 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateDownloads</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
@@ -551,11 +564,10 @@
                             <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
-                    <span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
-                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span>
-                    <span class="p">},</span>
-                    <span class="nx">stylesheet</span><span class="o">:</span> <span class="p">{</span>
-                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span>
+                    <span class="nx">downloads</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;open-downloads&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">about</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -594,6 +606,18 @@
             <span class="kd">var</span> <span class="nx">about</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$about</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span>
                 <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+
+            <span class="kd">var</span> <span class="nx">downloads</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;downloads&quot;</span><span class="p">,</span>
+                <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
                 <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -709,6 +733,7 @@
 
             <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="nx">about</span><span class="o">:</span> <span class="nx">about</span><span class="p">,</span>
+                <span class="nx">downloads</span><span class="o">:</span> <span class="nx">downloads</span><span class="p">,</span>
                 <span class="nx">settings</span><span class="o">:</span> <span class="nx">settings</span><span class="p">,</span>
                 <span class="nx">properties</span><span class="o">:</span> <span class="nx">properties</span>
             <span class="p">};</span>
@@ -849,6 +874,63 @@
         <span class="nx">closeAbout</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">about</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.opendownloads">
+  <h3>
+    <a href="#stitches.prototype.opendownloads" class="pilcrow">&#182;</a>
+    Stitches.prototype.openDownloads
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">openDownloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">downloads</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s2">&quot;show&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.closedownloads">
+  <h3>
+    <a href="#stitches.prototype.closedownloads" class="pilcrow">&#182;</a>
+    Stitches.prototype.closeDownloads
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">closeDownloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">downloads</span><span class="p">.</span><span class="nx">visible</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">palettes</span><span class="p">.</span><span class="nx">downloads</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
             <span class="p">}</span>
         <span class="p">},</span>
 
@@ -1009,6 +1091,7 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">closePalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeAbout</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">closeDownloads</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeSettings</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">closeProperties</span><span class="p">();</span>
         <span class="p">},</span>
@@ -1062,19 +1145,49 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">updateToolbar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">$toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">.</span><span class="nx">$element</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">toolbar</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">;</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear spritesheet stylesheet&quot;</span><span class="p">);</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear spritesheet stylesheet&quot;</span><span class="p">);</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=spritesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
-                <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-action=stylesheet]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">);</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
             <span class="p">}</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.updatedownloads">
+  <h3>
+    <a href="#stitches.prototype.updatedownloads" class="pilcrow">&#182;</a>
+    Stitches.prototype.updateDownloads
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">updateDownloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">$textarea</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;textarea&quot;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">$img</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">$spritesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-spritesheet&quot;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">$stylesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-stylesheet&quot;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+
+            <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
+            <span class="nx">$textarea</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;rows&quot;</span><span class="p">,</span> <span class="nx">lines</span><span class="p">);</span>
+            <span class="nx">$spritesheet</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
+            <span class="nx">$stylesheet</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">));</span>
         <span class="p">},</span>
 
 
@@ -1152,17 +1265,11 @@
                 <span class="nx">uri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span>
             <span class="p">});</span>
 
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">);</span>
-                <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">dataToObjectURL</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ex</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">ex</span><span class="p">]);</span>
-            <span class="p">}</span>
-
             <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">spritesheet</span><span class="p">;</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheet</span><span class="p">;</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">);</span>
         <span class="p">},</span>
 

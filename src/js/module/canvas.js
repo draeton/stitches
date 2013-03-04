@@ -45,8 +45,6 @@ function($, util, array, layout, stylesheet, Sprite) {
         this.dimensions = this.settings.dimensions;
         this.progress = this.settings.progress;
         this.sprites = [];
-        this.spritesheet = null;
-        this.stylesheet = null;
 
         this.init();
     };

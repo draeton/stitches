@@ -112,6 +112,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             this.$progress = this.$element.find(".stitches-progress .progress");
             this.$progressBar = this.$element.find(".stitches-progress .bar");
             this.$about = this.$element.find(".stitches-about");
+            this.$downloads = this.$element.find(".stitches-downloads");
             this.$settings = this.$element.find(".stitches-settings");
             this.$properties = this.$element.find(".stitches-properties");
         },
@@ -125,6 +126,8 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             this.$element.on("hide-overlay", $.proxy(this.hideOverlay, this));
             this.$element.on("open-about", $.proxy(this.openAbout, this));
             this.$element.on("close-about", $.proxy(this.closeAbout, this));
+            this.$element.on("open-downloads", $.proxy(this.openDownloads, this));
+            this.$element.on("close-downloads", $.proxy(this.closeDownloads, this));
             this.$element.on("open-settings", $.proxy(this.openSettings, this));
             this.$element.on("close-settings", $.proxy(this.closeSettings, this));
             this.$element.on("open-properties", $.proxy(this.openProperties, this));
@@ -132,6 +135,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             this.$element.on("close-palettes", $.proxy(this.closePalettes, this));
             this.$element.on("process-files", $.proxy(this.processFiles, this));
             this.$element.on("update-toolbar", $.proxy(this.updateToolbar, this));
+            this.$element.on("update-downloads", $.proxy(this.updateDownloads, this));
             this.$element.on("generate-sheets", $.proxy(this.generateSheets, this));
             this.$element.on("error", $.proxy(this.errorHandler, this));
         },
@@ -225,11 +229,10 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                             self.canvas.clear();
                         }
                     },
-                    spritesheet: {
-                        click: function (e) {}
-                    },
-                    stylesheet: {
-                        click: function (e) {}
+                    downloads: {
+                        click: function (e) {
+                            self.$element.trigger("open-downloads");
+                        }
                     },
                     about: {
                         click: function (e) {
@@ -250,6 +253,18 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             var about = new Palette(this.$about, {
                 name: "about",
                 visible: true,
+                actions: {
+                    close: {
+                        click: function (e) {
+                            this.close();
+                        }
+                    }
+                }
+            });
+
+            var downloads = new Palette(this.$downloads, {
+                name: "downloads",
+                visible: false,
                 actions: {
                     close: {
                         click: function (e) {
@@ -365,6 +380,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
 
             this.palettes = {
                 about: about,
+                downloads: downloads,
                 settings: settings,
                 properties: properties
             };
@@ -415,6 +431,27 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
         closeAbout: function (e) {
             if (this.palettes.about.visible) {
                 this.palettes.about.close();
+            }
+        },
+
+        /**
+         * ### Stitches.prototype.openDownloads
+         * ...
+         */
+        openDownloads: function (e) {
+            this.closePalettes();
+
+            this.palettes.downloads.open();
+            this.$downloads.find("img").tooltip("show");
+        },
+
+        /**
+         * ### Stitches.prototype.closeDownloads
+         * ...
+         */
+        closeDownloads: function (e) {
+            if (this.palettes.downloads.visible) {
+                this.palettes.downloads.close();
             }
         },
 
@@ -485,6 +522,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
          */
         closePalettes: function (e) {
             this.closeAbout();
+            this.closeDownloads();
             this.closeSettings();
             this.closeProperties();
         },
@@ -502,19 +540,31 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
          * ...
          */
         updateToolbar: function (e) {
-            var $toolbar = this.toolbar.$element;
             var toolbar = this.toolbar;
             var canvas = this.canvas;
 
             if (canvas.sprites.length) {
-                toolbar.enable("reset generate clear spritesheet stylesheet");
-                $toolbar.find("[data-action=spritesheet]").attr("href", this.spritesheet);
-                $toolbar.find("[data-action=stylesheet]").attr("href", this.stylesheet);
+                toolbar.enable("reset generate clear downloads");
             } else {
-                toolbar.disable("reset generate clear spritesheet stylesheet");
-                $toolbar.find("[data-action=spritesheet]").attr("href", "#");
-                $toolbar.find("[data-action=stylesheet]").attr("href", "#");
+                toolbar.disable("reset generate clear downloads");
             }
+        },
+
+        /**
+         * ### Stitches.prototype.updateDownloads
+         * ...
+         */
+        updateDownloads: function (e) {
+            var $textarea = this.$downloads.find("textarea");
+            var $img = this.$downloads.find("img");
+            var $spritesheet = this.$downloads.find(".downloads-spritesheet");
+            var $stylesheet = this.$downloads.find(".downloads-stylesheet");
+            var lines = this.stylesheet.split("\n").length;
+
+            $img.attr("src", this.spritesheet);
+            $textarea.val(this.stylesheet).attr("rows", lines);
+            $spritesheet.attr("href", this.spritesheet);
+            $stylesheet.attr("href", "data:text/plain," + encodeURIComponent(this.stylesheet));
         },
 
         /**
@@ -556,17 +606,11 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 uri: this.settings.uri
             });
 
-            try {
-                spritesheet = util.dataToObjectURL(spritesheet);
-                stylesheet = util.dataToObjectURL(stylesheet);
-            } catch (ex) {
-                this.$element.trigger("error", [ex]);
-            }
-
             this.spritesheet = spritesheet;
             this.stylesheet = stylesheet;
 
             this.$element.trigger("update-toolbar");
+            this.$element.trigger("update-downloads");
             this.updateProgress(1, "success");
         },
 
