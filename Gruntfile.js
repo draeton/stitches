@@ -57,7 +57,8 @@ module.exports = function(grunt) {
                 src: "**/*.js",
                 dest: "../../docs",
                 options: {
-                    onlyUpdated: false
+                    onlyUpdated: false,
+                    fileSearch: true
                 }
             }
         },
@@ -253,7 +254,7 @@ module.exports = function(grunt) {
             prompt.start();
             prompt.get(["msg"], function (err, result) {
                 if (err || !result.msg) {
-                    grunt.fail.fatal("The commit task requires a message.");
+                    grunt.fail.fatal("This task requires a message.");
                 }
 
                 global.message = result.msg;
@@ -268,6 +269,19 @@ module.exports = function(grunt) {
         var done = this.async();
 
         setGlobalMessage(done);
+    });
+
+    grunt.registerTask("commit-test", "Commit the repo and push to github", function () {
+        var shell = require("shelljs");
+        var pkg = require("./package.json");
+
+        if (!shell.which("git")) {
+            grunt.fail.fatal("The commit-test task requires git.");
+        }
+
+        shell.exec("git add .");
+        shell.exec("git commit -am \"Build " + pkg.version + " - " + global.message + "\"");
+        shell.exec("git push origin master");
     });
 
     /**

@@ -34,6 +34,7 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-bump": "0.0.2",
     "prompt": "~0.2.9",
-    "grunt-docker": "0.0.4"
+    "grunt-docker": "0.0.4",
+    "shelljs": "~0.1.2"
   }
 }
