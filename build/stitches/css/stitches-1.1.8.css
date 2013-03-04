@@ -72,11 +72,6 @@
     height: 0;
     background-image: url(../img/checkerboard10.png);
 }
-@media (max-width: 767px) {
-    .btn-group.shrink span {
-        display: none;
-    }
-}
 /*!
  * Stitches - HTML5 Sprite Generator
  * http://draeton.github.com/stitches

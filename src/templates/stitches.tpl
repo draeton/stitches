@@ -1,34 +1,34 @@
 <div class="stitches">
     <!-- .stitches-toolbar -->
     <div class="stitches-toolbar btn-toolbar">
-        <div class="btn-group shrink">
+        <div class="btn-group">
             <a href="http://draeton.github.com/stitches/" class="btn btn-small btn-link">
                 <strong>Stitches</strong>
             </a>
             <button data-action="open" class="btn btn-small btn-info files" title="Open">
-                <i class="icon-folder-open icon-white"></i> <span>Open</span><input class="file" type="file" multiple="">
+                <i class="icon-folder-open icon-white"></i> <span class="hidden-phone">Open</span><input class="file" type="file" multiple="">
             </button>
             <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">
-                <i class="icon-cog icon-white"></i> <span>Settings</span>
+                <i class="icon-cog icon-white"></i> <span class="hidden-phone">Settings</span>
             </button>
             <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">
-                <i class="icon-tasks icon-white"></i> <span>Generate</span>
+                <i class="icon-tasks icon-white"></i> <span class="hidden-phone">Generate</span>
             </button>
             <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">
-                <i class="icon-remove icon-white"></i> <span>Clear</span>
+                <i class="icon-remove icon-white"></i> <span class="hidden-phone">Clear</span>
             </button>
         </div>
-        <div class="btn-group shrink">
+        <div class="btn-group">
             <a href="#" data-action="spritesheet" class="btn btn-small btn-success disabled" title="Open the spritesheet in a new tab" target="_blank">
-                <i class="icon-download-alt icon-white"></i> <span>Spritesheet</span>
+                <i class="icon-download-alt icon-white"></i> <span class="hidden-phone">Spritesheet</span>
             </a>
             <a href="#" data-action="stylesheet" class="btn btn-small btn-success disabled" title="Open the stylesheet in a new tab" target="_blank">
-                <i class="icon-download-alt icon-white"></i> <span>Stylesheet</span>
+                <i class="icon-download-alt icon-white"></i> <span class="hidden-phone">Stylesheet</span>
             </a>
         </div>
-        <div class="btn-group shrink">
+        <div class="btn-group">
             <button data-action="about" class="btn btn-small btn-info" title="About Stitches">
-                <i class="icon-info-sign icon-white"></i> <span>About</span>
+                <i class="icon-info-sign icon-white"></i> <span class="hidden-phone">About</span>
             </button>
         </div>
     </div>
