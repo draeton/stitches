@@ -1177,14 +1177,18 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">updateDownloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">$textarea</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;textarea&quot;</span><span class="p">);</span>
-            <span class="kd">var</span> <span class="nx">$img</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">$section</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;section&quot;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">$spritesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-spritesheet&quot;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">$stylesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-stylesheet&quot;</span><span class="p">);</span>
-            <span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
 
-            <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">);</span>
-            <span class="nx">$textarea</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;rows&quot;</span><span class="p">,</span> <span class="nx">lines</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">downloads</span><span class="p">({</span>
+                <span class="nx">spritesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
+                <span class="nx">stylesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">,</span>
+                <span class="nx">lines</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
+                <span class="nx">markup</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">markup</span>
+            <span class="p">});</span>
+
+            <span class="nx">$section</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 
             <span class="nx">$spritesheet</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
                 <span class="s2">&quot;href&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
