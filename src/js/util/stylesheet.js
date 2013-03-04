@@ -8,7 +8,6 @@
  * > Copyright 2013, Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
-/*global require, define */
 
 define([
     "jquery",

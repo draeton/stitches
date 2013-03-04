@@ -20,7 +20,6 @@
  * who develop [RequireJS](http://requirejs.org/) for helping this all make
  * sense.
  */
-/*global requirejs, require, define */
 
 /**
  * ### RequireJS Main
