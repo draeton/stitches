@@ -87,6 +87,23 @@
     float: right;
 }
 
+/** downloads */
+
+.stitches-downloads {
+    width: 720px;
+}
+
+.stitches-downloads .stitches-palette-body {
+    max-height: 250px;
+    overflow: auto;
+}
+
+.stitches-downloads textarea {
+    width: 100%;
+}
+
+/** responsive */
+
 @media (max-width: 767px) {
     .stitches-palette {
         top: 0;
@@ -95,24 +112,4 @@
         border-left: 0;
         border-right: 0;
     }
-}
-
-/** downloads */
-
-.stitches-downloads {
-    width: 100%;
-    border-left: 0;
-    border-right: 0;
-    margin: 0;
-    top: 0;
-    right: 0;
-}
-
-.stitches-downloads .stitches-palette-body {
-    max-height: 300px;
-    overflow: auto;
-}
-
-.stitches-downloads textarea {
-    width: 100%;
 }
