@@ -286,20 +286,18 @@ module.exports = function(grunt) {
         "rebase:repo"
     ]);
 
-    grunt.registerTask("compress", [
-        "rebase:build",
-        "zip",
-        "rebase:repo"
-    ]);
-
     grunt.registerTask("build-repo", [
-        "docs",
         "requirejs",
         "concat",
         "cssmin",
         "uglify",
-        "copy:dependencies",
-        "compress"
+        "copy:dependencies"
+    ]);
+
+    grunt.registerTask("dist", [
+        "rebase:build",
+        "zip",
+        "rebase:repo"
     ]);
 
     grunt.registerTask("commit-repo", [
@@ -314,6 +312,7 @@ module.exports = function(grunt) {
         "validate",
         "docs",
         "build-repo",
+        "dist",
         "commit-repo"
     ]);
 
