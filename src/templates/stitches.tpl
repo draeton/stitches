@@ -226,11 +226,10 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#spritesheet" data-toggle="tab">Spritesheet</a></li>
                         <li><a href="#stylesheet" data-toggle="tab">Stylesheet</a></li>
-                        <li><a href="#markup" data-toggle="tab">Markup</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="spritesheet">
-                            <p><a href="#" class="thumbnail"><img/></a></p>
+                            <p><img class="thumbnail"/></p>
                         </div>
                         <div class="tab-pane" id="stylesheet">
                             <p><textarea rows="80"></textarea></p>
