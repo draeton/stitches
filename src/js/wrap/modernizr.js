@@ -8,4 +8,7 @@
  * > Licensed under the MIT license.
  */
 
-define(Modernizr);
+define(function () {
+	"use strict";
+	return Modernizr;
+});

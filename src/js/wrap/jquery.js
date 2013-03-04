@@ -8,4 +8,7 @@
  * > Licensed under the MIT license.
  */
 
-define(jQuery);
+define(function () {
+	"use strict";
+	return jQuery;
+});
