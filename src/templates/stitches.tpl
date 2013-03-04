@@ -202,7 +202,7 @@
 
                     <p>Stitches is developed by <a href="http://draeton.github.com">Matthew Cobbs</a> in concert with the lovely open-source community at <a href="http://github.com">Github</a>. Thanks are owed to the developers at Twitter for <a href="http://twitter.github.com/bootstrap">Bootstrap</a>, and <a href="http://glyphicons.com/">Glyphicons</a> for some cool little icons.</p>
 
-                    <p class="text-right"><small>&copy; 2013, Matthew Cobbs<br/>
+                    <p class="text-right"><small>Copyright &copy; 2013 Matthew Cobbs<br/>
                         Licensed under the MIT license.</small></p>
                 </div>
 
