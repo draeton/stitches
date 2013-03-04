@@ -442,7 +442,6 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             this.closePalettes();
 
             this.palettes.downloads.open();
-            this.$downloads.find("img").tooltip("show");
         },
 
         /**

@@ -231,7 +231,7 @@
                     <div class="container-fluid">
                         <div class="row-fluid">
                             <div class="span4">
-                                <p><a href="#" class="thumbnail"><img data-toggle="tooltip" title="right-click to download" data-placement="right"/></a></p>
+                                <p><a href="#" class="thumbnail"><img/></a></p>
                             </div>
                             <div class="span8">
                                 <p><textarea rows="80"></textarea></p>
