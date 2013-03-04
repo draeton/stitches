@@ -51,11 +51,18 @@ module.exports = function(grunt) {
             }
         },
 
+        docker: {
+            files: {
+                expand: true,
+                src: "**/*.js",
+                dest: "../../docs",
+                options: {
+                    onlyUpdated: false
+                }
+            }
+        },
+
         exec: {
-            docker: {
-                command: "docker -i src/js -o docs",
-                stdout: true
-            },
             gitAdd: {
                 command: "git add .",
                 stdout: true
@@ -202,6 +209,9 @@ module.exports = function(grunt) {
             },
             build: {
                 dir: "build/"
+            },
+            srcjs: {
+                dir: "src/js/"
             }
         }
     });
@@ -214,6 +224,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-qunit");
     grunt.loadNpmTasks("grunt-replace");
+    grunt.loadNpmTasks("grunt-docker");
     grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-contrib-requirejs");
     grunt.loadNpmTasks("grunt-contrib-concat");
@@ -235,19 +246,24 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
-        var done = this.async();
-        var prompt = require("prompt");
+        var done;
+        var prompt;
 
-        grunt.log.writeln("Please enter a commit message.");
-        prompt.start();
-        prompt.get(["msg"], function (err, result) {
-            if (err || !result.msg) {
-                grunt.fail.fatal("The commit task requires a message.");
-            }
+        if (!global.message) {
+            done = this.async();
+            prompt = require("prompt");
 
-            global.message = result.msg;
-            done();
-        });
+            grunt.log.writeln("Please enter a commit message.");
+            prompt.start();
+            prompt.get(["msg"], function (err, result) {
+                if (err || !result.msg) {
+                    grunt.fail.fatal("The commit task requires a message.");
+                }
+
+                global.message = result.msg;
+                done();
+            });
+        }
     });
 
     /**
@@ -261,7 +277,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask("docs", [
         "replace:version",
-        "exec:docker"
+        "rebase:srcjs",
+        "docker",
+        "rebase:repo"
     ]);
 
     grunt.registerTask("compress", [
