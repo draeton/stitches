@@ -562,8 +562,15 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
 
             $img.attr("src", this.spritesheet);
             $textarea.val(this.stylesheet).attr("rows", lines);
-            $spritesheet.attr("href", this.spritesheet);
-            $stylesheet.attr("href", "data:text/plain," + encodeURIComponent(this.stylesheet));
+
+            $spritesheet.attr({
+                "href": this.spritesheet,
+                "target": "_blank"
+            });
+            $stylesheet.attr({
+                "href": "data:text/plain," + encodeURIComponent(this.stylesheet),
+                "target": "_blank"
+            });
         },
 
         /**

@@ -223,29 +223,27 @@
                 </div>
 
                 <div class="stitches-palette-body">
-                    <div class="container-fluid">
-                        <div class="row-fluid">
-                            <div class="span4">
-                                <p><a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a></p>
-                            </div>
-                            <div class="span8">
-                                <p><a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a></p>
-                            </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#spritesheet" data-toggle="tab">Spritesheet</a></li>
+                        <li><a href="#stylesheet" data-toggle="tab">Stylesheet</a></li>
+                        <li><a href="#markup" data-toggle="tab">Markup</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="spritesheet">
+                            <p><a href="#" class="thumbnail"><img/></a></p>
                         </div>
-                        <div class="row-fluid">
-                            <div class="span4">
-                                <p><a href="#" class="thumbnail"><img/></a></p>
-                            </div>
-                            <div class="span8">
-                                <p><textarea rows="80"></textarea></p>
-                            </div>
+                        <div class="tab-pane" id="stylesheet">
+                            <p><textarea rows="80"></textarea></p>
                         </div>
+                        <div class="tab-pane" id="markup"></div>
                     </div>
                 </div>
 
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
+                            <a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
+                            <a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
