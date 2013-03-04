@@ -264,13 +264,10 @@ module.exports = function(grunt) {
         }
     };
 
-    grunt.registerTask("commit-repo", "Commit the master branch files.", function () {
+    grunt.registerTask("commit-message", "Set the global commit message.", function () {
         var done = this.async();
 
-        setGlobalMessage(function () {
-            grunt.task.run(["exec:gitAdd", "exec:gitCommit", "exec:gitPush"]);
-            done();
-        });
+        setGlobalMessage(done);
     });
 
     /**
@@ -305,7 +302,14 @@ module.exports = function(grunt) {
         "compress"
     ]);
 
+    grunt.registerTask("commit-repo", [
+        "exec:gitAdd",
+        "exec:gitCommit",
+        "exec:gitPush"
+    ]);
+
     grunt.registerTask("repo", [
+        "commit-message",
         "clean:repo",
         "validate",
         "docs",
@@ -326,7 +330,6 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask("commit-pages", [
-        "commit-message",
         "rebase:pages",
         "exec:gitAddPages",
         "exec:gitCommitPages",
@@ -335,6 +338,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask("pages", [
+        "commit-message",
         "build-pages",
         "commit-pages"
     ]);
