@@ -44,7 +44,17 @@ function ($) {
          * @param {boolean} uri Switch including image as data URI
          * @return string
          */
-        get: function (sprites, spritesheet, prefix, uri) {}
+        get: function (sprites, spritesheet, prefix, uri) {},
+
+        /**
+         * ### BaseStylesheet.prototype.markup
+         * Returns markup for spritesheet example usage
+         *
+         * @param {array} sprites A list of sprites
+         * @param {string} prefix Used to create CSS classes
+         * @return string
+         */
+        markup: function (sprites, prefix) {}
     };
 
     return BaseStylesheet;

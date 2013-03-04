@@ -9,9 +9,9 @@
         <p><img src="<%= spritesheet %>" class="thumbnail"/></p>
     </div>
     <div class="tab-pane" id="stylesheet">
-        <p><textarea rows="<%= lines %>"><%= stylesheet %></textarea></p>
+        <p><textarea rows="<%= stylesheetLines %>"><%= stylesheet %></textarea></p>
     </div>
     <div class="tab-pane" id="markup">
-        <p><textarea rows="<%= lines %>"><%= markup %></textarea></p>
+        <p><textarea rows="<%= markupLines %>"><%= markup %></textarea></p>
     </div>
 </div>

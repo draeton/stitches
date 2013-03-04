@@ -58,6 +58,24 @@ function ($, CssStylesheet, LessStylesheet) {
             styles = styles.replace(/\\n/g, "\n");
 
             return styles;
+        },
+
+        /**
+         * ### stylesheet.getMarkup
+         * Returns markup for spritesheet example usage
+         *
+         * @param {array} options.sprites A list of sprites
+         * @param {string} options.prefix Used to create CSS classes
+         * @return string
+         */
+        getMarkup: function (options) {
+            var sprites = options.sprites;
+            var prefix = options.prefix;
+
+            var markup = this.manager.markup(sprites, prefix);
+            markup = markup.replace(/\\n/g, "\n");
+
+            return markup;
         }
     };
 

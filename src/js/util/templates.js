@@ -13,10 +13,11 @@ define([
     "tpl!../../templates/downloads.tpl",
     "tpl!../../templates/sprite.tpl",
     "tpl!../../templates/css.tpl",
+    "tpl!../../templates/css-markup.tpl",
     "tpl!../../templates/less.tpl",
-    "tpl!../../templates/markup.tpl"
+    "tpl!../../templates/less-markup.tpl"
 ],
-function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, lessTemplate, markupTemplate) {
+function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssMarkupTemplate, lessTemplate, lessMarkupTemplate) {
 
     "use strict";
 
@@ -63,6 +64,16 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, less
         },
 
         /**
+         * ### templates.cssMarkup
+         * Returns the css markup template
+         *
+         * @return string
+         */
+        cssMarkup: function () {
+            return cssMarkupTemplate.apply(this, arguments);
+        },
+
+        /**
          * ### templates.less
          * Returns the less template
          *
@@ -73,13 +84,13 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, less
         },
 
         /**
-         * ### templates.markup
-         * Returns the markup template
+         * ### templates.lessMarkup
+         * Returns the less markup template
          *
          * @return string
          */
-        markup: function () {
-            return markupTemplate.apply(this, arguments);
+        lessMarkup: function () {
+            return lessMarkupTemplate.apply(this, arguments);
         }
     };
 

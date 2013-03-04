@@ -558,16 +558,12 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             var $spritesheet = this.$downloads.find(".downloads-spritesheet");
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
 
-            var markup = templates.markup({
-                prefix: this.settings.prefix,
-                sprites: this.canvas.sprites
-            });
-
             var html = templates.downloads({
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
-                lines: this.stylesheet.split("\n").length,
-                markup: markup
+                stylesheetLines: this.stylesheet.split("\n").length,
+                markup: this.markup,
+                markupLines: this.markup.split("\n").length
             });
 
             $section.html(html);
@@ -621,8 +617,14 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 uri: this.settings.uri
             });
 
+            var markup = stylesheetManager.getMarkup({
+                sprites: this.canvas.sprites,
+                prefix: this.settings.prefix
+            });
+
             this.spritesheet = spritesheet;
             this.stylesheet = stylesheet;
+            this.markup = markup;
 
             this.$element.trigger("update-toolbar");
             this.$element.trigger("update-downloads");
