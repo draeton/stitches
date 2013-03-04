@@ -2,6 +2,10 @@ module.exports = function(grunt) {
 
     "use strict";
 
+    /**
+     * config
+     */
+
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
@@ -231,11 +235,19 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("commit-message", "Enter a git commit message", function () {
-        global.message = grunt.option("m");
+        var done = this.async();
+        var prompt = require("prompt");
 
-        if (!global.message) {
-            grunt.fail.fatal("The commit task requires a message passed in the -m parameter.")
-        }
+        grunt.log.writeln("Please enter a commit message.");
+        prompt.start();
+        prompt.get(["msg"], function (err, result) {
+            if (err || !result.msg) {
+                grunt.fail.fatal("The commit task requires a message.");
+            }
+
+            global.message = result.msg;
+            done();
+        });
     });
 
     /**
