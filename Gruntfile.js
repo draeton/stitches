@@ -76,9 +76,7 @@ module.exports = function(grunt) {
                     ],
                     paths: {
                         "libs": "../libs",
-                        "tpl" : "../tpl",
-                        "jquery": "wrap/jquery",
-                        "modernizr": "wrap/modernizr"
+                        "tpl" : "../tpl"
                     }
                 }
             }

@@ -9,7 +9,7 @@
  */
 
 define([
-    "jquery",
+    "wrap/jquery",
     "util/util",
     "layout/base"
 ],

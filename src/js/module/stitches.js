@@ -9,8 +9,8 @@
  */
 
 define([
-    "jquery",
-    "modernizr",
+    "wrap/jquery",
+    "wrap/modernizr",
     "../../../libs/store/store",
     "util/util",
     "util/layout",

@@ -28,13 +28,11 @@
  */
 require({
     paths: {
-        "tpl" : "../tpl",
-        "jquery": "wrap/jquery",
-        "modernizr": "wrap/modernizr"
+        "tpl" : "../tpl"
     }
 },
 [
-    "jquery",
+    "wrap/jquery",
     "module/stitches"
 ],
 function($, Stitches) {

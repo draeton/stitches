@@ -9,7 +9,7 @@
  */
 
 define([
-    "jquery"
+    "wrap/jquery"
 ],
 function ($) {
 

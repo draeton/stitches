@@ -10,7 +10,7 @@
  */
 
 define([
-    "jquery",
+    "wrap/jquery",
     "layout/compact",
     "layout/vertical",
     "layout/horizontal"
