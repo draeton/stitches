@@ -10,11 +10,12 @@
 
 define([
     "tpl!../../templates/stitches.tpl",
+    "tpl!../../templates/downloads.tpl",
     "tpl!../../templates/sprite.tpl",
     "tpl!../../templates/css.tpl",
     "tpl!../../templates/less.tpl"
 ],
-function (stitchesTemplate, spriteTemplate, cssTemplate, lessTemplate) {
+function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, lessTemplate) {
 
     "use strict";
 
@@ -28,6 +29,16 @@ function (stitchesTemplate, spriteTemplate, cssTemplate, lessTemplate) {
          */
         stitches: function () {
             return stitchesTemplate.apply(this, arguments);
+        },
+
+        /**
+         * ### templates.downloads
+         * Returns the downloads template
+         *
+         * @return string
+         */
+        downloads: function () {
+            return downloadsTemplate.apply(this, arguments);
         },
 
         /**

@@ -223,19 +223,7 @@
                 </div>
 
                 <div class="stitches-palette-body">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#spritesheet" data-toggle="tab">Spritesheet</a></li>
-                        <li><a href="#stylesheet" data-toggle="tab">Stylesheet</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="spritesheet">
-                            <p><img class="thumbnail"/></p>
-                        </div>
-                        <div class="tab-pane" id="stylesheet">
-                            <p><textarea rows="80"></textarea></p>
-                        </div>
-                        <div class="tab-pane" id="markup"></div>
-                    </div>
+                    <section></section>
                 </div>
 
                 <div class="stitches-palette-footer">

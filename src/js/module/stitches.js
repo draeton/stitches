@@ -554,14 +554,18 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
          * ...
          */
         updateDownloads: function (e) {
-            var $textarea = this.$downloads.find("textarea");
-            var $img = this.$downloads.find("img");
+            var $section = this.$downloads.find("section");
             var $spritesheet = this.$downloads.find(".downloads-spritesheet");
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
-            var lines = this.stylesheet.split("\n").length;
 
-            $img.attr("src", this.spritesheet);
-            $textarea.val(this.stylesheet).attr("rows", lines);
+            var html = templates.downloads({
+                spritesheet: this.spritesheet,
+                stylesheet: this.stylesheet,
+                lines: this.stylesheet.split("\n").length,
+                markup: this.markup
+            });
+
+            $section.html(html);
 
             $spritesheet.attr({
                 "href": this.spritesheet,

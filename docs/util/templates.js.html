@@ -25,6 +25,9 @@
         <a href="#templates.stitches">templates.stitches</a>
       </div>
       <div class="heading h3">
+        <a href="#templates.downloads">templates.downloads</a>
+      </div>
+      <div class="heading h3">
         <a href="#templates.sprite">templates.sprite</a>
       </div>
       <div class="heading h3">
@@ -62,11 +65,12 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;tpl!../../templates/stitches.tpl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tpl!../../templates/downloads.tpl&quot;</span><span class="p">,</span>
     <span class="s2">&quot;tpl!../../templates/sprite.tpl&quot;</span><span class="p">,</span>
     <span class="s2">&quot;tpl!../../templates/css.tpl&quot;</span><span class="p">,</span>
     <span class="s2">&quot;tpl!../../templates/less.tpl&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span> <span class="p">(</span><span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="nx">spriteTemplate</span><span class="p">,</span> <span class="nx">cssTemplate</span><span class="p">,</span> <span class="nx">lessTemplate</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">stitchesTemplate</span><span class="p">,</span> <span class="nx">downloadsTemplate</span><span class="p">,</span> <span class="nx">spriteTemplate</span><span class="p">,</span> <span class="nx">cssTemplate</span><span class="p">,</span> <span class="nx">lessTemplate</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -114,6 +118,39 @@
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">stitches</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">stitchesTemplate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="templates.downloads">
+  <h3>
+    <a href="#templates.downloads" class="pilcrow">&#182;</a>
+    templates.downloads
+  </h3>
+</div>
+
+
+<p>Returns the downloads template</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">downloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">downloadsTemplate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
         <span class="p">},</span>
 
 
