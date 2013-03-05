@@ -37,9 +37,6 @@
         <a href="#stitches.prototype.bind">Stitches.prototype.bind</a>
       </div>
       <div class="heading h3">
-        <a href="#stitches.prototype.setfilemanager">Stitches.prototype.setFileManager</a>
-      </div>
-      <div class="heading h3">
         <a href="#stitches.prototype.setdropbox">Stitches.prototype.setDropBox</a>
       </div>
       <div class="heading h3">
@@ -144,15 +141,15 @@
     <span class="s2">&quot;../../../libs/store/store&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;manager/file&quot;</span><span class="p">,</span>
     <span class="s2">&quot;manager/layout&quot;</span><span class="p">,</span>
     <span class="s2">&quot;manager/stylesheet&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/palette&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">layoutManager</span><span class="p">,</span> <span class="nx">stylesheetManager</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">fileManager</span><span class="p">,</span> <span class="nx">layoutManager</span><span class="p">,</span> <span class="nx">stylesheetManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -235,15 +232,14 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input.file&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
-
-            <span class="k">this</span><span class="p">.</span><span class="nx">setFileManager</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setDropBox</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setToolbar</span><span class="p">();</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">setManagers</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setImages</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setCanvas</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setManagers</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setPalettes</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
         <span class="p">},</span>
 
 
@@ -278,6 +274,8 @@
             <span class="k">if</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span> <span class="nx">settings</span><span class="p">);</span>
             <span class="p">}</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input.file&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
         <span class="p">},</span>
 
 
@@ -366,34 +364,6 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="stitches.prototype.setfilemanager">
-  <h3>
-    <a href="#stitches.prototype.setfilemanager" class="pilcrow">&#182;</a>
-    Stitches.prototype.setFileManager
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">setFileManager</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileManager</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">progress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
 <div class="pilwrap" id="stitches.prototype.setdropbox">
   <h3>
     <a href="#stitches.prototype.setdropbox" class="pilcrow">&#182;</a>
@@ -436,6 +406,10 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">setManagers</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">fileManager</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+                <span class="nx">onload</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">),</span>
+                <span class="nx">onprogress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+            <span class="p">});</span>
             <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
             <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
         <span class="p">},</span>
@@ -1110,7 +1084,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">processFiles</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">fileManager</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
+            <span class="nx">fileManager</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
         <span class="p">},</span>
 
 
@@ -1200,7 +1174,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+  <a class="pilcrow" href="#section-28" id="section-28">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1221,7 +1195,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
 </div>
 <p>tooltips</p>
         </td>
@@ -1324,7 +1298,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
+  <a class="pilcrow" href="#section-32" id="section-32">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the

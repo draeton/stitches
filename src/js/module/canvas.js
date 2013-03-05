@@ -44,8 +44,6 @@ function($, util, array, layoutManager, Sprite) {
         this.dimensions = this.settings.dimensions;
         this.progress = this.settings.progress;
         this.sprites = [];
-
-        this.init();
     };
 
     Canvas.classname = ".stitches-canvas";
@@ -69,7 +67,6 @@ function($, util, array, layoutManager, Sprite) {
          * ...
          */
         bind: function () {
-            this.$element.on("create-sprite", $.proxy(this.createSprite, this));
             this.$element.on("clear-active", $.proxy(this.clearActive, this));
         },
 
@@ -85,7 +82,7 @@ function($, util, array, layoutManager, Sprite) {
                 var name = $img.data("name");
                 var src = $img.attr("src");
 
-                self.$element.trigger("create-sprite", [name, src]);
+                self.createSprite(name, src);
             }).remove();
         },
 
@@ -188,6 +185,22 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
+         * ### Canvas.prototype.createSprite
+         * ...
+         */
+        createSprite: function (name, src) {
+            var self = this;
+            var sprite = new Sprite({
+                name: name,
+                src: src,
+                padding: this.settings.padding,
+                callback: function (sprite) {
+                    self.add(sprite);
+                }
+            });
+        },
+
+        /**
          * ### Canvas.prototype.clearActive
          * ...
          */
@@ -199,22 +212,6 @@ function($, util, array, layoutManager, Sprite) {
                 if (sprite && active !== sprite) {
                     $active.removeClass("active");
                     active.active = false;
-                }
-            });
-        },
-
-        /**
-         * ### Canvas.prototype.createSprite
-         * ...
-         */
-        createSprite: function (e, name, src) {
-            var self = this;
-            var sprite = new Sprite({
-                name: name,
-                src: src,
-                padding: this.settings.padding,
-                callback: function (sprite) {
-                    self.add(sprite);
                 }
             });
         }

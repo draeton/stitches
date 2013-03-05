@@ -14,15 +14,15 @@ define([
     "../../../libs/store/store",
     "util/util",
     "util/templates",
+    "manager/file",
     "manager/layout",
     "manager/stylesheet",
-    "module/file-manager",
     "module/drop-box",
     "module/canvas",
     "module/toolbar",
     "module/palette"
 ],
-function($, Modernizr, store, util, templates, layoutManager, stylesheetManager, FileManager, DropBox, Canvas, Toolbar, Palette) {
+function($, Modernizr, store, util, templates, fileManager, layoutManager, stylesheetManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
 
@@ -62,15 +62,14 @@ function($, Modernizr, store, util, templates, layoutManager, stylesheetManager,
             this.render();
             this.bind();
 
-            this.hasFileInput = this.$element.find("input.file").length;
-
-            this.setFileManager();
             this.setDropBox();
             this.setToolbar();
-            this.setManagers();
             this.setImages();
             this.setCanvas();
+            this.setManagers();
             this.setPalettes();
+
+            this.canvas.init();
         },
 
         /**
@@ -87,6 +86,8 @@ function($, Modernizr, store, util, templates, layoutManager, stylesheetManager,
             if (settings) {
                 this.settings = $.extend(this.settings, settings);
             }
+
+            this.hasFileInput = this.$element.find("input.file").length;
         },
 
         /**
@@ -133,16 +134,6 @@ function($, Modernizr, store, util, templates, layoutManager, stylesheetManager,
         },
 
         /**
-         * ### Stitches.prototype.setFileManager
-         * ...
-         */
-        setFileManager: function () {
-            this.fileManager = new FileManager(this.$canvas, {
-                progress: $.proxy(this.updateProgress, this)
-            });
-        },
-
-        /**
          * ### Stitches.prototype.setDropBox
          * ...
          */
@@ -155,6 +146,10 @@ function($, Modernizr, store, util, templates, layoutManager, stylesheetManager,
          * ...
          */
         setManagers: function () {
+            fileManager.set({
+                onload: $.proxy(this.canvas.createSprite, this.canvas),
+                onprogress: $.proxy(this.updateProgress, this)
+            });
             layoutManager.set(this.settings.layout);
             stylesheetManager.set(this.settings.stylesheet);
         },
@@ -523,7 +518,7 @@ function($, Modernizr, store, util, templates, layoutManager, stylesheetManager,
          * ...
          */
         processFiles: function (e, files) {
-            this.fileManager.processFiles(files);
+            fileManager.processFiles(files);
         },
 
         /**

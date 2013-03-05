@@ -55,10 +55,10 @@
         <a href="#canvas.prototype.clear">Canvas.prototype.clear</a>
       </div>
       <div class="heading h3">
-        <a href="#canvas.prototype.clearactive">Canvas.prototype.clearActive</a>
+        <a href="#canvas.prototype.createsprite">Canvas.prototype.createSprite</a>
       </div>
       <div class="heading h3">
-        <a href="#canvas.prototype.createsprite">Canvas.prototype.createSprite</a>
+        <a href="#canvas.prototype.clearactive">Canvas.prototype.clearActive</a>
       </div>
     </div>
   </div>
@@ -148,8 +148,6 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">progress</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
     <span class="p">};</span>
 
     <span class="nx">Canvas</span><span class="p">.</span><span class="nx">classname</span> <span class="o">=</span> <span class="s2">&quot;.stitches-canvas&quot;</span><span class="p">;</span>
@@ -209,7 +207,6 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;create-sprite&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;clear-active&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clearActive</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
 
@@ -243,7 +240,7 @@
                 <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$img</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>
                 <span class="kd">var</span> <span class="nx">src</span> <span class="o">=</span> <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">);</span>
 
-                <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;create-sprite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">]);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">);</span>
             <span class="p">}).</span><span class="nx">remove</span><span class="p">();</span>
         <span class="p">},</span>
 
@@ -478,6 +475,40 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
+<div class="pilwrap" id="canvas.prototype.createsprite">
+  <h3>
+    <a href="#canvas.prototype.createsprite" class="pilcrow">&#182;</a>
+    Canvas.prototype.createSprite
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">createSprite</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sprite</span><span class="p">({</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                <span class="nx">src</span><span class="o">:</span> <span class="nx">src</span><span class="p">,</span>
+                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">self</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="canvas.prototype.clearactive">
   <h3>
     <a href="#canvas.prototype.clearactive" class="pilcrow">&#182;</a>
@@ -501,40 +532,6 @@
                 <span class="k">if</span> <span class="p">(</span><span class="nx">sprite</span> <span class="o">&amp;&amp;</span> <span class="nx">active</span> <span class="o">!==</span> <span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">$active</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
                     <span class="nx">active</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="canvas.prototype.createsprite">
-  <h3>
-    <a href="#canvas.prototype.createsprite" class="pilcrow">&#182;</a>
-    Canvas.prototype.createSprite
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">createSprite</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sprite</span><span class="p">({</span>
-                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                <span class="nx">src</span><span class="o">:</span> <span class="nx">src</span><span class="p">,</span>
-                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
-                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">self</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
                 <span class="p">}</span>
             <span class="p">});</span>
         <span class="p">}</span>
