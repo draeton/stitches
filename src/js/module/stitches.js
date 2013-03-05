@@ -60,6 +60,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         init: function () {
             this.configure();
             this.render();
+            this.test();
             this.bind();
 
             this.setDropBox();
@@ -86,8 +87,6 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             if (settings) {
                 this.settings = $.extend(this.settings, settings);
             }
-
-            this.hasFileInput = this.$element.find("input.file").length;
         },
 
         /**
@@ -108,6 +107,14 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             this.$downloads = this.$element.find(".stitches-downloads");
             this.$settings = this.$element.find(".stitches-settings");
             this.$properties = this.$element.find(".stitches-properties");
+        },
+
+        /**
+         * ### Stitches.prototype.test
+         * ...
+         */
+        test: function () {
+            this.hasFileInput = this.$element.find("input.file").length;
         },
 
         /**
