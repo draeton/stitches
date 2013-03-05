@@ -6,7 +6,7 @@
                 <strong>Stitches</strong>
             </a>
             <button data-action="open" class="btn btn-small btn-info files" title="Open">
-                <i class="icon-folder-open icon-white"></i> <span class="hidden-phone">Open</span><input class="file" type="file" multiple="">
+                <i class="icon-folder-open icon-white"></i> <span class="hidden-phone">Open</span><input class="file" type="file" multiple="multiple">
             </button>
             <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">
                 <i class="icon-cog icon-white"></i> <span class="hidden-phone">Settings</span>

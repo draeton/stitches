@@ -143,28 +143,18 @@
     <span class="s2">&quot;wrap/modernizr&quot;</span><span class="p">,</span>
     <span class="s2">&quot;../../../libs/store/store&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;manager/layout&quot;</span><span class="p">,</span>
     <span class="s2">&quot;manager/stylesheet&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/file-manager&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/drop-box&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/canvas&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/toolbar&quot;</span><span class="p">,</span>
     <span class="s2">&quot;module/palette&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">layoutManager</span><span class="p">,</span> <span class="nx">stylesheetManager</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">Modernizr</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">layoutManager</span><span class="p">,</span> <span class="nx">stylesheetManager</span><span class="p">,</span> <span class="nx">FileManager</span><span class="p">,</span> <span class="nx">DropBox</span><span class="p">,</span> <span class="nx">Canvas</span><span class="p">,</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Palette</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
-
-    <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">FileReader</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">draganddrop</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../libs/dropfile/dropfile&quot;</span><span class="p">]);</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">canvas</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">require</span><span class="p">([</span><span class="s2">&quot;../../../libs/flashcanvas/flashcanvas&quot;</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}());</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">layout</span><span class="o">:</span> <span class="s2">&quot;compact&quot;</span><span class="p">,</span>
@@ -244,6 +234,8 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">configure</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input.file&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">setFileManager</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">setDropBox</span><span class="p">();</span>
@@ -1151,6 +1143,12 @@
                 <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
                 <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;open&quot;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;open&quot;</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">},</span>
 

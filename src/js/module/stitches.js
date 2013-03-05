@@ -13,28 +13,18 @@ define([
     "wrap/modernizr",
     "../../../libs/store/store",
     "util/util",
+    "util/templates",
     "manager/layout",
     "manager/stylesheet",
-    "util/templates",
     "module/file-manager",
     "module/drop-box",
     "module/canvas",
     "module/toolbar",
     "module/palette"
 ],
-function($, Modernizr, store, util, layoutManager, stylesheetManager, templates, FileManager, DropBox, Canvas, Toolbar, Palette) {
+function($, Modernizr, store, util, templates, layoutManager, stylesheetManager, FileManager, DropBox, Canvas, Toolbar, Palette) {
 
     "use strict";
-
-    (function () {
-        if (typeof FileReader === "undefined" || !Modernizr.draganddrop) {
-            require(["../../../libs/dropfile/dropfile"]);
-        }
-
-        if (!Modernizr.canvas) {
-            require(["../../../libs/flashcanvas/flashcanvas"]);
-        }
-    }());
 
     var defaults = {
         layout: "compact",
@@ -71,6 +61,8 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
             this.configure();
             this.render();
             this.bind();
+
+            this.hasFileInput = this.$element.find("input.file").length;
 
             this.setFileManager();
             this.setDropBox();
@@ -546,6 +538,12 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 toolbar.enable("reset generate clear downloads");
             } else {
                 toolbar.disable("reset generate clear downloads");
+            }
+
+            if (this.hasFileInput) {
+                toolbar.enable("open");
+            } else {
+                toolbar.disable("open");
             }
         },
 

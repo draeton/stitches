@@ -18,8 +18,8 @@
 .stitches-toolbar button.files input {
     position: absolute;
     top: 0;
-    left: 15%;
-    width: 70%;
+    left: 10%;
+    width: 80%;
     height: 100%;
     opacity: 0;
 }
