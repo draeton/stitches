@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git://github.com/draeton/stitches.git"
   },
-  "bugs": "https://github.com/draeton/stitches/issues",
+  "bugs": {
+    "url": "https://github.com/draeton/stitches/issues"
+  },
   "licenses": [
     {
       "type": "MIT",
@@ -35,5 +37,12 @@
     "prompt": "~0.2.9",
     "grunt-docker": "0.0.4",
     "shelljs": "~0.1.2"
-  }
+  },
+  "keywords": [
+    "stitches",
+    "html5",
+    "javascript",
+    "sprite"
+  ],
+  "readmeFilename": "README.md"
 }

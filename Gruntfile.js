@@ -10,16 +10,24 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            repo: ["amd/", "build/", "docs/"],
-            pages: ["repo/"]
+            stitches: {
+                src: ["amd/", "build/", "docs/"]
+            },
+            pages: {
+                src: ["stitches/"]
+            }
         },
 
         jshint: {
-            all: ["src/js/**/*.js"]
+            stitches: {
+                src: ["src/js/**/*.js"]
+            }
         },
 
         qunit: {
-            all: ["test/unit/**/*.js"]
+            stitches: {
+                src: ["test/unit/**/*.js"]
+            }
         },
 
         replace: {
@@ -116,7 +124,7 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            dependencies: {
+            stitches: {
                 files: [
                     {
                         expand: true,
@@ -136,22 +144,22 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         src: "build/**",
-                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                        dest: "../gh-pages/<%= pkg.name %>/stitches/"
                     },
                     {
                         expand: true,
                         src: "dist/**",
-                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                        dest: "../gh-pages/<%= pkg.name %>/stitches/"
                     },
                     {
                         expand: true,
                         src: "docs/**",
-                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                        dest: "../gh-pages/<%= pkg.name %>/stitches/"
                     },
                     {
                         expand: true,
                         src: "test/**",
-                        dest: "../gh-pages/<%= pkg.name %>/repo/"
+                        dest: "../gh-pages/<%= pkg.name %>/stitches/"
                     },
                 ]
             }
@@ -165,7 +173,7 @@ module.exports = function(grunt) {
         },
 
         rebase: {
-            repo: {
+            stitches: {
                 dir: process.cwd()
             },
             pages: {
@@ -177,6 +185,15 @@ module.exports = function(grunt) {
             srcjs: {
                 dir: "src/js/"
             }
+        },
+
+        commit: {
+            stitches: {
+                branch: "master"
+            },
+            pages: {
+                branch: "gh-pages"
+            }
         }
     });
 
@@ -184,6 +201,7 @@ module.exports = function(grunt) {
      * load node modules
      */
 
+    grunt.loadTasks("tasks");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-qunit");
@@ -198,127 +216,62 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-bump");
 
     /**
-     * register custom tasks
-     */
-
-    grunt.registerMultiTask("rebase", "Rebase cwd", function () {
-        var dir = this.data.dir;
-
-        grunt.file.setBase(dir);
-        grunt.log.ok("Base dir is now " + process.cwd());
-    });
-
-    var commitMessage = "";
-
-    var setCommitMessage = function (callback) {
-        var prompt = require("prompt");
-
-        if (!commitMessage) {
-            grunt.log.writeln("Please enter a commit message.");
-            prompt.start();
-            prompt.get(["msg"], function (err, result) {
-                if (err || !result.msg) {
-                    grunt.fail.fatal("This task requires a message.");
-                }
-
-                commitMessage = result.msg;
-                callback && callback();
-            });
-        } else {
-            callback && callback();
-        }
-    };
-
-    grunt.registerTask("commit-message", "Set the global commit message.", function () {
-        var done = this.async();
-
-        setCommitMessage(done);
-    });
-
-    grunt.registerTask("commit-repo", "Commit the repo and push to github", function () {
-        var shell = require("shelljs");
-        var pkg = require("./package.json");
-
-        shell.exec("git add .");
-        shell.exec("git commit -am \"Build " + pkg.version + " - " + commitMessage + "\"");
-        shell.exec("git push origin master");
-    });
-
-    grunt.registerTask("commit-pages", "Commit the repo and push to github", function () {
-        var shell = require("shelljs");
-        var pkg = require("./package.json");
-
-        shell.exec("git add .");
-        shell.exec("git commit -am \"Pages " + pkg.version + " - " + commitMessage + "\"");
-        shell.exec("git push origin gh-pages");
-    });
-
-    /**
      * master tasks
      */
 
     grunt.registerTask("validate", [
         "jshint"/*,
-        "qunit"*/
+        "qunit",*/
     ]);
 
     grunt.registerTask("docs", [
-        "replace:version",
         "rebase:srcjs",
         "docker",
-        "rebase:repo"
+        "rebase:stitches"
     ]);
 
-    grunt.registerTask("build-repo", [
+    grunt.registerTask("build", [
         "requirejs",
         "concat",
         "cssmin",
         "uglify",
-        "copy:dependencies"
+        "copy:stitches"
     ]);
 
     grunt.registerTask("dist", [
         "rebase:build",
         "zip",
-        "rebase:repo"
+        "rebase:stitches"
     ]);
 
-    grunt.registerTask("repo", [
-        "commit-message",
-        "clean:repo",
+    grunt.registerTask("stitches", [
+        "replace:version",
+        "clean:stitches",
         "validate",
         "docs",
-        "build-repo",
+        "build",
         "dist",
-        "commit-repo"
+        "commit:stitches"
     ]);
 
     /**
      * gh-pages tasks
      */
 
-    grunt.registerTask("build-pages", [
+    grunt.registerTask("pages", [
         "rebase:pages",
         "clean:pages",
-        "rebase:repo",
+        "rebase:stitches",
         "copy:pages",
-        "replace:pages"
-    ]);
-
-    grunt.registerTask("pages", [
-        "commit-message",
-        "build-pages",
+        "replace:pages",
         "rebase:pages",
-        "commit-pages",
-        "rebase:repo"
+        "commit:pages",
+        "rebase:stitches"
     ]);
 
     /**
      * default
      */
 
-    grunt.registerTask("default", [
-        "repo",
-        "pages"
-    ]);
+    grunt.registerTask("default", "stitches pages bump");
 };
