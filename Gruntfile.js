@@ -250,8 +250,7 @@ module.exports = function(grunt) {
         "validate",
         "docs",
         "build",
-        "dist",
-        "commit:stitches"
+        "dist"
     ]);
 
     /**
@@ -273,5 +272,5 @@ module.exports = function(grunt) {
      * default
      */
 
-    grunt.registerTask("default", "stitches pages bump");
+    grunt.registerTask("default", "stitches commit:stitches");
 };
