@@ -10,11 +10,12 @@
 
 define([
     "wrap/jquery",
+    "../../../libs/less/less",
     "util/util",
     "util/templates",
     "stylesheet/base"
 ],
-function ($, util, templates, BaseStylesheet) {
+function ($, less, util, templates, BaseStylesheet) {
 
     "use strict";
 
@@ -53,6 +54,10 @@ function ($, util, templates, BaseStylesheet) {
                 backgroundImage: backgroundImage,
                 sprites: sprites
             });
+        },
+
+        getCSS: function (sprites, spritesheet, prefix, uri) {
+
         },
 
         /**

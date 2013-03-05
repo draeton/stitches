@@ -59,11 +59,12 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;wrap/jquery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../../../libs/less/less&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;stylesheet/base&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">less</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -163,6 +164,10 @@
                 <span class="nx">backgroundImage</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">,</span>
                 <span class="nx">sprites</span><span class="o">:</span> <span class="nx">sprites</span>
             <span class="p">});</span>
+        <span class="p">},</span>
+
+        <span class="nx">getCSS</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
+
         <span class="p">},</span>
 
 
