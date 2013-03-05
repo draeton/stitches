@@ -33,8 +33,10 @@ function ($, CssStylesheet, LessStylesheet) {
          * @param {string} type The stylesheet manager type
          */
         set: function (type) {
-            var Manager = managers[type] || managers.css;
+            var Manager;
 
+            this.type = type || "css";
+            Manager = managers[this.type];
             this.manager = new Manager();
         },
 
@@ -71,8 +73,9 @@ function ($, CssStylesheet, LessStylesheet) {
         getMarkup: function (options) {
             var sprites = options.sprites;
             var prefix = options.prefix;
+            var tooltip = options.tooltip || false;
 
-            var markup = this.manager.markup(sprites, prefix);
+            var markup = this.manager.markup(sprites, prefix, tooltip);
             markup = markup.replace(/\\n/g, "\n");
 
             return markup;

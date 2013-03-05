@@ -181,6 +181,10 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.stitches-downloads .stitches-example i {
+    float: left;
+    margin: 6px;
+}
 @media (max-width: 767px) {
     .stitches-palette {
         top: 0;

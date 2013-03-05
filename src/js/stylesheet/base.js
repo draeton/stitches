@@ -34,6 +34,8 @@ function ($) {
     BaseStylesheet.prototype = {
         constructor: BaseStylesheet,
 
+        template: null,
+
         /**
          * ### BaseStylesheet.prototype.get
          * Returns a stylesheet to place images with spritesheet
@@ -52,9 +54,16 @@ function ($) {
          *
          * @param {array} sprites A list of sprites
          * @param {string} prefix Used to create CSS classes
+         * @param {boolean} tooltip If true display bootstrap tooltip
          * @return string
          */
-        markup: function (sprites, prefix) {}
+        markup: function (sprites, prefix, tooltip) {
+            return this.template({
+                prefix: prefix,
+                sprites: sprites,
+                tooltip: tooltip
+            });
+        }
     };
 
     return BaseStylesheet;

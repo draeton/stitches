@@ -35,6 +35,8 @@ function ($, util, templates, BaseStylesheet) {
     };
 
     util.inherit(CssStylesheet, BaseStylesheet, {
+        template: templates.cssMarkup,
+
         /**
          * ### CssStylesheet.prototype.get
          * Returns a stylesheet to place images with spritesheet
@@ -51,21 +53,6 @@ function ($, util, templates, BaseStylesheet) {
             return templates.css({
                 prefix: prefix,
                 backgroundImage: backgroundImage,
-                sprites: sprites
-            });
-        },
-
-        /**
-         * ### CssStylesheet.prototype.markup
-         * Returns markup for spritesheet example usage
-         *
-         * @param {array} sprites A list of sprites
-         * @param {string} prefix Used to create CSS classes
-         * @return string
-         */
-        markup: function (sprites, prefix) {
-            return templates.cssMarkup({
-                prefix: prefix,
                 sprites: sprites
             });
         }

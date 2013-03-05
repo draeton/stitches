@@ -1185,9 +1185,12 @@
                 <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
                 <span class="nx">spritesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
                 <span class="nx">stylesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">,</span>
+                <span class="nx">stylesheetWithUri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheetWithUri</span><span class="p">,</span>
+                <span class="nx">stylesheetType</span><span class="o">:</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
                 <span class="nx">stylesheetLines</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
                 <span class="nx">markup</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">markup</span><span class="p">,</span>
-                <span class="nx">markupLines</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">markup</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span>
+                <span class="nx">markupLines</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">markup</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
+                <span class="nx">markupTooltip</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">markupTooltip</span>
             <span class="p">});</span>
 
             <span class="nx">$section</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
@@ -1265,26 +1268,53 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">generateSheets</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">getSpritesheet</span><span class="p">({</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">getSpritesheet</span><span class="p">({</span>
                 <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span>
                 <span class="nx">dimensions</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">dimensions</span>
             <span class="p">});</span>
 
-            <span class="kd">var</span> <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getStylesheet</span><span class="p">({</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">stylesheetWithUri</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getStylesheet</span><span class="p">({</span>
                 <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span>
-                <span class="nx">spritesheet</span><span class="o">:</span> <span class="nx">spritesheet</span><span class="p">,</span>
+                <span class="nx">spritesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
                 <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
-                <span class="nx">uri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span>
+                <span class="nx">uri</span><span class="o">:</span> <span class="kc">true</span>
             <span class="p">});</span>
 
-            <span class="kd">var</span> <span class="nx">markup</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getMarkup</span><span class="p">({</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">markup</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getMarkup</span><span class="p">({</span>
                 <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span>
                 <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span>
             <span class="p">});</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span> <span class="o">=</span> <span class="nx">spritesheet</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheet</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">markup</span> <span class="o">=</span> <span class="nx">markup</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">markupTooltip</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getMarkup</span><span class="p">({</span>
+                <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span>
+                <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
+                <span class="nx">tooltip</span><span class="o">:</span> <span class="kc">true</span>
+            <span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-31" id="section-31">&#182;</a>
+</div>
+<p>if uri is not checked, we need to generate another
+stylesheet with the data uri included for the
+download example rendering</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">stylesheetWithUri</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">getStylesheet</span><span class="p">({</span>
+                    <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span>
+                    <span class="nx">spritesheet</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
+                    <span class="nx">prefix</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">prefix</span><span class="p">,</span>
+                    <span class="nx">uri</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">uri</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">);</span>

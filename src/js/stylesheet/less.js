@@ -10,12 +10,11 @@
 
 define([
     "wrap/jquery",
-    "../../../libs/less/less",
     "util/util",
     "util/templates",
     "stylesheet/base"
 ],
-function ($, less, util, templates, BaseStylesheet) {
+function ($, util, templates, BaseStylesheet) {
 
     "use strict";
 
@@ -36,6 +35,8 @@ function ($, less, util, templates, BaseStylesheet) {
     };
 
     util.inherit(LessStylesheet, BaseStylesheet, {
+        template: templates.lessMarkup,
+
         /**
          * ### LessStylesheet.prototype.get
          * Returns a stylesheet to place images with spritesheet
@@ -52,25 +53,6 @@ function ($, less, util, templates, BaseStylesheet) {
             return templates.less({
                 prefix: prefix,
                 backgroundImage: backgroundImage,
-                sprites: sprites
-            });
-        },
-
-        getCSS: function (sprites, spritesheet, prefix, uri) {
-
-        },
-
-        /**
-         * ### LessStylesheet.prototype.markup
-         * Returns markup for spritesheet example usage
-         *
-         * @param {array} sprites A list of sprites
-         * @param {string} prefix Used to create CSS classes
-         * @return string
-         */
-        markup: function (sprites, prefix) {
-            return templates.lessMarkup({
-                prefix: prefix,
                 sprites: sprites
             });
         }

@@ -104,6 +104,8 @@
     <span class="nx">BaseStylesheet</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">BaseStylesheet</span><span class="p">,</span>
 
+        <span class="nx">template</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
 
 </pre></div>
         </td>
@@ -187,6 +189,11 @@
       <span class="dox_type">string</span>
       <span>Used to create CSS classes</span>
     </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">tooltip</span>
+      <span class="dox_type">boolean</span>
+      <span>If true display bootstrap tooltip</span>
+    </div>
     <div class="dox_tag_title">Returns</div>
     <div class="dox_tag_detail">
       <span class="dox_tag_name"></span>
@@ -196,7 +203,13 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">markup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="nx">markup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">tooltip</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">({</span>
+                <span class="nx">prefix</span><span class="o">:</span> <span class="nx">prefix</span><span class="p">,</span>
+                <span class="nx">sprites</span><span class="o">:</span> <span class="nx">sprites</span><span class="p">,</span>
+                <span class="nx">tooltip</span><span class="o">:</span> <span class="nx">tooltip</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
     <span class="p">};</span>
 
     <span class="k">return</span> <span class="nx">BaseStylesheet</span><span class="p">;</span>

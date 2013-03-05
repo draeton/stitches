@@ -105,6 +105,11 @@
     box-sizing: border-box;
 }
 
+.stitches-downloads .stitches-example i {
+    float: left;
+    margin: 6px;
+}
+
 /** responsive */
 
 @media (max-width: 767px) {

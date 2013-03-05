@@ -562,9 +562,12 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 prefix: this.settings.prefix,
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
+                stylesheetWithUri: this.stylesheetWithUri,
+                stylesheetType: stylesheetManager.type,
                 stylesheetLines: this.stylesheet.split("\n").length,
                 markup: this.markup,
-                markupLines: this.markup.split("\n").length
+                markupLines: this.markup.split("\n").length,
+                markupTooltip: this.markupTooltip
             });
 
             $section.html(html);
@@ -606,26 +609,42 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
          * ...
          */
         generateSheets: function (e) {
-            var spritesheet = layoutManager.getSpritesheet({
+            this.spritesheet = layoutManager.getSpritesheet({
                 sprites: this.canvas.sprites,
                 dimensions: this.canvas.dimensions
             });
 
-            var stylesheet = stylesheetManager.getStylesheet({
+            this.stylesheetWithUri = stylesheetManager.getStylesheet({
                 sprites: this.canvas.sprites,
-                spritesheet: spritesheet,
+                spritesheet: this.spritesheet,
                 prefix: this.settings.prefix,
-                uri: this.settings.uri
+                uri: true
             });
 
-            var markup = stylesheetManager.getMarkup({
+            this.markup = stylesheetManager.getMarkup({
                 sprites: this.canvas.sprites,
                 prefix: this.settings.prefix
             });
 
-            this.spritesheet = spritesheet;
-            this.stylesheet = stylesheet;
-            this.markup = markup;
+            this.markupTooltip = stylesheetManager.getMarkup({
+                sprites: this.canvas.sprites,
+                prefix: this.settings.prefix,
+                tooltip: true
+            });
+
+            // if uri is not checked, we need to generate another
+            // stylesheet with the data uri included for the
+            // download example rendering
+            if (this.settings.uri) {
+                this.stylesheet = this.stylesheetWithUri;
+            } else {
+                this.stylesheet = stylesheetManager.getStylesheet({
+                    sprites: this.canvas.sprites,
+                    spritesheet: this.spritesheet,
+                    prefix: this.settings.prefix,
+                    uri: this.settings.uri
+                });
+            }
 
             this.$element.trigger("update-toolbar");
             this.$element.trigger("update-downloads");

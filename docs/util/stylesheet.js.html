@@ -128,8 +128,10 @@ stylesheets</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">Manager</span> <span class="o">=</span> <span class="nx">managers</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="nx">managers</span><span class="p">.</span><span class="nx">css</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">Manager</span><span class="p">;</span>
 
+            <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span> <span class="o">||</span> <span class="s2">&quot;css&quot;</span><span class="p">;</span>
+            <span class="nx">Manager</span> <span class="o">=</span> <span class="nx">managers</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="p">];</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
         <span class="p">},</span>
 
@@ -238,8 +240,9 @@ stylesheets</p>
         <span class="nx">getMarkup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">sprites</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">prefix</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">tooltip</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tooltip</span> <span class="o">||</span> <span class="kc">false</span><span class="p">;</span>
 
-            <span class="kd">var</span> <span class="nx">markup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">markup</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">markup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">markup</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">tooltip</span><span class="p">);</span>
             <span class="nx">markup</span> <span class="o">=</span> <span class="nx">markup</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\n/g</span><span class="p">,</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
 
             <span class="k">return</span> <span class="nx">markup</span><span class="p">;</span>

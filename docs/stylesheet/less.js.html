@@ -27,9 +27,6 @@
       <div class="heading h3">
         <a href="#lessstylesheet.prototype.get">LessStylesheet.prototype.get</a>
       </div>
-      <div class="heading h3">
-        <a href="#lessstylesheet.prototype.markup">LessStylesheet.prototype.markup</a>
-      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -59,12 +56,11 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="nx">define</span><span class="p">([</span>
     <span class="s2">&quot;wrap/jquery&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;../../../libs/less/less&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/util&quot;</span><span class="p">,</span>
     <span class="s2">&quot;util/templates&quot;</span><span class="p">,</span>
     <span class="s2">&quot;stylesheet/base&quot;</span>
 <span class="p">],</span>
-<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">less</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">util</span><span class="p">,</span> <span class="nx">templates</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
@@ -106,6 +102,8 @@
     <span class="p">};</span>
 
     <span class="nx">util</span><span class="p">.</span><span class="nx">inherit</span><span class="p">(</span><span class="nx">LessStylesheet</span><span class="p">,</span> <span class="nx">BaseStylesheet</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">lessMarkup</span><span class="p">,</span>
+
 
 </pre></div>
         </td>
@@ -162,57 +160,6 @@
             <span class="k">return</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">less</span><span class="p">({</span>
                 <span class="nx">prefix</span><span class="o">:</span> <span class="nx">prefix</span><span class="p">,</span>
                 <span class="nx">backgroundImage</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">,</span>
-                <span class="nx">sprites</span><span class="o">:</span> <span class="nx">sprites</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-
-        <span class="nx">getCSS</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">spritesheet</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="lessstylesheet.prototype.markup">
-  <h3>
-    <a href="#lessstylesheet.prototype.markup" class="pilcrow">&#182;</a>
-    LessStylesheet.prototype.markup
-  </h3>
-</div>
-
-
-<p>Returns markup for spritesheet example usage</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">sprites</span>
-      <span class="dox_type">array</span>
-      <span>A list of sprites</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">prefix</span>
-      <span class="dox_type">string</span>
-      <span>Used to create CSS classes</span>
-    </div>
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span>string</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">markup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">templates</span><span class="p">.</span><span class="nx">lessMarkup</span><span class="p">({</span>
-                <span class="nx">prefix</span><span class="o">:</span> <span class="nx">prefix</span><span class="p">,</span>
                 <span class="nx">sprites</span><span class="o">:</span> <span class="nx">sprites</span>
             <span class="p">});</span>
         <span class="p">}</span>
