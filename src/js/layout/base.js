@@ -41,13 +41,13 @@ function ($) {
         getDimensions: function () {},
 
         /**
-         * ### BaseLayout.prototype.getDimensions
+         * ### BaseLayout.prototype.placeSprite
          * ...
          */
-        placeSprites: function () {},
+        placeSprite: function (sprite, placed, dimensions) {},
 
         /**
-         * ### BaseLayout.prototype.getDimensions
+         * ### BaseLayout.prototype.intersection
          * ...
          */
         intersection: function (sprite, obstacles) {

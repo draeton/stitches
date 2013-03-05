@@ -54,7 +54,7 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### VerticalLayout.prototype.getDimensions
+         * ### VerticalLayout.prototype.placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {

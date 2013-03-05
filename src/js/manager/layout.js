@@ -1,8 +1,8 @@
 /**
- * # util/layout
+ * # manager/layout
  *
- * Utility methods for setting the canvas layout and stitching the sprites
- * together (i.e. placing them on the canvas)
+ * Methods for setting the canvas layout and stitching the sprites together
+ * (i.e. placing them on the canvas)
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>

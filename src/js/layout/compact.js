@@ -61,7 +61,7 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### CompactLayout.prototype.getDimensions
+         * ### CompactLayout.prototype.placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {

@@ -1,8 +1,7 @@
 /**
- * # util/stylesheet
+ * # manager/stylesheet
  *
- * Utility methods for setting the canvas stylesheet type and making the
- * stylesheets
+ * Methods for setting the canvas stylesheet type and making the stylesheets
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>

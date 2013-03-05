@@ -12,11 +12,10 @@ define([
     "wrap/jquery",
     "util/util",
     "util/array",
-    "util/layout",
-    "util/stylesheet",
+    "manager/layout",
     "module/sprite"
 ],
-function($, util, array, layout, stylesheet, Sprite) {
+function($, util, array, layoutManager, Sprite) {
 
     "use strict";
 
@@ -108,7 +107,7 @@ function($, util, array, layout, stylesheet, Sprite) {
          * ...
          */
         measure: function (sprites) {
-            this.dimensions = layout.getDimensions(sprites, this.settings.dimensions);
+            this.dimensions = layoutManager.getDimensions(sprites, this.settings.dimensions);
         },
 
         /**
@@ -130,7 +129,7 @@ function($, util, array, layout, stylesheet, Sprite) {
                 }
             });
 
-            layout.placeSprites(sprites, placed, this.dimensions, this.progress);
+            layoutManager.placeSprites(sprites, placed, this.dimensions, this.progress);
         },
 
         /**
@@ -138,7 +137,7 @@ function($, util, array, layout, stylesheet, Sprite) {
          * ...
          */
         cut: function (sprites) {
-            layout.trim(sprites, this.dimensions);
+            layoutManager.trim(sprites, this.dimensions);
 
             this.$element.css({
                 width: this.dimensions.width + "px",
