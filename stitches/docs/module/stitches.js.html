@@ -34,6 +34,9 @@
         <a href="#stitches.prototype.render">Stitches.prototype.render</a>
       </div>
       <div class="heading h3">
+        <a href="#stitches.prototype.test">Stitches.prototype.test</a>
+      </div>
+      <div class="heading h3">
         <a href="#stitches.prototype.bind">Stitches.prototype.bind</a>
       </div>
       <div class="heading h3">
@@ -230,6 +233,7 @@
         <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">configure</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">test</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">setDropBox</span><span class="p">();</span>
@@ -274,8 +278,6 @@
             <span class="k">if</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span> <span class="nx">settings</span><span class="p">);</span>
             <span class="p">}</span>
-
-            <span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input.file&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
         <span class="p">},</span>
 
 
@@ -314,6 +316,32 @@
             <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-downloads&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$settings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-settings&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$properties</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.stitches-properties&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="stitches.prototype.test">
+  <h3>
+    <a href="#stitches.prototype.test" class="pilcrow">&#182;</a>
+    Stitches.prototype.test
+  </h3>
+</div>
+
+
+<p>...</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">test</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;input.file&quot;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
         <span class="p">},</span>
 
 
@@ -1174,7 +1202,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-28" id="section-28">&#182;</a>
+  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1195,7 +1223,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
 </div>
 <p>tooltips</p>
         </td>
@@ -1298,7 +1326,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-32" id="section-32">&#182;</a>
+  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the
