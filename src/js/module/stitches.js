@@ -572,6 +572,7 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
 
             $section.html(html);
 
+            // buttons
             $spritesheet.attr({
                 "href": this.spritesheet,
                 "target": "_blank"
@@ -580,6 +581,11 @@ function($, Modernizr, store, util, layoutManager, stylesheetManager, templates,
                 "href": "data:text/plain," + encodeURIComponent(this.stylesheet),
                 "target": "_blank"
             });
+
+            // tooltips
+            if ($.fn.tooltip) {
+                $section.find("[data-toggle=tooltip]").tooltip();
+            }
         },
 
         /**

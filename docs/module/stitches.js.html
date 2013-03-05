@@ -1195,6 +1195,18 @@
 
             <span class="nx">$section</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+</div>
+<p>buttons</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="nx">$spritesheet</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
                 <span class="s2">&quot;href&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">,</span>
                 <span class="s2">&quot;target&quot;</span><span class="o">:</span> <span class="s2">&quot;_blank&quot;</span>
@@ -1203,6 +1215,22 @@
                 <span class="s2">&quot;href&quot;</span><span class="o">:</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">),</span>
                 <span class="s2">&quot;target&quot;</span><span class="o">:</span> <span class="s2">&quot;_blank&quot;</span>
             <span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+</div>
+<p>tooltips</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">tooltip</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$section</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-toggle=tooltip]&quot;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">();</span>
+            <span class="p">}</span>
         <span class="p">},</span>
 
 
@@ -1298,7 +1326,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-31" id="section-31">&#182;</a>
+  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the
