@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
         clean: {
             stitches: {
-                src: ["amd/", "build/", "docs/"]
+                src: ["amd/", "build/", "dist/", "docs/"]
             },
             pages: {
                 src: ["stitches/"]
@@ -250,8 +250,7 @@ module.exports = function(grunt) {
         "validate",
         "docs",
         "build",
-        "dist",
-        "push:stitches"
+        "dist"
     ]);
 
     /**
@@ -274,4 +273,6 @@ module.exports = function(grunt) {
      */
 
     grunt.registerTask("default", "stitches");
+    grunt.registerTask("ps", "push:stitches");
+    grunt.registerTask("p", "pages");
 };

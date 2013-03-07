@@ -1,2 +1,4 @@
-node_modules
 amd
+dist
+docs
+node_modules

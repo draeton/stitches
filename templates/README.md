@@ -47,6 +47,11 @@ If you choose, any images that are a part of the initial markup will be loaded o
 <script src="libs/bootstrap/js/bootstrap.min.js"></script>
 ```
 
+## Download
+
+**The latest release, @@version, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-@@version.zip).**
+
+
 ## License
 
 (The MIT License)
