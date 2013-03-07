@@ -1,0 +1,48 @@
+{
+  "name": "stitches",
+  "title": "Stitches",
+  "description": "Stitches is an HTML5 sprite sheet generator.",
+  "version": "1.2.8",
+  "homepage": "http://draeton.github.com/stitches/",
+  "author": {
+    "name": "Matthew Cobbs",
+    "email": "draeton@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/draeton/stitches.git"
+  },
+  "bugs": {
+    "url": "https://github.com/draeton/stitches/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/draeton/stitches/blob/master/LICENSE"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-qunit": "~0.2.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-requirejs": "~0.4.0",
+    "grunt-replace": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-zip": "~0.3.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-bump": "0.0.2",
+    "prompt": "~0.2.9",
+    "grunt-docker": "0.0.4",
+    "shelljs": "~0.1.2"
+  },
+  "keywords": [
+    "stitches",
+    "html5",
+    "javascript",
+    "sprite"
+  ],
+  "readmeFilename": "README.md"
+}
