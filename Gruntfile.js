@@ -187,7 +187,7 @@ module.exports = function(grunt) {
             }
         },
 
-        commit: {
+        push: {
             stitches: {
                 branch: "master"
             },
@@ -251,7 +251,7 @@ module.exports = function(grunt) {
         "docs",
         "build",
         "dist",
-        "commit:stitches"
+        "push:stitches"
     ]);
 
     /**
@@ -265,7 +265,7 @@ module.exports = function(grunt) {
         "copy:pages",
         "replace:pages",
         "rebase:pages",
-        "commit:pages",
+        "push:pages",
         "rebase:stitches"
     ]);
 
@@ -273,5 +273,5 @@ module.exports = function(grunt) {
      * default
      */
 
-    grunt.registerTask("default", "stitches pages bump");
+    grunt.registerTask("default", "stitches");
 };

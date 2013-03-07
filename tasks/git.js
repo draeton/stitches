@@ -27,7 +27,7 @@ module.exports = function(grunt) {
         }
     };
 
-    grunt.registerMultiTask("commit", "Commit the changes and push to github", function () {
+    grunt.registerMultiTask("push", "Commit the changes and push to github", function () {
         var done = this.async();
         var shell = require("shelljs");
         var pkg = require("../package.json");
