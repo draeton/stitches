@@ -44,6 +44,7 @@ function($, util, array, layoutManager, Sprite) {
         this.dimensions = this.settings.dimensions;
         this.progress = this.settings.progress;
         this.sprites = [];
+        this.names = "";
     };
 
     Canvas.classname = ".stitches-canvas";
@@ -147,8 +148,10 @@ function($, util, array, layoutManager, Sprite) {
          * ...
          */
         add: function (sprite) {
-            this.$element.trigger("show-overlay");
             this.sprites.push(sprite);
+            this.names = this.names + "/" + sprite.name + "/";
+
+            this.$element.trigger("show-overlay");
             sprite.$element.appendTo(this.$element);
             this.$element.trigger("update-toolbar");
 
@@ -160,8 +163,10 @@ function($, util, array, layoutManager, Sprite) {
          * ...
          */
         remove: function (sprite) {
-            this.$element.trigger("show-overlay");
             this.sprites = array.remove(this.sprites, sprite);
+            this.names = this.names.replace("/" + sprite.name + "/", "");
+
+            this.$element.trigger("show-overlay");
             sprite.$element.fadeOut("fast").remove();
             this.$element.trigger("update-toolbar");
             this.$element.trigger("close-properties");
@@ -174,8 +179,10 @@ function($, util, array, layoutManager, Sprite) {
          * ...
          */
         clear: function () {
-            this.$element.trigger("show-overlay");
             this.sprites = [];
+            this.names = "";
+
+            this.$element.trigger("show-overlay");
             this.$element.empty();
             this.$element.trigger("update-toolbar");
             this.$element.trigger("close-properties");
