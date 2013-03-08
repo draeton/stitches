@@ -148,6 +148,7 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">progress</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
     <span class="p">};</span>
 
     <span class="nx">Canvas</span><span class="p">.</span><span class="nx">classname</span> <span class="o">=</span> <span class="s2">&quot;.stitches-canvas&quot;</span><span class="p">;</span>
@@ -395,8 +396,10 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="nx">sprite</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
 
@@ -426,8 +429,10 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="nx">sprite</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">);</span>
@@ -458,8 +463,10 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">);</span>
