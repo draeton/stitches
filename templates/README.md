@@ -54,10 +54,10 @@ If you choose, any images that are a part of the initial markup will be loaded o
 
 ## Contributors
 
-@amenadiel
-@flying-sheep
-@JonDum
-@mreq
+* [amenadiel](https://github.com/amenadiel)
+* [flying-sheep](https://github.com/flying-sheep)
+* [JonDum](https://github.com/JonDum)
+* [mreq](https://github.com/mreq)
 
 
 ## License
