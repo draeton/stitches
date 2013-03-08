@@ -52,6 +52,14 @@ If you choose, any images that are a part of the initial markup will be loaded o
 **The latest release, @@version, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-@@version.zip).**
 
 
+## Contributors
+
+@amenadiel
+@flying-sheep
+@JonDum
+@mreq
+
+
 ## License
 
 (The MIT License)
