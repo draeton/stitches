@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         docker: {
             files: {
                 expand: true,
-                src: "**/*.js",
+                src: "**",
                 dest: "doc",
                 options: {
                     onlyUpdated: false
