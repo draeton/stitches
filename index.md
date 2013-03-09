@@ -47,7 +47,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 </div>
 {% endhighlight %}
 
-Documentation is available [here.](/stitches/stitches/docs/stitches.js.html)
+Documentation is available [here.](/stitches/stitches/src/js/doc/stitches.js.html)
 
 
 ## Dependencies
