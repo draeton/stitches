@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
         clean: {
             stitches: {
-                src: ["amd/", "build/", "dist/"]
+                src: ["amd/", "build/", "dist/", "src/js/doc/"]
             },
             pages: {
                 src: ["stitches/"]
