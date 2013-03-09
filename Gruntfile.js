@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
         clean: {
             stitches: {
-                src: ["amd/", "build/", "dist/", "src/js/doc/"]
+                src: ["amd/", "build/", "dist/"]
             },
             pages: {
                 src: ["stitches/"]
@@ -62,8 +62,8 @@ module.exports = function(grunt) {
         docker: {
             files: {
                 expand: true,
-                src: "**",
-                dest: "doc",
+                src: "**/*.js",
+                dest: "../../doc",
                 options: {
                     onlyUpdated: false
                 }
@@ -158,9 +158,14 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        src: "test/**",
+                        src: "doc/**",
                         dest: "../gh-pages/stitches/stitches/"
                     },
+                    {
+                        expand: true,
+                        src: "test/**",
+                        dest: "../gh-pages/stitches/stitches/"
+                    }
                 ]
             }
         },
