@@ -54,7 +54,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         constructor: Stitches,
 
         /**
-         * ### Stitches.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -74,7 +74,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.configure
+         * ### @configure
          * ...
          */
         configure: function () {
@@ -90,7 +90,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.render
+         * ### @render
          * ...
          */
         render: function () {
@@ -110,7 +110,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.test
+         * ### @test
          * ...
          */
         test: function () {
@@ -118,7 +118,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -141,7 +141,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setDropBox
+         * ### @setDropBox
          * ...
          */
         setDropBox: function () {
@@ -149,7 +149,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setManagers
+         * ### @setManagers
          * ...
          */
         setManagers: function () {
@@ -162,7 +162,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setImages
+         * ### @setImages
          * ...
          */
         setImages: function () {
@@ -170,7 +170,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setCanvas
+         * ### @setCanvas
          * ...
          */
         setCanvas: function () {
@@ -182,7 +182,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setToolbar
+         * ### @setToolbar
          * ...
          */
         setToolbar: function () {
@@ -238,7 +238,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setPalettes
+         * ### @setPalettes
          * ...
          */
         setPalettes: function () {
@@ -381,7 +381,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.update
+         * ### @update
          * ...
          */
         update: function () {
@@ -393,7 +393,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.showOverlay
+         * ### @showOverlay
          * ...
          */
         showOverlay: function (e, type) {
@@ -401,7 +401,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.hideOverlay
+         * ### @hideOverlay
          * ...
          */
         hideOverlay: function (e) {
@@ -409,7 +409,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openAbout
+         * ### @openAbout
          * ...
          */
         openAbout: function (e) {
@@ -419,7 +419,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeAbout
+         * ### @closeAbout
          * ...
          */
         closeAbout: function (e) {
@@ -429,7 +429,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openDownloads
+         * ### @openDownloads
          * ...
          */
         openDownloads: function (e) {
@@ -439,7 +439,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeDownloads
+         * ### @closeDownloads
          * ...
          */
         closeDownloads: function (e) {
@@ -449,7 +449,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openSettings
+         * ### @openSettings
          * ...
          */
         openSettings: function (e) {
@@ -470,7 +470,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeSettings
+         * ### @closeSettings
          * ...
          */
         closeSettings: function (e) {
@@ -480,7 +480,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openProperties
+         * ### @openProperties
          * ...
          */
         openProperties: function (e, sprite) {
@@ -499,7 +499,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeProperties
+         * ### @closeProperties
          * ...
          */
         closeProperties: function (e) {
@@ -510,7 +510,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closePalettes
+         * ### @closePalettes
          * ...
          */
         closePalettes: function (e) {
@@ -521,7 +521,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.processFiles
+         * ### @processFiles
          * ...
          */
         processFiles: function (e, files) {
@@ -529,7 +529,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.updateToolbar
+         * ### @updateToolbar
          * ...
          */
         updateToolbar: function (e) {
@@ -550,7 +550,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.updateDownloads
+         * ### @updateDownloads
          * ...
          */
         updateDownloads: function (e) {
@@ -589,7 +589,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.updateProgress
+         * ### @updateProgress
          * ...
          */
         updateProgress: function (progress, type) {
@@ -611,7 +611,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.generateSheets
+         * ### @generateSheets
          * ...
          */
         generateSheets: function (e) {
@@ -658,7 +658,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.errorHandler
+         * ### @errorHandler
          * ...
          */
         errorHandler: function (e, err, type) {

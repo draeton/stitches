@@ -29,7 +29,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
     // **Module definition**
     return {
         /**
-         * ### layout.set
+         * ### @set
          * Set the working layout manager instance by type
          *
          * @param {string} type The layout manager type
@@ -41,7 +41,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### layout.getDimensions
+         * ### @getDimensions
          * Get the dimensions necessary to place the sprites
          *
          * @param {array} sprites A list of sprites to place
@@ -53,7 +53,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### layout.placeSprites
+         * ### @placeSprites
          * Position a list of sprites to fit in dimensions and layout
          *
          * @param {array} sprites To place
@@ -80,7 +80,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### layout.trim
+         * ### @trim
          * Trim dimensions to only contain placed sprites
          *
          * @param {array} sprites A list of sprites
@@ -100,7 +100,7 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
         },
 
         /**
-         * ### layout.getSpritesheet
+         * ### @getSpritesheet
          * Returns an image using the browser canvas element's drawing context.
          * Triggers a non-fatal error if anything fails
          *

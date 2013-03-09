@@ -18,7 +18,7 @@ function ($) {
     // **Module definition**
     return {
         /**
-         * ### array.remove
+         * ### @remove
          * Remove from an array by value
          *
          * @param {array} list The array to filter

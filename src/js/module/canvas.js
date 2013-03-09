@@ -53,7 +53,7 @@ function($, util, array, layoutManager, Sprite) {
         constructor: Canvas,
 
         /**
-         * ### Canvas.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -64,7 +64,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -72,7 +72,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.setup
+         * ### @setup
          * ...
          */
         setup: function () {
@@ -88,7 +88,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.reset
+         * ### @reset
          * ...
          */
         reset: function () {
@@ -101,7 +101,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.measure
+         * ### @measure
          * ...
          */
         measure: function (sprites) {
@@ -109,7 +109,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.place
+         * ### @place
          * ...
          */
         place: function (sprites) {
@@ -131,7 +131,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.cut
+         * ### @cut
          * ...
          */
         cut: function (sprites) {
@@ -144,7 +144,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.add
+         * ### @add
          * ...
          */
         add: function (sprite) {
@@ -159,7 +159,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.remove
+         * ### @remove
          * ...
          */
         remove: function (sprite) {
@@ -175,7 +175,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.clear
+         * ### @clear
          * ...
          */
         clear: function () {
@@ -192,7 +192,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.createSprite
+         * ### @createSprite
          * ...
          */
         createSprite: function (name, src) {
@@ -208,7 +208,7 @@ function($, util, array, layoutManager, Sprite) {
         },
 
         /**
-         * ### Canvas.prototype.clearActive
+         * ### @clearActive
          * ...
          */
         clearActive: function (e, sprite) {

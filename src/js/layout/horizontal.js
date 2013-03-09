@@ -23,7 +23,6 @@ function ($, util, BaseLayout) {
 
     /**
      * ## HorizontalLayout
-     *
      * Create a new `HorizontalLayout` instance
      *
      * @constructor
@@ -35,7 +34,7 @@ function ($, util, BaseLayout) {
 
     util.inherit(HorizontalLayout, BaseLayout, {
         /**
-         * ### HorizontalLayout.prototype.getDimensions
+         * ### @getDimensions
          * ...
          */
         getDimensions: function (sprites, defaults) {
@@ -54,7 +53,7 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### HorizontalLayout.prototype.placeSprite
+         * ### @placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {

@@ -44,7 +44,7 @@ function ($) {
         constructor: Toolbar,
 
         /**
-         * ### Toolbar.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -52,7 +52,7 @@ function ($) {
         },
 
         /**
-         * ### Toolbar.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -73,7 +73,7 @@ function ($) {
         },
 
         /**
-         * ### Toolbar.prototype.getHandler
+         * ### @getHandler
          * ...
          */
         getHandler: function (context, callback) {
@@ -90,7 +90,7 @@ function ($) {
         },
 
         /**
-         * ### Toolbar.prototype.toggleActions
+         * ### @toggleActions
          * ...
          */
         toggleActions: function (actions, disable) {
@@ -108,7 +108,7 @@ function ($) {
         },
 
         /**
-         * ### Toolbar.prototype.enable
+         * ### @enable
          * ...
          */
         enable: function (actions) {
@@ -116,7 +116,7 @@ function ($) {
         },
 
         /**
-         * ### Toolbar.prototype.disable
+         * ### @disable
          * ...
          */
         disable: function (actions) {

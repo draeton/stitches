@@ -38,13 +38,13 @@ function ($, util) {
         },
 
         /**
-         * ### FileManager.prototype.noop
+         * ### @noop
          * ...
          */
         noop: function () {},
 
         /**
-         * ### FileManager.prototype.processFiles
+         * ### @processFiles
          * ...
          */
         processFiles: function (files) {
@@ -64,7 +64,7 @@ function ($, util) {
         },
 
         /**
-         * ### FileManager.prototype.processFile
+         * ### @processFile
          * ...
          */
         processFile: function (file) {
@@ -92,7 +92,7 @@ function ($, util) {
         },
 
         /**
-         * ### FileManager.prototype.processQueue
+         * ### @processQueue
          * ...
          */
         processQueue: function () {

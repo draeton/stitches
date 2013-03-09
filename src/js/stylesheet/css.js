@@ -24,7 +24,6 @@ function ($, util, templates, BaseStylesheet) {
 
     /**
      * ## CssStylesheet
-     *
      * Create a new `CssStylesheet` instance
      *
      * @constructor
@@ -38,7 +37,7 @@ function ($, util, templates, BaseStylesheet) {
         template: templates.cssMarkup,
 
         /**
-         * ### CssStylesheet.prototype.get
+         * ### @get
          * Returns a stylesheet to place images with spritesheet
          *
          * @param {array} sprites A list of sprites

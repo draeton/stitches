@@ -52,7 +52,7 @@ function($, util, templates) {
         constructor: Sprite,
 
         /**
-         * ### Sprite.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -60,7 +60,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.load
+         * ### @load
          * ...
          */
         load: function () {
@@ -85,7 +85,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.render
+         * ### @render
          * ...
          */
         render: function () {
@@ -96,7 +96,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -104,7 +104,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.reset
+         * ### @reset
          * ...
          */
         reset: function () {
@@ -115,7 +115,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.show
+         * ### @show
          * ...
          */
         show: function () {
@@ -127,7 +127,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.click
+         * ### @click
          * ...
          */
         click: function (e) {
@@ -144,7 +144,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.configure
+         * ### @configure
          * ...
          */
         configure: function (properties) {
@@ -157,7 +157,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.cleanName
+         * ### @cleanName
          * Remove special characters and other markers from a string
          * to be used as a sprite name
          *
@@ -173,7 +173,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.left
+         * ### @left
          * Returns the x position of the sprite accounting for padding
          *
          * @return number
@@ -183,7 +183,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.top
+         * ### @top
          * Returns the y position of the sprite accounting for padding
          *
          * @return number

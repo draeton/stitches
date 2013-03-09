@@ -24,7 +24,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
     // **Module definition**
     return {
         /**
-         * ### templates.stitches
+         * ### @stitches
          * Returns the app template
          *
          * @return string
@@ -34,7 +34,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.downloads
+         * ### @downloads
          * Returns the downloads template
          *
          * @return string
@@ -44,7 +44,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.sprite
+         * ### @sprite
          * Returns the sprite template
          *
          * @return string
@@ -54,7 +54,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.css
+         * ### @css
          * Returns the css template
          *
          * @return string
@@ -64,7 +64,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.cssMarkup
+         * ### @cssMarkup
          * Returns the css markup template
          *
          * @return string
@@ -74,7 +74,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.less
+         * ### @less
          * Returns the less template
          *
          * @return string
@@ -84,7 +84,7 @@ function (stitchesTemplate, downloadsTemplate, spriteTemplate, cssTemplate, cssM
         },
 
         /**
-         * ### templates.lessMarkup
+         * ### @lessMarkup
          * Returns the less markup template
          *
          * @return string

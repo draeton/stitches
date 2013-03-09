@@ -18,7 +18,7 @@ function ($) {
     // **Module definition**
     return {
         /**
-         * ### util.inherit
+         * ### @inherit
          * Set up prototypical inheritance
          *
          * @param {function} Child Constructor
@@ -41,7 +41,7 @@ function ($) {
         },
 
         /**
-         * ### util.debounce
+         * ### @debounce
          * Prevent a function from being called more than once within
          * a certain threshold
          *

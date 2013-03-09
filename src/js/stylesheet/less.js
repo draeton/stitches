@@ -24,7 +24,6 @@ function ($, util, templates, BaseStylesheet) {
 
     /**
      * ## LessStylesheet
-     *
      * Create a new `LessStylesheet` instance
      *
      * @constructor
@@ -38,7 +37,7 @@ function ($, util, templates, BaseStylesheet) {
         template: templates.lessMarkup,
 
         /**
-         * ### LessStylesheet.prototype.get
+         * ### @get
          * Returns a stylesheet to place images with spritesheet
          *
          * @param {array} sprites A list of sprites

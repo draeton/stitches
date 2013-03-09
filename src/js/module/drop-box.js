@@ -41,7 +41,7 @@ function($, util) {
         constructor: DropBox,
 
         /**
-         * ### DropBox.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -49,7 +49,7 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -64,7 +64,7 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.noop
+         * ### @noop
          * ...
          */
         noop: function (e) {
@@ -73,7 +73,7 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.dragStart
+         * ### @dragStart
          * ...
          */
         dragStart: function (e) {
@@ -82,7 +82,7 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.dragStop
+         * ### @dragStop
          * ...
          */
         dragStop: function (e) {
@@ -92,7 +92,7 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.drop
+         * ### @drop
          * ...
          */
         drop: function (e) {

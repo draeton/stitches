@@ -26,7 +26,7 @@ function ($, CssStylesheet, LessStylesheet) {
     // **Module definition**
     return {
         /**
-         * ### stylesheet.set
+         * ### @set
          * Set the working stylesheet manager instance by type
          *
          * @param {string} type The stylesheet manager type
@@ -40,7 +40,7 @@ function ($, CssStylesheet, LessStylesheet) {
         },
 
         /**
-         * ### stylesheet.getStylesheet
+         * ### @getStylesheet
          * Returns a stylesheet to place images with spritesheet
          *
          * @param {array} options.sprites A list of sprites
@@ -62,7 +62,7 @@ function ($, CssStylesheet, LessStylesheet) {
         },
 
         /**
-         * ### stylesheet.getMarkup
+         * ### @getMarkup
          * Returns markup for spritesheet example usage
          *
          * @param {array} options.sprites A list of sprites

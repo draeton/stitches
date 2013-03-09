@@ -23,7 +23,6 @@ function ($, util, BaseLayout) {
 
     /**
      * ## CompactLayout
-     *
      * Create a new `CompactLayout` instance
      *
      * @constructor
@@ -35,7 +34,7 @@ function ($, util, BaseLayout) {
 
     util.inherit(CompactLayout, BaseLayout, {
         /**
-         * ### CompactLayout.prototype.getDimensions
+         * ### @getDimensions
          * ...
          */
         getDimensions: function (sprites, defaults) {
@@ -61,7 +60,7 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### CompactLayout.prototype.placeSprite
+         * ### @placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {

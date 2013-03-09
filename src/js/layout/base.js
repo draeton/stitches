@@ -21,7 +21,6 @@ function ($) {
 
     /**
      * ## BaseLayout
-     *
      * Create a new `BaseLayout` instance
      *
      * @constructor
@@ -35,19 +34,19 @@ function ($) {
         constructor: BaseLayout,
 
         /**
-         * ### BaseLayout.prototype.getDimensions
+         * ### @getDimensions
          * ...
          */
         getDimensions: function () {},
 
         /**
-         * ### BaseLayout.prototype.placeSprite
+         * ### @placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {},
 
         /**
-         * ### BaseLayout.prototype.intersection
+         * ### @intersection
          * ...
          */
         intersection: function (sprite, obstacles) {

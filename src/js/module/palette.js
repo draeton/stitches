@@ -49,7 +49,7 @@ function ($, util, Toolbar) {
 
     util.inherit(Palette, Toolbar, {
         /**
-         * ### Palette.prototype.init
+         * ### @init
          * ...
          */
         init: function () {
@@ -59,7 +59,7 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.bind
+         * ### @bind
          * ...
          */
         bind: function () {
@@ -78,7 +78,7 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.open
+         * ### @open
          * ...
          */
         open: function () {
@@ -87,7 +87,7 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.close
+         * ### @close
          * ...
          */
         close: function () {
@@ -96,7 +96,7 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.configure
+         * ### @configure
          * ...
          */
         configure: function (properties) {

@@ -23,7 +23,6 @@ function ($, util, BaseLayout) {
 
     /**
      * ## VerticalLayout
-     *
      * Create a new `VerticalLayout` instance
      *
      * @constructor
@@ -35,7 +34,7 @@ function ($, util, BaseLayout) {
 
     util.inherit(VerticalLayout, BaseLayout, {
         /**
-         * ### VerticalLayout.prototype.getDimensions
+         * ### @getDimensions
          * ...
          */
         getDimensions: function (sprites, defaults) {
@@ -54,7 +53,7 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### VerticalLayout.prototype.placeSprite
+         * ### @placeSprite
          * ...
          */
         placeSprite: function (sprite, placed, dimensions) {

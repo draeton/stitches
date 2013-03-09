@@ -21,7 +21,6 @@ function ($) {
 
     /**
      * ## BaseStylesheet
-     *
      * Create a new `BaseStylesheet` instance
      *
      * @constructor
@@ -37,7 +36,7 @@ function ($) {
         template: null,
 
         /**
-         * ### BaseStylesheet.prototype.get
+         * ### @get
          * Returns a stylesheet to place images with spritesheet
          *
          * @param {array} sprites A list of sprites
@@ -49,7 +48,7 @@ function ($) {
         get: function (sprites, spritesheet, prefix, uri) {},
 
         /**
-         * ### BaseStylesheet.prototype.markup
+         * ### @markup
          * Returns markup for spritesheet example usage
          *
          * @param {array} sprites A list of sprites

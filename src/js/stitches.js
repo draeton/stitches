@@ -1,5 +1,6 @@
 /**
  * # Stitches
+ *
  * ### _An HTML5 Sprite Sheet Generator_
  *
  * > http://draeton.github.com/stitches<br/>
