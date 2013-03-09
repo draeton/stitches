@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
         clean: {
             stitches: {
-                src: ["amd/", "build/", "dist/", "docs/"]
+                src: ["amd/", "build/", "dist/"]
             },
             pages: {
                 src: ["stitches/"]
@@ -63,10 +63,9 @@ module.exports = function(grunt) {
             files: {
                 expand: true,
                 src: "**/*.js",
-                dest: "../../docs",
+                dest: "doc",
                 options: {
-                    onlyUpdated: false,
-                    fileSearch: true
+                    onlyUpdated: false
                 }
             }
         },
@@ -153,11 +152,6 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        src: "docs/**",
-                        dest: "../gh-pages/<%= pkg.name %>/stitches/"
-                    },
-                    {
-                        expand: true,
                         src: "test/**",
                         dest: "../gh-pages/<%= pkg.name %>/stitches/"
                     },
@@ -224,7 +218,7 @@ module.exports = function(grunt) {
         "qunit",*/
     ]);
 
-    grunt.registerTask("docs", [
+    grunt.registerTask("doc", [
         "rebase:srcjs",
         "docker",
         "rebase:stitches"
@@ -248,7 +242,7 @@ module.exports = function(grunt) {
         "replace:version",
         "clean:stitches",
         "validate",
-        "docs",
+        "doc",
         "build",
         "dist"
     ]);
