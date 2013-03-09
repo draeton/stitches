@@ -233,6 +233,7 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 
 /**
  * # Stitches
+ *
  * ### _An HTML5 Sprite Sheet Generator_
  *
  * > http://draeton.github.com/stitches<br/>
