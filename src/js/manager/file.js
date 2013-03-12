@@ -39,13 +39,15 @@ function ($, util) {
 
         /**
          * ### @noop
-         * ...
+         * No operation
          */
         noop: function () {},
 
         /**
          * ### @processFiles
-         * ...
+         * Reset the queue and start processing a list of files
+         *
+         * @param {array} files An array of files from one of the file inputs
          */
         processFiles: function (files) {
             var self = this;
@@ -65,7 +67,11 @@ function ($, util) {
 
         /**
          * ### @processFile
-         * ...
+         * Use the FileReader to read in image files from input, and add
+         * them to the queue. When all files are read, the queue is then
+         * processed
+         *
+         * @param {object} file From a file input
          */
         processFile: function (file) {
             var self = this;
@@ -93,7 +99,8 @@ function ($, util) {
 
         /**
          * ### @processQueue
-         * ...
+         * Loop over the queue and apply the onload callback to each
+         * item
          */
         processQueue: function () {
             var self = this;
