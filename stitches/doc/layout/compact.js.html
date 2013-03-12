@@ -120,9 +120,29 @@
 </div>
 
 
-<p>...</p>
+<p>Returns an object with the width and height necessary
+to contain the <code>sprites</code>. Calculation based on the least area
+needed to contain the sprites.</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>The list of sprites to size for</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">defaults</span>
+      <span class="dox_type">object</span>
+      <span>Default width and height, if no sprites</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -164,9 +184,30 @@
 </div>
 
 
-<p>...</p>
+<p>Determine sprite coordinates on the canvas. Once a position is
+determined with no intersections, the sprite is added to the
+placed array. If there is no space, the dimensions are updated.
+Seeks across, then down, to place the sprite.</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>The sprite to place</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">placed</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites already placed</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_type">object</span>
+      <span>The current canvas dimensions</span>
+    </div>
   </div>
 </div>
         </td>

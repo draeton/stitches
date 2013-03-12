@@ -105,6 +105,18 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
     <span class="p">};</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p><strong>Prototype</strong></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
     <span class="nx">BaseLayout</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="o">:</span> <span class="nx">BaseLayout</span><span class="p">,</span>
 
@@ -123,14 +135,33 @@
 </div>
 
 
-<p>...</p>
+<p>Returns an object with the width and height necessary
+to contain the <code>sprites</code></p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>The list of sprites to size for</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">defaults</span>
+      <span class="dox_type">object</span>
+      <span>Default width and height, if no sprites</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>object</span>
+    </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">getDimensions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">)</span> <span class="p">{},</span>
 
 
 </pre></div>
@@ -147,9 +178,29 @@
 </div>
 
 
-<p>...</p>
+<p>Determine sprite coordinates on the canvas. Once a position is
+determined with no intersections, the sprite is added to the
+placed array. If there is no space, the dimensions are updated.</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>The sprite to place</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">placed</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites already placed</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dimensions</span>
+      <span class="dox_type">object</span>
+      <span>The current canvas dimensions</span>
+    </div>
   </div>
 </div>
         </td>
@@ -171,9 +222,29 @@
 </div>
 
 
-<p>...</p>
+<p>Determine if a sprite intersects any other placed sprites. If no,
+returns undefined; if yes, returns the intersecting sprite
+for comparison</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>The sprite to compare against others</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">obstacles</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites already placed</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>undefined|Sprite</span>
+    </div>
   </div>
 </div>
         </td>
