@@ -30,24 +30,42 @@ function ($) {
         this.settings = $.extend({}, defaults, options);
     };
 
+    // **Prototype**
     BaseLayout.prototype = {
         constructor: BaseLayout,
 
         /**
          * ### @getDimensions
-         * ...
+         * Returns an object with the width and height necessary
+         * to contain the `sprites`
+         *
+         * @param {array} sprites The list of sprites to size for
+         * @param {object} defaults Default width and height, if no sprites
+         * @return object
          */
-        getDimensions: function () {},
+        getDimensions: function (sprites, defaults) {},
 
         /**
          * ### @placeSprite
-         * ...
+         * Determine sprite coordinates on the canvas. Once a position is
+         * determined with no intersections, the sprite is added to the
+         * placed array. If there is no space, the dimensions are updated.
+         *
+         * @param {Sprite} sprite The sprite to place
+         * @param {array} placed An array of sprites already placed
+         * @param {object} dimensions The current canvas dimensions
          */
         placeSprite: function (sprite, placed, dimensions) {},
 
         /**
          * ### @intersection
-         * ...
+         * Determine if a sprite intersects any other placed sprites. If no,
+         * returns undefined; if yes, returns the intersecting sprite
+         * for comparison
+         *
+         * @param {Sprite} sprite The sprite to compare against others
+         * @param {array} obstacles An array of sprites already placed
+         * @return undefined|Sprite
          */
         intersection: function (sprite, obstacles) {
             var x1, x2, y1, y2;

@@ -35,7 +35,13 @@ function ($, util, BaseLayout) {
     util.inherit(CompactLayout, BaseLayout, {
         /**
          * ### @getDimensions
-         * ...
+         * Returns an object with the width and height necessary
+         * to contain the `sprites`. Calculation based on the least area
+         * needed to contain the sprites.
+         *
+         * @param {array} sprites The list of sprites to size for
+         * @param {object} defaults Default width and height, if no sprites
+         * @return object
          */
         getDimensions: function (sprites, defaults) {
             var width = 0;
@@ -61,7 +67,14 @@ function ($, util, BaseLayout) {
 
         /**
          * ### @placeSprite
-         * ...
+         * Determine sprite coordinates on the canvas. Once a position is
+         * determined with no intersections, the sprite is added to the
+         * placed array. If there is no space, the dimensions are updated.
+         * Seeks across, then down, to place the sprite.
+         *
+         * @param {Sprite} sprite The sprite to place
+         * @param {array} placed An array of sprites already placed
+         * @param {object} dimensions The current canvas dimensions
          */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
