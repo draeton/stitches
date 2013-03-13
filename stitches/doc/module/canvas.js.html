@@ -153,7 +153,7 @@ state</p>
         <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
     <span class="p">};</span>
@@ -437,7 +437,7 @@ set of sprites</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="nx">sprite</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">);</span>
@@ -479,7 +479,7 @@ updates</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">names</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="nx">sprite</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
@@ -514,7 +514,7 @@ UI updates</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>

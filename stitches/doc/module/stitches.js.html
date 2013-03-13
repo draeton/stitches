@@ -710,14 +710,15 @@
                 <span class="nx">fields</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;input blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
                             <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
-                            <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
                             <span class="kd">var</span> <span class="nx">clean</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">cleanName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 
                             <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">clean</span><span class="p">;</span>
 
                             <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">!==</span> <span class="nx">clean</span><span class="p">)</span> <span class="p">{</span>
-                                <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">clean</span><span class="p">);</span>
+                                <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="nx">clean</span><span class="p">);</span>
                             <span class="p">}</span>
                         <span class="p">}</span>
                     <span class="p">}</span>
