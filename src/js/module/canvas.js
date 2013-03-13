@@ -45,7 +45,7 @@ function($, util, array, layoutManager, Sprite) {
         this.dimensions = this.settings.dimensions;
 
         this.sprites = [];
-        this.names = "";
+        this.names = [];
 
         this.onprogress = handlers.onprogress || util.noop;
     };
@@ -161,7 +161,7 @@ function($, util, array, layoutManager, Sprite) {
          */
         add: function (sprite) {
             this.sprites.push(sprite);
-            this.names = this.names + "/" + sprite.name + "/";
+            this.names.push(sprite.name);
 
             this.$element.trigger("show-overlay");
             sprite.$element.appendTo(this.$element);
@@ -179,7 +179,7 @@ function($, util, array, layoutManager, Sprite) {
          */
         remove: function (sprite) {
             this.sprites = array.remove(this.sprites, sprite);
-            this.names = this.names.replace("/" + sprite.name + "/", "");
+            this.names = array.remove(this.names, sprite.name);
 
             this.$element.trigger("show-overlay");
             sprite.$element.fadeOut("fast").remove();
@@ -196,7 +196,7 @@ function($, util, array, layoutManager, Sprite) {
          */
         clear: function () {
             this.sprites = [];
-            this.names = "";
+            this.names = [];
 
             this.$element.trigger("show-overlay");
             this.$element.empty();

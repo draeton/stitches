@@ -359,14 +359,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 fields: {
                     name: {
                         "input blur": function (e) {
+                            var $input = $(e.currentTarget);
                             var sprite = this.source;
-                            var name = $(e.currentTarget).val();
+                            var name = $input.val();
                             var clean = sprite.cleanName(name);
 
                             this.source.name = clean;
 
                             if (name !== clean) {
-                                $(e.currentTarget).val(clean);
+                                $input.val(clean);
                             }
                         }
                     }
