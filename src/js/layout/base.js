@@ -1,7 +1,8 @@
 /**
  * # layout/base
  *
- * Base constructor for the canvas layout managers
+ * Base constructor for the canvas layout managers. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap)
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -16,7 +17,7 @@ function ($) {
     "use strict";
 
     var defaults = {
-        maxPass: 2
+        maxPass: 2 // number of tries to place sprite
     };
 
     /**

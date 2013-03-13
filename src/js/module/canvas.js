@@ -1,7 +1,9 @@
 /**
  * # module/canvas
  *
- * ...
+ * Constructor for the sprite sheet canvas element, which holds and displays
+ * all placed sprites. Used for manipulating sprite placement and
+ * state
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -20,10 +22,10 @@ function($, util, array, layoutManager, Sprite) {
     "use strict";
 
     var defaults = {
-        images: null,
+        images: null, // an array holding any pre-init included images
         dimensions: {
-            width: 400,
-            height: 400
+            width: 400, // default canvas width
+            height: 400 // default canvas height
         },
         progress: function () {}
     };

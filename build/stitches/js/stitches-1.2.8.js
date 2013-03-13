@@ -73,7 +73,8 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 /**
  * # layout/base
  *
- * Base constructor for the canvas layout managers
+ * Base constructor for the canvas layout managers. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap)
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -83,7 +84,9 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 /**
  * # layout/compact
  *
- * Constructor for the compact canvas layout manager
+ * Constructor for the compact canvas layout manager. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap).
+ * Places sprites in the most compact rectangle possible
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -93,7 +96,9 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 /**
  * # layout/vertical
  *
- * Constructor for the vertical canvas layout manager
+ * Constructor for the vertical canvas layout manager. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap).
+ * Places sprites in a vertical column
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -103,7 +108,9 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 /**
  * # layout/horizontal
  *
- * Constructor for the horizontal canvas layout manager
+ * Constructor for the horizontal canvas layout manager. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap).
+ * Places sprites in a horizontal row
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -194,7 +201,9 @@ var requirejs,require,define;(function(global){function isFunction(e){return ost
 /**
  * # module/canvas
  *
- * ...
+ * Constructor for the sprite sheet canvas element, which holds and displays
+ * all placed sprites. Used for manipulating sprite placement and
+ * state
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>

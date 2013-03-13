@@ -1,7 +1,9 @@
 /**
  * # layout/horizontal
  *
- * Constructor for the horizontal canvas layout manager
+ * Constructor for the horizontal canvas layout manager. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap).
+ * Places sprites in a horizontal row
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -18,7 +20,7 @@ function ($, util, BaseLayout) {
     "use strict";
 
     var defaults = {
-        maxPass: 2
+        maxPass: 2 // number of tries to place sprite
     };
 
     /**
