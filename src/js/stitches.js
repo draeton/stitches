@@ -15,11 +15,9 @@
  * [Glyphicons](http://glyphicons.com/) for some cool little icons.
  *
  * Addtionally, I want to thank [James Taylor](https://github.com/jbt)
- * for the [Docker](https://github.com/jbt/docker) documentation tool, and
- * [Phil Mander](https://github.com/philmander) for his JSHint and JSTestRunner
- * Ant tasks, which round out my build toolchain, and most of all the good folks
- * who develop [RequireJS](http://requirejs.org/) for helping this all make
- * sense.
+ * for the [Docker](https://github.com/jbt/docker) documentation tool, and most
+ * of all the good folks who develop [RequireJS](http://requirejs.org/) and
+ * [GruntJS](http://gruntjs.com/), for helping this all make sense.
  */
 
 /**
