@@ -136,16 +136,17 @@ function($, util, templates) {
          * @param {event} e The event object
          */
         click: function (e) {
-            this.active = !this.active;
+            var active = !this.active;
 
-            if (this.active) {
+            if (active) {
                 this.$element.trigger("clear-active", [this]);
                 this.$element.trigger("open-properties", [this]);
             } else {
                 this.$element.trigger("close-properties");
             }
 
-            this.$element.toggleClass("active");
+            this.active = active;
+            this.$element.toggleClass("active", active);
         },
 
         /**
