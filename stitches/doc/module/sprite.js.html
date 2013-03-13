@@ -74,7 +74,9 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for the sprite element, which holds sprite dimensions,
+position, and display info. Used for manipulation of a single
+sprite on the canvas</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -94,10 +96,9 @@
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="nx">src</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">callback</span><span class="o">:</span> <span class="kc">null</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="c1">// no special chars, no spaces</span>
+        <span class="nx">src</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="c1">// image src (usually from a FileReader)</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span> <span class="c1">// defined in stitches settings</span>
     <span class="p">};</span>
 
 
@@ -124,23 +125,28 @@
       <span class="dox_type">element</span>
     </div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">options
-</span>
+      <span class="dox_tag_name">options</span>
       <span class="dox_type">object</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">handlers</span>
+      <span class="dox_type">object</span>
+      <span>The handlers for various events</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">Sprite</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Sprite</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">handlers</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">$element</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cleanName</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">callback</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">callback</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">placed</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onload</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
     <span class="p">};</span>
@@ -165,7 +171,7 @@
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -191,7 +197,7 @@
 </div>
 
 
-<p>...</p>
+<p>Load the image data from the source, then call onload callback</p>
   </div>
   <div class="body">
   </div>
@@ -210,10 +216,7 @@
                 <span class="nx">self</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">self</span><span class="p">.</span><span class="nx">callback</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
-                <span class="p">}</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">onload</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
             <span class="p">};</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
@@ -234,7 +237,7 @@
 </div>
 
 
-<p>...</p>
+<p>Render the sprite html from a JS template and add to DOM</p>
   </div>
   <div class="body">
   </div>
@@ -263,7 +266,8 @@
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. $.proxy is used to retain
+this instance as the callback execution context</p>
   </div>
   <div class="body">
   </div>
@@ -289,7 +293,8 @@
 </div>
 
 
-<p>...</p>
+<p>Reset the placement status and position of the sprite. Used
+before recalculating everything in a canvas reset</p>
   </div>
   <div class="body">
   </div>
@@ -318,7 +323,7 @@
 </div>
 
 
-<p>...</p>
+<p>Position and show the sprite</p>
   </div>
   <div class="body">
   </div>
@@ -348,9 +353,18 @@
 </div>
 
 
-<p>...</p>
+<p>Clicks trigger the sprite properties palette and toggle
+the sprite active state</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -383,9 +397,18 @@
 </div>
 
 
-<p>...</p>
+<p>Updates the sprite dimensions and related data. Triggered when
+settings (particulary padding) change</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">properties</span>
+      <span class="dox_type">object</span>
+      <span>The set of values to update</span>
+    </div>
   </div>
 </div>
         </td>

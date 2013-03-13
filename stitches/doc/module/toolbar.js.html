@@ -59,7 +59,7 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for UI toolbars</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -77,8 +77,8 @@
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="nx">actions</span><span class="o">:</span> <span class="p">{}</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="c1">// helpful for debugging</span>
+        <span class="nx">actions</span><span class="o">:</span> <span class="p">{}</span> <span class="c1">// named actions for events; set up with `bind`</span>
     <span class="p">};</span>
 
 
@@ -95,8 +95,10 @@
   </h2>
 </div>
 
+
+<p>Create a new <code>Toolbar</code> instance</p>
   </div>
-  <div class="body"><p>Create a new <code>Toolbar</code> instance</p>
+  <div class="body">
   </div>
   <div class="details">
     <div class="dox_tag_title">Params</div>
@@ -142,7 +144,7 @@
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -168,7 +170,9 @@
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. <code>getHandler</code> is used to retain
+this instance as the callback execution context. Loops through
+<code>actions</code> to bind handlers on matching <code>data-action</code> attributes</p>
   </div>
   <div class="body">
   </div>
@@ -207,9 +211,28 @@
 </div>
 
 
-<p>...</p>
+<p>Returns an event handler that maintains context and aborts if
+the target is disabled</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">context</span>
+      <span class="dox_type">object</span>
+      <span>Execution context</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">callback</span>
+      <span class="dox_type">function</span>
+      <span>Handler callback function</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>function</span>
+    </div>
   </div>
 </div>
         </td>
@@ -242,9 +265,22 @@
 </div>
 
 
-<p>...</p>
+<p>Enable or disable toolbar actions based on a flag</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">actions</span>
+      <span class="dox_type">string</span>
+      <span>Space-delimited string of action names</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">disable</span>
+      <span class="dox_type">boolean</span>
+      <span>If true, disable these actions</span>
+    </div>
   </div>
 </div>
         </td>
@@ -278,9 +314,17 @@
 </div>
 
 
-<p>...</p>
+<p>Short-hand for <code>toggleActions</code> to enable</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">actions</span>
+      <span class="dox_type">string</span>
+      <span>Space-delimited string of action names</span>
+    </div>
   </div>
 </div>
         </td>
@@ -304,9 +348,17 @@
 </div>
 
 
-<p>...</p>
+<p>Short-hand for <code>toggleActions</code> to disable</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">actions</span>
+      <span class="dox_type">string</span>
+      <span>Space-delimited string of action names</span>
+    </div>
   </div>
 </div>
         </td>

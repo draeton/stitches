@@ -565,8 +565,9 @@ UI updates</p>
             <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sprite</span><span class="p">({</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
                 <span class="nx">src</span><span class="o">:</span> <span class="nx">src</span><span class="p">,</span>
-                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
-                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span>
+            <span class="p">},</span> <span class="p">{</span>
+                <span class="nx">onload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
                     <span class="nx">self</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
                 <span class="p">}</span>
             <span class="p">});</span>

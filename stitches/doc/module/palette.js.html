@@ -56,7 +56,7 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for UI palettes (i.e. dialogs). Inherits from <code>Toolbar</code></p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -76,10 +76,10 @@
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">actions</span><span class="o">:</span> <span class="p">{},</span>
-        <span class="nx">fields</span><span class="o">:</span> <span class="p">{}</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="c1">// helpful for debugging</span>
+        <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// UI state</span>
+        <span class="nx">actions</span><span class="o">:</span> <span class="p">{},</span> <span class="c1">// named actions for events; set up with `bind`</span>
+        <span class="nx">fields</span><span class="o">:</span> <span class="p">{}</span> <span class="c1">// input fields; set up with `bind` and `configure`</span>
     <span class="p">};</span>
 
 
@@ -96,8 +96,10 @@
   </h2>
 </div>
 
+
+<p>Create a new <code>Palette</code> instance</p>
   </div>
-  <div class="body"><p>Create a new <code>Palette</code> instance</p>
+  <div class="body">
   </div>
   <div class="details">
     <div class="dox_tag_title">Params</div>
@@ -144,7 +146,7 @@
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -172,7 +174,9 @@
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. <code>getHandler</code> is used to retain
+this instance as the callback execution context. Loops through
+<code>fields</code> to bind handlers on matching <code>name</code> attributes</p>
   </div>
   <div class="body">
   </div>
@@ -209,7 +213,7 @@
 </div>
 
 
-<p>...</p>
+<p>Show this palette instance</p>
   </div>
   <div class="body">
   </div>
@@ -236,7 +240,7 @@
 </div>
 
 
-<p>...</p>
+<p>Hide this palette instance</p>
   </div>
   <div class="body">
   </div>
@@ -263,9 +267,17 @@
 </div>
 
 
-<p>...</p>
+<p>Configure the values of the inputs</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">properties</span>
+      <span class="dox_type">object</span>
+      <span>Defines the data source and input values</span>
+    </div>
   </div>
 </div>
         </td>
@@ -273,7 +285,7 @@
         <span class="nx">configure</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">properties</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">source</span> <span class="o">=</span> <span class="nx">properties</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">source</span> <span class="o">=</span> <span class="nx">properties</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span> <span class="c1">// reference object for other modules</span>
 
             <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">properties</span><span class="p">.</span><span class="nx">inputs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">selector</span> <span class="o">=</span> <span class="s2">&quot;input[name=&quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">;</span>

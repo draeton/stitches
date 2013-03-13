@@ -56,7 +56,8 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for the drag and drop element. Used to allow users to drag
+files onto a DOM element to initiate processing</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -90,8 +91,10 @@
   </h2>
 </div>
 
+
+<p>Create a new <code>DropBox</code> instance</p>
   </div>
-  <div class="body"><p>Create a new <code>DropBox</code> instance</p>
+  <div class="body">
   </div>
   <div class="details">
     <div class="dox_tag_title">Params</div>
@@ -136,7 +139,7 @@
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -162,7 +165,8 @@
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. $.proxy is used to retain
+this instance as the callback execution context</p>
   </div>
   <div class="body">
   </div>
@@ -195,9 +199,17 @@
 </div>
 
 
-<p>...</p>
+<p>Close all palettes and block the UI when dragging</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -222,9 +234,17 @@
 </div>
 
 
-<p>...</p>
+<p>If we're on the target, unblock the UI</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -250,9 +270,18 @@
 </div>
 
 
-<p>...</p>
+<p>When a drop event occurs, check for files. If there
+are files, start processing them</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
