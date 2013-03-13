@@ -142,7 +142,7 @@ progress</p>
 </div>
 
 
-<p>...</p>
+<p>No operation</p>
   </div>
   <div class="body">
   </div>
@@ -166,9 +166,17 @@ progress</p>
 </div>
 
 
-<p>...</p>
+<p>Reset the queue and start processing a list of files</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">files</span>
+      <span class="dox_type">array</span>
+      <span>An array of files from one of the file inputs</span>
+    </div>
   </div>
 </div>
         </td>
@@ -204,9 +212,19 @@ progress</p>
 </div>
 
 
-<p>...</p>
+<p>Use the FileReader to read in image files from input, and add
+them to the queue. When all files are read, the queue is then
+processed</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">file</span>
+      <span class="dox_type">object</span>
+      <span>From a file input</span>
+    </div>
   </div>
 </div>
         </td>
@@ -250,7 +268,8 @@ progress</p>
 </div>
 
 
-<p>...</p>
+<p>Loop over the queue and apply the onload callback to each
+item</p>
   </div>
   <div class="body">
   </div>

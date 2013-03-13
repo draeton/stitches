@@ -77,7 +77,9 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for the sprite sheet canvas element, which holds and displays
+all placed sprites. Used for manipulating sprite placement and
+state</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -99,10 +101,10 @@
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">images</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">images</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// an array holding any pre-init included images</span>
         <span class="nx">dimensions</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">width</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-            <span class="nx">height</span><span class="o">:</span> <span class="mi">400</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span> <span class="c1">// default canvas width</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="mi">400</span> <span class="c1">// default canvas height</span>
         <span class="p">},</span>
         <span class="nx">progress</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
     <span class="p">};</span>
