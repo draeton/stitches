@@ -73,6 +73,19 @@ function ($) {
 
                 timeout = setTimeout(delayed, threshold || 50);
             };
+        },
+
+        /**
+         * ### @noop
+         * No operation
+         *
+         * @param {event} e Optional
+         */
+        noop: function (e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
         }
     };
 

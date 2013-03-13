@@ -176,8 +176,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         setCanvas: function () {
             this.canvas = new Canvas(this.$canvas, {
                 images: this.images,
-                padding: this.settings.padding,
-                progress: $.proxy(this.updateProgress, this)
+                padding: this.settings.padding
+            }, {
+                onprogress: $.proxy(this.updateProgress, this)
             });
         },
 

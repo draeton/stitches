@@ -26,27 +26,28 @@ function($, util, array, layoutManager, Sprite) {
         dimensions: {
             width: 400, // default canvas width
             height: 400 // default canvas height
-        },
-        progress: function () {}
+        }
     };
 
     /**
      * ## Canvas
-     *
      * Create a new `Canvas` instance
      *
      * @constructor
      * @param {element} element
      * @param {object} options
+     * @param {object} handlers The handlers for various events
      */
-    var Canvas = function (element, options) {
+    var Canvas = function (element, options, handlers) {
         this.$element = $(element);
         this.settings = $.extend({}, defaults, options);
         this.images = this.settings.images;
         this.dimensions = this.settings.dimensions;
-        this.progress = this.settings.progress;
+
         this.sprites = [];
         this.names = "";
+
+        this.onprogress = handlers.onprogress || util.noop;
     };
 
     Canvas.classname = ".stitches-canvas";
@@ -56,7 +57,7 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @init
-         * ...
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.reset = util.debounce(this.reset, 500);
@@ -67,7 +68,8 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @bind
-         * ...
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             this.$element.on("clear-active", $.proxy(this.clearActive, this));
@@ -75,7 +77,8 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @setup
-         * ...
+         * Currently only initializes any in-document images as sprites
+         * on this canvas. Removes the images after processing
          */
         setup: function () {
             var self = this;
@@ -91,7 +94,8 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @reset
-         * ...
+         * Recalculate canvas dimensions and sprite positioning. Used
+         * after a change to sprites or settings
          */
         reset: function () {
             this.$element.trigger("show-overlay");
@@ -104,7 +108,9 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @measure
-         * ...
+         * Determine the canvas dimensions based on a set of sprites
+         *
+         * @param {array} sprites An array of sprites to measure
          */
         measure: function (sprites) {
             this.dimensions = layoutManager.getDimensions(sprites, this.settings.dimensions);
@@ -112,7 +118,10 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @place
-         * ...
+         * Place a set of sprites on this canvas. Sorts sprites by `name`
+         * property before placement
+         *
+         * @param {array} sprites An array of sprites to place
          */
         place: function (sprites) {
             var placed = [];
@@ -122,19 +131,18 @@ function($, util, array, layoutManager, Sprite) {
             });
 
             sprites = sprites.sort(function (a, b) {
-                if (b.area === a.area) {
-                    return b.name > a.name ? 1 : -1;
-                } else {
-                    return b.area - a.area;
-                }
+                return b.name > a.name ? 1 : -1;
             });
 
-            layoutManager.placeSprites(sprites, placed, this.dimensions, this.progress);
+            layoutManager.placeSprites(sprites, placed, this.dimensions, this.onprogress);
         },
 
         /**
          * ### @cut
-         * ...
+         * Trim an excess canvas dimensions not required to include this
+         * set of sprites
+         *
+         * @param {array} sprites An array of sprites to bound
          */
         cut: function (sprites) {
             layoutManager.trim(sprites, this.dimensions);
@@ -147,7 +155,9 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @add
-         * ...
+         * Add a sprite to this canvas. Triggers a reset and other UI updates
+         *
+         * @param {Sprite} sprite The sprite instance to add
          */
         add: function (sprite) {
             this.sprites.push(sprite);
@@ -162,7 +172,10 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @remove
-         * ...
+         * Remove a sprite from this canvas. Triggers a reset and other UI
+         * updates
+         *
+         * @param {Sprite} sprite The sprite instance to remove
          */
         remove: function (sprite) {
             this.sprites = array.remove(this.sprites, sprite);
@@ -178,7 +191,8 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @clear
-         * ...
+         * Clear all sprites from this canvas. Triggers a reset and other
+         * UI updates
          */
         clear: function () {
             this.sprites = [];
@@ -195,7 +209,10 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @createSprite
-         * ...
+         * Create a new sprite instance to place on this canvas.
+         *
+         * @param {string} name The sprite name (usually from a file name)
+         * @param {string} src The image src (usually from a FileReader)
          */
         createSprite: function (name, src) {
             var self = this;
@@ -211,7 +228,12 @@ function($, util, array, layoutManager, Sprite) {
 
         /**
          * ### @clearActive
-         * ...
+         * Clears the active class from all sprites. Used to maintain
+         * only one active sprite at a time
+         *
+         * @event
+         * @param {event} e The event object
+         * @param {Sprite} sprite An optional sprite to set active
          */
         clearActive: function (e, sprite) {
             this.$element.find(".active").each(function () {

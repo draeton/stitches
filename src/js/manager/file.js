@@ -32,16 +32,10 @@ function ($, util) {
         set: function (handlers) {
             handlers = handlers || {};
 
-            this.onload = handlers.onload || this.noop;
-            this.onprogress = handlers.onprogress || this.noop;
-            this.onerror = handlers.onerror || this.noop;
+            this.onload = handlers.onload || util.noop;
+            this.onprogress = handlers.onprogress || util.noop;
+            this.onerror = handlers.onerror || util.noop;
         },
-
-        /**
-         * ### @noop
-         * No operation
-         */
-        noop: function () {},
 
         /**
          * ### @processFiles

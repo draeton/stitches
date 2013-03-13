@@ -59,17 +59,8 @@ function($, util) {
             dropBox.addEventListener("dragenter", $.proxy(this.dragStart, this), false);
             overlay.addEventListener("dragleave", $.proxy(this.dragStop, this), false);
             overlay.addEventListener("dragexit", $.proxy(this.dragStop, this), false);
-            overlay.addEventListener("dragover", this.noop, false);
+            overlay.addEventListener("dragover", util.noop, false);
             overlay.addEventListener("drop", $.proxy(this.drop, this), false);
-        },
-
-        /**
-         * ### @noop
-         * ...
-         */
-        noop: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
         },
 
         /**
