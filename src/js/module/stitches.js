@@ -397,6 +397,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          * with store.js
          */
         updateSettings: function () {
+            this.showOverlay();
             this.canvas.reset();
 
             if (store && !store.disabled) {
