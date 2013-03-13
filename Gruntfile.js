@@ -280,4 +280,5 @@ module.exports = function(grunt) {
     grunt.registerTask("default", "stitches");
     grunt.registerTask("ps", "push:stitches");
     grunt.registerTask("p", "pages");
+    grunt.registerTask("all", "stitches ps p");
 };

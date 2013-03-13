@@ -131,7 +131,7 @@ function($, util, array, layoutManager, Sprite) {
             });
 
             sprites = sprites.sort(function (a, b) {
-                return b.name > a.name ? 1 : -1;
+                return a.name > b.name;
             });
 
             layoutManager.placeSprites(sprites, placed, this.dimensions, this.onprogress);
