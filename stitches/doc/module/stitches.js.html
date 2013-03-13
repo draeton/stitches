@@ -58,7 +58,7 @@
         <a href="#-setpalettes">@setPalettes</a>
       </div>
       <div class="heading h3">
-        <a href="#-update">@update</a>
+        <a href="#-updatesettings">@updateSettings</a>
       </div>
       <div class="heading h3">
         <a href="#-showoverlay">@showOverlay</a>
@@ -128,7 +128,10 @@
 </div>
 
   </div>
-  <div class="body"><p>...</p>
+  <div class="body"><p>Constructor for the stitches module, which encapsulates all of the UI
+functionality. Instantiated with a DOM element, into which all of the
+markup is injected and to which the behaviors are attached. Typically
+used in a DOM ready callback</p>
 
 <blockquote>
   <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
@@ -157,11 +160,11 @@
     <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
     <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">layout</span><span class="o">:</span> <span class="s2">&quot;compact&quot;</span><span class="p">,</span>
-        <span class="nx">prefix</span><span class="o">:</span> <span class="s2">&quot;sprite&quot;</span><span class="p">,</span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="nx">uri</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">stylesheet</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span>
+        <span class="nx">layout</span><span class="o">:</span> <span class="s2">&quot;compact&quot;</span><span class="p">,</span> <span class="c1">// default canvas sprite placement layout</span>
+        <span class="nx">prefix</span><span class="o">:</span> <span class="s2">&quot;sprite&quot;</span><span class="p">,</span> <span class="c1">// default stylesheet class prefix</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// default padding around sprites in pixels</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// whether or not to include the data-uri image (quite large)</span>
+        <span class="nx">stylesheet</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span> <span class="c1">// either css or less at the moment</span>
     <span class="p">};</span>
 
 
@@ -178,8 +181,10 @@
   </h2>
 </div>
 
+
+<p>Create a new <code>Stitches</code> instance</p>
   </div>
-  <div class="body"><p>Create a new <code>Stitches</code> instance</p>
+  <div class="body">
   </div>
   <div class="details">
     <div class="dox_tag_title">Params</div>
@@ -221,7 +226,7 @@
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -259,7 +264,7 @@
 </div>
 
 
-<p>...</p>
+<p>If available, load settings saved by store.js</p>
   </div>
   <div class="body">
   </div>
@@ -293,7 +298,7 @@
 </div>
 
 
-<p>...</p>
+<p>Render html using a JS template and grab references</p>
   </div>
   <div class="body">
   </div>
@@ -331,7 +336,8 @@
 </div>
 
 
-<p>...</p>
+<p>JS-rendered file inputs aren't useable in every browser. Probably
+needs a workaround. At the moment, this test disables that feature</p>
   </div>
   <div class="body">
   </div>
@@ -357,7 +363,8 @@
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. $.proxy is used to retain
+this instance as the callback execution context</p>
   </div>
   <div class="body">
   </div>
@@ -398,7 +405,7 @@
 </div>
 
 
-<p>...</p>
+<p>Create a <code>DropBox</code> instance for drag and drop file loading</p>
   </div>
   <div class="body">
   </div>
@@ -424,7 +431,8 @@
 </div>
 
 
-<p>...</p>
+<p>Set various managers for working with files, sprite sheet layout
+and stylesheets</p>
   </div>
   <div class="body">
   </div>
@@ -455,7 +463,7 @@
 </div>
 
 
-<p>...</p>
+<p>Set a reference to any pre-initialization images for processing</p>
   </div>
   <div class="body">
   </div>
@@ -481,7 +489,7 @@
 </div>
 
 
-<p>...</p>
+<p>Create a <code>Canvas</code> instance for sprite placement and manipulation</p>
   </div>
   <div class="body">
   </div>
@@ -512,7 +520,7 @@
 </div>
 
 
-<p>...</p>
+<p>Create the <code>Toolbar</code> instance with handlers</p>
   </div>
   <div class="body">
   </div>
@@ -586,7 +594,7 @@
 </div>
 
 
-<p>...</p>
+<p>Create the various <code>Palette</code> instances with handlers</p>
   </div>
   <div class="body">
   </div>
@@ -596,6 +604,18 @@
         <span class="nx">setPalettes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>displays about info</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">about</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$about</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span>
                 <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -608,6 +628,18 @@
                 <span class="p">}</span>
             <span class="p">});</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>displays the sprite, stylesheet and other info for download</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">downloads</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;downloads&quot;</span><span class="p">,</span>
                 <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -620,6 +652,18 @@
                 <span class="p">}</span>
             <span class="p">});</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>display app settings</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$settings</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;settings&quot;</span><span class="p">,</span>
                 <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -639,7 +683,7 @@
                             <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
                             <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">stylesheet</span><span class="o">:</span> <span class="p">{</span>
@@ -650,7 +694,7 @@
                             <span class="nx">self</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
                             <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">prefix</span><span class="o">:</span> <span class="p">{</span>
@@ -659,7 +703,7 @@
 
                             <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">prefix</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
@@ -675,7 +719,7 @@
                                 <span class="p">});</span>
                             <span class="p">});</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
                     <span class="nx">uri</span><span class="o">:</span> <span class="p">{</span>
@@ -684,12 +728,24 @@
 
                             <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">uri</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">});</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>displays sprite properties</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">var</span> <span class="nx">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$properties</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;properties&quot;</span><span class="p">,</span>
                 <span class="nx">visible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -740,22 +796,23 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="-update">
+<div class="pilwrap" id="-updatesettings">
   <h3>
-    <a href="#-update" class="pilcrow">&#182;</a>
-    @update
+    <a href="#-updatesettings" class="pilcrow">&#182;</a>
+    @updateSettings
   </h3>
 </div>
 
 
-<p>...</p>
+<p>Perform any necessary recalculations and save the new settings
+with store.js</p>
   </div>
   <div class="body">
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">updateSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">store</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">disabled</span><span class="p">)</span> <span class="p">{</span>
@@ -778,14 +835,22 @@
 </div>
 
 
-<p>...</p>
+<p>Block the UI</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">showOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">showOverlay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$overlay</span><span class="p">.</span><span class="nx">fadeTo</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
         <span class="p">},</span>
 
@@ -804,9 +869,17 @@
 </div>
 
 
-<p>...</p>
+<p>Unblock the UI</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -830,9 +903,17 @@
 </div>
 
 
-<p>...</p>
+<p>Open the about palette, hide others</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -858,9 +939,17 @@
 </div>
 
 
-<p>...</p>
+<p>Close the about palette, if visible</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -886,9 +975,17 @@
 </div>
 
 
-<p>...</p>
+<p>Open the downloads palette, hide others</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -914,9 +1011,17 @@
 </div>
 
 
-<p>...</p>
+<p>Close the downloads palette, if visible</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -942,9 +1047,18 @@
 </div>
 
 
-<p>...</p>
+<p>Open the settings palette, hide others. Configure the inputs
+with the current settings</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -981,9 +1095,17 @@
 </div>
 
 
-<p>...</p>
+<p>Close the settings palette, if visible</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1009,9 +1131,23 @@
 </div>
 
 
-<p>...</p>
+<p>Open the properties palette, hide others. Configure using the
+properties of the sprite argument</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>Uses these properties</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1046,9 +1182,18 @@
 </div>
 
 
-<p>...</p>
+<p>Close the properties palette, if visible. This also clears
+any active sprites</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1075,9 +1220,17 @@
 </div>
 
 
-<p>...</p>
+<p>Close all open palettes</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1104,9 +1257,22 @@
 </div>
 
 
-<p>...</p>
+<p>Send a set of files to the file manager for processing</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">files</span>
+      <span class="dox_type">array</span>
+      <span>For processing</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1130,9 +1296,18 @@
 </div>
 
 
-<p>...</p>
+<p>Update the available actions on the toolbar based on the current
+state</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1169,9 +1344,17 @@
 </div>
 
 
-<p>...</p>
+<p>Update the downloads palette content based on the current state</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1202,7 +1385,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1223,7 +1406,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+  <a class="pilcrow" href="#section-34" id="section-34">&#182;</a>
 </div>
 <p>tooltips</p>
         </td>
@@ -1248,9 +1431,22 @@
 </div>
 
 
-<p>...</p>
+<p>Update the progress bar at the top of the UI, right below the toolbar</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">progress</span>
+      <span class="dox_type">number</span>
+      <span>From 0 to 1</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">type</span>
+      <span class="dox_type">type</span>
+      <span>Determines the color of the bar</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1288,9 +1484,18 @@
 </div>
 
 
-<p>...</p>
+<p>Generate the sprite sheet and stylesheet using the layout manager
+and stylesheet manager. This is the final product</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
   </div>
 </div>
         </td>
@@ -1326,7 +1531,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
+  <a class="pilcrow" href="#section-37" id="section-37">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the
@@ -1364,7 +1569,7 @@ download example rendering</p>
 </div>
 
 
-<p>...</p>
+<p>At the moment, this just changes the progress bar to yellow</p>
   </div>
   <div class="body">
   </div>
