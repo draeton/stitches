@@ -3,7 +3,7 @@ layout: default
 title: Stitches - An HTML5 sprite sheet generator
 ---
 
-<link rel="stylesheet" href="/stitches/stitches/build/stitches/css/stitches-1.2.9.min.css">
+<link rel="stylesheet" href="/stitches/stitches/build/stitches/css/stitches-1.2.10.min.css">
 
 <section id="main" role="main">
 
@@ -23,9 +23,9 @@ Drag &amp; drop image files onto the space below, or use the &ldquo;Open&rdquo; 
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 {% highlight html %}
-<link rel="stylesheet" href="css/stitches-1.2.9.min.css">
+<link rel="stylesheet" href="css/stitches-1.2.10.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.2.9.min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.2.10.min.js"></script>
 {% endhighlight %}
 
 The sprite sheet generator is automatically created in elements that have the stitches class:
@@ -82,7 +82,7 @@ Documentation is available **[here.](/stitches/stitches/doc/stitches.js.html)**
 
 ## Download
 
-**The latest release, 1.2.9, is [available here](/stitches/stitches/dist/stitches-1.2.9.zip).**
+**The latest release, 1.2.10, is [available here](/stitches/stitches/dist/stitches-1.2.10.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/stitches/zipball/master)
 or [tar](https://github.com/draeton/stitches/tarball/master) formats.
@@ -93,4 +93,4 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script data-main="js/stitches.js" src="/stitches/stitches/build/stitches/js/stitches-1.2.9.min.js"></script>
+<script data-main="js/stitches.js" src="/stitches/stitches/build/stitches/js/stitches-1.2.10.min.js"></script>
