@@ -27,7 +27,6 @@ function($, util, templates) {
 
     /**
      * ## Sprite
-     *
      * Create a new `Sprite` instance
      *
      * @constructor
