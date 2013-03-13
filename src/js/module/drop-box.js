@@ -1,7 +1,8 @@
 /**
  * # module/drop-box
  *
- * ...
+ * Constructor for the drag and drop element. Used to allow users to drag
+ * files onto a DOM element to initiate processing
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -20,7 +21,6 @@ function($, util) {
 
     /**
      * ## DropBox
-     *
      * Create a new `DropBox` instance
      *
      * @constructor
@@ -42,7 +42,7 @@ function($, util) {
 
         /**
          * ### @init
-         * ...
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.bind();
@@ -50,7 +50,8 @@ function($, util) {
 
         /**
          * ### @bind
-         * ...
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             var dropBox = this.$element.get(0);
@@ -65,7 +66,9 @@ function($, util) {
 
         /**
          * ### @dragStart
-         * ...
+         * Close all palettes and block the UI when dragging
+         *
+         * @param {event} e The event object
          */
         dragStart: function (e) {
             this.$element.trigger("close-palettes");
@@ -74,7 +77,9 @@ function($, util) {
 
         /**
          * ### @dragStop
-         * ...
+         * If we're on the target, unblock the UI
+         *
+         * @param {event} e The event object
          */
         dragStop: function (e) {
             if ($.contains(this.$element, e.target)) {
@@ -84,7 +89,10 @@ function($, util) {
 
         /**
          * ### @drop
-         * ...
+         * When a drop event occurs, check for files. If there
+         * are files, start processing them
+         *
+         * @param {event} e The event object
          */
         drop: function (e) {
             var files = (e.files || e.dataTransfer.files);

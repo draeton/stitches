@@ -1,7 +1,7 @@
 /**
  * # module/toolbar
  *
- * ...
+ * Constructor for UI toolbars
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -16,13 +16,12 @@ function ($) {
     "use strict";
 
     var defaults = {
-        name: "",
-        actions: {}
+        name: "", // helpful for debugging
+        actions: {} // named actions for events; set up with `bind`
     };
 
     /**
      * ## Toolbar
-     *
      * Create a new `Toolbar` instance
      *
      * @constructor
@@ -45,7 +44,7 @@ function ($) {
 
         /**
          * ### @init
-         * ...
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.bind();
@@ -53,7 +52,9 @@ function ($) {
 
         /**
          * ### @bind
-         * ...
+         * Bind event handlers to DOM element. `getHandler` is used to retain
+         * this instance as the callback execution context. Loops through
+         * `actions` to bind handlers on matching `data-action` attributes
          */
         bind: function () {
             var self = this;
@@ -74,7 +75,12 @@ function ($) {
 
         /**
          * ### @getHandler
-         * ...
+         * Returns an event handler that maintains context and aborts if
+         * the target is disabled
+         *
+         * @param {object} context Execution context
+         * @param {function} callback Handler callback function
+         * @return function
          */
         getHandler: function (context, callback) {
             return function (e) {
@@ -91,7 +97,10 @@ function ($) {
 
         /**
          * ### @toggleActions
-         * ...
+         * Enable or disable toolbar actions based on a flag
+         *
+         * @param {string} actions Space-delimited string of action names
+         * @param {boolean} disable If true, disable these actions
          */
         toggleActions: function (actions, disable) {
             var self = this;
@@ -109,7 +118,9 @@ function ($) {
 
         /**
          * ### @enable
-         * ...
+         * Short-hand for `toggleActions` to enable
+         *
+         * @param {string} actions Space-delimited string of action names
          */
         enable: function (actions) {
             this.toggleActions(actions, false);
@@ -117,7 +128,9 @@ function ($) {
 
         /**
          * ### @disable
-         * ...
+         * Short-hand for `toggleActions` to disable
+         *
+         * @param {string} actions Space-delimited string of action names
          */
         disable: function (actions) {
             this.toggleActions(actions, true);

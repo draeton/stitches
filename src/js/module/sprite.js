@@ -1,7 +1,9 @@
 /**
  * # module/sprite
  *
- * ...
+ * Constructor for the sprite element, which holds sprite dimensions,
+ * position, and display info. Used for manipulation of a single
+ * sprite on the canvas
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -18,10 +20,9 @@ function($, util, templates) {
     "use strict";
 
     var defaults = {
-        name: "",
-        src: "",
-        padding: 0,
-        callback: null
+        name: "", // no special chars, no spaces
+        src: "", // image src (usually from a FileReader)
+        padding: 0 // defined in stitches settings
     };
 
     /**
@@ -32,16 +33,18 @@ function($, util, templates) {
      * @constructor
      * @param {element} element
      * @param {object} options
+     * @param {object} handlers The handlers for various events
      */
-    var Sprite = function (options) {
+    var Sprite = function (options, handlers) {
         this.settings = $.extend({}, defaults, options);
         this.$element = null;
         this.name = this.cleanName(this.settings.name);
         this.src = this.settings.src;
         this.padding = parseInt(this.settings.padding, 10);
-        this.callback = this.settings.callback;
         this.active = false;
         this.placed = false;
+
+        this.onload = handlers.onload || util.noop;
 
         this.init();
     };
@@ -53,7 +56,7 @@ function($, util, templates) {
 
         /**
          * ### @init
-         * ...
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.load();
@@ -61,7 +64,7 @@ function($, util, templates) {
 
         /**
          * ### @load
-         * ...
+         * Load the image data from the source, then call onload callback
          */
         load: function () {
             var self = this;
@@ -75,10 +78,7 @@ function($, util, templates) {
                 self.area = self.width * self.height;
                 self.render();
                 self.bind();
-
-                if (self.callback) {
-                    self.callback(self);
-                }
+                self.onload(self);
             };
 
             this.image.src = this.src;
@@ -86,7 +86,7 @@ function($, util, templates) {
 
         /**
          * ### @render
-         * ...
+         * Render the sprite html from a JS template and add to DOM
          */
         render: function () {
             var html = templates.sprite(this);
@@ -97,7 +97,8 @@ function($, util, templates) {
 
         /**
          * ### @bind
-         * ...
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             this.$element.on("click", $.proxy(this.click, this));
@@ -105,7 +106,8 @@ function($, util, templates) {
 
         /**
          * ### @reset
-         * ...
+         * Reset the placement status and position of the sprite. Used
+         * before recalculating everything in a canvas reset
          */
         reset: function () {
             this.x = 0;
@@ -116,7 +118,7 @@ function($, util, templates) {
 
         /**
          * ### @show
-         * ...
+         * Position and show the sprite
          */
         show: function () {
             this.$element.css({
@@ -128,7 +130,10 @@ function($, util, templates) {
 
         /**
          * ### @click
-         * ...
+         * Clicks trigger the sprite properties palette and toggle
+         * the sprite active state
+         *
+         * @param {event} e The event object
          */
         click: function (e) {
             this.active = !this.active;
@@ -145,7 +150,10 @@ function($, util, templates) {
 
         /**
          * ### @configure
-         * ...
+         * Updates the sprite dimensions and related data. Triggered when
+         * settings (particulary padding) change
+         *
+         * @param {object} properties The set of values to update
          */
         configure: function (properties) {
             if (properties.padding) {

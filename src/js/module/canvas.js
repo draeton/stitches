@@ -219,8 +219,9 @@ function($, util, array, layoutManager, Sprite) {
             var sprite = new Sprite({
                 name: name,
                 src: src,
-                padding: this.settings.padding,
-                callback: function (sprite) {
+                padding: this.settings.padding
+            }, {
+                onload: function (sprite) {
                     self.add(sprite);
                 }
             });
@@ -231,7 +232,6 @@ function($, util, array, layoutManager, Sprite) {
          * Clears the active class from all sprites. Used to maintain
          * only one active sprite at a time
          *
-         * @event
          * @param {event} e The event object
          * @param {Sprite} sprite An optional sprite to set active
          */

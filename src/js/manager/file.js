@@ -19,9 +19,9 @@ function ($, util) {
 
     // **Module definition**
     return {
-        total: 0,
-        processed: 0,
-        queue: [],
+        total: 0, // total count of files
+        processed: 0, // total count of processed files
+        queue: [], // queue after reading; used to process
 
         /**
          * ### file.set
