@@ -25,9 +25,6 @@
         <a href="#file.set">file.set</a>
       </div>
       <div class="heading h3">
-        <a href="#-noop">@noop</a>
-      </div>
-      <div class="heading h3">
         <a href="#-processfiles">@processFiles</a>
       </div>
       <div class="heading h3">
@@ -122,34 +119,10 @@ progress</p>
         <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handlers</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">handlers</span> <span class="o">=</span> <span class="nx">handlers</span> <span class="o">||</span> <span class="p">{};</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onload</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onload</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
         <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="-noop">
-  <h3>
-    <a href="#-noop" class="pilcrow">&#182;</a>
-    @noop
-  </h3>
-</div>
-
-
-<p>No operation</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">noop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
 
 
 </pre></div>

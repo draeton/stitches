@@ -31,9 +31,6 @@
         <a href="#-bind">@bind</a>
       </div>
       <div class="heading h3">
-        <a href="#-noop">@noop</a>
-      </div>
-      <div class="heading h3">
         <a href="#-dragstart">@dragStart</a>
       </div>
       <div class="heading h3">
@@ -179,35 +176,8 @@
             <span class="nx">dropBox</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragenter&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dragStart</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
             <span class="nx">overlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragleave&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dragStop</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
             <span class="nx">overlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragexit&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dragStop</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
-            <span class="nx">overlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragover&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+            <span class="nx">overlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragover&quot;</span><span class="p">,</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
             <span class="nx">overlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">drop</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="-noop">
-  <h3>
-    <a href="#-noop" class="pilcrow">&#182;</a>
-    @noop
-  </h3>
-</div>
-
-
-<p>...</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">noop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-            <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
         <span class="p">},</span>
 
 

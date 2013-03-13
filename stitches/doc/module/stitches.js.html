@@ -491,8 +491,9 @@
         <span class="nx">setCanvas</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$canvas</span><span class="p">,</span> <span class="p">{</span>
                 <span class="nx">images</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span>
-                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
-                <span class="nx">progress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+                <span class="nx">padding</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span>
+            <span class="p">},</span> <span class="p">{</span>
+                <span class="nx">onprogress</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
             <span class="p">});</span>
         <span class="p">},</span>
 

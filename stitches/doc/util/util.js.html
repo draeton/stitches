@@ -27,6 +27,9 @@
       <div class="heading h3">
         <a href="#-debounce">@debounce</a>
       </div>
+      <div class="heading h3">
+        <a href="#-noop">@noop</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -198,6 +201,43 @@ a certain threshold</p>
 
                 <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">delayed</span><span class="p">,</span> <span class="nx">threshold</span> <span class="o">||</span> <span class="mi">50</span><span class="p">);</span>
             <span class="p">};</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-noop">
+  <h3>
+    <a href="#-noop" class="pilcrow">&#182;</a>
+    @noop
+  </h3>
+</div>
+
+
+<p>No operation</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>Optional</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">noop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+            <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">};</span>
 

@@ -105,8 +105,7 @@ state</p>
         <span class="nx">dimensions</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">width</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span> <span class="c1">// default canvas width</span>
             <span class="nx">height</span><span class="o">:</span> <span class="mi">400</span> <span class="c1">// default canvas height</span>
-        <span class="p">},</span>
-        <span class="nx">progress</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+        <span class="p">}</span>
     <span class="p">};</span>
 
 
@@ -123,8 +122,10 @@ state</p>
   </h2>
 </div>
 
+
+<p>Create a new <code>Canvas</code> instance</p>
   </div>
-  <div class="body"><p>Create a new <code>Canvas</code> instance</p>
+  <div class="body">
   </div>
   <div class="details">
     <div class="dox_tag_title">Params</div>
@@ -133,22 +134,28 @@ state</p>
       <span class="dox_type">element</span>
     </div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">options
-</span>
+      <span class="dox_tag_name">options</span>
       <span class="dox_type">object</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">handlers</span>
+      <span class="dox_type">object</span>
+      <span>The handlers for various events</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">Canvas</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Canvas</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">handlers</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">$element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">images</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">images</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">progress</span><span class="p">;</span>
+
         <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">noop</span><span class="p">;</span>
     <span class="p">};</span>
 
     <span class="nx">Canvas</span><span class="p">.</span><span class="nx">classname</span> <span class="o">=</span> <span class="s2">&quot;.stitches-canvas&quot;</span><span class="p">;</span>
@@ -171,7 +178,7 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Run methods to prepare the instance for use</p>
   </div>
   <div class="body">
   </div>
@@ -200,7 +207,8 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Bind event handlers to DOM element. $.proxy is used to retain
+this instance as the callback execution context</p>
   </div>
   <div class="body">
   </div>
@@ -226,7 +234,8 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Currently only initializes any in-document images as sprites
+on this canvas. Removes the images after processing</p>
   </div>
   <div class="body">
   </div>
@@ -260,7 +269,8 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Recalculate canvas dimensions and sprite positioning. Used
+after a change to sprites or settings</p>
   </div>
   <div class="body">
   </div>
@@ -291,9 +301,17 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Determine the canvas dimensions based on a set of sprites</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites to measure</span>
+    </div>
   </div>
 </div>
         </td>
@@ -317,9 +335,18 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Place a set of sprites on this canvas. Sorts sprites by <code>name</code>
+property before placement</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites to place</span>
+    </div>
   </div>
 </div>
         </td>
@@ -332,14 +359,10 @@ state</p>
             <span class="p">});</span>
 
             <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">sprites</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">area</span> <span class="o">===</span> <span class="nx">a</span><span class="p">.</span><span class="nx">area</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">return</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span> <span class="o">&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="k">return</span> <span class="nx">b</span><span class="p">.</span><span class="nx">area</span> <span class="o">-</span> <span class="nx">a</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>
-                <span class="p">}</span>
+                <span class="k">return</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span> <span class="o">&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
             <span class="p">});</span>
 
-            <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">placeSprites</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">progress</span><span class="p">);</span>
+            <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">placeSprites</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">placed</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">dimensions</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onprogress</span><span class="p">);</span>
         <span class="p">},</span>
 
 
@@ -357,9 +380,18 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Trim an excess canvas dimensions not required to include this
+set of sprites</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprites</span>
+      <span class="dox_type">array</span>
+      <span>An array of sprites to bound</span>
+    </div>
   </div>
 </div>
         </td>
@@ -388,9 +420,17 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Add a sprite to this canvas. Triggers a reset and other UI updates</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>The sprite instance to add</span>
+    </div>
   </div>
 </div>
         </td>
@@ -421,9 +461,18 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Remove a sprite from this canvas. Triggers a reset and other UI
+updates</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>The sprite instance to remove</span>
+    </div>
   </div>
 </div>
         </td>
@@ -455,7 +504,8 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Clear all sprites from this canvas. Triggers a reset and other
+UI updates</p>
   </div>
   <div class="body">
   </div>
@@ -490,9 +540,22 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Create a new sprite instance to place on this canvas.</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">string</span>
+      <span>The sprite name (usually from a file name)</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">src</span>
+      <span class="dox_type">string</span>
+      <span>The image src (usually from a FileReader)</span>
+    </div>
   </div>
 </div>
         </td>
@@ -524,9 +587,23 @@ state</p>
 </div>
 
 
-<p>...</p>
+<p>Clears the active class from all sprites. Used to maintain
+only one active sprite at a time</p>
   </div>
   <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">sprite</span>
+      <span class="dox_type">Sprite</span>
+      <span>An optional sprite to set active</span>
+    </div>
   </div>
 </div>
         </td>
