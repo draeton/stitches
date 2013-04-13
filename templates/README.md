@@ -55,6 +55,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 ## Contributors
 
 * [amenadiel](https://github.com/amenadiel)
+* [egeriis](https://github.com/egeriis)
 * [flying-sheep](https://github.com/flying-sheep)
 * [JonDum](https://github.com/JonDum)
 * [mreq](https://github.com/mreq)
