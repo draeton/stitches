@@ -1,7 +1,8 @@
 /**
  * # module/drop-box
  *
- * ...
+ * Constructor for the drag and drop element. Used to allow users to drag
+ * files onto a DOM element to initiate processing
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -20,7 +21,6 @@ function($, util) {
 
     /**
      * ## DropBox
-     *
      * Create a new `DropBox` instance
      *
      * @constructor
@@ -41,16 +41,17 @@ function($, util) {
         constructor: DropBox,
 
         /**
-         * ### DropBox.prototype.init
-         * ...
+         * ### @init
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.bind();
         },
 
         /**
-         * ### DropBox.prototype.bind
-         * ...
+         * ### @bind
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             var dropBox = this.$element.get(0);
@@ -59,22 +60,15 @@ function($, util) {
             dropBox.addEventListener("dragenter", $.proxy(this.dragStart, this), false);
             overlay.addEventListener("dragleave", $.proxy(this.dragStop, this), false);
             overlay.addEventListener("dragexit", $.proxy(this.dragStop, this), false);
-            overlay.addEventListener("dragover", this.noop, false);
+            overlay.addEventListener("dragover", util.noop, false);
             overlay.addEventListener("drop", $.proxy(this.drop, this), false);
         },
 
         /**
-         * ### DropBox.prototype.noop
-         * ...
-         */
-        noop: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        },
-
-        /**
-         * ### DropBox.prototype.dragStart
-         * ...
+         * ### @dragStart
+         * Close all palettes and block the UI when dragging
+         *
+         * @param {event} e The event object
          */
         dragStart: function (e) {
             this.$element.trigger("close-palettes");
@@ -82,8 +76,10 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.dragStop
-         * ...
+         * ### @dragStop
+         * If we're on the target, unblock the UI
+         *
+         * @param {event} e The event object
          */
         dragStop: function (e) {
             if ($.contains(this.$element, e.target)) {
@@ -92,8 +88,11 @@ function($, util) {
         },
 
         /**
-         * ### DropBox.prototype.drop
-         * ...
+         * ### @drop
+         * When a drop event occurs, check for files. If there
+         * are files, start processing them
+         *
+         * @param {event} e The event object
          */
         drop: function (e) {
             var files = (e.files || e.dataTransfer.files);

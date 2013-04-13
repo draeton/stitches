@@ -1,7 +1,7 @@
 /**
  * # module/palette
  *
- * ...
+ * Constructor for UI palettes (i.e. dialogs). Inherits from `Toolbar`
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -18,15 +18,14 @@ function ($, util, Toolbar) {
     "use strict";
 
     var defaults = {
-        name: "",
-        visible: false,
-        actions: {},
-        fields: {}
+        name: "", // helpful for debugging
+        visible: false, // UI state
+        actions: {}, // named actions for events; set up with `bind`
+        fields: {} // input fields; set up with `bind` and `configure`
     };
 
     /**
      * ## Palette
-     *
      * Create a new `Palette` instance
      *
      * @constructor
@@ -49,8 +48,8 @@ function ($, util, Toolbar) {
 
     util.inherit(Palette, Toolbar, {
         /**
-         * ### Palette.prototype.init
-         * ...
+         * ### @init
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this._super("init", this, arguments);
@@ -59,8 +58,10 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.bind
-         * ...
+         * ### @bind
+         * Bind event handlers to DOM element. `getHandler` is used to retain
+         * this instance as the callback execution context. Loops through
+         * `fields` to bind handlers on matching `name` attributes
          */
         bind: function () {
             var self = this;
@@ -78,8 +79,8 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.open
-         * ...
+         * ### @open
+         * Show this palette instance
          */
         open: function () {
             this.$element.addClass("in");
@@ -87,8 +88,8 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.close
-         * ...
+         * ### @close
+         * Hide this palette instance
          */
         close: function () {
             this.$element.removeClass("in");
@@ -96,13 +97,15 @@ function ($, util, Toolbar) {
         },
 
         /**
-         * ### Palette.prototype.configure
-         * ...
+         * ### @configure
+         * Configure the values of the inputs
+         *
+         * @param {object} properties Defines the data source and input values
          */
         configure: function (properties) {
             var self = this;
 
-            this.source = properties.source;
+            this.source = properties.source; // reference object for other modules
 
             $.each(properties.inputs, function (name, value) {
                 var selector = "input[name=" + name + "]";

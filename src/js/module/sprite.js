@@ -1,7 +1,9 @@
 /**
  * # module/sprite
  *
- * ...
+ * Constructor for the sprite element, which holds sprite dimensions,
+ * position, and display info. Used for manipulation of a single
+ * sprite on the canvas
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -18,30 +20,30 @@ function($, util, templates) {
     "use strict";
 
     var defaults = {
-        name: "",
-        src: "",
-        padding: 0,
-        callback: null
+        name: "", // no special chars, no spaces
+        src: "", // image src (usually from a FileReader)
+        padding: 0 // defined in stitches settings
     };
 
     /**
      * ## Sprite
-     *
      * Create a new `Sprite` instance
      *
      * @constructor
      * @param {element} element
      * @param {object} options
+     * @param {object} handlers The handlers for various events
      */
-    var Sprite = function (options) {
+    var Sprite = function (options, handlers) {
         this.settings = $.extend({}, defaults, options);
         this.$element = null;
         this.name = this.cleanName(this.settings.name);
         this.src = this.settings.src;
         this.padding = parseInt(this.settings.padding, 10);
-        this.callback = this.settings.callback;
         this.active = false;
         this.placed = false;
+
+        this.onload = handlers.onload || util.noop;
 
         this.init();
     };
@@ -52,16 +54,16 @@ function($, util, templates) {
         constructor: Sprite,
 
         /**
-         * ### Sprite.prototype.init
-         * ...
+         * ### @init
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.load();
         },
 
         /**
-         * ### Sprite.prototype.load
-         * ...
+         * ### @load
+         * Load the image data from the source, then call onload callback
          */
         load: function () {
             var self = this;
@@ -75,18 +77,15 @@ function($, util, templates) {
                 self.area = self.width * self.height;
                 self.render();
                 self.bind();
-
-                if (self.callback) {
-                    self.callback(self);
-                }
+                self.onload(self);
             };
 
             this.image.src = this.src;
         },
 
         /**
-         * ### Sprite.prototype.render
-         * ...
+         * ### @render
+         * Render the sprite html from a JS template and add to DOM
          */
         render: function () {
             var html = templates.sprite(this);
@@ -96,16 +95,18 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.bind
-         * ...
+         * ### @bind
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             this.$element.on("click", $.proxy(this.click, this));
         },
 
         /**
-         * ### Sprite.prototype.reset
-         * ...
+         * ### @reset
+         * Reset the placement status and position of the sprite. Used
+         * before recalculating everything in a canvas reset
          */
         reset: function () {
             this.x = 0;
@@ -115,8 +116,8 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.show
-         * ...
+         * ### @show
+         * Position and show the sprite
          */
         show: function () {
             this.$element.css({
@@ -127,25 +128,32 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.click
-         * ...
+         * ### @click
+         * Clicks trigger the sprite properties palette and toggle
+         * the sprite active state
+         *
+         * @param {event} e The event object
          */
         click: function (e) {
-            this.active = !this.active;
+            var active = !this.active;
 
-            if (this.active) {
+            if (active) {
                 this.$element.trigger("clear-active", [this]);
                 this.$element.trigger("open-properties", [this]);
             } else {
                 this.$element.trigger("close-properties");
             }
 
-            this.$element.toggleClass("active");
+            this.active = active;
+            this.$element.toggleClass("active", active);
         },
 
         /**
-         * ### Sprite.prototype.configure
-         * ...
+         * ### @configure
+         * Updates the sprite dimensions and related data. Triggered when
+         * settings (particulary padding) change
+         *
+         * @param {object} properties The set of values to update
          */
         configure: function (properties) {
             if (properties.padding) {
@@ -157,7 +165,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.cleanName
+         * ### @cleanName
          * Remove special characters and other markers from a string
          * to be used as a sprite name
          *
@@ -173,7 +181,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.left
+         * ### @left
          * Returns the x position of the sprite accounting for padding
          *
          * @return number
@@ -183,7 +191,7 @@ function($, util, templates) {
         },
 
         /**
-         * ### Sprite.prototype.top
+         * ### @top
          * Returns the y position of the sprite accounting for padding
          *
          * @return number

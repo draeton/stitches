@@ -1,7 +1,9 @@
 /**
  * # layout/vertical
  *
- * Constructor for the vertical canvas layout manager
+ * Constructor for the vertical canvas layout manager. Used to determine
+ * canvas dimensions and to place sprites without intersections (overlap).
+ * Places sprites in a vertical column
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -18,12 +20,11 @@ function ($, util, BaseLayout) {
     "use strict";
 
     var defaults = {
-        maxPass: 2
+        maxPass: 2 // number of tries to place sprite
     };
 
     /**
      * ## VerticalLayout
-     *
      * Create a new `VerticalLayout` instance
      *
      * @constructor
@@ -35,8 +36,14 @@ function ($, util, BaseLayout) {
 
     util.inherit(VerticalLayout, BaseLayout, {
         /**
-         * ### VerticalLayout.prototype.getDimensions
-         * ...
+         * ### @getDimensions
+         * Returns an object with the width and height necessary
+         * to contain the `sprites`. Calculation based on adding all of the
+         * sprite heights.
+         *
+         * @param {array} sprites The list of sprites to size for
+         * @param {object} defaults Default width and height, if no sprites
+         * @return object
          */
         getDimensions: function (sprites, defaults) {
             var width = 0;
@@ -54,8 +61,15 @@ function ($, util, BaseLayout) {
         },
 
         /**
-         * ### VerticalLayout.prototype.placeSprite
-         * ...
+         * ### @placeSprite
+         * Determine sprite coordinates on the canvas. Once a position is
+         * determined with no intersections, the sprite is added to the
+         * placed array. If there is no space, the dimensions are updated.
+         * Seeks down to place the sprite.
+         *
+         * @param {Sprite} sprite The sprite to place
+         * @param {array} placed An array of sprites already placed
+         * @param {object} dimensions The current canvas dimensions
          */
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;

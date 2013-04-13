@@ -1,7 +1,10 @@
 /**
  * # module/stitches
  *
- * ...
+ * Constructor for the stitches module, which encapsulates all of the UI
+ * functionality. Instantiated with a DOM element, into which all of the
+ * markup is injected and to which the behaviors are attached. Typically
+ * used in a DOM ready callback
  *
  * > http://draeton.github.com/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -27,16 +30,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
     "use strict";
 
     var defaults = {
-        layout: "compact",
-        prefix: "sprite",
-        padding: 5,
-        uri: false,
-        stylesheet: "css"
+        layout: "compact", // default canvas sprite placement layout
+        prefix: "sprite", // default stylesheet class prefix
+        padding: 5, // default padding around sprites in pixels
+        uri: false, // whether or not to include the data-uri image (quite large)
+        stylesheet: "css" // either css or less at the moment
     };
 
     /**
      * ## Stitches
-     *
      * Create a new `Stitches` instance
      *
      * @constructor
@@ -54,8 +56,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         constructor: Stitches,
 
         /**
-         * ### Stitches.prototype.init
-         * ...
+         * ### @init
+         * Run methods to prepare the instance for use
          */
         init: function () {
             this.configure();
@@ -74,8 +76,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.configure
-         * ...
+         * ### @configure
+         * If available, load settings saved by store.js
          */
         configure: function () {
             var settings;
@@ -90,8 +92,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.render
-         * ...
+         * ### @render
+         * Render html using a JS template and grab references
          */
         render: function () {
             var html = templates.stitches({});
@@ -110,16 +112,18 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.test
-         * ...
+         * ### @test
+         * JS-rendered file inputs aren't useable in every browser. Probably
+         * needs a workaround. At the moment, this test disables that feature
          */
         test: function () {
             this.hasFileInput = this.$element.find("input.file").length;
         },
 
         /**
-         * ### Stitches.prototype.bind
-         * ...
+         * ### @bind
+         * Bind event handlers to DOM element. $.proxy is used to retain
+         * this instance as the callback execution context
          */
         bind: function () {
             this.$element.on("show-overlay", $.proxy(this.showOverlay, this));
@@ -141,16 +145,17 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setDropBox
-         * ...
+         * ### @setDropBox
+         * Create a `DropBox` instance for drag and drop file loading
          */
         setDropBox: function () {
             this.dropBox = new DropBox(this.$dropBox);
         },
 
         /**
-         * ### Stitches.prototype.setManagers
-         * ...
+         * ### @setManagers
+         * Set various managers for working with files, sprite sheet layout
+         * and stylesheets
          */
         setManagers: function () {
             fileManager.set({
@@ -162,28 +167,29 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setImages
-         * ...
+         * ### @setImages
+         * Set a reference to any pre-initialization images for processing
          */
         setImages: function () {
             this.images = this.$element.find("> img").get();
         },
 
         /**
-         * ### Stitches.prototype.setCanvas
-         * ...
+         * ### @setCanvas
+         * Create a `Canvas` instance for sprite placement and manipulation
          */
         setCanvas: function () {
             this.canvas = new Canvas(this.$canvas, {
                 images: this.images,
-                padding: this.settings.padding,
-                progress: $.proxy(this.updateProgress, this)
+                padding: this.settings.padding
+            }, {
+                onprogress: $.proxy(this.updateProgress, this)
             });
         },
 
         /**
-         * ### Stitches.prototype.setToolbar
-         * ...
+         * ### @setToolbar
+         * Create the `Toolbar` instance with handlers
          */
         setToolbar: function () {
             var self = this;
@@ -238,12 +244,13 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.setPalettes
-         * ...
+         * ### @setPalettes
+         * Create the various `Palette` instances with handlers
          */
         setPalettes: function () {
             var self = this;
 
+            // displays about info
             var about = new Palette(this.$about, {
                 name: "about",
                 visible: true,
@@ -256,6 +263,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 }
             });
 
+            // displays the sprite, stylesheet and other info for download
             var downloads = new Palette(this.$downloads, {
                 name: "downloads",
                 visible: false,
@@ -268,6 +276,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 }
             });
 
+            // display app settings
             var settings = new Palette(this.$settings, {
                 name: "settings",
                 visible: false,
@@ -287,7 +296,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             this.source.layout = value;
                             layoutManager.set(value);
 
-                            self.update();
+                            self.updateSettings();
                         }
                     },
                     stylesheet: {
@@ -298,7 +307,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             self.settings.stylesheet = value;
                             stylesheetManager.set(value);
 
-                            self.update();
+                            self.updateSettings();
                         }
                     },
                     prefix: {
@@ -307,7 +316,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
                             this.source.prefix = value;
 
-                            self.update();
+                            self.updateSettings();
                         }
                     },
                     padding: {
@@ -323,7 +332,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                                 });
                             });
 
-                            self.update();
+                            self.updateSettings();
                         }
                     },
                     uri: {
@@ -332,12 +341,13 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
                             this.source.uri = value;
 
-                            self.update();
+                            self.updateSettings();
                         }
                     }
                 }
             });
 
+            // displays sprite properties
             var properties = new Palette(this.$properties, {
                 name: "properties",
                 visible: false,
@@ -358,14 +368,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 fields: {
                     name: {
                         "input blur": function (e) {
+                            var $input = $(e.currentTarget);
                             var sprite = this.source;
-                            var name = $(e.currentTarget).val();
+                            var name = $input.val();
                             var clean = sprite.cleanName(name);
 
                             this.source.name = clean;
 
                             if (name !== clean) {
-                                $(e.currentTarget).val(clean);
+                                $input.val(clean);
                             }
                         }
                     }
@@ -381,10 +392,12 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.update
-         * ...
+         * ### @updateSettings
+         * Perform any necessary recalculations and save the new settings
+         * with store.js
          */
-        update: function () {
+        updateSettings: function () {
+            this.showOverlay();
             this.canvas.reset();
 
             if (store && !store.disabled) {
@@ -393,24 +406,30 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.showOverlay
-         * ...
+         * ### @showOverlay
+         * Block the UI
+         *
+         * @param {event} e The event object
          */
-        showOverlay: function (e, type) {
+        showOverlay: function (e) {
             this.$overlay.fadeTo("fast", 0.4);
         },
 
         /**
-         * ### Stitches.prototype.hideOverlay
-         * ...
+         * ### @hideOverlay
+         * Unblock the UI
+         *
+         * @param {event} e The event object
          */
         hideOverlay: function (e) {
             this.$overlay.fadeOut("fast");
         },
 
         /**
-         * ### Stitches.prototype.openAbout
-         * ...
+         * ### @openAbout
+         * Open the about palette, hide others
+         *
+         * @param {event} e The event object
          */
         openAbout: function (e) {
             this.closePalettes();
@@ -419,8 +438,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeAbout
-         * ...
+         * ### @closeAbout
+         * Close the about palette, if visible
+         *
+         * @param {event} e The event object
          */
         closeAbout: function (e) {
             if (this.palettes.about.visible) {
@@ -429,8 +450,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openDownloads
-         * ...
+         * ### @openDownloads
+         * Open the downloads palette, hide others
+         *
+         * @param {event} e The event object
          */
         openDownloads: function (e) {
             this.closePalettes();
@@ -439,8 +462,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeDownloads
-         * ...
+         * ### @closeDownloads
+         * Close the downloads palette, if visible
+         *
+         * @param {event} e The event object
          */
         closeDownloads: function (e) {
             if (this.palettes.downloads.visible) {
@@ -449,8 +474,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openSettings
-         * ...
+         * ### @openSettings
+         * Open the settings palette, hide others. Configure the inputs
+         * with the current settings
+         *
+         * @param {event} e The event object
          */
         openSettings: function (e) {
             this.closePalettes();
@@ -470,8 +498,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeSettings
-         * ...
+         * ### @closeSettings
+         * Close the settings palette, if visible
+         *
+         * @param {event} e The event object
          */
         closeSettings: function (e) {
             if (this.palettes.settings.visible) {
@@ -480,8 +510,12 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.openProperties
-         * ...
+         * ### @openProperties
+         * Open the properties palette, hide others. Configure using the
+         * properties of the sprite argument
+         *
+         * @param {event} e The event object
+         * @param {Sprite} sprite Uses these properties
          */
         openProperties: function (e, sprite) {
             this.closePalettes();
@@ -499,8 +533,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closeProperties
-         * ...
+         * ### @closeProperties
+         * Close the properties palette, if visible. This also clears
+         * any active sprites
+         *
+         * @param {event} e The event object
          */
         closeProperties: function (e) {
             if (this.palettes.properties.visible) {
@@ -510,8 +547,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.closePalettes
-         * ...
+         * ### @closePalettes
+         * Close all open palettes
+         *
+         * @param {event} e The event object
          */
         closePalettes: function (e) {
             this.closeAbout();
@@ -521,16 +560,22 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.processFiles
-         * ...
+         * ### @processFiles
+         * Send a set of files to the file manager for processing
+         *
+         * @param {event} e The event object
+         * @param {array} files For processing
          */
         processFiles: function (e, files) {
             fileManager.processFiles(files);
         },
 
         /**
-         * ### Stitches.prototype.updateToolbar
-         * ...
+         * ### @updateToolbar
+         * Update the available actions on the toolbar based on the current
+         * state
+         *
+         * @param {event} e The event object
          */
         updateToolbar: function (e) {
             var toolbar = this.toolbar;
@@ -550,8 +595,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.updateDownloads
-         * ...
+         * ### @updateDownloads
+         * Update the downloads palette content based on the current state
+         *
+         * @param {event} e The event object
          */
         updateDownloads: function (e) {
             var $section = this.$downloads.find("section");
@@ -589,8 +636,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.updateProgress
-         * ...
+         * ### @updateProgress
+         * Update the progress bar at the top of the UI, right below the toolbar
+         *
+         * @param {number} progress From 0 to 1
+         * @param {type} type Determines the color of the bar
          */
         updateProgress: function (progress, type) {
             var percent = Math.ceil(progress * 100);
@@ -611,8 +661,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.generateSheets
-         * ...
+         * ### @generateSheets
+         * Generate the sprite sheet and stylesheet using the layout manager
+         * and stylesheet manager. This is the final product
+         *
+         * @param {event} e The event object
          */
         generateSheets: function (e) {
             this.spritesheet = layoutManager.getSpritesheet({
@@ -658,8 +711,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### Stitches.prototype.errorHandler
-         * ...
+         * ### @errorHandler
+         * At the moment, this just changes the progress bar to yellow
          */
         errorHandler: function (e, err, type) {
             this.updateProgress(1, type || "warning");

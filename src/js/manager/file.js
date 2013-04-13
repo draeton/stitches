@@ -19,9 +19,9 @@ function ($, util) {
 
     // **Module definition**
     return {
-        total: 0,
-        processed: 0,
-        queue: [],
+        total: 0, // total count of files
+        processed: 0, // total count of processed files
+        queue: [], // queue after reading; used to process
 
         /**
          * ### file.set
@@ -32,20 +32,16 @@ function ($, util) {
         set: function (handlers) {
             handlers = handlers || {};
 
-            this.onload = handlers.onload || this.noop;
-            this.onprogress = handlers.onprogress || this.noop;
-            this.onerror = handlers.onerror || this.noop;
+            this.onload = handlers.onload || util.noop;
+            this.onprogress = handlers.onprogress || util.noop;
+            this.onerror = handlers.onerror || util.noop;
         },
 
         /**
-         * ### FileManager.prototype.noop
-         * ...
-         */
-        noop: function () {},
-
-        /**
-         * ### FileManager.prototype.processFiles
-         * ...
+         * ### @processFiles
+         * Reset the queue and start processing a list of files
+         *
+         * @param {array} files An array of files from one of the file inputs
          */
         processFiles: function (files) {
             var self = this;
@@ -64,8 +60,12 @@ function ($, util) {
         },
 
         /**
-         * ### FileManager.prototype.processFile
-         * ...
+         * ### @processFile
+         * Use the FileReader to read in image files from input, and add
+         * them to the queue. When all files are read, the queue is then
+         * processed
+         *
+         * @param {object} file From a file input
          */
         processFile: function (file) {
             var self = this;
@@ -92,8 +92,9 @@ function ($, util) {
         },
 
         /**
-         * ### FileManager.prototype.processQueue
-         * ...
+         * ### @processQueue
+         * Loop over the queue and apply the onload callback to each
+         * item
          */
         processQueue: function () {
             var self = this;
