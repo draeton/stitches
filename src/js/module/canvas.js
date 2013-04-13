@@ -121,7 +121,7 @@ function($, util, array, layoutManager, Sprite) {
 
             sprites = sprites.sort(function (a, b) {
                 if (b.area === a.area) {
-                    return b.name > a.name ? 1 : -1;
+                    return a.name > b.name ? 1 : -1;
                 } else {
                     return b.area - a.area;
                 }
