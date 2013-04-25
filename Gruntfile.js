@@ -153,6 +153,16 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            pagespost: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: "tmp/",
+                        src: "**",
+                        dest: "stitches/"
+                    }
+                ]
+            },
             pages: {
                 files: [
                     {
@@ -296,7 +306,12 @@ module.exports = function(grunt) {
         "checkout:pages",
         "clean:pages",
         "checkout:stitches",
-        "copy:pagespre"
+        "copy:pagespre",
+        "checkout:pages",
+        "copy:pagespost",
+        "replace:pages",
+        "push:pages",
+        "checkout:stitches"
     ]);
 
     /**
