@@ -11,11 +11,14 @@ module.exports = function(grunt) {
      * git checkout
      */
     grunt.registerMultiTask("checkout", "Checkout a git branch", function () {
+        var done = this.async();
         var shell = require("shelljs");
         var pkg = require("../package.json");
         var branch = this.data.branch || "master";
 
-        shell.exec("git checkout " + branch);
+        shell.exec("git checkout " + branch, function () {
+            done();
+        });
     });
 
     /**
@@ -62,9 +65,9 @@ module.exports = function(grunt) {
         setCommitMessage(function () {
             shell.exec("git add .");
             shell.exec("git commit -am \"" + messagePrefix + commitMessage + "\"");
-            shell.exec("git push origin " + branch);
-
-            done();
+            shell.exec("git push origin " + branch, function () {
+                done();
+            });
         });
     });
 };
