@@ -52,8 +52,8 @@ module.exports = function(grunt) {
                 },
                 files: [
                     {
-                        src: "stitches/templates/index.md",
-                        dest: "stitches/index.md"
+                        src: "templates/index.md",
+                        dest: "index.md"
                     }
                 ]
             }
