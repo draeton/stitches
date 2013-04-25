@@ -296,7 +296,7 @@ module.exports = function(grunt) {
         "checkout:pages",
         "clean:pages",
         "checkout:master",
-        "copy:pages"
+        "copy:pagespre"
     ]);
 
     /**
