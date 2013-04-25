@@ -295,7 +295,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test", [
         "checkout:pages",
         "clean:pages",
-        "checkout:master",
+        "checkout:stitches",
         "copy:pagespre"
     ]);
 
