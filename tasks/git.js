@@ -11,7 +11,6 @@ module.exports = function(grunt) {
      * git checkout
      */
     grunt.registerMultiTask("checkout", "Checkout a git branch", function () {
-        var done = this.async();
         var shell = require("shelljs");
         var pkg = require("../package.json");
         var branch = this.data.branch || "master";
