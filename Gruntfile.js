@@ -10,22 +10,22 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            stitches: {
+            module: {
                 src: ["amd/", "build/", "dist/"]
             },
             pages: {
-                src: ["stitches/", "tmp/"]
+                src: ["<%= pkg.name %>/", "tmp/"]
             }
         },
 
         jshint: {
-            stitches: {
+            module: {
                 src: ["src/js/**/*.js"]
             }
         },
 
         qunit: {
-            stitches: {
+            module: {
                 src: ["test/unit/**/*.js"]
             }
         },
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                     dir: "amd",
                     modules: [
                         {
-                            name: "stitches"
+                            name: "<%= pkg.name %>"
                         }
                     ],
                     paths: {
@@ -91,12 +91,12 @@ module.exports = function(grunt) {
 
         concat: {
             js: {
-                src: ["amd/require.js", "amd/js/stitches.js"],
-                dest: "build/stitches/js/stitches-<%= pkg.version %>.js"
+                src: ["amd/require.js", "amd/js/<%= pkg.name %>.js"],
+                dest: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.js"
             },
             css: {
-                src: ["amd/css/stitches.css"],
-                dest: "build/stitches/css/stitches-<%= pkg.version %>.css"
+                src: ["amd/css/<%= pkg.name %>.css"],
+                dest: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.css"
             }
         },
 
@@ -104,8 +104,8 @@ module.exports = function(grunt) {
             compress: {
                 files: [
                     {
-                        src: "build/stitches/css/stitches-<%= pkg.version %>.css",
-                        dest: "build/stitches/css/stitches-<%= pkg.version %>.min.css"
+                        src: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.css",
+                        dest: "build/<%= pkg.name %>/css/<%= pkg.name %>-<%= pkg.version %>.min.css"
                     }
                 ]
             }
@@ -115,21 +115,21 @@ module.exports = function(grunt) {
             compress: {
                 files: [
                     {
-                        src: "build/stitches/js/stitches-<%= pkg.version %>.js",
-                        dest: "build/stitches/js/stitches-<%= pkg.version %>.min.js"
+                        src: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.js",
+                        dest: "build/<%= pkg.name %>/js/<%= pkg.name %>-<%= pkg.version %>.min.js"
                     }
                 ]
             }
         },
 
         copy: {
-            stitches: {
+            module: {
                 files: [
                     {
                         expand: true,
                         cwd: "src/img/",
                         src: "**",
-                        dest: "build/stitches/img/"
+                        dest: "build/<%= pkg.name %>/img/"
                     },
                     {
                         expand: true,
@@ -159,7 +159,7 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: "tmp/",
                         src: "**",
-                        dest: "stitches/"
+                        dest: "<%= pkg.name %>/"
                     }
                 ]
             }
@@ -168,12 +168,12 @@ module.exports = function(grunt) {
         zip: {
             dist: {
                 src: "**",
-                dest: "../dist/stitches-<%= pkg.version %>.zip"
+                dest: "../dist/<%= pkg.name %>-<%= pkg.version %>.zip"
             }
         },
 
         rebase: {
-            stitches: {
+            module: {
                 dir: process.cwd()
             },
             build: {
@@ -185,8 +185,8 @@ module.exports = function(grunt) {
         },
 
         checkout: {
-            stitches: {
-                branch: "master"
+            module: {
+                branch: "<%= pkg.baseBranch %>"
             },
             pages: {
                 branch: "gh-pages"
@@ -194,8 +194,8 @@ module.exports = function(grunt) {
         },
 
         push: {
-            stitches: {
-                branch: "master"
+            module: {
+                branch: "<%= pkg.baseBranch %>"
             },
             pages: {
                 branch: "gh-pages"
@@ -233,7 +233,7 @@ module.exports = function(grunt) {
     grunt.registerTask("doc", [
         "rebase:srcjs",
         "docker",
-        "rebase:stitches"
+        "rebase:module"
     ]);
 
     grunt.registerTask("build", [
@@ -241,18 +241,18 @@ module.exports = function(grunt) {
         "concat",
         "cssmin",
         "uglify",
-        "copy:stitches"
+        "copy:module"
     ]);
 
     grunt.registerTask("dist", [
         "rebase:build",
         "zip",
-        "rebase:stitches"
+        "rebase:module"
     ]);
 
-    grunt.registerTask("stitches", [
+    grunt.registerTask("module", [
         "replace:version",
-        "clean:stitches",
+        "clean:module",
         "validate",
         "doc",
         "build",
@@ -266,21 +266,21 @@ module.exports = function(grunt) {
     grunt.registerTask("pages", [
         "checkout:pages",
         "clean:pages",
-        "checkout:stitches",
+        "checkout:module",
         "copy:pagespre",
         "checkout:pages",
         "copy:pagespost",
         "replace:pages",
         "push:pages",
-        "checkout:stitches"
+        "checkout:module"
     ]);
 
     /**
      * default
      */
 
-    grunt.registerTask("default", "stitches");
-    grunt.registerTask("ps", "push:stitches");
+    grunt.registerTask("default", "module");
+    grunt.registerTask("ps", "push:module");
     grunt.registerTask("p", "pages");
-    grunt.registerTask("all", "stitches ps p");
+    grunt.registerTask("all", "module ps p");
 };

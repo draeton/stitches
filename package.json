@@ -44,5 +44,6 @@
     "javascript",
     "sprite"
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "baseBranch": "master"
 }
