@@ -52,8 +52,8 @@ module.exports = function(grunt) {
                 },
                 files: [
                     {
-                        src: "../gh-pages/stitches/templates/index.md",
-                        dest: "../gh-pages/stitches/index.md"
+                        src: "stitches/templates/index.md",
+                        dest: "stitches/index.md"
                     }
                 ]
             }
@@ -162,30 +162,6 @@ module.exports = function(grunt) {
                         dest: "stitches/"
                     }
                 ]
-            },
-            pages: {
-                files: [
-                    {
-                        expand: true,
-                        src: "build/**",
-                        dest: "../gh-pages/stitches/stitches/"
-                    },
-                    {
-                        expand: true,
-                        src: "dist/**",
-                        dest: "../gh-pages/stitches/stitches/"
-                    },
-                    {
-                        expand: true,
-                        src: "doc/**",
-                        dest: "../gh-pages/stitches/stitches/"
-                    },
-                    {
-                        expand: true,
-                        src: "test/**",
-                        dest: "../gh-pages/stitches/stitches/"
-                    }
-                ]
             }
         },
 
@@ -199,9 +175,6 @@ module.exports = function(grunt) {
         rebase: {
             stitches: {
                 dir: process.cwd()
-            },
-            pages: {
-                dir: "../gh-pages/stitches/"
             },
             build: {
                 dir: "build/"
@@ -291,18 +264,6 @@ module.exports = function(grunt) {
      */
 
     grunt.registerTask("pages", [
-        "rebase:pages",
-        "clean:pages",
-        "rebase:stitches",
-        "copy:pages",
-        "replace:pages",
-        "rebase:pages",
-        "push:pages",
-        "rebase:stitches"
-    ]);
-
-
-    grunt.registerTask("test", [
         "checkout:pages",
         "clean:pages",
         "checkout:stitches",
