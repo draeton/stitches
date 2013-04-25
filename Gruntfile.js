@@ -144,6 +144,15 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            pagespre: {
+                files: [
+                    {
+                        expand: true,
+                        src: ["build/**", "dist/**", "doc/**", "test/**"],
+                        dest: "tmp/"
+                    }
+                ]
+            },
             pages: {
                 files: [
                     {
@@ -280,6 +289,14 @@ module.exports = function(grunt) {
         "rebase:pages",
         "push:pages",
         "rebase:stitches"
+    ]);
+
+
+    grunt.registerTask("test", [
+        "checkout:pages",
+        "clean:pages",
+        "checkout:master",
+        "copy:pages"
     ]);
 
     /**
