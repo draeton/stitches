@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                 src: ["amd/", "build/", "dist/"]
             },
             pages: {
-                src: ["stitches/"]
+                src: ["stitches/", "tmp/"]
             }
         },
 
@@ -189,6 +189,15 @@ module.exports = function(grunt) {
             },
             srcjs: {
                 dir: "src/js/"
+            }
+        },
+
+        checkout: {
+            stitches: {
+                branch: "master"
+            },
+            pages: {
+                branch: "gh-pages"
             }
         },
 

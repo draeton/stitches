@@ -6,6 +6,22 @@ module.exports = function(grunt) {
      * register custom tasks
      */
 
+
+    /**
+     * git checkout
+     */
+    grunt.registerMultiTask("checkout", "Checkout a git branch", function () {
+        var done = this.async();
+        var shell = require("shelljs");
+        var pkg = require("../package.json");
+        var branch = this.data.branch || "master";
+
+        shell.exec("git checkout " + branch);
+    });
+
+    /**
+     * git add . && git commit -am "" && git push
+     */
     var commitMessage = "";
 
     var setCommitMessage = function (callback) {
