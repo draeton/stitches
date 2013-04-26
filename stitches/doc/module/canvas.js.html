@@ -55,10 +55,16 @@
         <a href="#-clear">@clear</a>
       </div>
       <div class="heading h3">
+        <a href="#-empty">@empty</a>
+      </div>
+      <div class="heading h3">
         <a href="#-createsprite">@createSprite</a>
       </div>
       <div class="heading h3">
         <a href="#-clearactive">@clearActive</a>
+      </div>
+      <div class="heading h3">
+        <a href="#-tojson">@toJSON</a>
       </div>
     </div>
   </div>
@@ -515,16 +521,42 @@ UI updates</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-properties&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;open-settings&quot;</span><span class="p">);</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-empty">
+  <h3>
+    <a href="#-empty" class="pilcrow">&#182;</a>
+    @empty
+  </h3>
+</div>
+
+
+<p>Only empties out arrays and containers</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">empty</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
         <span class="p">},</span>
 
 
@@ -621,6 +653,34 @@ only one active sprite at a time</p>
                     <span class="nx">active</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
                 <span class="p">}</span>
             <span class="p">});</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-tojson">
+  <h3>
+    <a href="#-tojson" class="pilcrow">&#182;</a>
+    @toJSON
+  </h3>
+</div>
+
+
+<p>Returns object for canvas export</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">sprites</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">sprites</span>
+            <span class="p">};</span>
         <span class="p">}</span>
     <span class="p">};</span>
 

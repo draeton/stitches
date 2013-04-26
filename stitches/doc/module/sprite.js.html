@@ -37,6 +37,9 @@
         <a href="#-bind">@bind</a>
       </div>
       <div class="heading h3">
+        <a href="#-todataurl">@toDataURL</a>
+      </div>
+      <div class="heading h3">
         <a href="#-reset">@reset</a>
       </div>
       <div class="heading h3">
@@ -56,6 +59,9 @@
       </div>
       <div class="heading h3">
         <a href="#-top">@top</a>
+      </div>
+      <div class="heading h3">
+        <a href="#-tojson">@toJSON</a>
       </div>
     </div>
   </div>
@@ -220,6 +226,7 @@ sprite on the canvas</p>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">bind</span><span class="p">();</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">();</span>
                 <span class="nx">self</span><span class="p">.</span><span class="nx">onload</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
             <span class="p">};</span>
 
@@ -280,6 +287,49 @@ this instance as the callback execution context</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">click</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-todataurl">
+  <h3>
+    <a href="#-todataurl" class="pilcrow">&#182;</a>
+    @toDataURL
+  </h3>
+</div>
+
+
+<p>Convert image src to data url up front, to save on export
+processing</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">toDataURL</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">canvas</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">context</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">sprite</span><span class="p">;</span>
+
+            <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;canvas&quot;</span><span class="p">);</span>
+            <span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+            <span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+                <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">(</span><span class="s2">&quot;image/png&quot;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">e</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
         <span class="p">},</span>
 
 
@@ -535,6 +585,35 @@ to be used as a sprite name</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">top</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-tojson">
+  <h3>
+    <a href="#-tojson" class="pilcrow">&#182;</a>
+    @toJSON
+  </h3>
+</div>
+
+
+<p>Returns object for sprite export</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                <span class="nx">src</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">src</span>
+            <span class="p">};</span>
         <span class="p">}</span>
     <span class="p">};</span>
 

@@ -100,7 +100,10 @@
         <a href="#-updatetoolbar">@updateToolbar</a>
       </div>
       <div class="heading h3">
-        <a href="#-updatedownloads">@updateDownloads</a>
+        <a href="#-updatesettingspalette">@updateSettingsPalette</a>
+      </div>
+      <div class="heading h3">
+        <a href="#-updatedownloadspalette">@updateDownloadsPalette</a>
       </div>
       <div class="heading h3">
         <a href="#-updateprogress">@updateProgress</a>
@@ -110,6 +113,12 @@
       </div>
       <div class="heading h3">
         <a href="#-errorhandler">@errorHandler</a>
+      </div>
+      <div class="heading h3">
+        <a href="#-tojson">@toJSON</a>
+      </div>
+      <div class="heading h3">
+        <a href="#-importdata">@importData</a>
       </div>
     </div>
   </div>
@@ -387,7 +396,8 @@ this instance as the callback execution context</p>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;close-palettes&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">closePalettes</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;process-files&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">processFiles</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateToolbar</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateDownloads</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-settings&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateSettingsPalette</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateDownloadsPalette</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">generateSheets</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
         <span class="p">},</span>
@@ -732,6 +742,34 @@ and stylesheets</p>
 
                             <span class="nx">self</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
                         <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="kr">import</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">data</span><span class="p">;</span>
+
+                            <span class="k">try</span> <span class="p">{</span>
+                                <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+                                <span class="nx">self</span><span class="p">.</span><span class="nx">importData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">x</span><span class="p">]);</span>
+                            <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>clear out import field when done</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                            <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                        <span class="p">}</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">});</span>
@@ -743,7 +781,7 @@ and stylesheets</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
 </div>
 <p>displays sprite properties</p>
         </td>
@@ -815,9 +853,33 @@ with store.js</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">updateSettings</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>update ui</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="k">this</span><span class="p">.</span><span class="nx">showOverlay</span><span class="p">();</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>store settings</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
             <span class="k">if</span> <span class="p">(</span><span class="nx">store</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">disabled</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">store</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;stitches-settings&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
             <span class="p">}</span>
@@ -1339,10 +1401,61 @@ state</p>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="-updatedownloads">
+<div class="pilwrap" id="-updatesettingspalette">
   <h3>
-    <a href="#-updatedownloads" class="pilcrow">&#182;</a>
-    @updateDownloads
+    <a href="#-updatesettingspalette" class="pilcrow">&#182;</a>
+    @updateSettingsPalette
+  </h3>
+</div>
+
+
+<p>Update the settings palette content based on the current state</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">e</span>
+      <span class="dox_type">event</span>
+      <span>The event object</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">updateSettingsPalette</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">$export</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$settings</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-export&quot;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-36" id="section-36">&#182;</a>
+</div>
+<p>buttons</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">$export</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+                <span class="s2">&quot;href&quot;</span><span class="o">:</span> <span class="s2">&quot;data:text/plain,&quot;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">)),</span>
+                <span class="s2">&quot;target&quot;</span><span class="o">:</span> <span class="s2">&quot;_blank&quot;</span>
+            <span class="p">});</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-updatedownloadspalette">
+  <h3>
+    <a href="#-updatedownloadspalette" class="pilcrow">&#182;</a>
+    @updateDownloadsPalette
   </h3>
 </div>
 
@@ -1362,7 +1475,7 @@ state</p>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">updateDownloads</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">updateDownloadsPalette</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">$section</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;section&quot;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">$spritesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-spritesheet&quot;</span><span class="p">);</span>
             <span class="kd">var</span> <span class="nx">$stylesheet</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$downloads</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.downloads-stylesheet&quot;</span><span class="p">);</span>
@@ -1388,7 +1501,7 @@ state</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
+  <a class="pilcrow" href="#section-38" id="section-38">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1409,7 +1522,7 @@ state</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-34" id="section-34">&#182;</a>
+  <a class="pilcrow" href="#section-39" id="section-39">&#182;</a>
 </div>
 <p>tooltips</p>
         </td>
@@ -1463,7 +1576,7 @@ state</p>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">$progress</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
-                    <span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;progress progress-striped progress-&quot;</span> <span class="o">+</span> <span class="nx">type</span>
+                    <span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;progress progress-&quot;</span> <span class="o">+</span> <span class="nx">type</span>
                 <span class="p">});</span>
             <span class="p">}</span>
 
@@ -1534,7 +1647,7 @@ and stylesheet manager. This is the final product</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-37" id="section-37">&#182;</a>
+  <a class="pilcrow" href="#section-42" id="section-42">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the
@@ -1553,6 +1666,7 @@ download example rendering</p>
             <span class="p">}</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-toolbar&quot;</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-settings&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;update-downloads&quot;</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">);</span>
         <span class="p">},</span>
@@ -1581,6 +1695,121 @@ download example rendering</p>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">errorHandler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">updateProgress</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">type</span> <span class="o">||</span> <span class="s2">&quot;warning&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-tojson">
+  <h3>
+    <a href="#-tojson" class="pilcrow">&#182;</a>
+    @toJSON
+  </h3>
+</div>
+
+
+<p>Returns serialized object for stitches export</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">settings</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span>
+                <span class="nx">canvas</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()</span>
+            <span class="p">};</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="-importdata">
+  <h3>
+    <a href="#-importdata" class="pilcrow">&#182;</a>
+    @importData
+  </h3>
+</div>
+
+
+<p>Use imported data to reconstruct settings and canvas</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">data
+
+</span>
+      <span class="dox_type">object</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">importData</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">settings</span> <span class="o">||</span> <span class="p">{};</span>
+            <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">||</span> <span class="p">{</span><span class="nx">sprites</span><span class="o">:</span> <span class="p">[]};</span>
+            <span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span> <span class="o">||</span> <span class="p">[];</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-46" id="section-46">&#182;</a>
+</div>
+<p>make sure any new defaults are included</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">settings</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-47" id="section-47">&#182;</a>
+</div>
+<p>update settings</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">layoutManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">layout</span><span class="p">);</span>
+            <span class="nx">stylesheetManager</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">updateSettings</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-48" id="section-48">&#182;</a>
+</div>
+<p>update canvas</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">padding</span><span class="p">;</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">createSprite</span><span class="p">(</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
+            <span class="p">});</span>
         <span class="p">}</span>
     <span class="p">};</span>
 
