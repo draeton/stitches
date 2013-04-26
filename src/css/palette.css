@@ -49,6 +49,10 @@
 
 .stitches-palette-body textarea {
     font-family: "Courier New", Courier, monospace;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .stitches-palette-body .form-horizontal .control-group {
@@ -100,13 +104,6 @@
 .stitches-downloads .stitches-palette-body {
     max-height: 250px;
     overflow: auto;
-}
-
-.stitches-downloads textarea {
-    width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 }
 
 .stitches-downloads .stitches-example i {

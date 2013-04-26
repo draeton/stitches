@@ -77,6 +77,7 @@ function($, util, templates) {
                 self.area = self.width * self.height;
                 self.render();
                 self.bind();
+                self.toDataURL();
                 self.onload(self);
             };
 
@@ -101,6 +102,31 @@ function($, util, templates) {
          */
         bind: function () {
             this.$element.on("click", $.proxy(this.click, this));
+        },
+
+        /**
+         * ### @toDataURL
+         * Convert image src to data url up front, to save on export
+         * processing
+         */
+        toDataURL: function () {
+            var canvas;
+            var context;
+            var sprite;
+
+            canvas = document.createElement("canvas");
+            canvas.width = this.image.width;
+            canvas.height = this.image.height;
+
+            try {
+                context = canvas.getContext("2d");
+                context.drawImage(this.image, 0, 0);
+                sprite = canvas.toDataURL("image/png");
+            } catch (e) {
+                this.$element.trigger("error", [e]);
+            }
+
+            this.src = sprite;
         },
 
         /**
@@ -198,6 +224,17 @@ function($, util, templates) {
          */
         top: function () {
             return this.y + this.padding;
+        },
+
+        /**
+         * ### @toJSON
+         * Returns object for sprite export
+         */
+        toJSON: function () {
+            return {
+                name: this.name,
+                src: this.src
+            };
         }
     };
 

@@ -139,7 +139,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             this.$element.on("close-palettes", $.proxy(this.closePalettes, this));
             this.$element.on("process-files", $.proxy(this.processFiles, this));
             this.$element.on("update-toolbar", $.proxy(this.updateToolbar, this));
-            this.$element.on("update-downloads", $.proxy(this.updateDownloads, this));
+            this.$element.on("update-settings", $.proxy(this.updateSettingsPalette, this));
+            this.$element.on("update-downloads", $.proxy(this.updateDownloadsPalette, this));
             this.$element.on("generate-sheets", $.proxy(this.generateSheets, this));
             this.$element.on("error", $.proxy(this.errorHandler, this));
         },
@@ -343,6 +344,23 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
                             self.updateSettings();
                         }
+                    },
+                    import: {
+                        "blur": function (e) {
+                            var $input = $(e.currentTarget);
+                            var value = $input.val();
+                            var data;
+
+                            try {
+                                data = JSON.parse(value);
+                                self.importData(data);
+                            } catch (x) {
+                                self.$element.trigger("error", [x]);
+                            }
+
+                            // clear out import field when done
+                            $input.val("");
+                        }
                     }
                 }
             });
@@ -397,9 +415,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          * with store.js
          */
         updateSettings: function () {
+            // update ui
             this.showOverlay();
             this.canvas.reset();
 
+            // store settings
             if (store && !store.disabled) {
                 store.set("stitches-settings", this.settings);
             }
@@ -595,12 +615,28 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         },
 
         /**
-         * ### @updateDownloads
+         * ### @updateSettingsPalette
+         * Update the settings palette content based on the current state
+         *
+         * @param {event} e The event object
+         */
+        updateSettingsPalette: function (e) {
+            var $export = this.$settings.find(".downloads-export");
+
+            // buttons
+            $export.attr({
+                "href": "data:text/plain," + encodeURIComponent(JSON.stringify(this)),
+                "target": "_blank"
+            });
+        },
+
+        /**
+         * ### @updateDownloadsPalette
          * Update the downloads palette content based on the current state
          *
          * @param {event} e The event object
          */
-        updateDownloads: function (e) {
+        updateDownloadsPalette: function (e) {
             var $section = this.$downloads.find("section");
             var $spritesheet = this.$downloads.find(".downloads-spritesheet");
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
@@ -651,7 +687,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             if (type) {
                 this.$progress.attr({
-                    "class": "progress progress-striped progress-" + type
+                    "class": "progress progress-" + type
                 });
             }
 
@@ -706,6 +742,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             }
 
             this.$element.trigger("update-toolbar");
+            this.$element.trigger("update-settings");
             this.$element.trigger("update-downloads");
             this.updateProgress(1, "success");
         },
@@ -716,6 +753,45 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          */
         errorHandler: function (e, err, type) {
             this.updateProgress(1, type || "warning");
+        },
+
+        /**
+         * ### @toJSON
+         * Returns serialized object for stitches export
+         */
+        toJSON: function () {
+            return {
+                settings: this.settings,
+                canvas: this.canvas.toJSON()
+            };
+        },
+
+        /**
+         * ### @importData
+         * Use imported data to reconstruct settings and canvas
+         *
+         * @param {object} data
+         */
+        importData: function (data) {
+            var self = this;
+            var settings = data.settings || {};
+            var canvas = data.canvas || {sprites: []};
+            var sprites = canvas.sprites || [];
+
+            // make sure any new defaults are included
+            this.settings = $.extend({}, defaults, settings);
+
+            // update settings
+            layoutManager.set(this.settings.layout);
+            stylesheetManager.set(this.settings.stylesheet);
+            this.updateSettings();
+
+            // update canvas
+            this.canvas.clear();
+            this.canvas.settings.padding = this.settings.padding;
+            $.map(data.canvas.sprites, function (sprite) {
+                self.canvas.createSprite(sprite.name, sprite.src);
+            });
         }
     };
 

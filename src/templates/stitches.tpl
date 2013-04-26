@@ -61,66 +61,77 @@
                 </div>
 
                 <div class="stitches-palette-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+                        <li><a href="#import" data-toggle="tab">Import</a></li>
+                    </ul>
                     <form class="form-horizontal">
-                        <div class="control-group hide">
-                            <label class="control-label">Position</label>
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input name="position" type="checkbox" value="auto"/> Auto
-                                </label>
-                            </div>
-                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="general">
+                                <div class="control-group hide">
+                                    <label class="control-label">Position</label>
+                                    <div class="controls">
+                                        <label class="checkbox">
+                                            <input name="position" type="checkbox" value="auto"/> Auto
+                                        </label>
+                                    </div>
+                                </div>
 
-                        <div class="control-group">
-                            <label class="control-label">Layout</label>
-                            <div class="controls">
-                                <label class="radio inline">
-                                    <input name="layout" type="radio" value="compact"/> Compact
-                                </label>
-                                <label class="radio inline">
-                                    <input name="layout" type="radio" value="vertical"/> Vertical
-                                </label>
-                                <label class="radio inline">
-                                    <input name="layout" type="radio" value="horizontal"/> Horizontal
-                                </label>
-                            </div>
-                        </div>
+                                <div class="control-group">
+                                    <label class="control-label">Layout</label>
+                                    <div class="controls">
+                                        <label class="radio inline">
+                                            <input name="layout" type="radio" value="compact"/> Compact
+                                        </label>
+                                        <label class="radio inline">
+                                            <input name="layout" type="radio" value="vertical"/> Vertical
+                                        </label>
+                                        <label class="radio inline">
+                                            <input name="layout" type="radio" value="horizontal"/> Horizontal
+                                        </label>
+                                    </div>
+                                </div>
 
-                        <div class="control-group">
-                            <label class="control-label">CSS/LESS</label>
-                            <div class="controls">
-                                <label class="radio inline">
-                                    <input name="stylesheet" type="radio" value="css"/> CSS
-                                </label>
-                                <label class="radio inline">
-                                    <input name="stylesheet" type="radio" value="less"/> LESS
-                                </label>
-                            </div>
-                        </div>
+                                <div class="control-group">
+                                    <label class="control-label">CSS/LESS</label>
+                                    <div class="controls">
+                                        <label class="radio inline">
+                                            <input name="stylesheet" type="radio" value="css"/> CSS
+                                        </label>
+                                        <label class="radio inline">
+                                            <input name="stylesheet" type="radio" value="less"/> LESS
+                                        </label>
+                                    </div>
+                                </div>
 
-                        <div class="control-group">
-                            <label class="control-label">Style prefix</label>
-                            <div class="controls">
-                                <input name="prefix" type="text" placeholder="Style class prefix&hellip;">
-                            </div>
-                        </div>
+                                <div class="control-group">
+                                    <label class="control-label">Style prefix</label>
+                                    <div class="controls">
+                                        <input name="prefix" type="text" placeholder="Style class prefix&hellip;">
+                                    </div>
+                                </div>
 
-                        <div class="control-group">
-                            <label class="control-label">Padding</label>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">
-                                    <span class="add-on">px</span>
+                                <div class="control-group">
+                                    <label class="control-label">Padding</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">
+                                            <span class="add-on">px</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">Data URI</label>
+                                    <div class="controls">
+                                        <label class="checkbox">
+                                            <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Data URI</label>
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input name="uri" type="checkbox" value="true"/> Include encoded image in CSS
-                                </label>
+                            <div class="tab-pane" id="import">
+                                <textarea name="import" rows="10"></textarea>
                             </div>
                         </div>
                     </form>
@@ -129,12 +140,11 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
+                            <a href="#" class="downloads-export btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Export</a>
                             <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
             </div>
             <!-- /.stitches-settings -->
@@ -179,8 +189,6 @@
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
             </div>
             <!-- /.stitches-properties -->
@@ -209,8 +217,6 @@
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
             </div>
             <!-- /.stitches-about -->
@@ -234,8 +240,6 @@
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
             </div>
             <!-- /.stitches-downloads -->

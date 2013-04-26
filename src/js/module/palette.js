@@ -108,7 +108,7 @@ function ($, util, Toolbar) {
             this.source = properties.source; // reference object for other modules
 
             $.each(properties.inputs, function (name, value) {
-                var selector = "input[name=" + name + "]";
+                var selector = "[name=" + name + "]";
                 var $input = self.$element.find(selector);
                 var type = $input.attr("type");
 

@@ -195,16 +195,24 @@ function($, util, array, layoutManager, Sprite) {
          * UI updates
          */
         clear: function () {
-            this.sprites = [];
-            this.names = [];
+            this.empty();
 
             this.$element.trigger("show-overlay");
-            this.$element.empty();
             this.$element.trigger("update-toolbar");
             this.$element.trigger("close-properties");
             this.$element.trigger("open-settings");
 
             this.reset();
+        },
+
+        /**
+         * ### @empty
+         * Only empties out arrays and containers
+         */
+        empty: function () {
+            this.sprites = [];
+            this.names = [];
+            this.$element.empty();
         },
 
         /**
@@ -245,6 +253,16 @@ function($, util, array, layoutManager, Sprite) {
                     active.active = false;
                 }
             });
+        },
+
+        /**
+         * ### @toJSON
+         * Returns object for canvas export
+         */
+        toJSON: function () {
+            return {
+                sprites: this.sprites
+            };
         }
     };
 
