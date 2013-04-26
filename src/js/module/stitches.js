@@ -284,8 +284,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 actions: {
                     close: {
                         click: function (e) {
+                            this.$element.find(":input[name=import]").val("");
                             self.$element.trigger("close-settings");
-                            self.$element.find("[input[name=import]").val("");
                         }
                     }
                 },
