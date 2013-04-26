@@ -683,6 +683,7 @@ and stylesheets</p>
                     <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">);</span>
+                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[input[name=import]&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
                         <span class="p">}</span>
                     <span class="p">}</span>
                 <span class="p">},</span>
@@ -753,22 +754,9 @@ and stylesheets</p>
                                 <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
                                 <span class="nx">self</span><span class="p">.</span><span class="nx">importData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
                             <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
                                 <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">x</span><span class="p">]);</span>
                             <span class="p">}</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
-</div>
-<p>clear out import field when done</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-                            <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
                         <span class="p">}</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
@@ -781,7 +769,7 @@ and stylesheets</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
 </div>
 <p>displays sprite properties</p>
         </td>
@@ -860,7 +848,7 @@ with store.js</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
 </div>
 <p>update ui</p>
         </td>
@@ -875,7 +863,7 @@ with store.js</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
 </div>
 <p>store settings</p>
         </td>
@@ -1434,7 +1422,7 @@ state</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-36" id="section-36">&#182;</a>
+  <a class="pilcrow" href="#section-35" id="section-35">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1501,7 +1489,7 @@ state</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-38" id="section-38">&#182;</a>
+  <a class="pilcrow" href="#section-37" id="section-37">&#182;</a>
 </div>
 <p>buttons</p>
         </td>
@@ -1522,7 +1510,7 @@ state</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-39" id="section-39">&#182;</a>
+  <a class="pilcrow" href="#section-38" id="section-38">&#182;</a>
 </div>
 <p>tooltips</p>
         </td>
@@ -1647,7 +1635,7 @@ and stylesheet manager. This is the final product</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-42" id="section-42">&#182;</a>
+  <a class="pilcrow" href="#section-41" id="section-41">&#182;</a>
 </div>
 <p>if uri is not checked, we need to generate another
 stylesheet with the data uri included for the
@@ -1770,7 +1758,7 @@ download example rendering</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-46" id="section-46">&#182;</a>
+  <a class="pilcrow" href="#section-45" id="section-45">&#182;</a>
 </div>
 <p>make sure any new defaults are included</p>
         </td>
@@ -1784,7 +1772,7 @@ download example rendering</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-47" id="section-47">&#182;</a>
+  <a class="pilcrow" href="#section-46" id="section-46">&#182;</a>
 </div>
 <p>update settings</p>
         </td>
@@ -1800,7 +1788,7 @@ download example rendering</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-48" id="section-48">&#182;</a>
+  <a class="pilcrow" href="#section-47" id="section-47">&#182;</a>
 </div>
 <p>update canvas</p>
         </td>
