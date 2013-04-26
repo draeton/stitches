@@ -285,6 +285,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                     close: {
                         click: function (e) {
                             self.$element.trigger("close-settings");
+                            self.$element.find("[input[name=import]").val("");
                         }
                     }
                 },
@@ -355,11 +356,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                                 data = JSON.parse(value);
                                 self.importData(data);
                             } catch (x) {
+                                $input.val("");
                                 self.$element.trigger("error", [x]);
                             }
-
-                            // clear out import field when done
-                            $input.val("");
                         }
                     }
                 }
