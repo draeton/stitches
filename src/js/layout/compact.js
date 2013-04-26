@@ -85,8 +85,8 @@ function ($, util, BaseLayout) {
             var y = 0;
 
             while (pass++ < this.settings.maxPass) {
-                for (y = 0; y <= dimensions.height - sprite.height; y++) {
-                    for (x = 0; x <= dimensions.width - sprite.width; x++) {
+                for (y = 0; y <= (dimensions.height - sprite.height); y++) {
+                    for (x = 0; x <= (dimensions.width - sprite.width); x++) {
                         sprite.x = x;
                         sprite.y = y;
 
