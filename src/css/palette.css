@@ -47,6 +47,10 @@
     margin: 0;
 }
 
+.stitches-palette-body textarea {
+    font-family: "Courier New", Courier, monospace;
+}
+
 .stitches-palette-body .form-horizontal .control-group {
     margin-bottom: 10px;
 }
