@@ -131,7 +131,12 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="import">
-                                <textarea name="import" rows="10"></textarea>
+                                <div class="control-group">
+                                    <label class="control-label">Paste import here</label>
+                                    <div class="controls">
+                                        <textarea name="import" rows="10"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -140,9 +145,9 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <a href="#" class="downloads-export btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Export</a>
                             <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
+                            <a href="#" class="downloads-export btn btn-small btn-success" download="stitches"><i class="icon-download-alt icon-white"></i> Export</a>
                         </div>
                     </div>
                 </div>
@@ -235,8 +240,8 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <a href="#" class="downloads-spritesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
-                            <a href="#" class="downloads-stylesheet btn btn-small btn-success"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
+                            <a href="#" class="downloads-spritesheet btn btn-small btn-success" download="spritesheet"><i class="icon-download-alt icon-white"></i> Spritesheet</a>
+                            <a href="#" class="downloads-stylesheet btn btn-small btn-success" download="stylesheet"><i class="icon-download-alt icon-white"></i> Stylesheet</a>
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
                         </div>
                     </div>

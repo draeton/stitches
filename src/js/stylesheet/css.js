@@ -19,7 +19,7 @@ function ($, util, templates, BaseStylesheet) {
     "use strict";
 
     var defaults = {
-        filename: "download.png"
+        filename: "spritesheet.png"
     };
 
     /**

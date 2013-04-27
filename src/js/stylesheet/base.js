@@ -16,7 +16,7 @@ function ($) {
     "use strict";
 
     var defaults = {
-        filename: "download.png"
+        filename: "spritesheet.png"
     };
 
     /**
