@@ -1,6 +1,6 @@
-amd
-dist
-doc
-node_modules
-stitches
-tmp
+amd/
+dist/
+doc/
+node_modules/
+stitches/
+tmp/
