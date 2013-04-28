@@ -3,4 +3,5 @@ dist/
 doc/
 node_modules/
 stitches/
+!build/stitches/
 tmp/
