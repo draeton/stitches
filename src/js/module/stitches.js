@@ -284,7 +284,11 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 actions: {
                     close: {
                         click: function (e) {
-                            this.$element.find(":input[name=import]").val("");
+                            var $import = this.$element.find(":input[name=import]");
+                            var $importGroup = $import.parents(".control-group");
+
+                            $import.val("");
+                            $importGroup.removeClass("error");
                             self.$element.trigger("close-settings");
                         }
                     }
@@ -348,15 +352,18 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                     },
                     import: {
                         "blur": function (e) {
-                            var $input = $(e.currentTarget);
-                            var value = $input.val();
+                            var $import = $(e.currentTarget);
+                            var $importGroup = $import.parents(".control-group");
+                            var value = $import.val();
                             var data;
 
                             try {
                                 data = JSON.parse(value);
                                 self.importData(data);
+                                $import.val("");
+                                $importGroup.removeClass("error");
                             } catch (x) {
-                                $input.val("");
+                                $importGroup.addClass("error");
                                 self.$element.trigger("error", [x]);
                             }
                         }
