@@ -1,6 +1,7 @@
-_site
-amd
-dist
-doc
-node_modules
-tmp
+_site/
+amd/
+build/
+dist/
+doc/
+node_modules/
+tmp/
