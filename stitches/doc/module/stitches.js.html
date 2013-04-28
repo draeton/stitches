@@ -143,7 +143,7 @@ markup is injected and to which the behaviors are attached. Typically
 used in a DOM ready callback</p>
 
 <blockquote>
-  <p><a href='http://draeton.github.com/stitches'>http://draeton.github.com/stitches</a><br/>
+  <p><a href='http://draeton.github.io/stitches'>http://draeton.github.io/stitches</a><br/>
   Copyright 2013 Matthew Cobbs<br/>
   Licensed under the MIT license.</p>
 </blockquote>
@@ -682,7 +682,11 @@ and stylesheets</p>
                 <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input[name=import]&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">$import</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input[name=import]&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">$importGroup</span> <span class="o">=</span> <span class="nx">$import</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="s2">&quot;.control-group&quot;</span><span class="p">);</span>
+
+                            <span class="nx">$import</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                            <span class="nx">$importGroup</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">);</span>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;close-settings&quot;</span><span class="p">);</span>
                         <span class="p">}</span>
                     <span class="p">}</span>
@@ -746,15 +750,18 @@ and stylesheets</p>
                     <span class="p">},</span>
                     <span class="kr">import</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">&quot;blur&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
-                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+                            <span class="kd">var</span> <span class="nx">$import</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">$importGroup</span> <span class="o">=</span> <span class="nx">$import</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="s2">&quot;.control-group&quot;</span><span class="p">);</span>
+                            <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">$import</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
                             <span class="kd">var</span> <span class="nx">data</span><span class="p">;</span>
 
                             <span class="k">try</span> <span class="p">{</span>
                                 <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
                                 <span class="nx">self</span><span class="p">.</span><span class="nx">importData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                                <span class="nx">$import</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                                <span class="nx">$importGroup</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">);</span>
                             <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-                                <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+                                <span class="nx">$importGroup</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">);</span>
                                 <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">x</span><span class="p">]);</span>
                             <span class="p">}</span>
                         <span class="p">}</span>
