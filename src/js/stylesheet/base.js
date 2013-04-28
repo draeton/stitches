@@ -3,7 +3,7 @@
  *
  * Base constructor for the stylesheet managers
  *
- * > http://draeton.github.com/stitches<br/>
+ * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */

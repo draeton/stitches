@@ -6,7 +6,7 @@
  * markup is injected and to which the behaviors are attached. Typically
  * used in a DOM ready callback
  *
- * > http://draeton.github.com/stitches<br/>
+ * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */

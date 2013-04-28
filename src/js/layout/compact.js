@@ -5,7 +5,7 @@
  * canvas dimensions and to place sprites without intersections (overlap).
  * Places sprites in the most compact rectangle possible
  *
- * > http://draeton.github.com/stitches<br/>
+ * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */

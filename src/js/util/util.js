@@ -3,7 +3,7 @@
  *
  * This is the home for wayward methods who have lost their way.
  *
- * > http://draeton.github.com/stitches<br/>
+ * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */

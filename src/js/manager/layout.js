@@ -4,7 +4,7 @@
  * Methods for setting the canvas layout and stitching the sprites together
  * (i.e. placing them on the canvas)
  *
- * > http://draeton.github.com/stitches<br/>
+ * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
  * > Licensed under the MIT license.
  */
