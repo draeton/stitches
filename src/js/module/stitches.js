@@ -218,13 +218,6 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             self.canvas.reset();
                         }
                     },
-                    generate: {
-                        click: function (e) {
-                            self.$element.trigger("show-overlay");
-                            self.$element.trigger("generate-sheets");
-                            self.$element.trigger("hide-overlay");
-                        }
-                    },
                     clear: {
                         click: function (e) {
                             self.canvas.clear();
@@ -619,9 +612,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             var canvas = this.canvas;
 
             if (canvas.sprites.length) {
-                toolbar.enable("reset generate clear downloads");
+                toolbar.enable("reset clear downloads");
             } else {
-                toolbar.disable("reset generate clear downloads");
+                toolbar.disable("reset clear downloads");
             }
 
             if (this.hasFileInput) {

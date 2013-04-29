@@ -11,9 +11,6 @@
             <button data-action="settings" class="btn btn-small btn-info" title="Set layout, style prefix, padding, etc.">
                 <i class="icon-cog icon-white"></i> <span class="hidden-phone">Settings</span>
             </button>
-            <button data-action="generate" class="btn btn-small btn-info disabled" title="Generate spritesheet and stylesheet">
-                <i class="icon-tasks icon-white"></i> <span class="hidden-phone">Generate</span>
-            </button>
             <button data-action="clear" class="btn btn-small btn-info disabled" title="Clear sprites from the canvas">
                 <i class="icon-remove icon-white"></i> <span class="hidden-phone">Clear</span>
             </button>
