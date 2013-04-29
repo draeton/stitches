@@ -284,11 +284,6 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 actions: {
                     close: {
                         click: function (e) {
-                            var $import = this.$element.find(":input[name=import]");
-                            var $importGroup = $import.parents(".control-group");
-
-                            $import.val("");
-                            $importGroup.removeClass("error");
                             self.$element.trigger("close-settings");
                         }
                     }
@@ -357,14 +352,18 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             var value = $import.val();
                             var data;
 
-                            try {
-                                data = JSON.parse(value);
-                                self.importData(data);
-                                $import.val("");
-                                $importGroup.removeClass("error");
-                            } catch (x) {
-                                $importGroup.addClass("error");
-                                self.$element.trigger("error", [x]);
+                            $importGroup.removeClass("error");
+
+                            if (value) {
+                                try {
+                                    data = JSON.parse(value);
+                                    self.importData(data);
+                                } catch (x) {
+                                    $importGroup.addClass("error");
+                                    self.$element.trigger("error", [x]);
+                                }
+                            } else {
+                                self.updateProgress(1, "success");
                             }
                         }
                     }
@@ -530,6 +529,18 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          * @param {event} e The event object
          */
         closeSettings: function (e) {
+            var $navTabs = this.$settings.find("ul.nav-tabs");
+            var $navFirst = $navTabs.find("li:first-child a");
+            var $import = this.$settings.find(":input[name=import]");
+            var $importGroup = $import.parents(".control-group");
+
+            // go back to the first tab
+            $navFirst.click();
+
+            // clear out the import field
+            $import.val("");
+            $importGroup.removeClass("error");
+
             if (this.palettes.settings.visible) {
                 this.palettes.settings.close();
             }
@@ -781,7 +792,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
         importData: function (data) {
             var self = this;
             var settings = data.settings || {};
-            var canvas = data.canvas || {sprites: []};
+            var canvas = data.canvas || {};
             var sprites = canvas.sprites || [];
 
             // make sure any new defaults are included
@@ -795,9 +806,12 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             // update canvas
             this.canvas.clear();
             this.canvas.settings.padding = this.settings.padding;
-            $.map(data.canvas.sprites, function (sprite) {
+            $.map(sprites, function (sprite) {
                 self.canvas.createSprite(sprite.name, sprite.src);
             });
+
+            // ok
+            this.updateProgress(1, "success");
         }
     };
 
