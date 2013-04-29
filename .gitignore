@@ -1,6 +1,7 @@
 _site/
 amd/
 build/
+!stitches/build/
 dist/
 doc/
 node_modules/
