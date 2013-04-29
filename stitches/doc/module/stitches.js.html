@@ -565,13 +565,6 @@ and stylesheets</p>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
                         <span class="p">}</span>
                     <span class="p">},</span>
-                    <span class="nx">generate</span><span class="o">:</span> <span class="p">{</span>
-                        <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;show-overlay&quot;</span><span class="p">);</span>
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;generate-sheets&quot;</span><span class="p">);</span>
-                            <span class="nx">self</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;hide-overlay&quot;</span><span class="p">);</span>
-                        <span class="p">}</span>
-                    <span class="p">},</span>
                     <span class="nx">clear</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
                             <span class="nx">self</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
@@ -1410,9 +1403,9 @@ state</p>
             <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">;</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="s2">&quot;reset clear downloads&quot;</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset generate clear downloads&quot;</span><span class="p">);</span>
+                <span class="nx">toolbar</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;reset clear downloads&quot;</span><span class="p">);</span>
             <span class="p">}</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasFileInput</span><span class="p">)</span> <span class="p">{</span>
