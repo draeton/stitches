@@ -142,9 +142,11 @@
                 <div class="stitches-palette-footer">
                     <div class="btn-toolbar">
                         <div class="btn-group">
+                            <a href="#" class="downloads-export btn btn-small btn-success" download="stitches"><i class="icon-download-alt icon-white"></i> Export</a>
+                        </div>
+                        <div class="btn-group">
                             <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
                             <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
-                            <a href="#" class="downloads-export btn btn-small btn-success" download="stitches"><i class="icon-download-alt icon-white"></i> Export</a>
                         </div>
                     </div>
                 </div>
