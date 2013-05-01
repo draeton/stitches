@@ -321,11 +321,11 @@ body .highlight .ge { font-style: italic } /* Generic.Emph */
 body .highlight .gr { color: #FF0000 } /* Generic.Error */
 body .highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
 body .highlight .gi { color: #00A000 } /* Generic.Inserted */
-body .highlight .go { color: #808080 } /* Generic.Output */
+body .highlight .go { color: #888888 } /* Generic.Output */
 body .highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
 body .highlight .gs { font-weight: bold } /* Generic.Strong */
 body .highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-body .highlight .gt { color: #0040D0 } /* Generic.Traceback */
+body .highlight .gt { color: #0044DD } /* Generic.Traceback */
 body .highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
 body .highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
 body .highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
