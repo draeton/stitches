@@ -61,12 +61,6 @@
         <a href="#%40top">@top</a>
       </div>
       <div class="heading h3">
-        <a href="#%40width">@width</a>
-      </div>
-      <div class="heading h3">
-        <a href="#%40height">@height</a>
-      </div>
-      <div class="heading h3">
         <a href="#%40tojson">@toJSON</a>
       </div>
     </div>
@@ -629,88 +623,6 @@ to be used as a sprite name</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
             <span class="k">return</span> <span class="nx">isPx</span> <span class="o">?</span> <span class="nx">util</span><span class="p">.</span><span class="nx">toPx</span><span class="p">(</span><span class="o">-</span><span class="nx">top</span><span class="p">)</span> <span class="o">:</span> <span class="nx">top</span><span class="p">;</span>
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="%40width">
-  <h3>
-    <a href="#%40width" name="%40width" class="pilcrow">&#182;</a>
-    @width
-  </h3>
-</div>
-
-
-<p>Returns the width of the sprite image</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">isPx</span>
-      <span class="dox_type">boolean</span>
-      <span>Method returns px value</span>
-    </div>
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span>number || string</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">width</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isPx</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-
-            <span class="k">return</span> <span class="nx">isPx</span> <span class="o">?</span> <span class="nx">util</span><span class="p">.</span><span class="nx">toPx</span><span class="p">(</span><span class="nx">width</span><span class="p">)</span> <span class="o">:</span> <span class="nx">width</span><span class="p">;</span>
-        <span class="p">},</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="%40height">
-  <h3>
-    <a href="#%40height" name="%40height" class="pilcrow">&#182;</a>
-    @height
-  </h3>
-</div>
-
-
-<p>Returns the height of the sprite image</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">isPx</span>
-      <span class="dox_type">boolean</span>
-      <span>Method returns px value</span>
-    </div>
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span>number || string</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">height</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isPx</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-
-            <span class="k">return</span> <span class="nx">isPx</span> <span class="o">?</span> <span class="nx">util</span><span class="p">.</span><span class="nx">toPx</span><span class="p">(</span><span class="nx">height</span><span class="p">)</span> <span class="o">:</span> <span class="nx">height</span><span class="p">;</span>
         <span class="p">},</span>
 
 
