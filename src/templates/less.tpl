@@ -11,7 +11,7 @@
 <% $.map(sprites, function (sprite) { %>
 \n
 	&.<%= prefix %>-<%= sprite.name %> {\n
-		.stitches-<%= prefix %>(<%= sprite.left(true) %>, <%= sprite.top(true) %>, <%= sprite.width(true) %>, <%= sprite.height(true) %>);\n
+		.stitches-<%= prefix %>(<%= sprite.left(true) %>, <%= sprite.top(true) %>, <%= sprite.image.width %>px, <%= sprite.image.height %>px);\n
 	}\n
 <% }); %>
 }\n

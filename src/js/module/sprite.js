@@ -235,32 +235,6 @@ function($, util, templates) {
         },
 
         /**
-         * ### @width
-         * Returns the width of the sprite image
-         *
-         * @param {boolean} isPx Method returns px value
-         * @return number || string
-         */
-        width: function (isPx) {
-            var width = this.image.width;
-
-            return isPx ? util.toPx(width) : width;
-        },
-
-        /**
-         * ### @height
-         * Returns the height of the sprite image
-         *
-         * @param {boolean} isPx Method returns px value
-         * @return number || string
-         */
-        height: function (isPx) {
-            var height = this.image.height;
-
-            return isPx ? util.toPx(height) : height;
-        },
-
-        /**
          * ### @toJSON
          * Returns object for sprite export
          */

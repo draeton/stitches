@@ -7,8 +7,8 @@
 <% $.map(sprites, function (sprite) { %>
 \n
 .<%= prefix %>-<%= sprite.name %> {\n
-	width: <%= sprite.width(true) %>;\n
-	height: <%= sprite.height(true) %>;\n
+	width: <%= sprite.image.width %>px;\n
+	height: <%= sprite.image.height %>px;\n
 	background-position: <%= sprite.left(true) %> <%= sprite.top(true) %>;\n
 }\n
 <% }); %>
