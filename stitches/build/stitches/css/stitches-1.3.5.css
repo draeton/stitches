@@ -1,0 +1,229 @@
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * HTML5 Sprite Sheet Generator
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+.stitches {
+    min-width: 400px;
+}
+.stitches > img {
+    display: none;
+}
+.stitches-toolbar {
+    margin: 0;
+    padding: 6px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+    *zoom: 1;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.stitches-progress {
+    height: 4px;
+    background-color: #e5e5e5;
+}
+.stitches-progress .progress {
+    margin: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.stitches-drop-box {
+    position: relative;
+    z-index: 0;
+    min-height: 400px;
+}
+.stitches-overlay {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: #e5e5e5;
+    background-image: url(../img/stripes90.gif);
+}
+.stitches-overlay.in {
+    opacity: 0.4;
+}
+.stitches-wrap {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e5e5e5;
+    overflow: auto;
+}
+.stitches-canvas {
+    position: relative;
+    z-index: 0;
+    width: 0;
+    height: 0;
+    background-image: url(../img/checkerboard10.png);
+}
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Toolbar Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+.stitches-toolbar {}
+.stitches-toolbar button.files {
+    position: relative;
+    overflow: hidden;
+}
+.stitches-toolbar button.files input {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+    opacity: 0;
+}
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Palette Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+.stitches-palette {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 480px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+    *zoom: 1;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.stitches-palette.fade.in {
+    display: block;
+    opacity: 1;
+}
+.stitches-palette-header {
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+}
+.stitches-palette-body {
+    padding: 9px 15px;
+}
+.stitches-palette-body form {
+    margin: 0;
+}
+.stitches-palette-body textarea {
+    font-family: "Courier New", Courier, monospace;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.stitches-palette-body .form-horizontal .control-group {
+    margin-bottom: 10px;
+}
+.stitches-palette-body .form-horizontal .control-group:last-child {
+    margin-bottom: 0;
+}
+.stitches-palette-body .form-horizontal .control-label {
+    width: 120px;
+    font-size: 12px;
+}
+.stitches-palette-body .form-horizontal .controls {
+    margin-left: 140px;
+}
+@media (max-width: 480px) {
+    .stitches-palette-body .form-horizontal .control-label {
+        width: auto;
+    }
+    .stitches-palette-body .form-horizontal .controls {
+        margin-left: 0;
+    }
+    .stitches-palette-body img {
+        max-width: 150px;
+    }
+}
+.stitches-palette-footer {
+    padding: 0 15px;
+    border-top: 1px solid #ddd;
+}
+.stitches-palette-footer .btn-toolbar {
+    float: right;
+}
+.stitches-downloads {
+    width: 600px;
+}
+.stitches-downloads .stitches-palette-body {
+    max-height: 250px;
+    overflow: auto;
+}
+.stitches-downloads .stitches-example i {
+    float: left;
+    margin: 6px;
+}
+@media (max-width: 767px) {
+    .stitches-palette {
+        top: 0;
+        right: 0;
+        width: 100%;
+        border-left: 0;
+        border-right: 0;
+    }
+}
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Sprite Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+.stitches-sprite {
+    display: none;
+    z-index: 0;
+    position: absolute;
+    cursor: pointer;
+}
+.stitches-sprite.placed {
+    display: block;
+}
+.stitches-sprite:hover {
+    z-index: 1;
+    background-color: #e5e5e5;
+    background-image: url(../img/stripes90.gif);
+}
+.stitches-sprite:hover img {
+    opacity: 0.7;
+}
+.stitches-sprite.active {
+    z-index: 2;
+}
+.stitches-sprite.active img {
+    outline: 2px solid #3a87ad;
+}

@@ -30,6 +30,9 @@
       <div class="heading h3">
         <a href="#%40noop">@noop</a>
       </div>
+      <div class="heading h3">
+        <a href="#%40topx">@toPx</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -238,6 +241,45 @@ a certain threshold</p>
                 <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
                 <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
             <span class="p">}</span>
+        <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%40topx">
+  <h3>
+    <a href="#%40topx" name="%40topx" class="pilcrow">&#182;</a>
+    @toPx
+  </h3>
+</div>
+
+
+<p>Convet a number to px for stylesheets</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">num</span>
+      <span class="dox_type">string</span>
+      <span>Pixel value</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>string</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">toPx</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">num</span> <span class="o">?</span> <span class="nx">num</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span> <span class="o">:</span> <span class="s2">&quot;0&quot;</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">};</span>
 
