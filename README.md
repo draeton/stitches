@@ -2,7 +2,7 @@
 ==========
 
 Stitches is an HTML5 sprite sheet generator.
-The current version is `1.3.4`. Documentation is available
+The current version is `1.3.5`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/doc/stitches.js.html).
 
 ## Implementation
@@ -10,9 +10,9 @@ The current version is `1.3.4`. Documentation is available
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 ```html
-<link rel="stylesheet" href="css/stitches-1.3.4.min.css">
+<link rel="stylesheet" href="css/stitches-1.3.5.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.3.4.min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.3.5.min.js"></script>
 ```
 
 The sprite sheet generator is automatically created in elements that have the `stitches` class:
@@ -49,7 +49,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 
 ## Download
 
-**The latest release, 1.3.4, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-1.3.4.zip).**
+**The latest release, 1.3.5, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-1.3.5.zip).**
 
 
 ## Contributors
