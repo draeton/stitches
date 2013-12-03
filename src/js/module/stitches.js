@@ -203,7 +203,23 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             var $input = self.$toolbar.find("input[type=file]");
                             var $clone = $input.clone(true).val("");
                             var files = e.target.files;
-
+                            
+                            /**
+                             * Import the stitches projects over the open button.
+                             */
+                            $.map(files, function (file) {
+                                if (file.type.match('text.*')) {
+                                    var reader;
+                                    reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        var data;
+                                        data = JSON.parse(e.target.result);
+                                        self.importData(data);
+                                    };
+                                    reader.readAsText(file);
+                                }
+                            });
+                            
                             self.$element.trigger("process-files", [files]);
                             $input.replaceWith($clone);
                         }
