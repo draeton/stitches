@@ -5,7 +5,7 @@
 }\n
 \n
 .<%= prefix %> {\n
-    background-image: url(<%= backgroundImage %>);
+    background-image: url(<%= backgroundImage %>);\n
     background-repeat: no-repeat;\n
     display: block;\n
 <% $.map(sprites, function (sprite) { %>
