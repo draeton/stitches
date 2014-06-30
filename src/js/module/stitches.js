@@ -29,12 +29,16 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
     "use strict";
 
+    var UNIT_PIXELS = "pixel";
+	var UNIT_PERCENT = "percent";
+	
     var defaults = {
         layout: "compact", // default canvas sprite placement layout
         prefix: "sprite", // default stylesheet class prefix
         padding: 5, // default padding around sprites in pixels
         uri: false, // whether or not to include the data-uri image (quite large)
-        stylesheet: "css" // either css, less or sass at the moment
+        stylesheet: "css", // either css, less or sass at the moment
+		units: UNIT_PIXELS // Units of the spritesheet
     };
 
     /**
@@ -84,6 +88,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             if (store && !store.disabled) {
                 settings = store.get("stitches-settings");
+				if (!settings.units) {
+					settings.units = UNIT_PIXELS;
+				}
             }
 
             if (settings) {
@@ -304,6 +311,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             self.updateSettings();
                         }
                     },
+                    units: {
+                        "change": function (e) {
+                            var $checked = this.$element.find("input[name=units]:checked");
+                            var value = $checked.val();
+                            self.settings.units = value;
+                            
+                            self.updateSettings();
+                        }
+                    },
                     prefix: {
                         "input blur": function (e) {
                             var value = $(e.currentTarget).val();
@@ -500,7 +516,6 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          */
         openSettings: function (e) {
             this.closePalettes();
-
             this.palettes.settings.configure({
                 source: this.settings,
                 inputs: {
@@ -508,7 +523,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                     stylesheet: this.settings.stylesheet,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
-                    uri: this.settings.uri
+                    uri: this.settings.uri,
+                    units: this.settings.units
                 }
             });
 
@@ -655,6 +671,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 prefix: this.settings.prefix,
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
+                units: this.units,
                 stylesheetWithUri: this.stylesheetWithUri,
                 stylesheetType: stylesheetManager.type,
                 stylesheetLines: this.stylesheet.split("\n").length,
@@ -718,12 +735,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 sprites: this.canvas.sprites,
                 dimensions: this.canvas.dimensions
             });
-
+            
             this.stylesheetWithUri = stylesheetManager.getStylesheet({
                 sprites: this.canvas.sprites,
                 spritesheet: this.spritesheet,
                 prefix: this.settings.prefix,
-                uri: true
+                uri: true,
+                width: this.canvas.dimensions.width,
+                height: this.canvas.dimensions.height,
+                units: this.settings.units
             });
 
             this.markup = stylesheetManager.getMarkup({
@@ -747,7 +767,10 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                     sprites: this.canvas.sprites,
                     spritesheet: this.spritesheet,
                     prefix: this.settings.prefix,
-                    uri: this.settings.uri
+                    uri: this.settings.uri,
+                    width: this.canvas.dimensions.width,
+                    height: this.canvas.dimensions.height,
+                    units: this.settings.units
                 });
             }
 

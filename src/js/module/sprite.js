@@ -210,28 +210,20 @@ function($, util, templates) {
          * ### @left
          * Returns the x position of the sprite accounting for padding
          *
-         * @param {boolean} isPx Method returns px value
          * @return number || string
          */
-        left: function (isPx) {
-            var left = this.x + this.padding;
-
-            // left style position is always negative
-            return isPx ? util.toPx(-left) : left;
+        left: function () {
+            return (this.x + this.padding);
         },
 
         /**
          * ### @top
          * Returns the y position of the sprite accounting for padding
          *
-         * @param {boolean} isPx Method returns px value
          * @return number || string
          */
-        top: function (isPx) {
-            var top = this.y + this.padding;
-
-            // top style postion is always negative
-            return isPx ? util.toPx(-top) : top;
+        top: function (unit, canvasHeight) {
+            return (this.y + this.padding);
         },
 
         /**

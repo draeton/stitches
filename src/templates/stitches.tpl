@@ -103,6 +103,18 @@
                                         </label>
                                     </div>
                                 </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Unit</label>
+                                    <div class="controls">
+                                        <label class="radio inline">
+                                            <input name="units" type="radio" value="pixel"/>pixel
+                                        </label>
+                                        <label class="radio inline">
+                                            <input name="units" type="radio" value="percent"/>percent
+                                        </label>
+                                    </div>
+                                </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Style prefix</label>

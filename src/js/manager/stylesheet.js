@@ -56,8 +56,11 @@ function ($, CssStylesheet, LessStylesheet, SassStylesheet) {
             var spritesheet = options.spritesheet;
             var prefix = options.prefix;
             var uri = options.uri;
+			var width = options.width;
+			var height = options.height;
+			var units = options.units;
 
-            var styles = this.manager.get(sprites, spritesheet, prefix, uri);
+            var styles = this.manager.get(sprites, spritesheet, prefix, uri, width, height, units);
             styles = styles.replace(/\\n/g, "\n");
 
             return styles;
