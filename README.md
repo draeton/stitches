@@ -10,7 +10,7 @@ The current version is `1.3.6`. Documentation is available
 After dependencies, Stitches requires a stylesheet, a script, and an HTML element to get the job done:
 
 ```html
-<link rel="stylesheet" href="css/stitches-1.3.6.min.css">
+<link rel="stylesheet" href="css/stitches-1.3.5.min.css">
 
 <script data-main="js/stitches.js" src="js/stitches-1.3.6.min.js"></script>
 ```
