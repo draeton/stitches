@@ -1,0 +1,41 @@
+<div class="stitches-palette stitches-properties panel panel-default fade">
+	<div class="panel-heading">
+		<button type="button" class="close" data-action="close" title="Close">&times;</button>
+		<h4>Sprite Properties</h4>
+	</div>
+
+	<div class="panel-body">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">Name</label>
+				<div class="controls">
+					<input name="name" type="text" required placeholder="Sprite name&hellip;">
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">Coordinates (x, y)</label>
+				<div class="controls">
+					<div class="input-append">
+						<input name="x" required disabled placeholder="From left&hellip;" class="input-mini">
+						<span class="add-on">px</span>
+					</div>
+					<div class="input-append">
+						<input name="y" required disabled placeholder="From top&hellip;" class="input-mini">
+						<span class="add-on">px</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="panel-footer">
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>
+				<button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
+				<button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
+			</div>
+		</div>
+	</div>
+</div>

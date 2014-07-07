@@ -1,4 +1,4 @@
-var template = require("./templates/stitches.hbs");
+var template = require('../templates/progress.hbs');
 
 /**
  * @return {View}
@@ -14,10 +14,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('stitches : initialize()');
-
-		this.views = {};
-		this.elements = {};
+		console.info('progress : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -29,7 +26,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('stitches : render()');
+		console.info('progress : render()');
 
 		var html = template();
 

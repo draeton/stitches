@@ -1,5 +1,5 @@
-var Stitches = require('./stitches');
+var StitchesView = require('./views/stitches');
 
-var stitches = new Stitches({el: '.stitches'});
+var stitches = new StitchesView({el: '.stitches'});
 
 console.log(stitches);
