@@ -1,0 +1,20 @@
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * HTML5 Sprite Sheet Generator
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+
+.stitches {
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+
+	> img {
+		display: none;
+	}
+}

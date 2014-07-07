@@ -1,0 +1,49 @@
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Drop Box Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+
+.stitches-drop-box {
+	position: absolute;
+	top: 52px;
+	bottom: 0;
+	left: 0;
+	z-index: 0;
+	width: 100%;
+
+	.stitches-overlay {
+		display: none;
+		position: absolute;
+		z-index: 1000;
+		width: 100%;
+		height: 100%;
+		background-color: #e5e5e5;
+		background-image: url(../images/stripes90.gif);
+
+		&.in {
+			opacity: 0.4;
+		}
+	}
+
+	.stitches-wrap {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #e5e5e5;
+		overflow: auto;
+
+		.stitches-canvas {
+			position: relative;
+			z-index: 0;
+			width: 0;
+			height: 0;
+			background-image: url(../images/checkerboard10.png);
+		}
+	}
+}

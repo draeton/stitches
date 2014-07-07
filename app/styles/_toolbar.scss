@@ -1,0 +1,52 @@
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Toolbar Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+
+.stitches-toolbar {
+	position: relative;
+	z-index: 10;
+	margin: 0;
+	padding: 6px;
+	background-color: #fafafa;
+	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+	border: 1px solid #d4d4d4;
+	border-radius: 4px 4px 0 0;
+
+	button {
+		&.files {
+			position: relative;
+			overflow: hidden;
+
+			span {
+				margin-left: 6px;
+			}
+
+			input {
+				position: absolute;
+				top: 0;
+				left: 10%;
+				width: 80%;
+				height: 100%;
+				opacity: 0;
+			}
+		}
+	}
+}
+
+@media (max-width: 640px) {
+
+	.stitches-toolbar {
+		button {
+			span {
+				display: none;
+			}
+		}
+	}
+
+}

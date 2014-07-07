@@ -1,0 +1,98 @@
+/*!
+ * Stitches - HTML5 Sprite Generator
+ * http://draeton.github.io/stitches
+ *
+ * Palette Module
+ *
+ * Copyright 2013 Matthew Cobbs
+ * Licensed under the MIT license.
+ */
+
+.stitches-palette {
+	display: none;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 480px;
+	background-color: #fafafa;
+	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+	border: 1px solid #d4d4d4;
+	border-radius: 4px 4px 0 0;
+
+	&.fade.in {
+		display: block;
+		opacity: 1;
+	}
+
+	.panel-heading {
+		padding: 15px;
+
+		h4 {
+			margin: 0;
+		}
+	}
+
+	.panel-body {
+		form {
+			margin: 0;
+		}
+
+		textarea {
+			font-family: "Courier New", Courier, monospace;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		.form-horizontal {
+			.control-group {
+				margin-bottom: 10px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.control-label {
+				width: 120px;
+				font-size: 12px;
+			}
+
+			.controls {
+				margin-left: 140px;
+			}
+		}
+	}
+
+	.panel-footer {
+		overflow: hidden;
+
+		.btn-toolbar {
+			float: right;
+		}
+	}
+
+	&.stitches-downloads {
+		width: 600px;
+
+		.stitches-palette-body {
+			max-height: 250px;
+			overflow: auto;
+
+			.stitches-example i {
+				float: left;
+				margin: 6px;
+			}
+		}
+	}
+}
+
+@media (max-width: 640px) {
+
+	.stitches-palette {
+		top: 0;
+		left: 0;
+		right: 0;
+		width: auto;
+	}
+
+}

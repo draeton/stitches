@@ -1,23 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Stitches Test Suite</title>
-  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
-  <script src="../libs/jquery/jquery-1.7.1.js"></script>
-  <script src="../libs/modernizr/modernizr-2.0.6.min.js"></script>
-  <!-- Load local QUnit. -->
-  <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
-  <script src="../libs/qunit/qunit.js"></script>
-  <!-- Load local lib and tests. -->
-  <link rel="stylesheet" href="../src/css/stitches.css" media="screen">
-  <script data-main="../src/js/stitches.js" src="../src/require.js"></script>
-  <script src="unit/stitches.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mocha Spec Runner</title>
+    <link rel="stylesheet" href="bower_components/mocha/mocha.css">
 </head>
 <body>
-  <div id="qunit"></div>
-  <div id="qunit-fixture">
-    <div class="stitches"></div>
-  </div>
+    <div id="mocha"></div>
+    <script src="bower_components/mocha/mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="bower_components/chai/chai.js"></script>
+    <script>
+        var assert = chai.assert;
+        var expect = chai.expect;
+        var should = chai.should();
+    </script>
+
+    <!-- include source files here... -->
+
+    <!-- include spec files here... -->
+    <script src="spec/test.js"></script>
+
+    <script>mocha.run()</script>
 </body>
 </html>

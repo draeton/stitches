@@ -1,0 +1,12 @@
+{
+  "name": "stitches",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.1",
+    "modernizr": "~2.6.2",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.1",
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {}
+}
