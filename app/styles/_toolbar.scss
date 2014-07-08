@@ -19,6 +19,10 @@
 	border-radius: 4px 4px 0 0;
 
 	button {
+		span {
+			margin-left: 3px;
+		}
+
 		&.files {
 			position: relative;
 			overflow: hidden;
