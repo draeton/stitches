@@ -108,7 +108,6 @@ module.exports = Backbone.View.extend({
 		messages.on(config.events.close, _.bind(this.onClose, this));
 		messages.on(config.events.busy, _.bind(this.onBusy, this));
 		messages.on(config.events.idle, _.bind(this.onIdle, this));
-		messages.on(config.events.reset, _.bind(this.onReset, this));
 		messages.on(config.events.clear, _.bind(this.onClear, this));
 		messages.on(config.events.process, _.bind(this.onProcess, this));
 		messages.on(config.events.remove, _.bind(this.onRemove, this));
@@ -180,17 +179,12 @@ module.exports = Backbone.View.extend({
 	},
 
 	/**
-	 * Restore canvas to initial state
-	 */
-	onReset: function () {
-		console.info('stitches : onReset()');
-	},
-
-	/**
 	 * Clear sprites from canvas
 	 */
 	onClear: function () {
 		console.info('stitches : onClear()');
+
+		this.views.canvas.clear();
 	},
 
 	/**

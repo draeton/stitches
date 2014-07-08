@@ -22,7 +22,13 @@ module.exports = {
 		uri: false,
 
 		// either css or less at the moment
-		stylesheet: 'css'
+		stylesheet: 'css',
+
+		// initial canvas dimensions
+		dimensions: {
+			width: 400,
+			height: 400
+		}
 	},
 
 	/**
@@ -46,9 +52,6 @@ module.exports = {
 
 		// hide the overlay
 		idle: 'IDLE',
-
-		// restore the canvas to default state
-		reset: 'RESET',
 
 		// clear sprites from the canvas
 		clear: 'CLEAR',
