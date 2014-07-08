@@ -1,14 +1,18 @@
 var template = require('../../templates/palettes/about.hbs');
 
+var PaletteView = require('./palette');
+
 /**
  * @return {View}
  */
-module.exports = Backbone.View.extend({
+module.exports = PaletteView.extend({
 
 	/**
 	 * @type {Objetc}
 	 */
-	events: {},
+	events: {
+		'click [data-action=close]': 'onClickClose'
+	},
 
 	/**
 	 * Set up instance properties and call startup methods
@@ -33,6 +37,17 @@ module.exports = Backbone.View.extend({
 		this.$el.empty().append(html);
 
 		return this;
+	},
+
+	/**
+	 * Close me
+	 *
+	 * @param {Event} e
+	 */
+	onClickClose: function () {
+		console.info('palettes : about : onClickClose()');
+
+		this.close();
 	}
 
 });

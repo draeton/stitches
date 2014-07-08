@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-.stitches-toolbar {
+.toolbar {
 	position: relative;
 	z-index: 10;
 	margin: 0;
@@ -45,7 +45,7 @@
 
 @media (max-width: 640px) {
 
-	.stitches-toolbar {
+	.toolbar {
 		button {
 			span {
 				display: none;

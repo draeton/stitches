@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-.stitches-palette {
+.palette {
 	display: none;
 	position: absolute;
 	top: 62px;
@@ -71,14 +71,14 @@
 		}
 	}
 
-	&.stitches-downloads {
+	&.palette-downloads {
 		width: 600px;
 
-		.stitches-palette-body {
+		.panel-body {
 			max-height: 250px;
 			overflow: auto;
 
-			.stitches-example i {
+			.example i {
 				float: left;
 				margin: 6px;
 			}
@@ -88,7 +88,7 @@
 
 @media (max-width: 640px) {
 
-	.stitches-palette {
+	.palette {
 		top: 52px;
 		left: 0;
 		right: 0;

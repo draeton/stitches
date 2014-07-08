@@ -5,8 +5,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 // endbower
 
 @import "_stitches";
-@import "_toolbar";
+@import "_canvas";
+@import "_dropbox";
 @import "_palette";
 @import "_progress";
-@import "_dropbox";
 @import "_sprite";
+@import "_toolbar";

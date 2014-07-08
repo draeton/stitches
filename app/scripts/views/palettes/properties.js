@@ -1,14 +1,22 @@
+var config = require('../../config');
+var messages = require('../../messages');
 var template = require('../../templates/palettes/properties.hbs');
+
+var PaletteView = require('./palette');
 
 /**
  * @return {View}
  */
-module.exports = Backbone.View.extend({
+module.exports = PaletteView.extend({
 
 	/**
 	 * @type {Objetc}
 	 */
-	events: {},
+	events: {
+		'click [data-action=close]': 'onClickClose',
+		'click [data-action=remove]': 'onClickRemove',
+		'change [name=name]': 'onChangeName'
+	},
 
 	/**
 	 * Set up instance properties and call startup methods
@@ -33,6 +41,43 @@ module.exports = Backbone.View.extend({
 		this.$el.empty().append(html);
 
 		return this;
+	},
+
+	/**
+	 * Close me
+	 *
+	 * @param {Event} e
+	 */
+	onClickClose: function () {
+		console.info('palettes : downloads : onClickClose()');
+
+		this.close();
+	},
+
+	/**
+	 * Remove source sprite from canvas
+	 *
+	 * @param {Event} e
+	 */
+	onClickRemove: function () {
+		messages.trigger(config.events.remove, this.source);
+	},
+
+	/**
+	 * Process name after input change
+	 *
+	 * @param {Event} e
+	 */
+	onChangeName: function (e) {
+		var input = $(e.currentTarget);
+		var name = input.val();
+		var sprite = this.source;
+
+		sprite.name = sprite.cleanName(name);
+
+		if (name !== sprite.name) {
+			input.val(sprite.name);
+		}
 	}
 
 });

@@ -1,10 +1,9 @@
-var PaletteView = require('./palette');
-var template = require('../../templates/palettes/settings.hbs');
+var template = require('../templates/canvas.hbs');
 
 /**
  * @return {View}
  */
-module.exports = PaletteView.extend({
+module.exports = Backbone.View.extend({
 
 	/**
 	 * @type {Objetc}
@@ -15,7 +14,7 @@ module.exports = PaletteView.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('palettes : settings : initialize()');
+		console.info('canvas : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -27,7 +26,7 @@ module.exports = PaletteView.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('palettes : settings : render()');
+		console.info('canvas : render()');
 
 		var html = template();
 

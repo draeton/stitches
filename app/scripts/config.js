@@ -10,6 +10,7 @@ module.exports = {
 		reset: 'RESET',
 		clear: 'CLEAR',
 		process: 'PROCESS',
+		remove: 'REMOVE'
 	}
 
 };
