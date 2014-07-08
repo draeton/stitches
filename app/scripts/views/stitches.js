@@ -37,13 +37,32 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('stitches : initialize()');
 
+		this.settings = _.extend({}, config.settings);
 		this.elements = {};
 		this.views = {};
 		this.palettes = {};
 
 		// prepare in dom
+		this.setup();
 		this.render();
 		this.bind();
+	},
+
+	/**
+	 * If available, load settings
+	 */
+	setup: function () {
+		console.info('stitches : setup()');
+
+		var stored;
+
+		if (store && !store.disabled) {
+			stored = store.get(config.storage);
+		}
+
+		if (stored) {
+			_.extend(this.settings, stored);
+		}
 	},
 
 	/**
