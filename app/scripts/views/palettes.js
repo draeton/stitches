@@ -11,7 +11,7 @@ var SettingsView = require('../views/palettes/settings');
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {},
 

@@ -1,3 +1,13 @@
+/**
+ * # views/palettes/settings
+ *
+ * Constructor for the Settings palette.
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var config = require('../../config');
 var messages = require('../../messages');
 var template = require('../../templates/palettes/settings.hbs');
@@ -10,7 +20,7 @@ var PaletteView = require('./palette');
 module.exports = PaletteView.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {
 		'click [data-action=close]': 'onClickClose'

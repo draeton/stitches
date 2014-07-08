@@ -1,14 +1,24 @@
+/**
+ * # views/toolbar
+ *
+ * Constructor for UI toolbar view
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var config = require('../config');
 var messages = require('../messages');
 var template = require('../templates/toolbar.hbs');
 
 /**
- * @return {View}
+ * @return {ToolbarView}
  */
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {
 		'change [data-action=open]': 'onChangeOpen',
@@ -54,7 +64,7 @@ module.exports = Backbone.View.extend({
 		var clone = input.clone(true).val('');
 		var files = e.target.files;
 
-		messages.trigger(config.events.process, [files]);
+		messages.trigger(config.events.process, files);
 		input.replaceWith(clone);
 	},
 

@@ -6,7 +6,7 @@ var template = require('../templates/progress.hbs');
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {},
 

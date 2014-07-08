@@ -1,16 +1,33 @@
+/**
+ * # views/dropbox
+ *
+ * Constructor for the drag and drop view. Used to allow users to drag
+ * files onto a DOM element to initiate processing
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var config = require('../config');
 var messages = require('../messages');
 var template = require('../templates/dropbox.hbs');
 
 /**
- * @return {View}
+ * @return {DropboxView}
  */
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
-	events: {},
+	events: {
+		'dragenter .dropbox': 'onDragStart',
+		'dragleave .overlay': 'onDragStop',
+		'dragexit .overlay': 'onDragStop',
+		'dragover .overlay': 'onDragOver',
+		'drop .overlay': 'onDrop'
+	},
 
 	/**
 	 * Set up instance properties and call startup methods
@@ -22,7 +39,6 @@ module.exports = Backbone.View.extend({
 
 		// prepare in dom
 		this.render();
-		this.bind();
 	},
 
 	/**
@@ -40,22 +56,6 @@ module.exports = Backbone.View.extend({
 		this.elements.overlay = this.$el.find('.overlay');
 
 		return this;
-	},
-
-	/**
-	 * Bind event handlers
-	 */
-	bind: function () {
-		console.info('dropbox : bind()');
-
-		var dropbox = this.elements.dropbox.get(0);
-		var overlay = this.elements.overlay.get(0);
-
-		dropbox.addEventListener('dragenter', _.bind(this.onDragStart, this), false);
-		overlay.addEventListener('dragleave', _.bind(this.onDragStop, this), false);
-		overlay.addEventListener('dragexit', _.bind(this.onDragStop, this), false);
-		overlay.addEventListener('dragover', function () {}, false);
-		overlay.addEventListener('drop', _.bind(this.onDrop, this), false);
 	},
 
 	/**
@@ -104,6 +104,17 @@ module.exports = Backbone.View.extend({
 	},
 
 	/**
+	 * Do nothing
+	 *
+	 * @param {Event} e
+	 */
+	onDragOver: function (e) {
+		console.info('dropbox : onDragOver()');
+
+		e.preventDefault();
+	},
+
+	/**
 	 * When a drop event occurs, check for files. If there are files, start
 	 * processing them
 	 *
@@ -112,13 +123,13 @@ module.exports = Backbone.View.extend({
 	onDrop: function (e) {
 		console.info('dropbox : onDrop()');
 
-		var files = (e.files || e.dataTransfer.files);
+		e.originalEvent.stopPropagation();
+		e.originalEvent.preventDefault();
 
-		e.stopPropagation();
-		e.preventDefault();
+		var files = (e.originalEvent.files || e.originalEvent.dataTransfer.files);
 
 		if (files.length) {
-			messages.trigger(config.events.process, [files]);
+			messages.trigger(config.events.process, files);
 		} else {
 			messages.trigger(config.events.idle);
 		}

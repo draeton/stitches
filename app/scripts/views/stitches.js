@@ -1,3 +1,16 @@
+/**
+ * # views/stitches
+ *
+ * Constructor for the stitches view, which encapsulates all of the UI
+ * functionality. Instantiated with a DOM element, into which all of the
+ * markup is injected and to which the behaviors are attached. Typically
+ * used in a DOM ready callback
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var config = require('../config');
 var messages = require('../messages');
 var template = require('../templates/stitches.hbs');
@@ -9,12 +22,12 @@ var ProgressView = require('../views/progress');
 var ToolbarView = require('../views/toolbar');
 
 /**
- * @return {View}
+ * @return {StitchesView}
  */
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {},
 

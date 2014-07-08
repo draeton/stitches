@@ -19,6 +19,7 @@
  * of all the good folks who develop [RequireJS](http://requirejs.org/) and
  * [GruntJS](http://gruntjs.com/), for helping this all make sense.
  */
+
 var StitchesView = require('./views/stitches');
 
 module.exports = new StitchesView({el: '.stitches'});

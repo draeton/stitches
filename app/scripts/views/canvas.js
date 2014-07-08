@@ -1,12 +1,24 @@
+/**
+ * # views/canvas
+ *
+ * Constructor for the sprite sheet canvas view, which holds and displays
+ * all placed sprites. Used for manipulating sprite placement and
+ * state
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var template = require('../templates/canvas.hbs');
 
 /**
- * @return {View}
+ * @return {CanvasView}
  */
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {},
 

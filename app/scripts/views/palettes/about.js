@@ -1,3 +1,13 @@
+/**
+ * # views/palettes/about
+ *
+ * Constructor for the About palette.
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 var template = require('../../templates/palettes/about.hbs');
 
 var PaletteView = require('./palette');
@@ -8,7 +18,7 @@ var PaletteView = require('./palette');
 module.exports = PaletteView.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {
 		'click [data-action=close]': 'onClickClose'

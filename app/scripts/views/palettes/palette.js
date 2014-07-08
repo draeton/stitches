@@ -1,10 +1,20 @@
 /**
- * @return {View}
+ * # views/palettes/palette
+ *
+ * Base constructor for UI palettes (i.e. dialogs).
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
+/**
+ * @return {PaletteView}
  */
 module.exports = Backbone.View.extend({
 
 	/**
-	 * @type {Objetc}
+	 * @type {Object}
 	 */
 	events: {},
 
