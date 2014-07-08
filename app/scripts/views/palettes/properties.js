@@ -15,7 +15,8 @@ module.exports = PaletteView.extend({
 	events: {
 		'click [data-action=close]': 'onClickClose',
 		'click [data-action=remove]': 'onClickRemove',
-		'change [name=name]': 'onChangeName'
+		'input [name=name]': 'onChangeName',
+		'blur [name=name]': 'onChangeName'
 	},
 
 	/**
@@ -60,6 +61,8 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onClickRemove: function () {
+		console.info('palettes : downloads : onClickRemove()');
+
 		messages.trigger(config.events.remove, this.source);
 	},
 
@@ -69,6 +72,8 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onChangeName: function (e) {
+		console.info('palettes : downloads : onChangeName()');
+
 		var input = $(e.currentTarget);
 		var name = input.val();
 		var sprite = this.source;

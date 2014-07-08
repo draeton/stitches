@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend({
 	open: function () {
 		console.info('palettes : palette : open()');
 
-		this.$el.find('.palette').addClass('in');
+		this.$el.find('.palette').addClass('active');
 	},
 
 	/**
@@ -32,7 +32,7 @@ module.exports = Backbone.View.extend({
 	close: function () {
 		console.info('palettes : palette : close()');
 
-		this.$el.find('.palette').removeClass('in');
+		this.$el.find('.palette').removeClass('active');
 	},
 
 	/**

@@ -1,5 +1,8 @@
-var PaletteView = require('./palette');
+var config = require('../../config');
+var messages = require('../../messages');
 var template = require('../../templates/palettes/settings.hbs');
+
+var PaletteView = require('./palette');
 
 /**
  * @return {View}
@@ -9,13 +12,17 @@ module.exports = PaletteView.extend({
 	/**
 	 * @type {Objetc}
 	 */
-	events: {},
+	events: {
+		'click [data-action=close]': 'onClickClose'
+	},
 
 	/**
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
 		console.info('palettes : settings : initialize()');
+
+		this.elements = {};
 
 		// prepare in dom
 		this.render();
@@ -34,6 +41,17 @@ module.exports = PaletteView.extend({
 		this.$el.empty().append(html);
 
 		return this;
+	},
+
+	/**
+	 * Close me
+	 *
+	 * @param {Event} e
+	 */
+	onClickClose: function () {
+		console.info('palettes : downloads : onClickClose()');
+
+		this.close();
 	}
 
 });

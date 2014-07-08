@@ -1,3 +1,5 @@
+var config = require('../config');
+var messages = require('../messages');
 var template = require('../templates/stitches.hbs');
 
 var CanvasView = require('../views/canvas');
@@ -28,6 +30,7 @@ module.exports = Backbone.View.extend({
 
 		// prepare in dom
 		this.render();
+		this.bind();
 	},
 
 	/**
@@ -59,6 +62,117 @@ module.exports = Backbone.View.extend({
 		this.palettes.settings = this.views.palettes.views.settings;
 
 		return this;
+	},
+
+	/**
+	 * Bind event handlers
+	 */
+	bind: function () {
+		console.info('stitches : bind()');
+
+		messages.on(config.events.about, _.bind(this.onAbout, this));
+		messages.on(config.events.downloads, _.bind(this.onDownloads, this));
+		messages.on(config.events.settings, _.bind(this.onSettings, this));
+		messages.on(config.events.close, _.bind(this.onClose, this));
+		messages.on(config.events.busy, _.bind(this.onBusy, this));
+		messages.on(config.events.idle, _.bind(this.onIdle, this));
+		messages.on(config.events.reset, _.bind(this.onReset, this));
+		messages.on(config.events.clear, _.bind(this.onClear, this));
+		messages.on(config.events.process, _.bind(this.onProcess, this));
+		messages.on(config.events.remove, _.bind(this.onRemove, this));
+	},
+
+	/**
+	 * Open about palette
+	 */
+	onAbout: function () {
+		console.info('stitches : onAbout()');
+
+		messages.trigger(config.events.close);
+		this.palettes.about.open();
+	},
+
+	/**
+	 * Open downloads palette
+	 */
+	onDownloads: function () {
+		console.info('stitches : onDownloads()');
+
+		messages.trigger(config.events.close);
+		this.palettes.downloads.open();
+	},
+
+	/**
+	 * Open settings palette
+	 */
+	onSettings: function () {
+		console.info('stitches : onSettings()');
+
+		messages.trigger(config.events.close);
+		this.palettes.settings.open();
+	},
+
+	/**
+	 * Close a palette or all palettes
+	 *
+	 * @param {String} name
+	 */
+	onClose: function (name) {
+		console.info('stitches : onClose()');
+
+		var palette = this.palettes[name];
+
+		if (palette) {
+			palette.close();
+		} else {
+			_.invoke(this.palettes, 'close');
+		}
+	},
+
+	/**
+	 * Show overlay
+	 */
+	onBusy: function () {
+		console.info('stitches : onBusy()');
+
+		this.views.dropbox.showOverlay();
+	},
+
+	/**
+	 * Hide overlay
+	 */
+	onIdle: function () {
+		console.info('stitches : onIdle()');
+
+		this.views.dropbox.hideOverlay();
+	},
+
+	/**
+	 * Restore canvas to initial state
+	 */
+	onReset: function () {
+		console.info('stitches : onReset()');
+	},
+
+	/**
+	 * Clear sprites from canvas
+	 */
+	onClear: function () {
+		console.info('stitches : onClear()');
+	},
+
+	/**
+	 * Process a set of files into sprites
+	 */
+	onProcess: function () {
+		console.info('stitches : onProcess()');
+	},
+
+	/**
+	 * Remove a single sprite from the canvas
+	 */
+	onRemove: function () {
+		console.info('stitches : onRemove()');
 	}
 
 });

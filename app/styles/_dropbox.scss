@@ -24,8 +24,10 @@
 		height: 100%;
 		background-color: #e5e5e5;
 		background-image: url(../images/stripes90.gif);
+		transition: opacity 0.15s linear;
 
-		&.in {
+		&.active {
+			display: block;
 			opacity: 0.4;
 		}
 	}
