@@ -17,5 +17,6 @@
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "jquery": false
+    "jquery": true,
+    "predef": [ "_", "Backbone" ]
 }
