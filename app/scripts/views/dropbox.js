@@ -13,6 +13,8 @@ var config = require('../config');
 var messages = require('../messages');
 var template = require('../templates/dropbox.hbs');
 
+var CanvasView = require('../views/canvas');
+
 /**
  * @return {DropboxView}
  */
@@ -36,6 +38,7 @@ module.exports = Backbone.View.extend({
 		console.info('views/dropbox : initialize()');
 
 		this.elements = {};
+		this.views = {};
 
 		// prepare in dom
 		this.render();
@@ -54,6 +57,9 @@ module.exports = Backbone.View.extend({
 		this.$el.empty().append(html);
 		this.elements.dropbox = this.$el.find('.dropbox');
 		this.elements.overlay = this.$el.find('.overlay');
+		this.elements.canvas = this.$el.find('.canvas');
+
+		this.views.canvas = new CanvasView({el: this.elements.canvas, collection: this.collection});
 
 		return this;
 	},

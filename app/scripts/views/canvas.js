@@ -10,7 +10,10 @@
  * > Licensed under the MIT license.
  */
 
-var template = require('../templates/canvas.hbs');
+var config = require('../config');
+var messages = require('../messages');
+
+var SpriteView = require('../views/sprite');
 
 /**
  * @return {CanvasView}
@@ -28,23 +31,42 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/canvas : initialize()');
 
+		this.elements = {};
+
 		// prepare in dom
-		this.render();
+		this.bind();
 	},
 
 	/**
-	 * Create the html for the view and append to the element.
-	 *
-	 * @return {View}
+	 * Bind event handlers
 	 */
-	render: function () {
-		console.info('views/canvas : render()');
+	bind: function () {
+		console.info('views/canvas : bind()');
 
-		var html = template();
+		this.collection.on('add', _.bind(this.add, this));
+		this.collection.on('reset', _.bind(this.reset, this));
+	},
 
-		this.$el.empty().append(html);
+	/**
+	 * When sprites are added to the collection
+	 *
+	 * @param {SpriteModel} sprite
+	 */
+	add: function (sprite) {
+		console.info('views/canvas : add()');
 
-		return this;
+		var view = new SpriteView({model: sprite});
+
+		this.$el.append(view.el);
+	},
+
+	/**
+	 * Clear out canvas
+	 */
+	reset: function () {
+		console.info('views/canvas : reset()');
+
+		this.$el.empty();
 	}
 
 });

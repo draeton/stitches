@@ -16,6 +16,8 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/progress : initialize()');
 
+		this.elements = {};
+
 		// prepare in dom
 		this.render();
 	},
@@ -31,8 +33,25 @@ module.exports = Backbone.View.extend({
 		var html = template();
 
 		this.$el.empty().append(html);
+		this.elements.bar = this.$el.find('.progress-bar');
 
 		return this;
+	},
+
+	/**
+	 * Set bar width and color
+	 *
+	 * @param {Number} percent
+	 * @param {String} type
+	 */
+	set: function (percent, type) {
+		console.info('views/progress : set()');
+
+		if (type) {
+			this.elements.bar.attr('class', 'progress-bar progress-bar-' + type);
+		}
+
+		this.elements.bar.css('width', percent + '%');
 	}
 
 });

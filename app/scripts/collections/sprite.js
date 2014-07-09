@@ -28,7 +28,9 @@ module.exports = Backbone.Collection.extend({
 		 * Initialize collection properties
 		 */
 		initialize: function () {
-			console.info('collections/sprite : initialize');
+			console.info('collections/sprite : initialize()');
+
+			this.on('change:loaded', _.bind(this.onChangeLoaded, this));
 		},
 
 		/**
@@ -38,9 +40,29 @@ module.exports = Backbone.Collection.extend({
 		 * @return {Array}
 		 */
 		parse: function (files) {
-			console.info('collections/sprite : parse');
+			console.info('collections/sprite : parse()');
 
-			return files;
+			var list = _.filter(files, function (file) {
+				return /jpeg|png|gif/.test(file.type);
+			});
+
+			return list;
+		},
+
+		/**
+		 * For updating progress
+		 */
+		onChangeLoaded: function () {
+			console.info('collections/sprite : onChangeLoaded()');
+
+			var loaded = this.where({loaded: true}).length;
+			var completed = loaded / this.length;
+
+			messages.trigger(config.events.progress, completed);
+
+			if (completed === 1) {
+				messages.trigger(config.events.idle);
+			}
 		}
 
 });

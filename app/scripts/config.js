@@ -53,14 +53,14 @@ module.exports = {
 		// hide the overlay
 		idle: 'IDLE',
 
-		// clear sprites from the canvas
-		clear: 'CLEAR',
+		// display progress percentage
+		progress: 'PROGRESS',
 
 		// process submitted files into sprites
 		process: 'PROCESS',
 
-		// remove a sprite from the canvas
-		remove: 'REMOVE'
+		// any kind of error
+		error: 'ERROR'
 	}
 
 };

@@ -31,4 +31,12 @@
 			opacity: 0.4;
 		}
 	}
+
+	.canvas {
+		position: relative;
+		z-index: 0;
+		width: 0;
+		height: 0;
+		background-image: url(../images/checkerboard10.png);
+	}
 }

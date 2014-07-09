@@ -12,10 +12,9 @@
 	position: relative;
 	z-index: 10;
 	height: 4px;
+	margin: 0;
 	background-color: #e5e5e5;
+	border-radius: 0;
 
-	.progress {
-		margin: 0;
-		border-radius: 0;
-	}
+	.progress-bar {}
 }

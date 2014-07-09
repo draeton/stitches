@@ -15,7 +15,6 @@ var config = require('../config');
 var messages = require('../messages');
 var template = require('../templates/stitches.hbs');
 
-var CanvasView = require('../views/canvas');
 var DropboxView = require('../views/dropbox');
 var PalettesView = require('../views/palettes');
 var ProgressView = require('../views/progress');
@@ -43,6 +42,9 @@ module.exports = Backbone.View.extend({
 		this.elements = {};
 		this.views = {};
 		this.palettes = {};
+
+		// sprites
+		this.sprites = new SpriteCollection();
 
 		// prepare in dom
 		this.load();
@@ -84,11 +86,10 @@ module.exports = Backbone.View.extend({
 		this.elements.progress = this.$el.find('.wrap-progress');
 		this.elements.toolbar = this.$el.find('.wrap-toolbar');
 
-		this.views.canvas = new CanvasView({el: this.elements.canvas});
-		this.views.dropbox = new DropboxView({el: this.elements.dropbox});
+		this.views.dropbox = new DropboxView({el: this.elements.dropbox, collection: this.sprites});
 		this.views.palettes = new PalettesView({el: this.elements.palettes});
 		this.views.progress = new ProgressView({el: this.elements.progress});
-		this.views.toolbar = new ToolbarView({el: this.elements.toolbar});
+		this.views.toolbar = new ToolbarView({el: this.elements.toolbar, collection: this.sprites});
 
 		this.palettes.about = this.views.palettes.views.about;
 		this.palettes.downloads = this.views.palettes.views.downloads;
@@ -110,6 +111,7 @@ module.exports = Backbone.View.extend({
 		messages.on(config.events.close, _.bind(this.onClose, this));
 		messages.on(config.events.busy, _.bind(this.onBusy, this));
 		messages.on(config.events.idle, _.bind(this.onIdle, this));
+		messages.on(config.events.progress, _.bind(this.onProgress, this));
 		messages.on(config.events.clear, _.bind(this.onClear, this));
 		messages.on(config.events.process, _.bind(this.onProcess, this));
 		messages.on(config.events.remove, _.bind(this.onRemove, this));
@@ -181,6 +183,22 @@ module.exports = Backbone.View.extend({
 	},
 
 	/**
+	 * Show progress percentage
+	 *
+	 * @param {Number} value From 0 to 1
+	 * @param {String} type Determines the color of the bar
+	 */
+	onProgress: function (value, type) {
+		var percent = Math.ceil(value * 100);
+
+		if (percent === 100 && type !== 'danger' && type !== 'warning') {
+			type = 'success';
+		}
+
+		this.views.progress.set(percent, type);
+	},
+
+	/**
 	 * Clear sprites from canvas
 	 */
 	onClear: function () {
@@ -197,7 +215,11 @@ module.exports = Backbone.View.extend({
 	onProcess: function (files) {
 		console.info('views/stitches : onProcess()');
 
-		this.sprites = new SpriteCollection(files);
+		var items = SpriteCollection.prototype.parse(files);
+
+		this.sprites.add(items);
+
+		messages.trigger(config.events.progress, 0, 'info');
 	},
 
 	/**
