@@ -12,6 +12,7 @@
 
 var config = require('../config');
 var messages = require('../messages');
+var layout = require('../utils/layout');
 
 var SpriteView = require('../views/sprite');
 
@@ -82,6 +83,41 @@ module.exports = Backbone.View.extend({
 
 		messages.trigger(config.events.generate);
 		messages.trigger(config.events.idle);
+	},
+
+	/**
+	 * Determine the canvas dimensions based on a set of sprites
+	 */
+	measure: function () {
+		console.info('views/canvas : measure()');
+
+		this.dimensions = layout.getDimensions(this.collection);
+	},
+
+	/**
+	 * Place a set of sprites on this canvas. Sorts sprites by `name`
+	 * property before placement
+	 */
+	place: function () {
+		console.info('views/canvas : place()');
+
+		this.collection.invoke('reset');
+		layout.placeSprites(this.collection, [], this.dimensions);
+	},
+
+	/**
+	 * Trim an excess canvas dimensions not required to include this
+	 * set of sprites
+	 */
+	cut: function () {
+		console.info('views/canvas : place()');
+
+		layout.trim(this.collection, this.dimensions);
+
+		this.$el.css({
+			width: this.dimensions.width + 'px',
+			height: this.dimensions.height + 'px'
+		});
 	}
 
 });

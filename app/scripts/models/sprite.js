@@ -30,7 +30,7 @@ module.exports = Backbone.Model.extend({
 		height: 0,
 		area: 0,
 		src: '',
-		loaded: false
+		placed: false
 	},
 
 	/**
@@ -42,6 +42,7 @@ module.exports = Backbone.Model.extend({
 		console.info('models/sprite : initialize()');
 
 		this.image = null;
+		this.placed = false;
 
 		this.cleanName();
 		this.read(file);
@@ -124,8 +125,21 @@ module.exports = Backbone.Model.extend({
 			width: width,
 			height: height,
 			area: area,
-			src: this.image.src,
-			loaded: true
+			src: this.image.src
+		});
+	},
+
+	/**
+	 * Reset the placement status and position of the sprite. Used before
+	 * recalculating everything in a canvas reset
+	 */
+	reset: function () {
+		console.info('models/sprite : reset()');
+
+		this.set({
+			x: 0,
+			y: 0,
+			placed: false
 		});
 	}
 

@@ -1,3 +1,13 @@
+/**
+ * # config
+ *
+ * Some settings
+ *
+ * > http://draeton.github.io/stitches<br/>
+ * > Copyright 2013 Matthew Cobbs<br/>
+ * > Licensed under the MIT license.
+ */
+
 module.exports = {
 
 	/**
@@ -28,7 +38,10 @@ module.exports = {
 		dimensions: {
 			width: 400,
 			height: 400
-		}
+		},
+
+		// max passes for sprite placement
+		tries: 2
 	},
 
 	/**

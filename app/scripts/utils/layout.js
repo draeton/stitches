@@ -19,7 +19,7 @@ var VerticalLayout = require('./layouts/vertical');
 /**
  * @type {Object}
  */
-modules.exports = {
+module.exports = {
 
 	/**
 	 * @type {Object}
@@ -52,13 +52,12 @@ modules.exports = {
 	 * Get the dimensions necessary to place the sprites
 	 *
 	 * @param {SpriteCollection} sprites A list of sprites to place
-	 * @param {Object} defaults Default dimensions if no sprites
 	 * @return {Object}
 	 */
-	getDimensions: function (sprites, defaults) {
+	getDimensions: function (sprites) {
 		console.info('utils/layout : getDimensions()');
 
-		return this.layout.getDimensions(sprites, defaults);
+		return this.layout.getDimensions(sprites, config.settings.dimensions);
 	},
 
 	/**
@@ -73,17 +72,18 @@ modules.exports = {
 
 		messages.trigger(config.events.progress, 0, 'info');
 
-		sprites.each(_.bind(this.placeSprite, this, placed, dimensions));
+		sprites.each(_.bind(this.placeSprite, this, sprites, placed, dimensions));
 	},
 
 	/**
 	 * Position a sprite to fit in dimensions and layout
 	 *
-	 * @param {SpriteModel} sprite To place
+	 * @param {SpriteCollection} sprites To place
 	 * @param {Array} placed Already placed
 	 * @param {Object} dimensions Working width and height
+	 * @param {SpriteModel} sprite To place
 	 */
-	placeSprite: function (sprite, placed, dimensions) {
+	placeSprite: function (sprites, placed, dimensions, sprite) {
 		console.info('utils/layout : placeSprite()');
 
 		if (!sprite.placed) {

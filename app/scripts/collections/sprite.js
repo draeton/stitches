@@ -30,7 +30,7 @@ module.exports = Backbone.Collection.extend({
 	initialize: function () {
 		console.info('collections/sprite : initialize()');
 
-		this.on('change:loaded', _.bind(this.onChangeLoaded, this));
+		this.on('change:src', _.bind(this.onChangeSrc, this));
 		this.on('change', _.bind(this.onChange, this))
 	},
 
@@ -53,10 +53,10 @@ module.exports = Backbone.Collection.extend({
 	/**
 	 * For updating progress
 	 */
-	onChangeLoaded: function () {
-		console.info('collections/sprite : onChangeLoaded()');
+	onChangeSrc: function () {
+		console.info('collections/sprite : onChangeSrc()');
 
-		var loaded = this.where({loaded: true}).length;
+		var loaded = this.length - this.where({src: ''}).length;
 		var completed = loaded / this.length;
 
 		messages.trigger(config.events.progress, completed);
