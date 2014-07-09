@@ -31,8 +31,6 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/canvas : initialize()');
 
-		this.elements = {};
-
 		// prepare in dom
 		this.bind();
 	},
@@ -67,6 +65,23 @@ module.exports = Backbone.View.extend({
 		console.info('views/canvas : reset()');
 
 		this.$el.empty();
+	},
+
+	/**
+	 * Recalculate canvas dimensions and sprite positioning. Used after a
+	 * change to sprites or settings
+	 */
+	stitch: function () {
+		console.info('views/canvas : stitch()');
+
+		messages.trigger(config.events.busy);
+
+		this.measure();
+		this.place();
+		this.cut();
+
+		messages.trigger(config.events.generate);
+		messages.trigger(config.events.idle);
 	}
 
 });

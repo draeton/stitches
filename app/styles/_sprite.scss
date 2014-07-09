@@ -7,3 +7,32 @@
  * Copyright 2013 Matthew Cobbs
  * Licensed under the MIT license.
  */
+
+.sprite {
+	display: none;
+	position: absolute;
+	z-index: 0;
+	cursor: pointer;
+
+	&.placed {
+		display: block;
+	}
+
+	&:hover {
+		z-index: 1;
+		background-color: #e5e5e5;
+		background-image: url(../images/stripes90.gif);
+
+		img {
+			opacity: 0.7;
+		}
+	}
+
+	&.active {
+		z-index: 10;
+
+		img {
+			outline: 2px solid #3a87ad;
+		}
+	}
+}

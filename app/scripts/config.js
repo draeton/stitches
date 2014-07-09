@@ -59,6 +59,9 @@ module.exports = {
 		// process submitted files into sprites
 		process: 'PROCESS',
 
+		// place sprites onto sprite sheet
+		stitch: 'STITCH',
+
 		// any kind of error
 		error: 'ERROR'
 	}

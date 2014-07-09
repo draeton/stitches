@@ -91,6 +91,8 @@ module.exports = Backbone.View.extend({
 		this.views.progress = new ProgressView({el: this.elements.progress});
 		this.views.toolbar = new ToolbarView({el: this.elements.toolbar, collection: this.sprites});
 
+		this.views.canvas = this.views.dropbox.views.canvas;
+
 		this.palettes.about = this.views.palettes.views.about;
 		this.palettes.downloads = this.views.palettes.views.downloads;
 		this.palettes.properties = this.views.palettes.views.properties;
@@ -112,9 +114,8 @@ module.exports = Backbone.View.extend({
 		messages.on(config.events.busy, _.bind(this.onBusy, this));
 		messages.on(config.events.idle, _.bind(this.onIdle, this));
 		messages.on(config.events.progress, _.bind(this.onProgress, this));
-		messages.on(config.events.clear, _.bind(this.onClear, this));
 		messages.on(config.events.process, _.bind(this.onProcess, this));
-		messages.on(config.events.remove, _.bind(this.onRemove, this));
+		messages.on(config.events.stitch, _.bind(this.onStitch, this));
 	},
 
 	/**
@@ -199,15 +200,6 @@ module.exports = Backbone.View.extend({
 	},
 
 	/**
-	 * Clear sprites from canvas
-	 */
-	onClear: function () {
-		console.info('views/stitches : onClear()');
-
-		this.views.canvas.clear();
-	},
-
-	/**
 	 * Process a set of files into sprites
 	 *
 	 * @param {FilesList} files
@@ -223,10 +215,13 @@ module.exports = Backbone.View.extend({
 	},
 
 	/**
-	 * Remove a single sprite from the canvas
+	 * Recalculate canvas dimensions and sprite positioning. Used after a
+	 * change to sprites or settings
 	 */
-	onRemove: function () {
-		console.info('views/stitches : onRemove()');
+	onStitch: function () {
+		console.info('views/stitches : onStitch()');
+
+		this.views.canvas.stitch();
 	}
 
 });

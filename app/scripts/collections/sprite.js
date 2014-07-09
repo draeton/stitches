@@ -19,50 +19,60 @@ var SpriteModel = require('../models/sprite');
  */
 module.exports = Backbone.Collection.extend({
 
-		/**
-		 * @type {Model}
-		 */
-		model: SpriteModel,
+	/**
+	 * @type {Model}
+	 */
+	model: SpriteModel,
 
-		/**
-		 * Initialize collection properties
-		 */
-		initialize: function () {
-			console.info('collections/sprite : initialize()');
+	/**
+	 * Initialize collection properties
+	 */
+	initialize: function () {
+		console.info('collections/sprite : initialize()');
 
-			this.on('change:loaded', _.bind(this.onChangeLoaded, this));
-		},
+		this.on('change:loaded', _.bind(this.onChangeLoaded, this));
+		this.on('change', _.bind(this.onChange, this))
+	},
 
-		/**
-		 * Parse file data
-		 *
-		 * @param {FileList} files
-		 * @return {Array}
-		 */
-		parse: function (files) {
-			console.info('collections/sprite : parse()');
+	/**
+	 * Parse file data
+	 *
+	 * @param {FileList} files
+	 * @return {Array}
+	 */
+	parse: function (files) {
+		console.info('collections/sprite : parse()');
 
-			var list = _.filter(files, function (file) {
-				return /jpeg|png|gif/.test(file.type);
-			});
+		var list = _.filter(files, function (file) {
+			return /jpeg|png|gif/.test(file.type);
+		});
 
-			return list;
-		},
+		return list;
+	},
 
-		/**
-		 * For updating progress
-		 */
-		onChangeLoaded: function () {
-			console.info('collections/sprite : onChangeLoaded()');
+	/**
+	 * For updating progress
+	 */
+	onChangeLoaded: function () {
+		console.info('collections/sprite : onChangeLoaded()');
 
-			var loaded = this.where({loaded: true}).length;
-			var completed = loaded / this.length;
+		var loaded = this.where({loaded: true}).length;
+		var completed = loaded / this.length;
 
-			messages.trigger(config.events.progress, completed);
+		messages.trigger(config.events.progress, completed);
 
-			if (completed === 1) {
-				messages.trigger(config.events.idle);
-			}
+		if (completed === 1) {
+			messages.trigger(config.events.idle);
 		}
+	},
+
+	/**
+	 * Rearrange sprites
+	 */
+	onChange: function () {
+		console.info('collections/sprite : onChange()');
+
+		messages.trigger(config.events.stitch);
+	}
 
 });

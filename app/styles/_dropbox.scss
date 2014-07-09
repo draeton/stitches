@@ -16,9 +16,20 @@
 	z-index: 0;
 	width: 100%;
 
+	.target {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+	}
+
 	.overlay {
 		display: none;
-		position: absolute;
+		position: fixed;
+		top: 0;
+		left: 0;
 		z-index: 1000;
 		width: 100%;
 		height: 100%;
@@ -34,7 +45,7 @@
 
 	.canvas {
 		position: relative;
-		z-index: 0;
+		z-index: 10;
 		width: 0;
 		height: 0;
 		background-image: url(../images/checkerboard10.png);
