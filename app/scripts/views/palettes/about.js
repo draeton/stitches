@@ -28,7 +28,7 @@ module.exports = PaletteView.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('palettes : about : initialize()');
+		console.info('views/palettes/about : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -40,7 +40,7 @@ module.exports = PaletteView.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('palettes : about : render()');
+		console.info('views/palettes/about : render()');
 
 		var html = template();
 
@@ -55,7 +55,7 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onClickClose: function () {
-		console.info('palettes : about : onClickClose()');
+		console.info('views/palettes/about : onClickClose()');
 
 		this.close();
 	}

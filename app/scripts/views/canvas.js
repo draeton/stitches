@@ -26,7 +26,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('canvas : initialize()');
+		console.info('views/canvas : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -38,7 +38,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('canvas : render()');
+		console.info('views/canvas : render()');
 
 		var html = template();
 

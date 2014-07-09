@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('progress : initialize()');
+		console.info('views/progress : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -26,7 +26,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('progress : render()');
+		console.info('views/progress : render()');
 
 		var html = template();
 

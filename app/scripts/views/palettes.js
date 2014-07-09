@@ -19,7 +19,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('palettes : initialize()');
+		console.info('views/palettes : initialize()');
 
 		this.elements = {};
 		this.views = {};
@@ -34,7 +34,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('palettes : render()');
+		console.info('views/palettes : render()');
 
 		var html = template();
 

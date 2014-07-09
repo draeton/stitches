@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('palettes : palette : initialize()');
+		console.info('views/palettes/palette : initialize()');
 
 		this.source = null;
 	},
@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
 	 * Show me
 	 */
 	open: function () {
-		console.info('palettes : palette : open()');
+		console.info('views/palettes/palette : open()');
 
 		this.$el.find('.palette').addClass('active');
 	},
@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend({
 	 * Hide me
 	 */
 	close: function () {
-		console.info('palettes : palette : close()');
+		console.info('views/palettes/palette : close()');
 
 		this.$el.find('.palette').removeClass('active');
 	},
@@ -51,7 +51,7 @@ module.exports = Backbone.View.extend({
 	 * @param {Object} hash Defines the data source and input values
 	 */
 	props: function (hash) {
-		console.info('palettes : palette : props()');
+		console.info('views/palettes/palette : props()');
 
 		this.source = hash.source;
 
@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend({
 	 * @param {String} value
 	 */
 	prop: function (name, value) {
-		console.info('palettes : palette : prop()');
+		console.info('views/palettes/palette : prop()');
 
 		var selector = '[name=' + name + ']';
 		var input = this.$el.find(selector);

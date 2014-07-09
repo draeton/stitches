@@ -33,7 +33,7 @@ module.exports = PaletteView.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('palettes : properties : initialize()');
+		console.info('views/palettes/properties : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -45,7 +45,7 @@ module.exports = PaletteView.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('palettes : properties : render()');
+		console.info('views/palettes/properties : render()');
 
 		var html = template();
 
@@ -60,7 +60,7 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onClickClose: function () {
-		console.info('palettes : downloads : onClickClose()');
+		console.info('views/palettes/properties : onClickClose()');
 
 		this.close();
 	},
@@ -71,7 +71,7 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onClickRemove: function () {
-		console.info('palettes : downloads : onClickRemove()');
+		console.info('views/palettes/properties : onClickRemove()');
 
 		messages.trigger(config.events.remove, this.source);
 	},
@@ -82,7 +82,7 @@ module.exports = PaletteView.extend({
 	 * @param {Event} e
 	 */
 	onChangeName: function (e) {
-		console.info('palettes : downloads : onChangeName()');
+		console.info('views/palettes/properties : onChangeName()');
 
 		var input = $(e.currentTarget);
 		var name = input.val();

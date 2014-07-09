@@ -23,7 +23,6 @@ module.exports = Backbone.View.extend({
 	events: {
 		'change [data-action=open]': 'onChangeOpen',
 		'click [data-action=settings]': 'onClickSettings',
-		'click [data-action=reset]': 'onClickReset',
 		'click [data-action=clear]': 'onClickClear',
 		'click [data-action=downloads]': 'onClickDownloads',
 		'click [data-action=about]': 'onClickAbout'
@@ -33,7 +32,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('toolbar : initialize()');
+		console.info('views/toolbar : initialize()');
 
 		// prepare in dom
 		this.render();
@@ -45,7 +44,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('toolbar : render()');
+		console.info('views/toolbar : render()');
 
 		var html = template();
 
@@ -60,6 +59,8 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onChangeOpen: function (e) {
+		console.info('views/toolbar : onChangeOpen()');
+
 		var input = this.$el.find('input[type=file]');
 		var clone = input.clone(true).val('');
 		var files = e.target.files;
@@ -74,16 +75,9 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onClickSettings: function () {
-		messages.trigger(config.events.settings);
-	},
+		console.info('views/toolbar : onClickSettings()');
 
-	/**
-	 * Reset canvas to initial state
-	 *
-	 * @param {Event} e
-	 */
-	onClickReset: function () {
-		messages.trigger(config.events.reset);
+		messages.trigger(config.events.settings);
 	},
 
 	/**
@@ -92,6 +86,8 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onClickClear: function () {
+		console.info('views/toolbar : onClickClear()');
+
 		messages.trigger(config.events.clear);
 	},
 
@@ -101,6 +97,8 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onClickDownloads: function () {
+		console.info('views/toolbar : onClickDownloads()');
+
 		messages.trigger(config.events.downloads);
 	},
 
@@ -110,6 +108,8 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onClickAbout: function () {
+		console.info('views/toolbar : onClickAbout()');
+
 		messages.trigger(config.events.about);
 	}
 

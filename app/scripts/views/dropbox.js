@@ -33,7 +33,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('dropbox : initialize()');
+		console.info('views/dropbox : initialize()');
 
 		this.elements = {};
 
@@ -47,7 +47,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('dropbox : render()');
+		console.info('views/dropbox : render()');
 
 		var html = template();
 
@@ -62,7 +62,7 @@ module.exports = Backbone.View.extend({
 	 * Show the overlay
 	 */
 	showOverlay: function () {
-		console.info('dropbox : showOverlay()');
+		console.info('views/dropbox : showOverlay()');
 
 		this.elements.overlay.addClass('active');
 	},
@@ -71,7 +71,7 @@ module.exports = Backbone.View.extend({
 	 * Hide the overlay
 	 */
 	hideOverlay: function () {
-		console.info('dropbox : hideOverlay()');
+		console.info('views/dropbox : hideOverlay()');
 
 		this.elements.overlay.removeClass('active');
 	},
@@ -82,7 +82,7 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onDragStart: function () {
-		console.info('dropbox : onDragStart()');
+		console.info('views/dropbox : onDragStart()');
 
 		messages.trigger(config.events.close);
 		messages.trigger(config.events.busy);
@@ -94,7 +94,7 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onDragStop: function (e) {
-		console.info('dropbox : onDragStop()');
+		console.info('views/dropbox : onDragStop()');
 
 		var contains = $.contains(this.el, e.target);
 
@@ -109,7 +109,7 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onDragOver: function (e) {
-		console.info('dropbox : onDragOver()');
+		console.info('views/dropbox : onDragOver()');
 
 		e.preventDefault();
 	},
@@ -121,7 +121,7 @@ module.exports = Backbone.View.extend({
 	 * @param {Event} e
 	 */
 	onDrop: function (e) {
-		console.info('dropbox : onDrop()');
+		console.info('views/dropbox : onDrop()');
 
 		e.originalEvent.stopPropagation();
 		e.originalEvent.preventDefault();

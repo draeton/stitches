@@ -21,6 +21,8 @@ var PalettesView = require('../views/palettes');
 var ProgressView = require('../views/progress');
 var ToolbarView = require('../views/toolbar');
 
+var SpriteCollection = require('../collections/sprite');
+
 /**
  * @return {StitchesView}
  */
@@ -35,7 +37,7 @@ module.exports = Backbone.View.extend({
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
-		console.info('stitches : initialize()');
+		console.info('views/stitches : initialize()');
 
 		this.settings = _.extend({}, config.settings);
 		this.elements = {};
@@ -43,7 +45,7 @@ module.exports = Backbone.View.extend({
 		this.palettes = {};
 
 		// prepare in dom
-		this.setup();
+		this.load();
 		this.render();
 		this.bind();
 	},
@@ -51,8 +53,8 @@ module.exports = Backbone.View.extend({
 	/**
 	 * If available, load settings
 	 */
-	setup: function () {
-		console.info('stitches : setup()');
+	load: function () {
+		console.info('views/stitches : load()');
 
 		var stored;
 
@@ -71,7 +73,7 @@ module.exports = Backbone.View.extend({
 	 * @return {View}
 	 */
 	render: function () {
-		console.info('stitches : render()');
+		console.info('views/stitches : render()');
 
 		var html = template();
 
@@ -100,7 +102,7 @@ module.exports = Backbone.View.extend({
 	 * Bind event handlers
 	 */
 	bind: function () {
-		console.info('stitches : bind()');
+		console.info('views/stitches : bind()');
 
 		messages.on(config.events.about, _.bind(this.onAbout, this));
 		messages.on(config.events.downloads, _.bind(this.onDownloads, this));
@@ -117,7 +119,7 @@ module.exports = Backbone.View.extend({
 	 * Open about palette
 	 */
 	onAbout: function () {
-		console.info('stitches : onAbout()');
+		console.info('views/stitches : onAbout()');
 
 		messages.trigger(config.events.close);
 		this.palettes.about.open();
@@ -127,7 +129,7 @@ module.exports = Backbone.View.extend({
 	 * Open downloads palette
 	 */
 	onDownloads: function () {
-		console.info('stitches : onDownloads()');
+		console.info('views/stitches : onDownloads()');
 
 		messages.trigger(config.events.close);
 		this.palettes.downloads.open();
@@ -137,7 +139,7 @@ module.exports = Backbone.View.extend({
 	 * Open settings palette
 	 */
 	onSettings: function () {
-		console.info('stitches : onSettings()');
+		console.info('views/stitches : onSettings()');
 
 		messages.trigger(config.events.close);
 		this.palettes.settings.open();
@@ -149,7 +151,7 @@ module.exports = Backbone.View.extend({
 	 * @param {String} name
 	 */
 	onClose: function (name) {
-		console.info('stitches : onClose()');
+		console.info('views/stitches : onClose()');
 
 		var palette = this.palettes[name];
 
@@ -164,7 +166,7 @@ module.exports = Backbone.View.extend({
 	 * Show overlay
 	 */
 	onBusy: function () {
-		console.info('stitches : onBusy()');
+		console.info('views/stitches : onBusy()');
 
 		this.views.dropbox.showOverlay();
 	},
@@ -173,7 +175,7 @@ module.exports = Backbone.View.extend({
 	 * Hide overlay
 	 */
 	onIdle: function () {
-		console.info('stitches : onIdle()');
+		console.info('views/stitches : onIdle()');
 
 		this.views.dropbox.hideOverlay();
 	},
@@ -182,23 +184,27 @@ module.exports = Backbone.View.extend({
 	 * Clear sprites from canvas
 	 */
 	onClear: function () {
-		console.info('stitches : onClear()');
+		console.info('views/stitches : onClear()');
 
 		this.views.canvas.clear();
 	},
 
 	/**
 	 * Process a set of files into sprites
+	 *
+	 * @param {FilesList} files
 	 */
-	onProcess: function () {
-		console.info('stitches : onProcess()');
+	onProcess: function (files) {
+		console.info('views/stitches : onProcess()');
+
+		this.sprites = new SpriteCollection(files);
 	},
 
 	/**
 	 * Remove a single sprite from the canvas
 	 */
 	onRemove: function () {
-		console.info('stitches : onRemove()');
+		console.info('views/stitches : onRemove()');
 	}
 
 });
