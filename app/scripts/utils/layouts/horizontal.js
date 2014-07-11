@@ -32,13 +32,11 @@ HorizontalLayout.prototype = new Layout();
 HorizontalLayout.prototype.getDimensions = function (sprites, defaults) {
 	console.info('utils/layouts/horizontal : getDimensions()');
 
-	var width = 0;
-	var height = 0;
+	var height = _.max(sprites.pluck('height'));
 
-	sprites.each(function (sprite) {
-		height = sprite.height > height ? sprite.height : height;
-		width += sprite.width;
-	});
+	var width = sprites.reduce(function (memo, sprite) {
+		return memo + sprite.size().width;
+	}, 0);
 
 	return {
 		width: width || defaults.width,

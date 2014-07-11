@@ -64,33 +64,20 @@ module.exports = {
 	 * Position a list of sprites to fit in dimensions and layout
 	 *
 	 * @param {SpriteCollection} sprites To place
-	 * @param {Array} placed Already placed
 	 * @param {Object} dimensions Working width and height
 	 */
-	placeSprites: function (sprites, placed, dimensions) {
+	placeSprites: function (sprites, dimensions) {
 		console.info('utils/layout : placeSprites()');
 
 		messages.trigger(config.events.progress, 0, 'info');
 
-		sprites.each(_.bind(this.placeSprite, this, sprites, placed, dimensions));
-	},
+		sprites.each(_.bind(function (sprite) {
 
-	/**
-	 * Position a sprite to fit in dimensions and layout
-	 *
-	 * @param {SpriteCollection} sprites To place
-	 * @param {Array} placed Already placed
-	 * @param {Object} dimensions Working width and height
-	 * @param {SpriteModel} sprite To place
-	 */
-	placeSprite: function (sprites, placed, dimensions, sprite) {
-		console.info('utils/layout : placeSprite()');
+			this.layout.placeSprite(sprites, sprite, dimensions);
 
-		if (!sprite.placed) {
-			sprite.placed = this.layout.placeSprite(sprite, placed, dimensions);
-		}
+			messages.trigger(config.events.progress, sprites.placed().length / sprites.length);
 
-		messages.trigger(config.events.progress, placed.length / sprites.length);
+		}, this));
 	},
 
 	/**

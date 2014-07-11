@@ -31,8 +31,8 @@ Layout.prototype.getDimensions = function () {
  * determined with no intersections, the sprite is added to the
  * placed array. If there is no space, the dimensions are updated.
  *
- * @param {SpriteCollection} sprite The sprite to place
- * @param {Array} placed An array of sprites already placed
+ * @param {SpriteCollection} sprites The sprites to place
+ * @param {SpriteModel} sprite The current sprite
  * @param {Object} dimensions The current canvas dimensions
  */
 Layout.prototype.placeSprite = function () {
@@ -56,10 +56,10 @@ Layout.prototype.intersection = function (sprite, obstacles) {
 	var intersection;
 
 	_.map(obstacles, function (obstacle) {
-		x1 = (obstacle.x < (sprite.x + sprite.width));
-		y1 = (obstacle.y < (sprite.y + sprite.height));
-		x2 = ((obstacle.x + obstacle.width) > sprite.x);
-		y2 = ((obstacle.y + obstacle.height) > sprite.y);
+		x1 = (obstacle.get('x') < (sprite.get('x') + sprite.get('width')));
+		y1 = (obstacle.get('y') < (sprite.get('y') + sprite.get('height')));
+		x2 = ((obstacle.get('x') + obstacle.get('width')) > sprite.get('x'));
+		y2 = ((obstacle.get('y') + obstacle.get('height')) > sprite.get('y'));
 
 		if (x1 && x2 && y1 && y2) {
 			intersections.push(obstacle);

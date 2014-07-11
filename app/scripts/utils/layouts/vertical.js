@@ -32,13 +32,11 @@ VerticalLayout.prototype = new Layout();
 VerticalLayout.prototype.getDimensions = function (sprites, defaults) {
 	console.info('utils/layouts/vertical : getDimensions()');
 
-	var width = 0;
-	var height = 0;
+	var width = _.max(sprites.pluck('width'));
 
-	sprites.each(function (sprite) {
-		width = sprite.width > width ? sprite.width : width;
-		height += sprite.height;
-	});
+	var height = sprites.reduce(function (memo, sprite) {
+		return memo + sprite.size().height;
+	}, 0);
 
 	return {
 		width: width || defaults.width,

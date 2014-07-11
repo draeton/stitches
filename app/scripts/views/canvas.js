@@ -79,7 +79,7 @@ module.exports = Backbone.View.extend({
 
 		this.measure();
 		this.place();
-		this.cut();
+		//this.cut();
 
 		messages.trigger(config.events.generate);
 		messages.trigger(config.events.idle);
@@ -102,7 +102,7 @@ module.exports = Backbone.View.extend({
 		console.info('views/canvas : place()');
 
 		this.collection.invoke('reset');
-		layout.placeSprites(this.collection, [], this.dimensions);
+		layout.placeSprites(this.collection, this.dimensions);
 	},
 
 	/**

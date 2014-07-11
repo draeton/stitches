@@ -115,7 +115,7 @@ module.exports = Backbone.View.extend({
 		messages.on(config.events.idle, _.bind(this.onIdle, this));
 		messages.on(config.events.progress, _.bind(this.onProgress, this));
 		messages.on(config.events.process, _.bind(this.onProcess, this));
-		messages.on(config.events.stitch, _.bind(this.onStitch, this));
+		messages.on(config.events.stitch, _.debounce(_.bind(this.onStitch, this), 500));
 	},
 
 	/**

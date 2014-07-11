@@ -11,6 +11,7 @@
  */
 
 var config = require('../../config');
+var messages = require('../../messages');
 
 var Layout = require('./layout');
 
@@ -30,22 +31,19 @@ CompactLayout.prototype = new Layout();
  * @return {Object}
  */
 CompactLayout.prototype.getDimensions = function (sprites, defaults) {
-	console.info('utils/layouts/layout : getDimensions()');
+	console.info('utils/layouts/compact : getDimensions()');
 
-	var width = 0;
-	var height = 0;
-	var area = 0;
-	var mean = 0;
+	var width = _.max(sprites.pluck('width'));
+	var height = _.max(sprites.pluck('height'));
 
-	sprites.each(function (sprite) {
-		width = sprite.width > width ? sprite.width : width;
-		height = sprite.height > height ? sprite.height : height;
-		area += sprite.area;
-	});
+	var area = sprites.reduce(function (memo, sprite) {
+		return memo + sprite.area();
+	}, 0);
 
-	mean = Math.ceil(Math.sqrt(area));
-	width = width > mean ? width : mean;
-	height = height > mean ? height : mean;
+	var mean = Math.ceil(Math.sqrt(area));
+
+	width = Math.max(width, mean);
+	height = Math.max(height, mean);
 
 	return {
 		width: width || defaults.width,
@@ -58,41 +56,41 @@ CompactLayout.prototype.getDimensions = function (sprites, defaults) {
  * determined with no intersections, the sprite is added to the
  * placed array. If there is no space, the dimensions are updated.
  *
- * @param {SpriteCollection} sprite The sprite to place
- * @param {Array} placed An array of sprites already placed
+ * @param {SpriteCollection} sprites The sprites to place
+ * @param {SpriteModel} sprite The current sprite
  * @param {Object} dimensions The current canvas dimensions
  */
-CompactLayout.prototype.placeSprite = function (sprite, placed, dimensions) {
-	console.info('utils/layouts/layout : placeSprite()');
+CompactLayout.prototype.placeSprite = function (sprites, sprite, dimensions) {
+	console.info('utils/layouts/compact : placeSprite()');
 
-	var intersection;
+	var intersection = null;
 	var pass = 0;
 	var x = 0;
 	var y = 0;
 
 	while (pass++ < config.settings.tries) {
-		for (y = 0; y <= (dimensions.height - sprite.height); y++) {
-			for (x = 0; x <= (dimensions.width - sprite.width); x++) {
-				sprite.x = x;
-				sprite.y = y;
+		for (y = 0; y <= (dimensions.height - sprite.get('height')); y++) {
+			for (x = 0; x <= (dimensions.width - sprite.get('width')); x++) {
+				sprite.set('x', x);
+				sprite.set('y', y);
 
-				intersection = this.intersection(sprite, placed);
+				intersection = this.intersection(sprite, sprites.placed());
 
 				if (!intersection) {
-					placed.push(sprite);
-					sprite.show();
-					return true;
+					return sprite.set('placed', true);
 				}
 
-				x = intersection.x + intersection.width - 1;
+				x = intersection.get('x') + intersection.get('width') - 1;
 			}
 
-			y = intersection.y + intersection.height - 1;
+			y = intersection.get('y') + intersection.get('height') - 1;
 		}
 
-		dimensions.width += sprite.width;
-		dimensions.height += sprite.height;
+		dimensions.width += sprite.get('width');
+		dimensions.height += sprite.get('height');
 	}
+
+	messages.trigger(config.events.error);
 };
 
 module.exports = CompactLayout;

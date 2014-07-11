@@ -23,14 +23,13 @@ module.exports = Backbone.Model.extend({
 	 */
 	defaults: {
 		name: '',
+		src: '',
 		padding: config.settings.padding,
 		x: 0,
 		y: 0,
+		placed: null,
 		width: 0,
-		height: 0,
-		area: 0,
-		src: '',
-		placed: false
+		height: 0
 	},
 
 	/**
@@ -42,7 +41,6 @@ module.exports = Backbone.Model.extend({
 		console.info('models/sprite : initialize()');
 
 		this.image = null;
-		this.placed = false;
 
 		this.cleanName();
 		this.read(file);
@@ -117,14 +115,13 @@ module.exports = Backbone.Model.extend({
 		var padding = this.get('padding');
 		var width = this.image.width + padding * 2;
 		var height = this.image.height + padding * 2;
-		var area = width * height;
 
 		this.set({
 			x: 0,
 			y: 0,
+			placed: false,
 			width: width,
 			height: height,
-			area: area,
 			src: this.image.src
 		});
 	},
@@ -141,6 +138,17 @@ module.exports = Backbone.Model.extend({
 			y: 0,
 			placed: false
 		});
+	},
+
+	/**
+	 * Return computed area
+	 *
+	 * @return {Number}
+	 */
+	area: function () {
+		console.info('models/sprite : area()');
+
+		return this.get('width') * this.get('height');
 	}
 
 });

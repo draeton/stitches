@@ -31,7 +31,7 @@ module.exports = Backbone.Collection.extend({
 		console.info('collections/sprite : initialize()');
 
 		this.on('change:src', _.bind(this.onChangeSrc, this));
-		this.on('change', _.bind(this.onChange, this))
+		this.on('change:placed', _.bind(this.onChangePlaced, this))
 	},
 
 	/**
@@ -68,11 +68,26 @@ module.exports = Backbone.Collection.extend({
 
 	/**
 	 * Rearrange sprites
+	 *
+	 * @param {SpriteModel) sprite The changed sprite
 	 */
-	onChange: function () {
-		console.info('collections/sprite : onChange()');
+	onChangePlaced: function (sprite) {
+		console.info('collections/sprite : onChangePlaced()', sprite.get('placed'));
 
-		messages.trigger(config.events.stitch);
+		if (!sprite.get('placed')) {
+			messages.trigger(config.events.stitch);
+		}
+	},
+
+	/**
+	 * Spirtes that have been placed
+	 *
+	 * @return {Array}
+	 */
+	placed: function () {
+		console.info('collections/sprite : placed()');
+
+		return this.where({placed: true});
 	}
 
 });

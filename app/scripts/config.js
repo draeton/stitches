@@ -36,12 +36,12 @@ module.exports = {
 
 		// initial canvas dimensions
 		dimensions: {
-			width: 400,
-			height: 400
+			width: 100,
+			height: 100
 		},
 
 		// max passes for sprite placement
-		tries: 2
+		tries: 5
 	},
 
 	/**
