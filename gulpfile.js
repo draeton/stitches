@@ -103,7 +103,7 @@ gulp.task('connect', function () {
 		});
 });
 
-gulp.task('serve', ['connect', 'styles'], function () {
+gulp.task('serve', ['connect', 'scripts', 'styles'], function () {
 	require('opn')('http://localhost:9000');
 });
 
@@ -133,7 +133,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
 	gulp.watch([
 		'app/*.html',
 		'.tmp/styles/**/*.css',
-		'app/scripts/**/*.js',
+		'.tmp/scripts/**/*.js',
 		'app/scripts/**/*.hbs',
 		'app/images/**/*'
 	]).on('change', function (file) {
