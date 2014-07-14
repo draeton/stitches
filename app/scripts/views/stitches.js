@@ -120,7 +120,7 @@ module.exports = Backbone.View.extend({
 	onAbout: function () {
 		console.info('views/stitches : onAbout()');
 
-		messages.trigger(config.events.close);
+		messages.trigger(config.events.close, 'about', true);
 		this.palettes.about.open();
 	},
 
@@ -130,7 +130,7 @@ module.exports = Backbone.View.extend({
 	onDownloads: function () {
 		console.info('views/stitches : onDownloads()');
 
-		messages.trigger(config.events.close);
+		messages.trigger(config.events.close, 'downloads', true);
 		this.palettes.downloads.open();
 	},
 
@@ -142,7 +142,7 @@ module.exports = Backbone.View.extend({
 	onProperties: function (sprite) {
 		console.info('views/stitches : onProperties()');
 
-		messages.trigger(config.events.close);
+		messages.trigger(config.events.close, 'properties', true);
 		this.palettes.properties.render(sprite).open();
 	},
 
@@ -152,24 +152,27 @@ module.exports = Backbone.View.extend({
 	onSettings: function () {
 		console.info('views/stitches : onSettings()');
 
-		messages.trigger(config.events.close);
+		messages.trigger(config.events.close, 'settings', true);
 		this.palettes.settings.open();
 	},
 
 	/**
-	 * Close a palette or all palettes
+	 * Close a palette or all palettes. If invert, close all palettes but
+	 * the named palette
 	 *
 	 * @param {String} name
+	 * @param {Boolean} invert
 	 */
-	onClose: function (name) {
+	onClose: function (name, invert) {
 		console.info('views/stitches : onClose()');
 
 		var palette = this.palettes[name];
+		var palettes = invert ? _.without(this.palettes, palette) : this.palettes;
 
-		if (palette) {
+		if (palette && !invert) {
 			palette.close();
 		} else {
-			_.invoke(this.palettes, 'close');
+			_.invoke(palettes, 'close');
 		}
 	},
 

@@ -35,8 +35,10 @@ HorizontalLayout.prototype.getDimensions = function (sprites) {
 	var height = _.max(sprites.pluck('height'));
 
 	var width = sprites.reduce(function (memo, sprite) {
-		return memo + sprite.size().width;
+		return memo + sprite.get('width');
 	}, 0);
+
+	console.log(width, height);
 
 	return {
 		width: width,
@@ -53,7 +55,7 @@ HorizontalLayout.prototype.getDimensions = function (sprites) {
  * @param {SpriteModel} sprite The current sprite
  * @param {CanvasModel} canvas The current canvas
  */
-HorizontalLayout.prototype.placeSprite = function (sprite, placed, canvas) {
+HorizontalLayout.prototype.placeSprite = function (sprites, sprite, canvas) {
 	console.info('utils/layouts/horizontal : placeSprite()');
 
 	var intersection = null;

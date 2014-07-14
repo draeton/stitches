@@ -35,7 +35,7 @@ VerticalLayout.prototype.getDimensions = function (sprites) {
 	var width = _.max(sprites.pluck('width'));
 
 	var height = sprites.reduce(function (memo, sprite) {
-		return memo + sprite.size().height;
+		return memo + sprite.get('height');
 	}, 0);
 
 	return {
@@ -53,7 +53,7 @@ VerticalLayout.prototype.getDimensions = function (sprites) {
  * @param {SpriteModel} sprite The current sprite
  * @param {CanvasModel} canvas The current canvas
  */
-VerticalLayout.prototype.placeSprite = function (sprite, placed, canvas) {
+VerticalLayout.prototype.placeSprite = function (sprites, sprite, canvas) {
 	console.info('utils/layouts/vertical : placeSprite()');
 
 	var intersection = null;
@@ -62,7 +62,7 @@ VerticalLayout.prototype.placeSprite = function (sprite, placed, canvas) {
 	var y = 0;
 
 	while (pass++ < config.settings.tries) {
-		for (y = 0; y <= dimensions.height - sprite.height; y++) {
+		for (y = 0; y <= canvas.get('height') - sprite.get('height'); y++) {
 			sprite.set('x', x, {silent: true});
 			sprite.set('y', y, {silent: true});
 

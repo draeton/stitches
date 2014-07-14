@@ -33,7 +33,7 @@ module.exports = {
 
 		// initial canvas dimensions
 		canvas: {
-			layout: 'compact',
+			layout: 'vertical',
 			width: 100,
 			height: 100
 		},

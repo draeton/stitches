@@ -19,7 +19,11 @@ body {
 	min-width: 360px;
 	height: 100%;
 
-	> img {
-		display: none;
+	header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		width: 100%;
 	}
 }

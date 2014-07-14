@@ -83,6 +83,8 @@ module.exports = Backbone.View.extend({
 
 		if (this.model.get('active')) {
 			messages.trigger(config.events.properties, this.model);
+		} else {
+			messages.trigger(config.events.close, 'properties');
 		}
 	}
 
