@@ -109,6 +109,7 @@ module.exports = Backbone.View.extend({
 
 		messages.on(config.events.about, _.bind(this.onAbout, this));
 		messages.on(config.events.downloads, _.bind(this.onDownloads, this));
+		messages.on(config.events.properties, _.bind(this.onProperties, this));
 		messages.on(config.events.settings, _.bind(this.onSettings, this));
 		messages.on(config.events.close, _.bind(this.onClose, this));
 		messages.on(config.events.busy, _.bind(this.onBusy, this));
@@ -136,6 +137,18 @@ module.exports = Backbone.View.extend({
 
 		messages.trigger(config.events.close);
 		this.palettes.downloads.open();
+	},
+
+	/**
+	 * Open properties palette
+	 *
+	 * @param {SpriteModel} sprite
+	 */
+	onProperties: function (sprite) {
+		console.info('views/stitches : onProperties()');
+
+		messages.trigger(config.events.close);
+		this.palettes.properties.render(sprite).open();
 	},
 
 	/**

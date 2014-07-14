@@ -9,7 +9,7 @@
 			<div class="control-group">
 				<label class="control-label">Name</label>
 				<div class="controls">
-					<input name="name" type="text" required placeholder="Sprite name&hellip;">
+					<input name="name" type="text" required  value="{{ name }}">
 				</div>
 			</div>
 
@@ -17,11 +17,11 @@
 				<label class="control-label">Coordinates (x, y)</label>
 				<div class="controls">
 					<div class="input-append">
-						<input name="x" required disabled placeholder="From left&hellip;" class="input-mini">
+						<input name="x" required disabled class="input-mini" value="{{ x }}">
 						<span class="add-on">px</span>
 					</div>
 					<div class="input-append">
-						<input name="y" required disabled placeholder="From top&hellip;" class="input-mini">
+						<input name="y" required disabled class="input-mini" value="{{ y }}">
 						<span class="add-on">px</span>
 					</div>
 				</div>

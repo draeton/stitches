@@ -54,6 +54,9 @@ module.exports = {
 		// open the downloads palette
 		downloads: 'DOWNLOADS',
 
+		// open the properties palette
+		properties: 'PROPERTIES',
+
 		// open the settings palette
 		settings: 'SETTINGS',
 

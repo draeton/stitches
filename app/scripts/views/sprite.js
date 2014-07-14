@@ -20,13 +20,17 @@ module.exports = Backbone.View.extend({
 	/**
 	 * @type {Object}
 	 */
-	events: {},
+	events: {
+		'click .sprite': 'onClick'
+	},
 
 	/**
 	 * Set up instance properties and call startup methods
 	 */
 	initialize: function () {
 		console.info('views/sprite : initialize()');
+
+		this.elements = {};
 
 		// prepare in dom
 		this.render();
@@ -55,6 +59,7 @@ module.exports = Backbone.View.extend({
 		var html = template(data);
 
 		this.$el.empty().append(html);
+		this.elements.sprite = this.$el.find('.sprite');
 
 		return this;
 	},
@@ -66,6 +71,19 @@ module.exports = Backbone.View.extend({
 		console.info('views/sprite : remove()');
 
 		this.$el.remove();
+	},
+
+	/**
+	 * Toggle active state and show properties
+	 */
+	onClick: function () {
+		console.info('views/sprite : onClick()');
+
+		this.model.toggleActive();
+
+		if (this.model.get('active')) {
+			messages.trigger(config.events.properties, this.model);
+		}
 	}
 
 });

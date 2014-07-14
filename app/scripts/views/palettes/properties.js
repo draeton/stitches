@@ -42,12 +42,14 @@ module.exports = PaletteView.extend({
 	/**
 	 * Create the html for the view and append to the element.
 	 *
+	 * @param {SpriteModel} sprite
 	 * @return {View}
 	 */
-	render: function () {
+	render: function (sprite) {
 		console.info('views/palettes/properties : render()');
 
-		var html = template();
+		var data = sprite ? sprite.toJSON() : null;
+		var html = template(data);
 
 		this.$el.empty().append(html);
 

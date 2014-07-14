@@ -29,7 +29,8 @@ module.exports = Backbone.Model.extend({
 		y: 0,
 		placed: null,
 		width: 0,
-		height: 0
+		height: 0,
+		active: false
 	},
 
 	/**
@@ -149,6 +150,23 @@ module.exports = Backbone.Model.extend({
 		console.info('models/sprite : area()');
 
 		return this.get('width') * this.get('height');
+	},
+
+	/**
+	 * Toggle active state
+	 */
+	toggleActive: function () {
+		console.info('models/sprite : toggleActive()');
+
+		var active = this.get('active');
+		var siblings = this.collection.without(this);
+
+		if (active) {
+			this.set('active', false);
+		} else {
+			_.invoke(siblings, 'set', 'active', false);
+			this.set('active', true);
+		}
 	}
 
 });
