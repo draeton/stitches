@@ -31,9 +31,6 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/canvas : initialize()');
 
-		this.sprites = this.collection;
-		this.canvas = this.sprites.canvas;
-
 		// prepare in dom
 		this.bind();
 	},
@@ -44,9 +41,21 @@ module.exports = Backbone.View.extend({
 	bind: function () {
 		console.info('views/canvas : bind()');
 
-		this.sprites.on('add', _.bind(this.onAdd, this));
-		this.sprites.on('reset', _.bind(this.onReset, this));
-		this.canvas.on('change', _.bind(this.onChange, this));
+		this.model.on('change', _.bind(this.onChange, this));
+		this.model.sprites.on('add', _.bind(this.onAdd, this));
+		this.model.sprites.on('reset', _.bind(this.onReset, this));
+	},
+
+	/**
+	 * Update canvas style
+	 */
+	onChange: function () {
+		console.info('views/canvas : onChange()', arguments);
+
+		this.$el.css({
+			width: this.model.get('width'),
+			height: this.model.get('height')
+		});
 	},
 
 	/**
@@ -69,18 +78,6 @@ module.exports = Backbone.View.extend({
 		console.info('views/canvas : onReset()');
 
 		this.$el.empty();
-	},
-
-	/**
-	 * Update canvas style
-	 */
-	onChange: function () {
-		console.info('views/canvas : onChange()');
-
-		this.$el.css({
-			width: this.canvas.get('width'),
-			height: this.canvas.get('height')
-		});
 	}
 
 });

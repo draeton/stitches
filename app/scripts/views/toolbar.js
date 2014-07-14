@@ -34,8 +34,6 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/toolbar : initialize()');
 
-		this.sprites = this.collection;
-
 		// prepare in dom
 		this.render();
 	},

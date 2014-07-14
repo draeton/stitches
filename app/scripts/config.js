@@ -19,9 +19,6 @@ module.exports = {
 	 * @type {Object}
 	 */
 	settings: {
-		// default canvas sprite placement layout
-		layout: 'compact',
-
 		// default stylesheet class prefix
 		prefix: 'sprite',
 
@@ -36,6 +33,7 @@ module.exports = {
 
 		// initial canvas dimensions
 		canvas: {
+			layout: 'compact',
 			width: 100,
 			height: 100
 		},

@@ -20,8 +20,6 @@ var PalettesView = require('../views/palettes');
 var ProgressView = require('../views/progress');
 var ToolbarView = require('../views/toolbar');
 
-var SpriteCollection = require('../collections/sprite');
-
 /**
  * @return {StitchesView}
  */
@@ -42,9 +40,6 @@ module.exports = Backbone.View.extend({
 		this.elements = {};
 		this.views = {};
 		this.palettes = {};
-
-		// sprites
-		this.sprites = new SpriteCollection();
 
 		// prepare in dom
 		this.load();
@@ -86,10 +81,10 @@ module.exports = Backbone.View.extend({
 		this.elements.progress = this.$el.find('.wrap-progress');
 		this.elements.toolbar = this.$el.find('.wrap-toolbar');
 
-		this.views.dropbox = new DropboxView({el: this.elements.dropbox, collection: this.sprites});
+		this.views.dropbox = new DropboxView({el: this.elements.dropbox, model: this.model});
 		this.views.palettes = new PalettesView({el: this.elements.palettes});
 		this.views.progress = new ProgressView({el: this.elements.progress});
-		this.views.toolbar = new ToolbarView({el: this.elements.toolbar, collection: this.sprites});
+		this.views.toolbar = new ToolbarView({el: this.elements.toolbar, model: this.model});
 
 		this.views.canvas = this.views.dropbox.views.canvas;
 
@@ -220,11 +215,8 @@ module.exports = Backbone.View.extend({
 	onProcess: function (files) {
 		console.info('views/stitches : onProcess()');
 
-		var items = SpriteCollection.prototype.parse(files);
-
-		this.sprites.add(items);
-
 		messages.trigger(config.events.progress, 0, 'info');
+		this.model.addFiles(files);
 	},
 
 	/**
@@ -235,7 +227,7 @@ module.exports = Backbone.View.extend({
 		console.info('views/stitches : onStitch()');
 
 		messages.trigger(config.events.close);
-		this.sprites.stitch();
+		this.model.stitch();
 	}
 
 });

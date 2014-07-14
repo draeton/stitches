@@ -20,6 +20,10 @@
  * [GruntJS](http://gruntjs.com/), for helping this all make sense.
  */
 
+var CanvasModel = require('./models/canvas');
 var StitchesView = require('./views/stitches');
 
-module.exports = new StitchesView({el: '.stitches'});
+var model = new CanvasModel();
+var view = new StitchesView({el: '.stitches', model: model});
+
+module.exports = view;

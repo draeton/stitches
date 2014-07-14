@@ -37,7 +37,6 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/dropbox : initialize()');
 
-		this.sprites = this.collection;
 		this.elements = {};
 		this.views = {};
 
@@ -60,7 +59,7 @@ module.exports = Backbone.View.extend({
 		this.elements.overlay = this.$el.find('.overlay');
 		this.elements.canvas = this.$el.find('.canvas');
 
-		this.views.canvas = new CanvasView({el: this.elements.canvas, collection: this.sprites});
+		this.views.canvas = new CanvasView({el: this.elements.canvas, model: this.model});
 
 		return this;
 	},

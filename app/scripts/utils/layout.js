@@ -33,7 +33,7 @@ module.exports = {
 	/**
 	 * @type {Layout}
 	 */
-	layout: new CompactLayout(),
+	layout: null,
 
 	/**
 	 * Set the working layout manager instance by type
@@ -43,9 +43,11 @@ module.exports = {
 	set: function (type) {
 		console.info('utils/layout : set()');
 
-		var Layout = this.style[type] || this.style.compact;
+		var Layout = this.style[type];
 
-		this.layout = new Layout();
+		if (Layout) {
+			this.layout = new Layout();
+		}
 	},
 
 	/**
