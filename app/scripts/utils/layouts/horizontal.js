@@ -11,6 +11,7 @@
  */
 
 var config = require('../../config');
+var messages = require('../../messages');
 
 var Layout = require('./layout');
 
@@ -26,10 +27,9 @@ HorizontalLayout.prototype = new Layout();
  * to contain the `sprites`
  *
  * @param {SpriteCollection} sprites The list of sprites to size for
- * @param {Object} defaults Default width and height, if no sprites
  * @return {Object}
  */
-HorizontalLayout.prototype.getDimensions = function (sprites, defaults) {
+HorizontalLayout.prototype.getDimensions = function (sprites) {
 	console.info('utils/layouts/horizontal : getDimensions()');
 
 	var height = _.max(sprites.pluck('height'));
@@ -39,8 +39,8 @@ HorizontalLayout.prototype.getDimensions = function (sprites, defaults) {
 	}, 0);
 
 	return {
-		width: width || defaults.width,
-		height: height || defaults.height
+		width: width,
+		height: height
 	};
 };
 
@@ -49,39 +49,39 @@ HorizontalLayout.prototype.getDimensions = function (sprites, defaults) {
  * determined with no intersections, the sprite is added to the
  * placed array. If there is no space, the dimensions are updated.
  *
- * @param {SpriteCollection} sprite The sprite to place
- * @param {Array} placed An array of sprites already placed
- * @param {Object} dimensions The current canvas dimensions
+ * @param {SpriteCollection} sprites The sprites to place
+ * @param {SpriteModel} sprite The current sprite
+ * @param {CanvasModel} canvas The current canvas
  */
-HorizontalLayout.prototype.placeSprite = function (sprite, placed, dimensions) {
+HorizontalLayout.prototype.placeSprite = function (sprite, placed, canvas) {
 	console.info('utils/layouts/horizontal : placeSprite()');
 
-	var intersection;
+	var intersection = null;
 	var pass = 0;
 	var x = 0;
 	var y = 0;
 
 	while (pass++ < config.settings.tries) {
-		for (x = 0; x <= dimensions.width - sprite.width; x++) {
-			sprite.x = x;
-			sprite.y = y;
+		for (x = 0; x <= canvas.get('width') - sprite.get('width'); x++) {
+			sprite.set('x', x, {silent: true});
+			sprite.set('y', y, {silent: true});
 
-			intersection = this.intersection(sprite, placed);
+			intersection = this.intersection(sprite, sprites.placed());
 
 			if (!intersection) {
-				placed.push(sprite);
-				sprite.show();
-				return true;
+				return sprite.set('placed', true);
 			}
 
-			x = intersection.x + intersection.width - 1;
+			x = intersection.get('x') + intersection.get('width') - 1;
 		}
 
-		dimensions.width += sprite.width;
-		dimensions.height += sprite.height;
+		canvas.set({
+			width: canvas.get('width') + sprite.get('width'),
+			height: canvas.get('height') + sprite.get('height')
+		});
 	}
 
-	return false;
+	messages.trigger(config.events.error);
 };
 
 module.exports = HorizontalLayout;
