@@ -27,10 +27,9 @@ CompactLayout.prototype = new Layout();
  * to contain the `sprites`
  *
  * @param {SpriteCollection} sprites The list of sprites to size for
- * @param {Object} defaults Default width and height, if no sprites
  * @return {Object}
  */
-CompactLayout.prototype.getDimensions = function (sprites, defaults) {
+CompactLayout.prototype.getDimensions = function (sprites) {
 	console.info('utils/layouts/compact : getDimensions()');
 
 	var width = _.max(sprites.pluck('width'));
@@ -46,8 +45,8 @@ CompactLayout.prototype.getDimensions = function (sprites, defaults) {
 	height = Math.max(height, mean);
 
 	return {
-		width: width || defaults.width,
-		height: height || defaults.height
+		width: width,
+		height: height
 	};
 };
 
@@ -58,9 +57,9 @@ CompactLayout.prototype.getDimensions = function (sprites, defaults) {
  *
  * @param {SpriteCollection} sprites The sprites to place
  * @param {SpriteModel} sprite The current sprite
- * @param {Object} dimensions The current canvas dimensions
+ * @param {CanvasModel} canvas The current canvas
  */
-CompactLayout.prototype.placeSprite = function (sprites, sprite, dimensions) {
+CompactLayout.prototype.placeSprite = function (sprites, sprite, canvas) {
 	console.info('utils/layouts/compact : placeSprite()');
 
 	var intersection = null;
@@ -69,10 +68,10 @@ CompactLayout.prototype.placeSprite = function (sprites, sprite, dimensions) {
 	var y = 0;
 
 	while (pass++ < config.settings.tries) {
-		for (y = 0; y <= (dimensions.height - sprite.get('height')); y++) {
-			for (x = 0; x <= (dimensions.width - sprite.get('width')); x++) {
-				sprite.set('x', x);
-				sprite.set('y', y);
+		for (y = 0; y <= (canvas.get('height') - sprite.get('height')); y++) {
+			for (x = 0; x <= (canvas.get('width') - sprite.get('width')); x++) {
+				sprite.set('x', x, {silent: true});
+				sprite.set('y', y, {silent: true});
 
 				intersection = this.intersection(sprite, sprites.placed());
 
@@ -86,8 +85,10 @@ CompactLayout.prototype.placeSprite = function (sprites, sprite, dimensions) {
 			y = intersection.get('y') + intersection.get('height') - 1;
 		}
 
-		dimensions.width += sprite.get('width');
-		dimensions.height += sprite.get('height');
+		canvas.set({
+			width: canvas.get('width') + sprite.get('width'),
+			height: canvas.get('height') + sprite.get('height')
+		});
 	}
 
 	messages.trigger(config.events.error);

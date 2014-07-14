@@ -12,7 +12,6 @@
 
 var config = require('../config');
 var messages = require('../messages');
-var layout = require('../utils/layout');
 
 var SpriteView = require('../views/sprite');
 
@@ -32,6 +31,9 @@ module.exports = Backbone.View.extend({
 	initialize: function () {
 		console.info('views/canvas : initialize()');
 
+		this.sprites = this.collection;
+		this.canvas = this.sprites.canvas;
+
 		// prepare in dom
 		this.bind();
 	},
@@ -42,8 +44,9 @@ module.exports = Backbone.View.extend({
 	bind: function () {
 		console.info('views/canvas : bind()');
 
-		this.collection.on('add', _.bind(this.add, this));
-		this.collection.on('reset', _.bind(this.reset, this));
+		this.sprites.on('add', _.bind(this.onAdd, this));
+		this.sprites.on('reset', _.bind(this.onReset, this));
+		this.canvas.on('change', _.bind(this.onChange, this));
 	},
 
 	/**
@@ -51,8 +54,8 @@ module.exports = Backbone.View.extend({
 	 *
 	 * @param {SpriteModel} sprite
 	 */
-	add: function (sprite) {
-		console.info('views/canvas : add()');
+	onAdd: function (sprite) {
+		console.info('views/canvas : onAdd()');
 
 		var view = new SpriteView({model: sprite});
 
@@ -62,61 +65,21 @@ module.exports = Backbone.View.extend({
 	/**
 	 * Clear out canvas
 	 */
-	reset: function () {
-		console.info('views/canvas : reset()');
+	onReset: function () {
+		console.info('views/canvas : onReset()');
 
 		this.$el.empty();
 	},
 
 	/**
-	 * Recalculate canvas dimensions and sprite positioning. Used after a
-	 * change to sprites or settings
+	 * Update canvas style
 	 */
-	stitch: function () {
-		console.info('views/canvas : stitch()');
-
-		messages.trigger(config.events.busy);
-
-		this.measure();
-		this.place();
-		//this.cut();
-
-		messages.trigger(config.events.generate);
-		messages.trigger(config.events.idle);
-	},
-
-	/**
-	 * Determine the canvas dimensions based on a set of sprites
-	 */
-	measure: function () {
-		console.info('views/canvas : measure()');
-
-		this.dimensions = layout.getDimensions(this.collection);
-	},
-
-	/**
-	 * Place a set of sprites on this canvas. Sorts sprites by `name`
-	 * property before placement
-	 */
-	place: function () {
-		console.info('views/canvas : place()');
-
-		this.collection.invoke('reset');
-		layout.placeSprites(this.collection, this.dimensions);
-	},
-
-	/**
-	 * Trim an excess canvas dimensions not required to include this
-	 * set of sprites
-	 */
-	cut: function () {
-		console.info('views/canvas : place()');
-
-		layout.trim(this.collection, this.dimensions);
+	onChange: function () {
+		console.info('views/canvas : onChange()');
 
 		this.$el.css({
-			width: this.dimensions.width + 'px',
-			height: this.dimensions.height + 'px'
+			width: this.canvas.get('width'),
+			height: this.canvas.get('height')
 		});
 	}
 

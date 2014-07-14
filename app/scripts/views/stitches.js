@@ -221,7 +221,8 @@ module.exports = Backbone.View.extend({
 	onStitch: function () {
 		console.info('views/stitches : onStitch()');
 
-		this.views.canvas.stitch();
+		messages.trigger(config.events.close);
+		this.sprites.stitch();
 	}
 
 });

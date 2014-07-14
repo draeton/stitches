@@ -61,44 +61,39 @@ module.exports = {
 	},
 
 	/**
-	 * Position a list of sprites to fit in dimensions and layout
+	 * Place a sprite on the canvas using the current layout
 	 *
-	 * @param {SpriteCollection} sprites To place
-	 * @param {Object} dimensions Working width and height
+	 * @param {SpriteCollection} sprites The sprites to place
+	 * @param {SpriteModel} sprite The current sprite
+	 * @param {CanvasModel} canvas The current canvas
 	 */
-	placeSprites: function (sprites, dimensions) {
-		console.info('utils/layout : placeSprites()');
+	placeSprite: function (sprites, sprite, canvas) {
+		console.info('utils/layout : placeSprite()');
 
-		messages.trigger(config.events.progress, 0, 'info');
-
-		sprites.each(_.bind(function (sprite) {
-
-			this.layout.placeSprite(sprites, sprite, dimensions);
-
-			messages.trigger(config.events.progress, sprites.placed().length / sprites.length);
-
-		}, this));
+		this.layout.placeSprite(sprites, sprite, canvas);
 	},
 
 	/**
 	 * Trim dimensions to only contain placed sprites
 	 *
 	 * @param {SpriteCollection} sprites A list of sprites
-	 * @param {Object} dimensions Working width and height
+	 * @return {Object}
 	 */
-	trim: function (sprites, dimensions) {
-		console.info('utils/layout : trim()');
+	trimDimensions: function (sprites) {
+		console.info('utils/layout : trimDimensions()');
 
-		var w = 0;
-		var h = 0;
+		var width = 0;
+		var height = 0;
 
 		sprites.each(function (sprite) {
-			w = w > sprite.x + sprite.width ? w : sprite.x + sprite.width;
-			h = h > sprite.y + sprite.height ? h : sprite.y + sprite.height;
+			width = Math.max(width, sprite.get('x') + sprite.get('width'));
+			height = Math.max(height, sprite.get('y') + sprite.get('height'));
 		});
 
-		dimensions.width = w || dimensions.width;
-		dimensions.height = h || dimensions.height;
+		return {
+			width: width,
+			height: height
+		};
 	},
 
 	/**

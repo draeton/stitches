@@ -19,7 +19,6 @@ var Layout = function () {};
  * to contain the `sprites`
  *
  * @param {SpriteCollection} sprites The list of sprites to size for
- * @param {Object} defaults Default width and height, if no sprites
  * @return {Object}
  */
 Layout.prototype.getDimensions = function () {
@@ -33,7 +32,7 @@ Layout.prototype.getDimensions = function () {
  *
  * @param {SpriteCollection} sprites The sprites to place
  * @param {SpriteModel} sprite The current sprite
- * @param {Object} dimensions The current canvas dimensions
+ * @param {CanvasModel} canvas The current canvas
  */
 Layout.prototype.placeSprite = function () {
 	console.info('utils/layouts/layout : placeSprite()');

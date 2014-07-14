@@ -35,7 +35,7 @@ module.exports = {
 		stylesheet: 'css',
 
 		// initial canvas dimensions
-		dimensions: {
+		canvas: {
 			width: 100,
 			height: 100
 		},
@@ -74,6 +74,9 @@ module.exports = {
 
 		// place sprites onto sprite sheet
 		stitch: 'STITCH',
+
+		// generate final products
+		generate: 'GENERATE',
 
 		// any kind of error
 		error: 'ERROR'
