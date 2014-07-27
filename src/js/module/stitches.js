@@ -88,12 +88,12 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             if (store && !store.disabled) {
                 settings = store.get("stitches-settings");
-				if (!settings.units) {
-					settings.units = UNIT_PIXELS;
-				}
             }
 
             if (settings) {
+				if (!settings.units) {
+					settings.units = UNIT_PIXELS;
+				}
                 this.settings = $.extend(this.settings, settings);
             }
         },

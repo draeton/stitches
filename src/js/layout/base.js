@@ -68,10 +68,9 @@ function ($) {
          * @param {array} obstacles An array of sprites already placed
          * @return undefined|Sprite
          */
-        intersection: function (sprite, obstacles) {
+        intersection: function (sprite, obstacles, placeX) {
             var x1, x2, y1, y2;
-            var intersections = [];
-            var intersection;
+            var intersection = null;
 
             $.map(obstacles, function (obstacle) {
                 x1 = (obstacle.x < (sprite.x + sprite.width));
@@ -80,13 +79,21 @@ function ($) {
                 y2 = ((obstacle.y + obstacle.height) > sprite.y);
 
                 if (x1 && x2 && y1 && y2) {
-                    intersections.push(obstacle);
+					if (intersection == null) {
+						intersection = obstacle;
+					} else {
+						if (placeX) {
+							if ((intersection.x + intersection.width) > (obstacle.x + obstacle.width)) {
+								intersection = obstacle;
+							}
+						} else {
+							if ((intersection.y + intersection.height) > (obstacle.y + obstacle.height)) {
+								intersection = obstacle;
+							}
+						}
+					}
                 }
             });
-
-            if (intersections.length) {
-                intersection = intersections.pop();
-            }
 
             return intersection;
         }
