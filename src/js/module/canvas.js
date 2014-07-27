@@ -163,7 +163,6 @@ function($, util, array, layoutManager, Sprite) {
             this.sprites.push(sprite);
             this.names.push(sprite.name);
 
-            this.$element.trigger("show-overlay");
             sprite.$element.appendTo(this.$element);
             this.$element.trigger("update-toolbar");
 
