@@ -111,7 +111,9 @@ function ($, util, BaseLayout) {
 									intersection = intersectionTmp;
 								}
 							}
+							x += intersectionTmp.width;
 						}
+						
 					}
                     y = intersection.y + intersection.height - 1;
                 }
