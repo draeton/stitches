@@ -66,6 +66,7 @@ function ($) {
          *
          * @param {Sprite} sprite The sprite to compare against others
          * @param {array} obstacles An array of sprites already placed
+		 * @param {boolean} placeX the intersection must place the sprite horizontaly or verticaly
          * @return undefined|Sprite
          */
         intersection: function (sprite, obstacles, placeX) {

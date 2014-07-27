@@ -118,8 +118,11 @@ function ($, util, BaseLayout) {
 
 				sprite.x = 0;
 				sprite.y = 0;
-                dimensions.width += sprite.width;
-                dimensions.height += sprite.height;
+				if (sprite.width * dimensions.width <= sprite.height * dimensions.height) {
+					dimensions.width += sprite.width;
+				} else { 
+					dimensions.height += sprite.height;
+				}
             }
         }
     });
