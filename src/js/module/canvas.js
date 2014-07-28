@@ -177,7 +177,13 @@ function($, util, array, layoutManager, Sprite) {
          * @param {Sprite} sprite The sprite instance to remove
          */
         remove: function (sprite) {
-            this.sprites = array.remove(this.sprites, sprite);
+            var sprites = array.remove(this.sprites, sprite);
+			this.sprites = [];
+			var globalSprites = this.sprites;
+			$.map(sprites, function (sprite) {
+                globalSprites.push(sprite);
+            });
+			
             this.names = array.remove(this.names, sprite.name);
 
             this.$element.trigger("show-overlay");
