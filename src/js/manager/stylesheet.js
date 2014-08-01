@@ -11,16 +11,18 @@
 define([
     "wrap/jquery",
     "stylesheet/css",
-    "stylesheet/less"
+    "stylesheet/less",
+    "stylesheet/sass"
 ],
-function ($, CssStylesheet, LessStylesheet) {
+function ($, CssStylesheet, LessStylesheet, SassStylesheet) {
 
     "use strict";
 
     // **Canvas stylesheet managers**
     var managers = {
         css: CssStylesheet,
-        less: LessStylesheet
+        less: LessStylesheet,
+        sass: SassStylesheet
     };
 
     // **Module definition**
@@ -54,8 +56,13 @@ function ($, CssStylesheet, LessStylesheet) {
             var spritesheet = options.spritesheet;
             var prefix = options.prefix;
             var uri = options.uri;
+			var width = options.width;
+			var height = options.height;
+			var units = options.units;
+			var exportNormalSize = options.exportNormalSize;
+			var exportPercentageSize = options.exportPercentageSize;
 
-            var styles = this.manager.get(sprites, spritesheet, prefix, uri);
+            var styles = this.manager.get(sprites, spritesheet, prefix, uri, width, height, units, exportNormalSize, exportPercentageSize);
             styles = styles.replace(/\\n/g, "\n");
 
             return styles;

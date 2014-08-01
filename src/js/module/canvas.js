@@ -105,6 +105,17 @@ function($, util, array, layoutManager, Sprite) {
             this.$element.trigger("generate-sheets");
             this.$element.trigger("hide-overlay");
         },
+		
+		/**
+		 * ### @resetWithoutPosition
+		 * Reset the spritesheet generation without recompute the dimensions and position.
+		 * Used after a change to sprite's name or settings
+		 */
+		resetWithoutPosition: function() {
+			this.$element.trigger("show-overlay");
+            this.$element.trigger("generate-sheets");
+            this.$element.trigger("hide-overlay");
+		},
 
         /**
          * ### @measure
@@ -163,7 +174,6 @@ function($, util, array, layoutManager, Sprite) {
             this.sprites.push(sprite);
             this.names.push(sprite.name);
 
-            this.$element.trigger("show-overlay");
             sprite.$element.appendTo(this.$element);
             this.$element.trigger("update-toolbar");
 
@@ -178,7 +188,13 @@ function($, util, array, layoutManager, Sprite) {
          * @param {Sprite} sprite The sprite instance to remove
          */
         remove: function (sprite) {
-            this.sprites = array.remove(this.sprites, sprite);
+            var sprites = array.remove(this.sprites, sprite);
+			this.sprites = [];
+			var globalSprites = this.sprites;
+			$.map(sprites, function (sprite) {
+                globalSprites.push(sprite);
+            });
+			
             this.names = array.remove(this.names, sprite.name);
 
             this.$element.trigger("show-overlay");
@@ -222,12 +238,14 @@ function($, util, array, layoutManager, Sprite) {
          * @param {string} name The sprite name (usually from a file name)
          * @param {string} src The image src (usually from a FileReader)
          */
-        createSprite: function (name, src) {
+        createSprite: function (name, src, parentWidth, parentHeight) {
             var self = this;
             var sprite = new Sprite({
                 name: name,
                 src: src,
-                padding: this.settings.padding
+                padding: this.settings.padding,
+				parentWidth: (parentWidth ? parentWidth : 0),
+				parentHeight: (parentHeight ? parentHeight : 0),
             }, {
                 onload: function (sprite) {
                     self.add(sprite);

@@ -29,12 +29,16 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
     "use strict";
 
+    var UNIT_PIXELS = "pixel";
+	var UNIT_PERCENT = "percent";
+	
     var defaults = {
         layout: "compact", // default canvas sprite placement layout
         prefix: "sprite", // default stylesheet class prefix
         padding: 5, // default padding around sprites in pixels
         uri: false, // whether or not to include the data-uri image (quite large)
-        stylesheet: "css" // either css or less at the moment
+        stylesheet: "css", // either css, less or sass at the moment
+		units: UNIT_PIXELS // Units of the spritesheet
     };
 
     /**
@@ -87,6 +91,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             }
 
             if (settings) {
+				if (!settings.units) {
+					settings.units = UNIT_PIXELS;
+				}
                 this.settings = $.extend(this.settings, settings);
             }
         },
@@ -304,6 +311,15 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             self.updateSettings();
                         }
                     },
+                    units: {
+                        "change": function (e) {
+                            var $checked = this.$element.find("input[name=units]:checked");
+                            var value = $checked.val();
+                            self.settings.units = value;
+                            
+                            self.updateSettings();
+                        }
+                    },
                     prefix: {
                         "input blur": function (e) {
                             var value = $(e.currentTarget).val();
@@ -395,7 +411,21 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                                 $input.val(clean);
                             }
                         }
-                    }
+                    },
+					parentWidth: {
+						"input blur": function (e) {
+							var $input = $(e.currentTarget);
+                            var parentWidth = $input.val();
+                            this.source.parentWidth = parentWidth;
+						}
+					},
+					parentHeight: {
+						"input blur": function (e) {
+							var $input = $(e.currentTarget);
+                            var parentHeight = $input.val();
+                            this.source.parentHeight = parentHeight;
+						}
+					}
                 }
             });
 
@@ -500,7 +530,6 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          */
         openSettings: function (e) {
             this.closePalettes();
-
             this.palettes.settings.configure({
                 source: this.settings,
                 inputs: {
@@ -508,7 +537,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                     stylesheet: this.settings.stylesheet,
                     prefix: this.settings.prefix,
                     padding: this.settings.padding,
-                    uri: this.settings.uri
+                    uri: this.settings.uri,
+                    units: this.settings.units
                 }
             });
 
@@ -555,7 +585,9 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 inputs: {
                     name: sprite.name,
                     x: sprite.left(),
-                    y: sprite.top()
+                    y: sprite.top(),
+					parentWidth: sprite.parentWidth,
+					parentHeight: sprite.parentHeight
                 }
             });
 
@@ -573,6 +605,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             if (this.palettes.properties.visible) {
                 this.palettes.properties.close();
                 this.canvas.$element.trigger("clear-active", [true]);
+				this.canvas.resetWithoutPosition();
             }
         },
 
@@ -646,25 +679,57 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          *
          * @param {event} e The event object
          */
-        updateDownloadsPalette: function (e) {
+        updateDownloadsPalette: function (e, refreshCss) {
             var $section = this.$downloads.find("section");
             var $spritesheet = this.$downloads.find(".downloads-spritesheet");
             var $stylesheet = this.$downloads.find(".downloads-stylesheet");
 
-            var html = templates.downloads({
+			if (refreshCss) {
+				this.generateSheets(e);
+			}
+			
+			var html = templates.downloads({
                 prefix: this.settings.prefix,
                 spritesheet: this.spritesheet,
                 stylesheet: this.stylesheet,
+                units: this.settings.units,
+				responsive: (this.settings.units == UNIT_PERCENT),
                 stylesheetWithUri: this.stylesheetWithUri,
                 stylesheetType: stylesheetManager.type,
                 stylesheetLines: this.stylesheet.split("\n").length,
                 markup: this.markup,
                 markupLines: this.markup.split("\n").length,
-                markupTooltip: this.markupTooltip
+                markupTooltip: this.markupTooltip,
+				exportNormalSize: this.$settings.exportNormalSizeClick,
+				exportPercentageSize: this.$settings.exportPercentageSizeClick
             });
-
+			
             $section.html(html);
-
+			this.$exportNormalSize = this.$downloads.find(":input[name=exportNormalSize]");
+			this.$exportPercentageSize = this.$downloads.find(":input[name=exportPercentageSize]");
+			this.$exportNormalSize.on("click", $.proxy(this.exportNormalSizeClick, this));
+			this.$exportPercentageSize.on("click", $.proxy(this.exportPercentageSizeClick, this));
+			
+			// refresh the css tab with the export option and open the css tab active
+			if (refreshCss) {
+				var tabSpritesheet = this.$downloads.find("#spritesheet");
+				tabSpritesheet.removeClass("active");
+				tabSpritesheet = this.$downloads.find("#tabSpritesheet");
+				tabSpritesheet.removeClass("active");
+				
+				var tabStylesheet = this.$downloads.find("#stylesheet");
+				tabStylesheet.addClass("active");
+				tabStylesheet = this.$downloads.find("#tabStylesheet");
+				tabStylesheet.addClass("active");
+				
+				if (this.$settings.exportPercentageSizeClick) {
+					this.$exportPercentageSize[0].checked = true;
+				}
+				if (this.$settings.exportNormalSizeClick) {
+					this.$exportNormalSize[0].checked = true;
+				}
+			}
+			
             // buttons
             $spritesheet.attr({
                 "href": this.spritesheet,
@@ -681,6 +746,16 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             }
         },
 
+		exportNormalSizeClick: function (event) {
+			this.$settings.exportNormalSizeClick = this.$exportNormalSize[0].checked;
+			this.updateDownloadsPalette(event, true);
+		},
+		
+		exportPercentageSizeClick: function (event) {
+			this.$settings.exportPercentageSizeClick = this.$exportPercentageSize[0].checked;
+			this.updateDownloadsPalette(event, true);
+		},
+		
         /**
          * ### @updateProgress
          * Update the progress bar at the top of the UI, right below the toolbar
@@ -718,12 +793,17 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                 sprites: this.canvas.sprites,
                 dimensions: this.canvas.dimensions
             });
-
+            
             this.stylesheetWithUri = stylesheetManager.getStylesheet({
                 sprites: this.canvas.sprites,
                 spritesheet: this.spritesheet,
                 prefix: this.settings.prefix,
-                uri: true
+                uri: true,
+                width: this.canvas.dimensions.width,
+                height: this.canvas.dimensions.height,
+                units: this.settings.units,
+				exportNormalSize: true,
+				exportPercentageSize: this.$settings.exportPercentageSizeClick
             });
 
             this.markup = stylesheetManager.getMarkup({
@@ -740,16 +820,22 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             // if uri is not checked, we need to generate another
             // stylesheet with the data uri included for the
             // download example rendering
-            if (this.settings.uri) {
+			
+			if (this.settings.uri) {
                 this.stylesheet = this.stylesheetWithUri;
             } else {
-                this.stylesheet = stylesheetManager.getStylesheet({
-                    sprites: this.canvas.sprites,
-                    spritesheet: this.spritesheet,
-                    prefix: this.settings.prefix,
-                    uri: this.settings.uri
-                });
-            }
+				this.stylesheet = stylesheetManager.getStylesheet({
+					sprites: this.canvas.sprites,
+					spritesheet: this.spritesheet,
+					prefix: this.settings.prefix,
+					uri: this.settings.uri,
+					width: this.canvas.dimensions.width,
+					height: this.canvas.dimensions.height,
+					units: this.settings.units,
+					exportNormalSize: this.$settings.exportNormalSizeClick,
+					exportPercentageSize: this.$settings.exportPercentageSizeClick
+				});
+			}
 
             this.$element.trigger("update-toolbar");
             this.$element.trigger("update-settings");
@@ -800,7 +886,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             this.canvas.clear();
             this.canvas.settings.padding = this.settings.padding;
             $.map(sprites, function (sprite) {
-                self.canvas.createSprite(sprite.name, sprite.src);
+                self.canvas.createSprite(sprite.name, sprite.src, sprite.parentWidth, sprite.parentHeight);
             });
 
             // ok

@@ -45,7 +45,7 @@ function ($) {
          * @param {boolean} uri Switch including image as data URI
          * @return string
          */
-        get: function (sprites, spritesheet, prefix, uri) {},
+        get: function (sprites, spritesheet, prefix, uri, width, height, units, exportNormalSize, exportPercentageSize) {},
 
         /**
          * ### @markup

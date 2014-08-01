@@ -86,17 +86,6 @@ function ($) {
                 e.preventDefault();
                 e.stopPropagation();
             }
-        },
-
-        /**
-         * ### @toPx
-         * Convet a number to px for stylesheets
-         *
-         * @param {string} num Pixel value
-         * @return string
-         */
-        toPx: function (num) {
-            return num ? num + "px" : "0";
         }
     };
 

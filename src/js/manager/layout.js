@@ -65,8 +65,30 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
             var self = this;
 
             progress(0, "info");
-
-            $.map(sprites, function (sprite) {
+			
+			var sizes = [];
+			$.map(sprites, function(sprite) {
+				sizes.push(sprite.width * sprite.height);
+			});
+			sizes.sort(function(a, b){return b-a});
+			var spritesSorted = [];
+			var indexSize = 0;
+			$.map(sprites, function(sprite) {
+				sprite.computed = false;
+			});
+			for (var i = 0; i < sprites.length; i++) {
+				$.map(sprites, function(sprite) {
+					if (!sprite.computed) {
+						if (sprite.width * sprite.height == sizes[indexSize]) {
+							sprite.computed = true;
+							spritesSorted.push(sprite);
+							indexSize++;
+						}
+					}
+				});
+			}
+			
+            $.map(spritesSorted, function (sprite) {
                 if (!sprite.placed) {
                     sprite.placed = self.manager.placeSprite(sprite, placed, dimensions);
                 }

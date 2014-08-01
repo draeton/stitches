@@ -81,16 +81,14 @@ function ($, util, BaseLayout) {
         placeSprite: function (sprite, placed, dimensions) {
             var intersection;
             var pass = 0;
-            var x = 0;
-            var y = 0;
 
             while (pass++ < this.settings.maxPass) {
-                for (y = 0; y <= (dimensions.height - sprite.height); y++) {
-                    for (x = 0; x <= (dimensions.width - sprite.width); x++) {
+                for (var y = 0; y <= (dimensions.height - sprite.height); y++) {
+                    for (var x = 0; x <= (dimensions.width - sprite.width); x++) {
                         sprite.x = x;
                         sprite.y = y;
 
-                        intersection = this.intersection(sprite, placed);
+                        intersection = this.intersection(sprite, placed, true);
 
                         if (!intersection) {
                             placed.push(sprite);
@@ -100,12 +98,33 @@ function ($, util, BaseLayout) {
 
                         x = intersection.x + intersection.width - 1;
                     }
-
+					sprite.x = 0;
+					intersection = this.intersection(sprite, placed, false);
+					for (var x = 0; x <= (dimensions.width - sprite.width); x++) {
+						sprite.x = x;
+						var intersectionTmp = this.intersection(sprite, placed, false);
+						if (intersectionTmp) {
+							if (!intersection) {
+								intersection = intersectionTmp;
+							} else {
+								if (intersectionTmp.y + intersectionTmp.height < intersection.y + intersection.height) {
+									intersection = intersectionTmp;
+								}
+							}
+							x += intersectionTmp.width;
+						}
+						
+					}
                     y = intersection.y + intersection.height - 1;
                 }
 
-                dimensions.width += sprite.width;
-                dimensions.height += sprite.height;
+				sprite.x = 0;
+				sprite.y = 0;
+				if (sprite.width * dimensions.width <= sprite.height * dimensions.height) {
+					dimensions.width += sprite.width;
+				} else { 
+					dimensions.height += sprite.height;
+				}
             }
         }
     });

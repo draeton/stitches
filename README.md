@@ -1,8 +1,8 @@
-[Stitches](http://draeton.github.com/stitches/)
+[Stitches](http://markmoulard.github.com/responsive-stitches/)
 ==========
 
-Stitches is an HTML5 sprite sheet generator.
-The current version is `1.3.5`. Documentation is available
+Stitches is an HTML5 responsive sprite sheet generator forked from the stitches project of Matthew Cobbs.
+The current version is `1.3.6`. Documentation is available
 [here](http://draeton.github.com/stitches/stitches/doc/stitches.js.html).
 
 ## Implementation
@@ -12,7 +12,7 @@ After dependencies, Stitches requires a stylesheet, a script, and an HTML elemen
 ```html
 <link rel="stylesheet" href="css/stitches-1.3.5.min.css">
 
-<script data-main="js/stitches.js" src="js/stitches-1.3.5.min.js"></script>
+<script data-main="js/stitches.js" src="js/stitches-1.3.6.min.js"></script>
 ```
 
 The sprite sheet generator is automatically created in elements that have the `stitches` class:
@@ -49,7 +49,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 
 ## Download
 
-**The latest release, 1.3.5, is [available here](http://draeton.github.com/stitches/stitches/dist/stitches-1.3.5.zip).**
+**The latest release, 1.3.6, is [available here](http://markmoulard.github.com/response-stitches/stitches/dist/stitches-1.3.6.zip).**
 
 
 ## Contributors
@@ -59,6 +59,7 @@ If you choose, any images that are a part of the initial markup will be loaded o
 * [flying-sheep](https://github.com/flying-sheep)
 * [JonDum](https://github.com/JonDum)
 * [mreq](https://github.com/mreq)
+* [markmoulard](https://github.com/markmoulard)
 
 
 ## License

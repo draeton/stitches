@@ -1,7 +1,7 @@
 /**
- * # stylesheet/css
+ * # stylesheet/sass
  *
- * Base constructor for the CSS stylesheet manager
+ * Base constructor for the SASS stylesheet manager
  *
  * > http://draeton.github.io/stitches<br/>
  * > Copyright 2013 Matthew Cobbs<br/>
@@ -23,18 +23,18 @@ function ($, util, templates, BaseStylesheet) {
     };
 
     /**
-     * ## CssStylesheet
-     * Create a new `CssStylesheet` instance
+     * ## SassStylesheet
+     * Create a new `SassStylesheet` instance
      *
      * @constructor
      * @param {object} options
      */
-    var CssStylesheet = function (options) {
+    var SassStylesheet = function (options) {
         this.settings = $.extend({}, defaults, options);
     };
 
-    util.inherit(CssStylesheet, BaseStylesheet, {
-        template: templates.cssMarkup,
+    util.inherit(SassStylesheet, BaseStylesheet, {
+        template: templates.sassMarkup,
 
         /**
          * ### @get
@@ -49,19 +49,19 @@ function ($, util, templates, BaseStylesheet) {
         get: function (sprites, spritesheet, prefix, uri, width, height, units, exportNormalSize, exportPercentageSize) {
             var backgroundImage = uri ? spritesheet : this.settings.filename;
 
-            return templates.css({
+            return templates.sass({
                 prefix: prefix,
                 backgroundImage: backgroundImage,
                 sprites: sprites,
                 canvasWidth: width,
                 canvasHeight: height,
                 units: units,
-				exportNormalSize: exportNormalSize,
+				exportNormalSize: exportNormalSize, 
 				exportPercentageSize: exportPercentageSize
             });
         }
     });
 
-    return CssStylesheet;
+    return SassStylesheet;
 
 });
