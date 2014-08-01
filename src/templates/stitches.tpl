@@ -169,34 +169,57 @@
             <!-- /.stitches-settings -->
 
             <!-- .stitches-properties -->
-            <div class="stitches-palette stitches-properties fade">
+			<div class="stitches-palette stitches-properties fade">
                 <div class="stitches-palette-header">
                     <button type="button" class="close" data-action="close" title="Close">&times;</button>
                     <h4>Sprite Properties</h4>
                 </div>
 
                 <div class="stitches-palette-body">
-                    <form class="form-horizontal">
-                        <div class="control-group">
-                            <label class="control-label">Name</label>
-                            <div class="controls">
-                                <input name="name" type="text" required placeholder="Sprite name&hellip;">
-                            </div>
-                        </div>
+					<ul class="nav nav-tabs">
+                        <li class="active"><a href="#spriteGeneral" data-toggle="tab">General</a></li>
+                        <li><a href="#spriteResponsive" data-toggle="tab">Responsive design</a></li>
+                    </ul>
+					<form class="form-horizontal">
+						<div class="tab-content">
+                            <div class="tab-pane active" id="spriteGeneral">
+								<div class="control-group">
+									<label class="control-label">Name</label>
+									<div class="controls">
+										<input name="name" type="text" required placeholder="Sprite name&hellip;">
+									</div>
+								</div>
 
-                        <div class="control-group">
-                            <label class="control-label">Coordinates (x, y)</label>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <input name="x" required disabled placeholder="From left&hellip;" class="input-mini">
-                                    <span class="add-on">px</span>
-                                </div>
-                                <div class="input-append">
-                                    <input name="y" required disabled placeholder="From top&hellip;" class="input-mini">
-                                    <span class="add-on">px</span>
-                                </div>
-                            </div>
-                        </div>
+								<div class="control-group">
+									<label class="control-label">Coordinates (x, y)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input name="x" required disabled placeholder="From left&hellip;" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+										<div class="input-append">
+											<input name="y" required disabled placeholder="From top&hellip;" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						    <div class="tab-pane" id="spriteResponsive">
+								<div class="control-group">
+									<label class="control-label">Parent dimensions (width, height)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input name="parentWidth" type="number" min="0" placeholder="Width of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+										<div class="input-append">
+											<input name="parentHeight" type="number" min="0" placeholder="Height of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                     </form>
                 </div>
 
@@ -210,6 +233,89 @@
                     </div>
                 </div>
             </div>
+			
+            <!--<div class="stitches-palette stitches-properties fade">
+                <div class="stitches-palette-header">
+                    <button type="button" class="close" data-action="close" title="Close">&times;</button>
+                    <h4>Sprite Properties</h4>
+                </div>
+
+                <div class="stitches-palette-body">
+					<form class="form-horizontal">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">General</h4>
+							</div>
+							<div class="panel-body">
+								<div class="control-group">
+									<label class="control-label">Name</label>
+									<div class="controls">
+										<input name="name" type="text" required placeholder="Sprite name&hellip;">
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">Coordinates (x, y)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input name="x" required disabled placeholder="From left&hellip;" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+										<div class="input-append">
+											<input name="y" required disabled placeholder="From top&hellip;" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">Responsive design</h4>
+							</div>
+							<div class="panel-body">
+								<div class="control-group">
+									<label class="control-label">Parent dimensions (width, height)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input name="parentWidth" type="number" min="0" placeholder="Width of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+										<div class="input-append">
+											<input name="parentHeight" type="number" min="0" placeholder="Height of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">Padding (x, y)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input name="paddingX" type="number" min="0" placeholder="Width of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+										<div class="input-append">
+											<input name="paddingY" type="number" min="0" placeholder="Height of the parent div" class="input-mini">
+											<span class="add-on">px</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </form>
+                </div>
+
+                <div class="stitches-palette-footer">
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button class="btn btn-small btn-danger" data-action="remove" title="Delete"><span>Delete</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Save"><span>Save</span></button>
+                            <button class="btn btn-small btn-info" data-action="close" title="Close"><span>Close</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
             <!-- /.stitches-properties -->
 
             <!-- .stitches-about -->

@@ -12,11 +12,20 @@
 <% } %>
 \n
 <% if (units == "percent") { %>
+<% if (exportNormalSize) { %>
 .stitches-<%= prefix %>-sizeNormal(@width: 0, @height: 0) {\n
     width: @width;\n
     height: @height;\n
 }
 \n
+<% }%>
+<% if (exportPercentageSize) { %>
+.stitches-<%= prefix %>-sizePercentage(@width: 0, @height: 0, @parentWidth: 0, @parentHeight: 0) {\n
+    width: percentage((@parentWidth / @width) * 100);\n
+    height: percentage((@parentHeight / @height * 100);\n
+}
+\n
+<% }%>
 <% }%>
 .<%= prefix %> {\n
     background-image: url(<%= backgroundImage %>);\n
@@ -29,9 +38,16 @@
 <% $.map(sprites, function (sprite) { %>
 \n
 <% if (units == "percent") { %>
+<% if (exportNormalSize) { %>
     &.<%= prefix %>-<%= sprite.name %>-sizeNormal {\n
         .stitches-<%= prefix %>-sizeNormal(<%= sprite.width %>px, <%= sprite.height %>px);\n
     }\n
+<% } %>
+<% if (exportPercentageSize) { %>
+    &.<%= prefix %>-<%= sprite.name %>-sizePercentage {\n
+        .stitches-<%= prefix %>-sizePercentage(<%= sprite.width %>, <%= sprite.height %>, <%= sprite.parentWidth %>, <%= sprite.parentHeight %>);\n
+    }\n
+<% } %>
 <% } %>
 
     &.<%= prefix %>-<%= sprite.name %> {\n

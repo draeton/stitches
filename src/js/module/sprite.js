@@ -22,7 +22,9 @@ function($, util, templates) {
     var defaults = {
         name: "", // no special chars, no spaces
         src: "", // image src (usually from a FileReader)
-        padding: 0 // defined in stitches settings
+        padding: 0, // defined in stitches settings
+		parentWidth: 0, //parent div width
+		parentHeight: 0 //parent div height
     };
 
     /**
@@ -40,6 +42,8 @@ function($, util, templates) {
         this.name = this.cleanName(this.settings.name);
         this.src = this.settings.src;
         this.padding = parseInt(this.settings.padding, 10);
+		this.parentWidth = parseInt(this.settings.parentWidth);
+		this.parentHeight = parseInt(this.settings.parentHeight);
         this.active = false;
         this.placed = false;
 
@@ -72,7 +76,7 @@ function($, util, templates) {
             this.image.onload = function () {
                 self.x = 0;
                 self.y = 0;
-                self.width = self.image.width + self.padding * 2;
+				self.width = self.image.width + self.padding * 2;
                 self.height = self.image.height + self.padding * 2;
                 self.area = self.width * self.height;
                 self.render();
@@ -226,14 +230,16 @@ function($, util, templates) {
             return (this.y + this.padding);
         },
 
-        /**
+		/**
          * ### @toJSON
          * Returns object for sprite export
          */
         toJSON: function () {
             return {
                 name: this.name,
-                src: this.src
+                src: this.src,
+				parentWidth: this.parentWidth,
+				parentHeight: this.parentHeight
             };
         }
     };

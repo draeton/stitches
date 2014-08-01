@@ -46,7 +46,7 @@ function ($, util, templates, BaseStylesheet) {
          * @param {boolean} uri Switch including image as data URI
          * @return string
          */
-        get: function (sprites, spritesheet, prefix, uri, width, height, units) {
+        get: function (sprites, spritesheet, prefix, uri, width, height, units, exportNormalSize, exportPercentageSize) {
             var backgroundImage = uri ? spritesheet : this.settings.filename;
 
             return templates.sass({
@@ -55,7 +55,9 @@ function ($, util, templates, BaseStylesheet) {
                 sprites: sprites,
                 canvasWidth: width,
                 canvasHeight: height,
-                units: units
+                units: units,
+				exportNormalSize: exportNormalSize, 
+				exportPercentageSize: exportPercentageSize
             });
         }
     });

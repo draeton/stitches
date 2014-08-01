@@ -1,3 +1,4 @@
+
 .<%= prefix %> {\n
     background-image: url(<%= backgroundImage %>);\n
 <% if (units == "pixel") { %>
@@ -11,10 +12,21 @@
 <% $.map(sprites, function (sprite) { %>
 \n
 <% if (units == "percent") { %>
+<% if (exportNormalSize) { %>
 .<%= prefix %>-<%= sprite.name %>-sizeNormal {\n
     width: <%= sprite.width %>px;\n
     height: <%= sprite.height %>px;\n
 }\n
+\n
+<% } %>
+<% if (exportPercentageSize) { %>
+<% if (sprite.parentWidth != 0 || sprite.parentHeight != 0) { %>
+.<%= prefix %>-<%= sprite.name %>-sizePercentage {\n
+    width: <%= ((sprite.parentWidth / sprite.width) * 100) %>%;\n
+    height: <%= ((sprite.parentHeight / sprite.height) * 100) %>%;\n
+}\n
+<% } %>
+<% } %>
 <% } %>
 
 .<%= prefix %>-<%= sprite.name %> {\n

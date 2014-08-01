@@ -59,8 +59,10 @@ function ($, CssStylesheet, LessStylesheet, SassStylesheet) {
 			var width = options.width;
 			var height = options.height;
 			var units = options.units;
+			var exportNormalSize = options.exportNormalSize;
+			var exportPercentageSize = options.exportPercentageSize;
 
-            var styles = this.manager.get(sprites, spritesheet, prefix, uri, width, height, units);
+            var styles = this.manager.get(sprites, spritesheet, prefix, uri, width, height, units, exportNormalSize, exportPercentageSize);
             styles = styles.replace(/\\n/g, "\n");
 
             return styles;

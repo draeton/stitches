@@ -1,7 +1,7 @@
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#spritesheet" data-toggle="tab">PNG</a></li>
-    <li><a href="#stylesheet" data-toggle="tab"><%= stylesheetType.toUpperCase() %></a></li>
+    <li class="active" id="tabSpritesheet"><a href="#spritesheet" data-toggle="tab">PNG</a></li>
+    <li id="tabStylesheet"><a href="#stylesheet" data-toggle="tab"><%= stylesheetType.toUpperCase() %></a></li>
     <li><a href="#markup" data-toggle="tab">HTML</a></li>
     <li><a href="#example" data-toggle="tab"><strong>Example</strong></a></li>
 </ul>
@@ -10,6 +10,14 @@
         <p><img src="<%= spritesheet %>" class="thumbnail"/></p>
     </div>
     <div class="tab-pane" id="stylesheet">
+<% if (responsive) { %>
+		<div class="control-group">
+			<div class="controls">
+					<input name="exportNormalSize" type="checkbox" value="true" /> Export normal size classes
+					&nbsp;&nbsp;<input name="exportPercentageSize" type="checkbox" value="true"/> Export percentage size classes
+			</div>
+		</div>
+<% }%>
         <p><textarea rows="<%= stylesheetLines %>"><%= stylesheet %></textarea></p>
     </div>
     <div class="tab-pane" id="markup">
