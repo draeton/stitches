@@ -153,7 +153,7 @@ module.exports = Backbone.View.extend({
 		console.info('views/stitches : onSettings()');
 
 		messages.trigger(config.events.close, 'settings', true);
-		this.palettes.settings.open();
+		this.palettes.settings.render().open();
 	},
 
 	/**

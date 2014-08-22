@@ -16,7 +16,7 @@
 						<label class="control-label">Position</label>
 						<div class="controls">
 							<label class="checkbox">
-								<input name="position" type="checkbox" value="auto"/> Auto
+								<input name="position" type="checkbox" value="auto"> Auto
 							</label>
 						</div>
 					</div>
@@ -25,13 +25,13 @@
 						<label class="control-label">Layout</label>
 						<div class="controls">
 							<label class="radio inline">
-								<input name="layout" type="radio" value="compact"/> Compact
+								<input name="layout" type="radio" value="compact" {{#if isCompact }}checked{{/if}}> Compact
 							</label>
 							<label class="radio inline">
-								<input name="layout" type="radio" value="vertical"/> Vertical
+								<input name="layout" type="radio" value="horizontal" {{#if isHorizontal }}checked{{/if}}> Horizontal
 							</label>
 							<label class="radio inline">
-								<input name="layout" type="radio" value="horizontal"/> Horizontal
+								<input name="layout" type="radio" value="vertical" {{#if isVertical }}checked{{/if}}> Vertical
 							</label>
 						</div>
 					</div>
@@ -40,10 +40,13 @@
 						<label class="control-label">CSS/LESS</label>
 						<div class="controls">
 							<label class="radio inline">
-								<input name="stylesheet" type="radio" value="css"/> CSS
+								<input name="stylesheet" type="radio" value="css" {{#if isCss }}checked{{/if}}> CSS
 							</label>
 							<label class="radio inline">
-								<input name="stylesheet" type="radio" value="less"/> LESS
+								<input name="stylesheet" type="radio" value="less" {{#if isLess }}checked{{/if}}> LESS
+							</label>
+							<label class="radio inline">
+								<input name="stylesheet" type="radio" value="stylus" {{#if isStylus }}checked{{/if}}> Stylus
 							</label>
 						</div>
 					</div>
@@ -51,7 +54,7 @@
 					<div class="control-group">
 						<label class="control-label">Style prefix</label>
 						<div class="controls">
-							<input name="prefix" type="text" placeholder="Style class prefix&hellip;">
+							<input name="prefix" type="text" placeholder="Style class prefix&hellip;" value="{{ prefix }}">
 						</div>
 					</div>
 
@@ -59,7 +62,7 @@
 						<label class="control-label">Padding</label>
 						<div class="controls">
 							<div class="input-append">
-								<input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;">
+								<input name="padding" type="number" min="0" required placeholder="Sprite padding&hellip;" value="{{ padding }}">
 								<span class="add-on">px</span>
 							</div>
 						</div>
@@ -69,7 +72,7 @@
 						<label class="control-label">Data URI</label>
 						<div class="controls">
 							<label class="checkbox">
-								<input name="uri" type="checkbox" value="true"/> Include encoded image in CSS
+								<input name="uri" type="checkbox" value="true" {{#if uri }}checked{{/if}}> Include encoded image in CSS
 							</label>
 						</div>
 					</div>

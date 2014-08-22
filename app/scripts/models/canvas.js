@@ -37,7 +37,11 @@ module.exports = Backbone.Model.extend({
 		this.sprites = new SpriteCollection();
 
 		this.on('change:layout', _.bind(this.onChangeLayout, this));
-		this.set(config.settings.canvas);
+		this.set({
+			layout: config.settings.layout,
+			width: config.canvas.width,
+			height: config.canvas.height
+		});
 	},
 
 	/**
@@ -97,7 +101,6 @@ module.exports = Backbone.Model.extend({
 		sprites.each(function (sprite) {
 
 			layout.placeSprite(sprites, sprite, canvas);
-
 			messages.trigger(config.events.progress, sprites.placed().length / sprites.length);
 
 		});

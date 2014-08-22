@@ -46,7 +46,17 @@ module.exports = PaletteView.extend({
 	render: function () {
 		console.info('views/palettes/settings : render()');
 
-		var html = template();
+		var data = config.settings;
+
+		data.isCss = data.stylesheet === 'css';
+		data.isLess = data.stylesheet === 'less';
+		data.isStylus = data.stylesheet === 'stylus';
+
+		data.isCompact = data.layout === 'compact';
+		data.isHorizontal = data.layout === 'horizontal';
+		data.isVertical = data.layout === 'vertical';
+
+		var html = template(data);
 
 		this.$el.empty().append(html);
 

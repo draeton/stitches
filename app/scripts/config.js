@@ -26,20 +26,24 @@ module.exports = {
 		padding: 5,
 
 		// whether or not to include the data-uri image (quite large)
-		uri: false,
+		uri: true,
 
 		// either css or less at the moment
 		stylesheet: 'css',
 
-		// initial canvas dimensions
-		canvas: {
-			layout: 'vertical',
-			width: 100,
-			height: 100
-		},
+		// sprite sheet layout
+		layout: 'vertical',
 
 		// max passes for sprite placement
 		tries: 5
+	},
+
+	/**
+	 * @type {Object}
+	 */
+	canvas: {
+		width: 100,
+		height: 100
 	},
 
 	/**
