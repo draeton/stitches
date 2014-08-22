@@ -47,6 +47,7 @@
 			.form-horizontal {
 				.control-group {
 					margin-bottom: 10px;
+					clear: both;
 
 					&:last-child {
 						margin-bottom: 0;
@@ -54,12 +55,20 @@
 				}
 
 				.control-label {
+					float: left;
 					width: 120px;
+					margin-right: 20px;
 					font-size: 12px;
 				}
 
 				.controls {
 					margin-left: 140px;
+
+					.checkbox input,
+					.radio input {
+						margin-left: 0;
+						margin-right: 4px;
+					}
 				}
 			}
 		}
