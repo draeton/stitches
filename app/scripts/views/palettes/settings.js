@@ -46,16 +46,17 @@ module.exports = PaletteView.extend({
 	render: function () {
 		console.info('views/palettes/settings : render()');
 
-		var data = config.settings;
+		// set selected layout
+		_.map(config.layouts, function (layout) {
+			layout.selected = layout.type === config.settings.layout;
+		});
 
-		data.isCss = data.stylesheet === 'css';
-		data.isLess = data.stylesheet === 'less';
-		data.isStylus = data.stylesheet === 'stylus';
+		// set selected stylesheet
+		_.map(config.stylesheets, function (stylesheet) {
+			stylesheet.selected = stylesheet.type === config.settings.stylesheet;
+		});
 
-		data.isCompact = data.layout === 'compact';
-		data.isHorizontal = data.layout === 'horizontal';
-		data.isVertical = data.layout === 'vertical';
-
+		var data = config;
 		var html = template(data);
 
 		this.$el.empty().append(html);

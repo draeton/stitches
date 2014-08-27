@@ -12,6 +12,7 @@ var config = require('../config');
 var messages = require('../messages');
 var layout = require('../utils/layout');
 
+var SettingsModel = require('../models/settings');
 var SpriteCollection = require('../collections/sprite');
 
 /**
@@ -23,7 +24,6 @@ module.exports = Backbone.Model.extend({
 	 * @type {Object}
 	 */
 	defaults: {
-		layout: '',
 		width: 0,
 		height: 0
 	},
@@ -34,14 +34,10 @@ module.exports = Backbone.Model.extend({
 	initialize: function () {
 		console.info('models/canvas : initialize()');
 
+		this.settings = new SettingsModel();
 		this.sprites = new SpriteCollection();
 
-		this.on('change:layout', _.bind(this.onChangeLayout, this));
-		this.set({
-			layout: config.settings.layout,
-			width: config.canvas.width,
-			height: config.canvas.height
-		});
+		this.settings.on('change', _.bind(this.onChangeSettings, this));
 	},
 
 	/**
@@ -121,8 +117,10 @@ module.exports = Backbone.Model.extend({
 	/**
 	 * Update the layout utility
 	 */
-	onChangeLayout: function () {
-		console.info('models/canvas : onChangeLayout()');
+	onChangeSettings: function () {
+		console.info('models/canvas : onChangeSettings()');
+
+		debugger;
 
 		layout.set(this.get('layout'));
 	}

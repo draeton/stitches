@@ -167,6 +167,34 @@ module.exports = Backbone.Model.extend({
 			_.invoke(siblings, 'set', 'active', false);
 			this.set('active', true);
 		}
+	},
+
+	/**
+	 * Serialization
+	 *
+	 * @return {Object}
+	 */
+	toJSON: function () {
+		console.info('models/sprite : toJSON()');
+
+		var data = Backbone.Model.prototype.toJSON.apply(this);
+
+		data.left = this.toPx(data.x + data.padding);
+		data.top = this.toPx(data.y + data.padding);
+
+		return data;
+	},
+
+	/**
+	 * In units
+	 *
+	 * @param {Number} value
+	 * @return {String}
+	 */
+	toPx: function (value) {
+		console.info('models/sprite : toPx()');
+
+		return value === 0 ? '0' : value + 'px';
 	}
 
 });
