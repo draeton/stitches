@@ -359,6 +359,34 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                                 self.updateProgress(1, "success");
                             }
                         }
+                    },
+                    importfile: {
+                        "change": function (e) {
+                            var $import = $(e.currentTarget);
+                            var $importGroup = $import.parents(".control-group");
+                            var file   = $(e.currentTarget).get(0).files[0];
+                            var reader;
+                            var data;
+
+                            $importGroup.removeClass("error");
+
+                            if (file) {
+                                reader = new FileReader();
+                                reader.onload = function (readerEvent) {
+                                    try {
+                                        data = JSON.parse(readerEvent.target.result);
+                                        self.importData(data);
+                                    } catch (x) {
+                                        $importGroup.addClass("error");
+                                        self.$element.trigger("error", [x]);
+                                    }
+                                }
+
+                                reader.readAsText(file);
+                            } else {
+                                self.updateProgress(1, "success");
+                            }
+                        }
                     }
                 }
             });
@@ -525,6 +553,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             var $navTabs = this.$settings.find("ul.nav-tabs");
             var $navFirst = $navTabs.find("li:first-child a");
             var $import = this.$settings.find(":input[name=import]");
+            var $importFile = this.$settings.find(":input[name=importfile]");
             var $importGroup = $import.parents(".control-group");
 
             // go back to the first tab
@@ -532,6 +561,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             // clear out the import field
             $import.val("");
+            $importFile.val("");
             $importGroup.removeClass("error");
 
             if (this.palettes.settings.visible) {
