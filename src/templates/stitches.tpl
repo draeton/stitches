@@ -129,7 +129,12 @@
                             </div>
                             <div class="tab-pane" id="import">
                                 <div class="control-group">
-                                    <label class="control-label">Paste import here</label>
+                                    <label class="control-label">Select a file</label>
+                                    <div class="controls">
+                                        <input type="file" name="importfile"/>
+                                    </div>
+                                <div class="control-group">
+                                    <label class="control-label">or paste import here</label>
                                     <div class="controls">
                                         <textarea name="import" rows="10"></textarea>
                                     </div>
