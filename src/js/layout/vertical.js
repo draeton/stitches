@@ -55,12 +55,14 @@ function ($, util, BaseLayout) {
                 i = 0, 
                 j =0;
                 
-            if(rows>0) {
+            if(rows>0 && rows<sprites.length) {
                 cols = Math.ceil(sprites.length/rows);
                 for(i=0; i<cols; i++) {
                     for(j=0; j<rows; j++) {
-                        if(sprites[i*rows+j])
-                        minheight += sprites[i*rows+j].height; 
+                        if(sprites[i*rows+j]) {
+                            minheight += sprites[i*rows+j].height; 
+                            width += sprites[i*rows+j].width;
+                        }
                     }
                     height = Math.max(height, minheight);
                     minheight = 0;    
@@ -70,7 +72,7 @@ function ($, util, BaseLayout) {
                 width = sprite.width > width ? sprite.width : width;
                 height += sprite.height;
             });
-
+console.log(width, height, sprites.length, this.rowlimit);
             return {
                 width: width || defaults.width,
                 height: height || defaults.height
@@ -93,7 +95,7 @@ function ($, util, BaseLayout) {
             var pass = 0;
             var x = 0;
             var y = 0;
-
+console.log(sprite.name);
             while (pass++ < this.settings.maxPass) {
                 for (x = 0; x <= dimensions.width - sprite.width; x++) {
                     for (y = 0; y <= dimensions.height - sprite.height; y++) {
@@ -101,7 +103,7 @@ function ($, util, BaseLayout) {
                         sprite.y = y;
 
                         intersection = this.intersection(sprite, placed);
-
+console.log("-",$(intersection).attr("name"));
                         if (!intersection) {
                             placed.push(sprite);
                             sprite.show();

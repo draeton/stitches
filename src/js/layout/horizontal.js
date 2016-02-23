@@ -55,12 +55,14 @@ function ($, util, BaseLayout) {
                 i = 0, 
                 j =0;
             
-            if(cols>0) {
+            if(cols>0 && cols<sprites.length) {
                 rows = Math.ceil(sprites.length/cols);
                 for(i=0; i<rows; i++) {
                     for(j=0; j<cols; j++) {
-                        if(sprites[i*cols+j])
-                        minwidth += sprites[i*cols+j].width; 
+                        if(sprites[i*cols+j]) {
+                            minwidth += sprites[i*cols+j].width;
+                            height += sprites[i*rows+j].height;
+                        }
                     }
                     width = Math.max(width, minwidth);
                     minwidth = 0;    
