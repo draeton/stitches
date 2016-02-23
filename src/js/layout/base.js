@@ -89,6 +89,15 @@ function ($) {
             }
 
             return intersection;
+        },
+        
+        /**
+         * ### @isLimitable
+         * Returns whether rows/colums in layout are limitable
+         * If yes, should implement a setLimit method
+         */
+        isLimitable : function() {
+            return false;
         }
     };
 
