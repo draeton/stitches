@@ -165,6 +165,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             });
             layoutManager.set(this.settings.layout);
             stylesheetManager.set(this.settings.stylesheet);
+            this.updateProps();
         },
 
         /**
@@ -289,6 +290,8 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                             this.source.layout = value;
                             layoutManager.set(value);
                             self.updateSettings();
+                            layoutManager.setLimit(
+                                this.$element.find("input[name=limit]").val());
                         }
                     },
                     limit: {
@@ -811,6 +814,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             // update settings
             layoutManager.set(this.settings.layout);
+            layoutManager.setLimit(this.settings.limit);
             stylesheetManager.set(this.settings.stylesheet);
             this.updateSettings();
 
