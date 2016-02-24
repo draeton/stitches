@@ -48,12 +48,31 @@ function ($, util, BaseLayout) {
         getDimensions: function (sprites, defaults) {
             var width = 0;
             var height = 0;
-
-            $.map(sprites, function (sprite) {
+            
+            var cols = this.columnlimit || 0,
+                rows = 0,
+                minwidth = 0, 
+                i = 0, 
+                j =0;
+            
+            if(cols>0 && cols<sprites.length) {
+                rows = Math.ceil(sprites.length/cols);
+                for(i=0; i<rows; i++) {
+                    for(j=0; j<cols; j++) {
+                        if(sprites[i*cols+j]) {
+                            minwidth += sprites[i*cols+j].width;
+                            height += sprites[i*cols+j].height;
+                        }
+                    }
+                    width = Math.max(width, minwidth);
+                    minwidth = 0;    
+                }
+            }
+            else $.map(sprites, function (sprite) {
                 height = sprite.height > height ? sprite.height : height;
                 width += sprite.width;
             });
-
+            
             return {
                 width: width || defaults.width,
                 height: height || defaults.height
@@ -76,28 +95,48 @@ function ($, util, BaseLayout) {
             var pass = 0;
             var x = 0;
             var y = 0;
-
+            
             while (pass++ < this.settings.maxPass) {
-                for (x = 0; x <= dimensions.width - sprite.width; x++) {
-                    sprite.x = x;
-                    sprite.y = y;
+                for (y = 0; y <= dimensions.height - sprite.height; y++) {
+                    for (x = 0; x <= dimensions.width - sprite.width; x++) {
+                        sprite.x = x;
+                        sprite.y = y;
 
-                    intersection = this.intersection(sprite, placed);
+                        intersection = this.intersection(sprite, placed);
 
-                    if (!intersection) {
-                        placed.push(sprite);
-                        sprite.show();
-                        return true;
-                    }
+                        if (!intersection) {
+                            placed.push(sprite);
+                            sprite.show();
+                            return true;
+                        }
 
-                    x = intersection.x + intersection.width - 1;
+                        x = intersection.x + intersection.width - 1;
+                    } 
+                    
+                    y = intersection.y + intersection.height - 1;
                 }
-
+                
                 dimensions.width += sprite.width;
                 dimensions.height += sprite.height;
             }
 
             return false;
+        },
+        
+        /**
+         * ### @isLimitable
+         * Returns whether rows/colums in layout are limitable
+         */
+        isLimitable : function() {
+            return true;
+        },
+        
+        /**
+         * ### @setLimit
+         * Limit the number of columns
+         */
+        setLimit : function(limit) {
+            this.columnlimit = limit;
         }
     });
 

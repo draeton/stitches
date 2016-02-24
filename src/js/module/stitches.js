@@ -165,6 +165,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             });
             layoutManager.set(this.settings.layout);
             stylesheetManager.set(this.settings.stylesheet);
+            this.updateProps();
         },
 
         /**
@@ -286,10 +287,18 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
                         "change": function (e) {
                             var $checked = this.$element.find("input[name=layout]:checked");
                             var value = $checked.val();
-
                             this.source.layout = value;
                             layoutManager.set(value);
-
+                            self.updateSettings();
+                            layoutManager.setLimit(
+                                this.$element.find("input[name=limit]").val());
+                        }
+                    },
+                    limit: {
+                        "change": function (e) {
+                            var value = $(e.currentTarget).val();
+                            self.settings.limit = value;
+                            layoutManager.setLimit(value);
                             self.updateSettings();
                         }
                     },
@@ -416,6 +425,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
             // update ui
             this.showOverlay();
             this.canvas.reset();
+            this.updateProps();
 
             // store settings
             if (store && !store.disabled) {
@@ -441,6 +451,17 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
          */
         hideOverlay: function (e) {
             this.$overlay.fadeOut("fast");
+        },
+        
+        /**
+         * ### @updateProps
+         * Update Dependent Properties
+         *
+         * @param {event} e The event object
+         */
+        updateProps: function (e) {
+            this.$element.find("input[name=limit]")
+                .prop('disabled', !layoutManager.isLimitable());
         },
 
         /**
@@ -793,6 +814,7 @@ function($, Modernizr, store, util, templates, fileManager, layoutManager, style
 
             // update settings
             layoutManager.set(this.settings.layout);
+            layoutManager.setLimit(this.settings.limit);
             stylesheetManager.set(this.settings.stylesheet);
             this.updateSettings();
 

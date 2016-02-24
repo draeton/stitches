@@ -88,6 +88,14 @@
                                         </label>
                                     </div>
                                 </div>
+                                
+
+                                <div class="control-group">
+                                    <label class="control-label">Fixed Limit</label>
+                                    <div class="controls">
+                                        <input name="limit" disabled type="number" placeholder="Limit of rows/columns...">
+                                    </div>
+                                </div>
 
                                 <div class="control-group">
                                     <label class="control-label">CSS/LESS</label>

@@ -49,11 +49,30 @@ function ($, util, BaseLayout) {
             var width = 0;
             var height = 0;
 
-            $.map(sprites, function (sprite) {
+            var rows = this.rowlimit || 0,
+                cols = 0,
+                minheight = 0, 
+                i = 0, 
+                j =0;
+                
+            if(rows>0 && rows<sprites.length) {
+                cols = Math.ceil(sprites.length/rows);
+                for(i=0; i<cols; i++) {
+                    for(j=0; j<rows; j++) {
+                        if(sprites[i*rows+j]) {
+                            minheight += sprites[i*rows+j].height; 
+                            width += sprites[i*rows+j].width;
+                        }
+                    }
+                    height = Math.max(height, minheight);
+                    minheight = 0;    
+                }
+            }
+            else $.map(sprites, function (sprite) {
                 width = sprite.width > width ? sprite.width : width;
                 height += sprite.height;
             });
-
+console.log(width, height, sprites.length, this.rowlimit);
             return {
                 width: width || defaults.width,
                 height: height || defaults.height
@@ -76,21 +95,25 @@ function ($, util, BaseLayout) {
             var pass = 0;
             var x = 0;
             var y = 0;
-
+console.log(sprite.name);
             while (pass++ < this.settings.maxPass) {
-                for (y = 0; y <= dimensions.height - sprite.height; y++) {
-                    sprite.x = x;
-                    sprite.y = y;
+                for (x = 0; x <= dimensions.width - sprite.width; x++) {
+                    for (y = 0; y <= dimensions.height - sprite.height; y++) {
+                        sprite.x = x;
+                        sprite.y = y;
 
-                    intersection = this.intersection(sprite, placed);
-
-                    if (!intersection) {
-                        placed.push(sprite);
-                        sprite.show();
-                        return true;
+                        intersection = this.intersection(sprite, placed);
+console.log("-",$(intersection).attr("name"));
+                        if (!intersection) {
+                            placed.push(sprite);
+                            sprite.show();
+                            return true;
+                        }
+                        
+                        y = intersection.y + intersection.height - 1;
                     }
-
-                    y = intersection.y + intersection.height - 1;
+                    
+                    x = intersection.x + intersection.width - 1;
                 }
 
                 dimensions.width += sprite.width;
@@ -98,6 +121,22 @@ function ($, util, BaseLayout) {
             }
 
             return false;
+        },
+        
+        /**
+         * ### @isLimitable
+         * Returns whether rows/colums in layout are limitable
+         */
+        isLimitable : function() {
+            return true;
+        },
+        
+        /**
+         * ### @setLimit
+         * Limit the number of rows
+         */
+        setLimit : function(limit) {
+            this.rowlimit = limit;
         }
     });
 

@@ -39,6 +39,26 @@ function ($, CompactLayout, VerticalLayout, HorizontalLayout) {
 
             this.manager = new Manager();
         },
+        /**
+         * ### @isLimitable
+         * Returns whether working layout manager is limitable
+         *
+         * @param null
+         */
+        isLimitable: function () {
+            return this.manager.isLimitable();
+        },
+        /**
+         * ### @limitRows
+         * Set the working layout manager instance by type
+         *
+         * @param {number} limit value for the limit 
+         */
+        setLimit: function (limit) {
+            if(this.manager.isLimitable()) {
+                this.manager.setLimit(limit);
+            }
+        },
 
         /**
          * ### @getDimensions
