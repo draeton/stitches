@@ -61,7 +61,7 @@ function ($, util, BaseLayout) {
                     for(j=0; j<cols; j++) {
                         if(sprites[i*cols+j]) {
                             minwidth += sprites[i*cols+j].width;
-                            height += sprites[i*rows+j].height;
+                            height += sprites[i*cols+j].height;
                         }
                     }
                     width = Math.max(width, minwidth);
